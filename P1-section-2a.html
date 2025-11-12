@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2A: Solving Quadratic Equations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .shape-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .shape-diagram {
+            position: relative;
+            background: #e6f3ff;
+            border: 2px solid #4a90e2;
+        }
+
+        .dimension-label {
+            position: absolute;
+            color: #333;
+            font-size: 0.9em;
+            font-family: Arial, sans-serif;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-2a.html" class="section-link active">2A</a>
+                <a href="P1-section-2b.html" class="section-link">2B</a>
+                <a href="P1-section-2c.html" class="section-link">2C</a>
+                <a href="P1-section-2d.html" class="section-link">2D</a>
+                <a href="P1-section-2e.html" class="section-link">2E</a>
+                <a href="P1-section-2f.html" class="section-link">2F</a>
+                <a href="P1-section-2g.html" class="section-link">2G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 2A: Solving Quadratic Equations</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Solving Quadratic Equations</h3>
+                <p>Factorising and solving quadratic equations</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    x<sup>2</sup> - 4x - 12 = 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the structure</div>
+                        <div class="step-content">
+                            We need to factorise x<sup>2</sup> - 4x - 12
+                        </div>
+                        <div class="step-explanation">This is a quadratic in the form ax² + bx + c where a = 1, b = -4, c = -12</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find two numbers that multiply to give c and add to give b</div>
+                        <div class="step-content">
+                            We need two numbers that:<br>
+                            • Multiply to give -12<br>
+                            • Add to give -4
+                        </div>
+                        <div class="step-explanation">The numbers are -6 and 2, because (-6) × 2 = -12 and (-6) + 2 = -4</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Write the factorised form</div>
+                        <div class="step-content">
+                            x<sup>2</sup> - 4x - 12 = (x - 6)(x + 2)
+                        </div>
+                        <div class="step-explanation">Each bracket contains x and one of our numbers</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Set each factor equal to zero</div>
+                        <div class="step-content">
+                            (x - 6)(x + 2) = 0<br>
+                            So either x - 6 = 0 or x + 2 = 0
+                        </div>
+                        <div class="step-explanation">If a product equals zero, at least one factor must be zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for x</div>
+                        <div class="step-content">
+                            x - 6 = 0 → x = 6<br>
+                            x + 2 = 0 → x = -2
+                        </div>
+                        <div class="step-explanation">Solve each equation separately</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 6 or x = -2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    4x<sup>2</sup> - 16x + 15 = 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the structure</div>
+                        <div class="step-content">
+                            We need to factorise 4x<sup>2</sup> - 16x + 15
+                        </div>
+                        <div class="step-explanation">This has a = 4, b = -16, c = 15. Since a ≠ 1, we'll use the AC method</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Calculate AC and find factor pairs</div>
+                        <div class="step-content">
+                            AC = 4 × 15 = 60<br>
+                            We need two numbers that multiply to 60 and add to -16
+                        </div>
+                        <div class="step-explanation">The numbers are -10 and -6, because (-10) × (-6) = 60 and (-10) + (-6) = -16</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Rewrite the middle term</div>
+                        <div class="step-content">
+                            4x<sup>2</sup> - 16x + 15 = 4x<sup>2</sup> - 10x - 6x + 15
+                        </div>
+                        <div class="step-explanation">Split -16x into -10x and -6x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Factor by grouping</div>
+                        <div class="step-content">
+                            = 2x(2x - 5) - 3(2x - 5)<br>
+                            = (2x - 5)(2x - 3)
+                        </div>
+                        <div class="step-explanation">Group the first two terms and last two terms, then factor out the common bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Set each factor equal to zero</div>
+                        <div class="step-content">
+                            2x - 5 = 0 → x = 5/2<br>
+                            2x - 3 = 0 → x = 3/2
+                        </div>
+                        <div class="step-explanation">Solve each equation for x</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 5/2 or x = 3/2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    5x<sup>2</sup> - 10x<sup>2</sup> = -7 + x + x<sup>2</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Simplify the left side</div>
+                        <div class="step-content">
+                            5x<sup>2</sup> - 10x<sup>2</sup> = -5x<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Combine like terms on the left</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the equation</div>
+                        <div class="step-content">
+                            -5x<sup>2</sup> = -7 + x + x<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Simplified equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Move all terms to one side</div>
+                        <div class="step-content">
+                            -5x<sup>2</sup> - x<sup>2</sup> - x + 7 = 0<br>
+                            -6x<sup>2</sup> - x + 7 = 0
+                        </div>
+                        <div class="step-explanation">Rearrange to standard form</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Multiply by -1 to make the leading coefficient positive</div>
+                        <div class="step-content">
+                            6x<sup>2</sup> + x - 7 = 0
+                        </div>
+                        <div class="step-explanation">This makes factorising easier</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Use AC method to factorise</div>
+                        <div class="step-content">
+                            AC = 6 × (-7) = -42<br>
+                            Need two numbers that multiply to -42 and add to 1<br>
+                            The numbers are 7 and -6
+                        </div>
+                        <div class="step-explanation">Because 7 × (-6) = -42 and 7 + (-6) = 1</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Rewrite and factor</div>
+                        <div class="step-content">
+                            6x<sup>2</sup> + 7x - 6x - 7 = 0<br>
+                            x(6x + 7) - 1(6x + 7) = 0<br>
+                            (6x + 7)(x - 1) = 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Solve for x</div>
+                        <div class="step-content">
+                            6x + 7 = 0 → x = -7/6<br>
+                            x - 1 = 0 → x = 1
+                        </div>
+                        <div class="step-explanation">Set each factor to zero and solve</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 1 or x = -7/6 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

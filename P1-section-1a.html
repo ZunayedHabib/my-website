@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1A: Index Laws</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 8px;
+            align-items: center;
+        }
+
+        .fraction .numerator {
+            padding: 8px 15px;
+            border-bottom: 3px solid #000000;
+        }
+
+        .fraction .denominator {
+            padding: 8px 15px;
+        }
+
+        .final-answer .fraction .numerator {
+            border-bottom-color: #ffffff;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .x-squared {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .x-term {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .constant {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-1a.html" class="section-link active">1A</a>
+                <a href="P1-section-1b.html" class="section-link">1B</a>
+                <a href="P1-section-1c.html" class="section-link">1C</a>
+                <a href="P1-section-1d.html" class="section-link">1D</a>
+                <a href="P1-section-1e.html" class="section-link">1E</a>
+                <a href="P1-section-1f.html" class="section-link">1F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 1A: Index Laws</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Index Laws - Powers & Exponents</h3>
+            </div>
+
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    (4y<sup>3</sup>)<sup>3</sup> ÷ 2y<sup>3</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply the power rule to the bracket</div>
+                        <div class="step-content">
+                            <span class="constant">4<sup>3</sup></span> × <span class="x-term">(y<sup>3</sup>)<sup>3</sup></span>
+                        </div>
+                        <div class="step-explanation">When raising a product to a power, raise each factor to that power</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Simplify the constant and apply power of a power rule</div>
+                        <div class="step-content">
+                            <span class="constant">64</span> × <span class="x-term">y<sup>3×3</sup></span> = <span class="constant">64</span><span class="x-term">y<sup>9</sup></span>
+                        </div>
+                        <div class="step-explanation">4³ = 64 and for powers: (y<sup>a</sup>)<sup>b</sup> = y<sup>a×b</sup></div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Write the division</div>
+                        <div class="step-content">
+                            <div class="fraction">
+                                <span class="numerator"><span class="constant">64</span><span class="x-term">y<sup>9</sup></span></span>
+                                <span class="denominator"><span class="constant">2</span><span class="x-term">y<sup>3</sup></span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Express as a fraction</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Divide the constants</div>
+                        <div class="step-content">
+                            <span class="constant">64 ÷ 2 = 32</span>
+                        </div>
+                        <div class="step-explanation">Divide the numerical coefficients</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the division rule for exponents</div>
+                        <div class="step-content">
+                            <span class="x-term">y<sup>9</sup> ÷ y<sup>3</sup> = y<sup>9-3</sup> = y<sup>6</sup></span>
+                        </div>
+                        <div class="step-explanation">When dividing powers with the same base: y<sup>a</sup> ÷ y<sup>b</sup> = y<sup>a-b</sup></div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Combine the results</div>
+                        <div class="step-content">
+                            <span class="constant">32</span><span class="x-term">y<sup>6</sup></span>
+                        </div>
+                        <div class="step-explanation">Put together the constant and variable</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 32y<sup>6</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    2a<sup>3</sup> ÷ 3a<sup>2</sup> × 6a<sup>5</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Work from left to right - first division</div>
+                        <div class="step-content">
+                            <div class="fraction">
+                                <span class="numerator"><span class="constant">2</span><span class="x-term">a<sup>3</sup></span></span>
+                                <span class="denominator"><span class="constant">3</span><span class="x-term">a<sup>2</sup></span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Start by dividing the first two terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Simplify the fraction</div>
+                        <div class="step-content">
+                            <span class="constant">2/3</span> × <span class="x-term">a<sup>3-2</sup></span> = <span class="constant">2/3</span><span class="x-term">a<sup>1</sup></span>
+                        </div>
+                        <div class="step-explanation">Divide constants and subtract exponents: a³ ÷ a² = a¹</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Now multiply by the third term</div>
+                        <div class="step-content">
+                            <span class="constant">2/3</span><span class="x-term">a</span> × <span class="constant">6</span><span class="x-term">a<sup>5</sup></span>
+                        </div>
+                        <div class="step-explanation">Multiply the result from step 2 by 6a⁵</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Multiply the constants</div>
+                        <div class="step-content">
+                            <span class="constant">2/3 × 6 = 12/3 = 4</span>
+                        </div>
+                        <div class="step-explanation">Multiply the numerical coefficients</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Multiply the variables (add exponents)</div>
+                        <div class="step-content">
+                            <span class="x-term">a<sup>1</sup> × a<sup>5</sup> = a<sup>1+5</sup> = a<sup>6</sup></span>
+                        </div>
+                        <div class="step-explanation">When multiplying same bases, add the exponents</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Combine the results</div>
+                        <div class="step-content">
+                            <span class="constant">4</span><span class="x-term">a<sup>6</sup></span>
+                        </div>
+                        <div class="step-explanation">Put together the constant and variable</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 4a<sup>6</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    3x<sup>2</sup>(2x + 1) - 5x<sup>2</sup>(3x - 4)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the first bracket</div>
+                        <div class="step-content">
+                            <span class="x-squared">3x<sup>2</sup></span> × <span class="x-term">2x</span> + <span class="x-squared">3x<sup>2</sup></span> × <span class="constant">1</span> = <span class="x-squared">6x<sup>3</sup></span> + <span class="x-term">3x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">Multiply 3x² by each term inside the first bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Expand the second bracket (keep minus outside)</div>
+                        <div class="step-content">
+                            - (<span class="x-squared">5x<sup>2</sup></span> × <span class="x-term">3x</span> - <span class="x-squared">5x<sup>2</sup></span> × <span class="constant">4</span>) = - (<span class="x-squared">15x<sup>3</sup></span> - <span class="x-term">20x<sup>2</sup></span>)
+                        </div>
+                        <div class="step-explanation">First multiply 5x² by each term inside the bracket, keeping the minus sign outside</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Remove the bracket by flipping signs</div>
+                        <div class="step-content">
+                            - (<span class="x-squared">15x<sup>3</sup></span> - <span class="x-term">20x<sup>2</sup></span>) = <span class="x-squared">-15x<sup>3</sup></span> + <span class="x-term">20x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">The minus sign outside changes BOTH signs: +15x³ becomes -15x³, and -20x² becomes +20x²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Write the full expression</div>
+                        <div class="step-content">
+                            <span class="x-squared">6x<sup>3</sup></span> + <span class="x-term">3x<sup>2</sup></span> + (<span class="x-squared">-15x<sup>3</sup></span> + <span class="x-term">20x<sup>2</sup></span>)
+                        </div>
+                        <div class="step-explanation">Combine the results from both expansions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Combine like terms (x³ terms)</div>
+                        <div class="step-content">
+                            <span class="x-squared">6x<sup>3</sup> - 15x<sup>3</sup> = -9x<sup>3</sup></span>
+                        </div>
+                        <div class="step-explanation">Combine the x³ terms: 6 - 15 = -9</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Combine like terms (x² terms)</div>
+                        <div class="step-content">
+                            <span class="x-term">3x<sup>2</sup> + 20x<sup>2</sup> = 23x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">Combine the x² terms: 3 + 20 = 23</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Write the final simplified expression</div>
+                        <div class="step-content">
+                            <span class="x-squared">-9x<sup>3</sup></span> + <span class="x-term">23x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">Combine all results in descending order of powers</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: -9x<sup>3</sup> + 23x<sup>2</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    <div class="fraction">
+                        <span class="numerator">9x<sup>5</sup> - 5x<sup>3</sup></span>
+                        <span class="denominator">3x</span>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Split the fraction into separate terms</div>
+                        <div class="step-content">
+                            <div class="fraction">
+                                <span class="numerator"><span class="x-squared">9x<sup>5</sup></span></span>
+                                <span class="denominator"><span class="x-term">3x</span></span>
+                            </div>
+                            -
+                            <div class="fraction">
+                                <span class="numerator"><span class="x-term">5x<sup>3</sup></span></span>
+                                <span class="denominator"><span class="x-term">3x</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Divide each term in the numerator by the denominator</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Simplify the first fraction</div>
+                        <div class="step-content">
+                            <div class="fraction">
+                                <span class="numerator"><span class="constant">9</span><span class="x-squared">x<sup>5</sup></span></span>
+                                <span class="denominator"><span class="constant">3</span><span class="x-term">x</span></span>
+                            </div>
+                            = <span class="constant">9 ÷ 3</span> × <span class="x-squared">x<sup>5-1</sup></span> = <span class="constant">3</span><span class="x-squared">x<sup>4</sup></span>
+                        </div>
+                        <div class="step-explanation">Divide constants: 9 ÷ 3 = 3, and subtract exponents: x⁵⁻¹ = x⁴</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Simplify the second fraction</div>
+                        <div class="step-content">
+                            <div class="fraction">
+                                <span class="numerator"><span class="constant">5</span><span class="x-term">x<sup>3</sup></span></span>
+                                <span class="denominator"><span class="constant">3</span><span class="x-term">x</span></span>
+                            </div>
+                            = <span class="constant">5/3</span> × <span class="x-term">x<sup>3-1</sup></span> = <span class="constant">5/3</span><span class="x-term">x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">Keep fraction 5/3 as is, and subtract exponents: x³⁻¹ = x²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Write the final simplified expression</div>
+                        <div class="step-content">
+                            <span class="x-squared">3x<sup>4</sup></span> - <span class="constant">5/3</span><span class="x-term">x<sup>2</sup></span>
+                        </div>
+                        <div class="step-explanation">Combine both results with the minus sign</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 3x<sup>4</sup> - <div class="fraction" style="display: inline-flex; font-size: 0.9em;"><span class="numerator">5</span><span class="denominator">3</span></div>x<sup>2</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

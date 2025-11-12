@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2B: Quadratic Formula</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 8px;
+            align-items: center;
+        }
+
+        .fraction .numerator {
+            padding: 8px 15px;
+            border-bottom: 3px solid #000000;
+        }
+
+        .fraction .denominator {
+            padding: 8px 15px;
+        }
+
+        .final-answer .fraction .numerator {
+            border-bottom-color: #ffffff;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .x-squared {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .x-term {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .constant {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .question-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .formula-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .formula-box .formula-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .formula-box .formula-content {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .sqrt {
+            text-decoration: overline;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-2a.html" class="section-link">2A</a>
+                <a href="P1-section-2b.html" class="section-link active">2B</a>
+                <a href="P1-section-2c.html" class="section-link">2C</a>
+                <a href="P1-section-2d.html" class="section-link">2D</a>
+                <a href="P1-section-2e.html" class="section-link">2E</a>
+                <a href="P1-section-2f.html" class="section-link">2F</a>
+                <a href="P1-section-2g.html" class="section-link">2G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 2B: Quadratic Formula</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Quadratic Formula - Solving Quadratic Equations</h3>
+            </div>
+
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    11x<sup>2</sup> + 2x - 7 = 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Quadratic Formula:</div>
+                        <div class="formula-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-b ± √(b<sup>2</sup> - 4ac)</span>
+                                <span class="denominator">2a</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify coefficients from ax² + bx + c = 0</div>
+                        <div class="step-content">
+                            <span class="x-squared">a = 11</span>, <span class="x-term">b = 2</span>, <span class="constant">c = -7</span>
+                        </div>
+                        <div class="step-explanation">From 11x² + 2x - 7 = 0</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Calculate the discriminant (b² - 4ac)</div>
+                        <div class="step-content">
+                            b<sup>2</sup> - 4ac = (2)<sup>2</sup> - 4(11)(-7)
+                        </div>
+                        <div class="step-content">
+                            = 4 - (-308) = 4 + 308 = 312
+                        </div>
+                        <div class="step-explanation">The discriminant is positive, so we have two real solutions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute into the quadratic formula</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-2 ± √312</span>
+                                <span class="denominator">2(11)</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-2 ± √312</span>
+                                <span class="denominator">22</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Simplify √312</div>
+                        <div class="step-content">
+                            √312 = √(4 × 78) = 2√78
+                        </div>
+                        <div class="step-explanation">Factor out perfect squares</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Substitute and simplify</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-2 ± 2√78</span>
+                                <span class="denominator">22</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">2(-1 ± √78)</span>
+                                <span class="denominator">22</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-1 ± √78</span>
+                                <span class="denominator">11</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Factor and cancel common factors</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write the two solutions</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-1 + √78</span>
+                                <span class="denominator">11</span>
+                            </div>
+                            or
+                            x = <div class="fraction">
+                                <span class="numerator">-1 - √78</span>
+                                <span class="denominator">11</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = <div class="fraction">
+                            <span class="numerator">-1 ± √78</span>
+                            <span class="denominator">11</span>
+                        </div> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    2x<sup>2</sup> + 11x = 5x<sup>2</sup> - 18
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Rearrange to standard form (ax² + bx + c = 0)</div>
+                        <div class="step-content">
+                            2x<sup>2</sup> + 11x = 5x<sup>2</sup> - 18
+                        </div>
+                        <div class="step-content">
+                            2x<sup>2</sup> - 5x<sup>2</sup> + 11x + 18 = 0
+                        </div>
+                        <div class="step-content">
+                            <span class="x-squared">-3x<sup>2</sup></span> + <span class="x-term">11x</span> + <span class="constant">18</span> = 0
+                        </div>
+                        <div class="step-explanation">Move all terms to one side</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Quadratic Formula:</div>
+                        <div class="formula-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-b ± √(b<sup>2</sup> - 4ac)</span>
+                                <span class="denominator">2a</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Identify coefficients</div>
+                        <div class="step-content">
+                            <span class="x-squared">a = -3</span>, <span class="x-term">b = 11</span>, <span class="constant">c = 18</span>
+                        </div>
+                        <div class="step-explanation">From -3x² + 11x + 18 = 0</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate the discriminant (b² - 4ac)</div>
+                        <div class="step-content">
+                            b<sup>2</sup> - 4ac = (11)<sup>2</sup> - 4(-3)(18)
+                        </div>
+                        <div class="step-content">
+                            = 121 - (-216) = 121 + 216 = 337
+                        </div>
+                        <div class="step-explanation">The discriminant is positive, so we have two real solutions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Substitute into the quadratic formula</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-11 ± √337</span>
+                                <span class="denominator">2(-3)</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-11 ± √337</span>
+                                <span class="denominator">-6</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Simplify by factoring out -1</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-(-11 ± √337)</span>
+                                <span class="denominator">6</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">11 ∓ √337</span>
+                                <span class="denominator">6</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Note: ∓ means the sign flips (+ becomes -, - becomes +)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write the two solutions</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">11 - √337</span>
+                                <span class="denominator">6</span>
+                            </div>
+                            or
+                            x = <div class="fraction">
+                                <span class="numerator">11 + √337</span>
+                                <span class="denominator">6</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = <div class="fraction">
+                            <span class="numerator">11 ∓ √337</span>
+                            <span class="denominator">6</span>
+                        </div> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    (2x + 8)<sup>2</sup> = 100
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the left side</div>
+                        <div class="step-content">
+                            (2x + 8)<sup>2</sup> = (2x + 8)(2x + 8)
+                        </div>
+                        <div class="step-content">
+                            = 4x<sup>2</sup> + 16x + 16x + 64
+                        </div>
+                        <div class="step-content">
+                            = 4x<sup>2</sup> + 32x + 64
+                        </div>
+                        <div class="step-explanation">Use FOIL or (a + b)² = a² + 2ab + b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange to standard form</div>
+                        <div class="step-content">
+                            4x<sup>2</sup> + 32x + 64 = 100
+                        </div>
+                        <div class="step-content">
+                            <span class="x-squared">4x<sup>2</sup></span> + <span class="x-term">32x</span> + <span class="constant">64 - 100</span> = 0
+                        </div>
+                        <div class="step-content">
+                            <span class="x-squared">4x<sup>2</sup></span> + <span class="x-term">32x</span> - <span class="constant">36</span> = 0
+                        </div>
+                        <div class="step-explanation">Subtract 100 from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Simplify by dividing all terms by 4</div>
+                        <div class="step-content">
+                            <span class="x-squared">x<sup>2</sup></span> + <span class="x-term">8x</span> - <span class="constant">9</span> = 0
+                        </div>
+                        <div class="step-explanation">This makes the numbers easier to work with</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Quadratic Formula:</div>
+                        <div class="formula-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-b ± √(b<sup>2</sup> - 4ac)</span>
+                                <span class="denominator">2a</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Identify coefficients</div>
+                        <div class="step-content">
+                            <span class="x-squared">a = 1</span>, <span class="x-term">b = 8</span>, <span class="constant">c = -9</span>
+                        </div>
+                        <div class="step-explanation">From x² + 8x - 9 = 0</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Calculate the discriminant (b² - 4ac)</div>
+                        <div class="step-content">
+                            b<sup>2</sup> - 4ac = (8)<sup>2</sup> - 4(1)(-9)
+                        </div>
+                        <div class="step-content">
+                            = 64 - (-36) = 64 + 36 = 100
+                        </div>
+                        <div class="step-explanation">The discriminant is a perfect square!</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Substitute into the quadratic formula</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-8 ± √100</span>
+                                <span class="denominator">2(1)</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-8 ± 10</span>
+                                <span class="denominator">2</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">√100 = 10</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Calculate both solutions</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-8 + 10</span>
+                                <span class="denominator">2</span>
+                            </div> = <div class="fraction">
+                                <span class="numerator">2</span>
+                                <span class="denominator">2</span>
+                            </div> = 1
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-8 - 10</span>
+                                <span class="denominator">2</span>
+                            </div> = <div class="fraction">
+                                <span class="numerator">-18</span>
+                                <span class="denominator">2</span>
+                            </div> = -9
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 1 or x = -9 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    x = √(8x - 15)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Square both sides to remove the square root</div>
+                        <div class="step-content">
+                            x = √(8x - 15)
+                        </div>
+                        <div class="step-content">
+                            x<sup>2</sup> = (√(8x - 15))<sup>2</sup>
+                        </div>
+                        <div class="step-content">
+                            x<sup>2</sup> = 8x - 15
+                        </div>
+                        <div class="step-explanation">Squaring removes the square root</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange to standard form</div>
+                        <div class="step-content">
+                            x<sup>2</sup> = 8x - 15
+                        </div>
+                        <div class="step-content">
+                            <span class="x-squared">x<sup>2</sup></span> - <span class="x-term">8x</span> + <span class="constant">15</span> = 0
+                        </div>
+                        <div class="step-explanation">Subtract 8x and add 15 to both sides</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Quadratic Formula:</div>
+                        <div class="formula-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-b ± √(b<sup>2</sup> - 4ac)</span>
+                                <span class="denominator">2a</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Identify coefficients</div>
+                        <div class="step-content">
+                            <span class="x-squared">a = 1</span>, <span class="x-term">b = -8</span>, <span class="constant">c = 15</span>
+                        </div>
+                        <div class="step-explanation">From x² - 8x + 15 = 0</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Calculate the discriminant (b² - 4ac)</div>
+                        <div class="step-content">
+                            b<sup>2</sup> - 4ac = (-8)<sup>2</sup> - 4(1)(15)
+                        </div>
+                        <div class="step-content">
+                            = 64 - 60 = 4
+                        </div>
+                        <div class="step-explanation">The discriminant is a perfect square!</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Substitute into the quadratic formula</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">-(-8) ± √4</span>
+                                <span class="denominator">2(1)</span>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">8 ± 2</span>
+                                <span class="denominator">2</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">√4 = 2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Calculate both solutions</div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">8 + 2</span>
+                                <span class="denominator">2</span>
+                            </div> = <div class="fraction">
+                                <span class="numerator">10</span>
+                                <span class="denominator">2</span>
+                            </div> = 5
+                        </div>
+                        <div class="step-content">
+                            x = <div class="fraction">
+                                <span class="numerator">8 - 2</span>
+                                <span class="denominator">2</span>
+                            </div> = <div class="fraction">
+                                <span class="numerator">6</span>
+                                <span class="denominator">2</span>
+                            </div> = 3
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check solutions in original equation</div>
+                        <div class="step-content">
+                            For x = 5: √(8(5) - 15) = √(40 - 15) = √25 = 5 ✓
+                        </div>
+                        <div class="step-content">
+                            For x = 3: √(8(3) - 15) = √(24 - 15) = √9 = 3 ✓
+                        </div>
+                        <div class="step-explanation">Both solutions are valid since they satisfy the original equation</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 5 or x = 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-nav">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            document.querySelectorAll('.question-box').forEach(box => {
+                box.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.question-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Scroll to top of content
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edexcel Math AS Level P1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 0.8s;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s;
+        }
+
+        .chapter-box {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 1s;
+        }
+
+        .chapter-title {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chapter-description {
+            text-align: center;
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .section-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .section-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.95em;
+            opacity: 0.85;
+        }
+
+        .question-count {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <a href="index.html" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s;">🏠 Back to Home</a>
+        </div>
+
+        <header>
+            <h1>📐 Edexcel Math AS Level P1</h1>
+            <p>Your Complete Learning Guide</p>
+        </header>
+
+        <!-- Chapter 1 -->
+        <div class="chapter-box">
+            <h2 class="chapter-title">Chapter 1: Algebraic Expressions</h2>
+            <p class="chapter-description">
+                Master the fundamentals of algebra through interactive lessons and step-by-step solutions.
+                Click on any section below to begin your learning journey.
+            </p>
+
+            <div class="section-grid">
+                <a href="P1-section-1a.html" class="section-card">
+                    <div class="section-number">1A</div>
+                    <div class="section-title">Index Laws</div>
+                </a>
+
+                <a href="P1-section-1b.html" class="section-card">
+                    <div class="section-number">1B</div>
+                    <div class="section-title">Expanding Brackets</div>
+                </a>
+
+                <a href="P1-section-1c.html" class="section-card">
+                    <div class="section-number">1C</div>
+                    <div class="section-title">Factorising</div>
+                </a>
+
+                <a href="P1-section-1d.html" class="section-card">
+                    <div class="section-number">1D</div>
+                    <div class="section-title">Negative & Fractional Indices</div>
+                </a>
+
+                <a href="P1-section-1e.html" class="section-card">
+                    <div class="section-number">1E</div>
+                    <div class="section-title">Surds</div>
+                </a>
+
+                <a href="P1-section-1f.html" class="section-card">
+                    <div class="section-number">1F</div>
+                    <div class="section-title">Rationalising Denominator</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="chapter-box" style="margin-top: 30px;">
+            <h2 class="chapter-title">Chapter 2: Quadratics</h2>
+            <p class="chapter-description">
+                Explore quadratic equations, graphs, and functions with comprehensive worked examples.
+                Master solving techniques and understand the discriminant.
+            </p>
+
+            <div class="section-grid">
+                <a href="P1-section-2a.html" class="section-card">
+                    <div class="section-number">2A</div>
+                    <div class="section-title">Solving Quadratic Equations</div>
+                </a>
+
+                <a href="P1-section-2b.html" class="section-card">
+                    <div class="section-number">2B</div>
+                    <div class="section-title">Quadratic Formula</div>
+                </a>
+
+                <a href="P1-section-2c.html" class="section-card">
+                    <div class="section-number">2C</div>
+                    <div class="section-title">Completing the Square</div>
+                </a>
+
+                <a href="P1-section-2d.html" class="section-card">
+                    <div class="section-number">2D</div>
+                    <div class="section-title">Completing the Square & Solving for x</div>
+                </a>
+
+                <a href="P1-section-2e.html" class="section-card">
+                    <div class="section-number">2E</div>
+                    <div class="section-title">Functions</div>
+                </a>
+
+                <a href="P1-section-2f.html" class="section-card">
+                    <div class="section-number">2F</div>
+                    <div class="section-title">Quadratic Graphs</div>
+                </a>
+
+                <a href="P1-section-2g.html" class="section-card">
+                    <div class="section-number">2G</div>
+                    <div class="section-title">The Discriminant</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="chapter-box" style="margin-top: 30px;">
+            <h2 class="chapter-title">Chapter 3: Equations and Inequalities</h2>
+            <p class="chapter-description">
+                Develop skills in solving simultaneous equations using algebraic and graphical methods.
+                Learn to work with linear and quadratic inequalities, and represent solution regions graphically.
+            </p>
+
+            <div class="section-grid">
+                <a href="P1-section-3a.html" class="section-card">
+                    <div class="section-number">3A</div>
+                    <div class="section-title">Linear Simultaneous Equations</div>
+                </a>
+
+                <a href="P1-section-3b.html" class="section-card">
+                    <div class="section-number">3B</div>
+                    <div class="section-title">Quadratic Simultaneous Equations</div>
+                </a>
+
+                <a href="P1-section-3c.html" class="section-card">
+                    <div class="section-number">3C</div>
+                    <div class="section-title">Simultaneous Equations on Graphs</div>
+                </a>
+
+                <a href="P1-section-3d.html" class="section-card">
+                    <div class="section-number">3D</div>
+                    <div class="section-title">Linear Inequalities</div>
+                </a>
+
+                <a href="P1-section-3e.html" class="section-card">
+                    <div class="section-number">3E</div>
+                    <div class="section-title">Quadratic Inequalities</div>
+                </a>
+
+                <a href="P1-section-3f.html" class="section-card">
+                    <div class="section-number">3F</div>
+                    <div class="section-title">Inequalities on Graphs</div>
+                </a>
+
+                <a href="P1-section-3g.html" class="section-card">
+                    <div class="section-number">3G</div>
+                    <div class="section-title">Regions</div>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Edexcel Math Study Guide | All sections include detailed solutions</p>
+            <p style="opacity: 0.8; font-size: 0.85em;">Chapters 1-3 available • More chapters coming soon</p>
+        </footer>
+    </div>
+</body>
+</html>

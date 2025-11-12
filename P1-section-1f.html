@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1F: Rationalising Denominator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 8px;
+            align-items: center;
+        }
+
+        .fraction .numerator {
+            padding: 8px 15px;
+            border-bottom: 3px solid #000000;
+        }
+
+        .fraction .denominator {
+            padding: 8px 15px;
+        }
+
+        .fraction-wide .numerator {
+            padding: 8px 5px;
+            border-bottom: 3px solid #000000;
+        }
+
+        .fraction-wide .denominator {
+            padding: 8px 5px;
+        }
+
+        .final-answer .fraction .numerator {
+            border-bottom-color: #ffffff;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .constant {
+            color: #000000;
+        }
+
+        .x-term {
+            color: #000000;
+        }
+
+        .x-squared {
+            color: #000000;
+        }
+
+        .surd-term {
+            color: #000000;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-1a.html" class="section-link">1A</a>
+                <a href="P1-section-1b.html" class="section-link">1B</a>
+                <a href="P1-section-1c.html" class="section-link">1C</a>
+                <a href="P1-section-1d.html" class="section-link">1D</a>
+                <a href="P1-section-1e.html" class="section-link">1E</a>
+                <a href="P1-section-1f.html" class="section-link active">1F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 1F: Rationalising Denominator</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Rationalising Denominator</h3>
+                <p>Remove surds from denominators by multiplication</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    <div class="fraction">
+                        <span class="numerator">√7</span>
+                        <span class="denominator">√63</span>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Simplify √63</div>
+                        <div class="step-content">
+                            <span class="surd-term">√63 = √(9 × 7) = √9 × √7 = 3√7</span>
+                        </div>
+                        <div class="step-explanation">Factor 63 = 9 × 7, where 9 is a perfect square</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute back into the fraction</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="surd-term">√7</span></span>
+                                <span class="denominator"><span class="surd-term">3√7</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Replace √63 with 3√7</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Cancel the √7 terms</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="surd-term">√7</span></span>
+                                <span class="denominator"><span class="surd-term">3√7</span></span>
+                            </div>
+                            = <span class="constant">1/3</span>
+                        </div>
+                        <div class="step-explanation">√7 ÷ √7 = 1, leaving 1/3</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 1/3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    <div class="fraction">
+                        <span class="numerator">11</span>
+                        <span class="denominator">3 + √11</span>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the conjugate</div>
+                        <div class="step-content">
+                            Conjugate of (<span class="constant">3</span> + <span class="surd-term">√11</span>) is (<span class="constant">3</span> - <span class="surd-term">√11</span>)
+                        </div>
+                        <div class="step-explanation">To rationalise, we multiply by the conjugate which changes the sign of the surd term</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Multiply numerator and denominator by conjugate</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">11</span></span>
+                                <span class="denominator">(<span class="constant">3</span> + <span class="surd-term">√11</span>)</span>
+                            </div>
+                            × 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">(<span class="constant">3</span> - <span class="surd-term">√11</span>)</span>
+                                <span class="denominator">(<span class="constant">3</span> - <span class="surd-term">√11</span>)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Multiplying by conjugate/conjugate = 1, so we don't change the value</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate the numerator</div>
+                        <div class="step-content">
+                            <span class="constant">11</span> × (<span class="constant">3</span> - <span class="surd-term">√11</span>) = <span class="constant">33</span> - <span class="surd-term">11√11</span>
+                        </div>
+                        <div class="step-explanation">Distribute 11 to both terms: 11 × 3 = 33 and 11 × (-√11) = -11√11</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Calculate the denominator (difference of squares)</div>
+                        <div class="step-content">
+                            (<span class="constant">3</span> + <span class="surd-term">√11</span>)(<span class="constant">3</span> - <span class="surd-term">√11</span>) = <span class="constant">3²</span> - <span class="surd-term">(√11)²</span> = <span class="constant">9</span> - <span class="constant">11</span> = <span class="constant">-2</span>
+                        </div>
+                        <div class="step-explanation">Using (a + b)(a - b) = a² - b², where a = 3 and b = √11</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Write the result</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">33</span> - <span class="surd-term">11√11</span></span>
+                                <span class="denominator"><span class="constant">-2</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Combine the calculated numerator and denominator</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Simplify by dividing both terms by -2</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">33</span></span>
+                                <span class="denominator"><span class="constant">-2</span></span>
+                            </div>
+                            - 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="surd-term">11√11</span></span>
+                                <span class="denominator"><span class="constant">-2</span></span>
+                            </div>
+                            = <span class="constant">-33/2</span> + <span class="surd-term">11√11/2</span>
+                        </div>
+                        <div class="step-explanation">Divide each term in the numerator by -2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Factor out 11/2</div>
+                        <div class="step-content">
+                            <span class="constant">11/2</span>(<span class="surd-term">√11</span> - <span class="constant">3</span>)
+                        </div>
+                        <div class="step-explanation">Factor out the common factor 11/2 from both terms</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <div class="fraction" style="display: inline-flex; font-size: 0.9em; vertical-align: middle;"><span class="numerator">11</span><span class="denominator">2</span></div>(√11 - 3) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    <div class="fraction">
+                        <span class="numerator">√41 + √29</span>
+                        <span class="denominator">√41 - √29</span>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the conjugate</div>
+                        <div class="step-content">
+                            Conjugate of (<span class="surd-term">√41</span> - <span class="surd-term">√29</span>) is (<span class="surd-term">√41</span> + <span class="surd-term">√29</span>)
+                        </div>
+                        <div class="step-explanation">The conjugate changes the sign between the terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Multiply numerator and denominator by conjugate</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">(<span class="surd-term">√41</span> + <span class="surd-term">√29</span>)</span>
+                                <span class="denominator">(<span class="surd-term">√41</span> - <span class="surd-term">√29</span>)</span>
+                            </div>
+                            × 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">(<span class="surd-term">√41</span> + <span class="surd-term">√29</span>)</span>
+                                <span class="denominator">(<span class="surd-term">√41</span> + <span class="surd-term">√29</span>)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Notice the numerator equals the conjugate!</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate the numerator (square of a sum)</div>
+                        <div class="step-content">
+                            (<span class="surd-term">√41</span> + <span class="surd-term">√29</span>)² = <span class="surd-term">(√41)²</span> + 2(<span class="surd-term">√41</span>)(<span class="surd-term">√29</span>) + <span class="surd-term">(√29)²</span>
+                        </div>
+                        <div class="step-explanation">Using (a + b)² = a² + 2ab + b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Simplify the numerator</div>
+                        <div class="step-content">
+                            = <span class="constant">41</span> + 2<span class="surd-term">√(41 × 29)</span> + <span class="constant">29</span><br>
+                            = <span class="constant">70</span> + 2<span class="surd-term">√1189</span>
+                        </div>
+                        <div class="step-explanation">(√41)² = 41, (√29)² = 29, and √41 × √29 = √(41×29) = √1189</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Calculate the denominator (difference of squares)</div>
+                        <div class="step-content">
+                            (<span class="surd-term">√41</span> - <span class="surd-term">√29</span>)(<span class="surd-term">√41</span> + <span class="surd-term">√29</span>) = <span class="surd-term">(√41)²</span> - <span class="surd-term">(√29)²</span> = <span class="constant">41</span> - <span class="constant">29</span> = <span class="constant">12</span>
+                        </div>
+                        <div class="step-explanation">Using (a - b)(a + b) = a² - b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write the result</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">70</span> + 2<span class="surd-term">√1189</span></span>
+                                <span class="denominator"><span class="constant">12</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Combine the calculated numerator and denominator</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Factor out 2 from numerator and simplify</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">2(<span class="constant">35</span> + <span class="surd-term">√1189</span>)</span>
+                                <span class="denominator"><span class="constant">12</span></span>
+                            </div>
+                            = 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">35</span> + <span class="surd-term">√1189</span></span>
+                                <span class="denominator"><span class="constant">6</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Factor 2 from numerator, then cancel with denominator: 2/12 = 1/6</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <div class="fraction" style="display: inline-flex; font-size: 0.9em; vertical-align: middle;"><span class="numerator">35 + √1189</span><span class="denominator">6</span></div> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    <div class="fraction">
+                        <span class="numerator" style="padding: 8px 60px;">2</span>
+                        <span class="denominator">(5 - √3)(2 + √3)</span>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the denominator using FOIL</div>
+                        <div class="step-content">
+                            (<span class="constant">5</span> - <span class="surd-term">√3</span>)(<span class="constant">2</span> + <span class="surd-term">√3</span>)<br>
+                            = <span class="constant">5×2</span> + <span class="constant">5</span>×<span class="surd-term">√3</span> - <span class="surd-term">√3</span>×<span class="constant">2</span> - <span class="surd-term">√3</span>×<span class="surd-term">√3</span><br>
+                            = <span class="constant">10</span> + <span class="surd-term">5√3</span> - <span class="surd-term">2√3</span> - <span class="constant">3</span>
+                        </div>
+                        <div class="step-explanation">First: 5×2=10, Outer: 5×√3=5√3, Inner: -√3×2=-2√3, Last: -√3×√3=-3</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Simplify the denominator</div>
+                        <div class="step-content">
+                            = <span class="constant">10</span> - <span class="constant">3</span> + <span class="surd-term">5√3</span> - <span class="surd-term">2√3</span><br>
+                            = <span class="constant">7</span> + <span class="surd-term">3√3</span>
+                        </div>
+                        <div class="step-explanation">Combine like terms: constants (10-3=7) and surds (5√3-2√3=3√3)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Rewrite the fraction</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">2</span></span>
+                                <span class="denominator"><span class="constant">7</span> + <span class="surd-term">3√3</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Replace the expanded denominator</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Identify the conjugate of the denominator</div>
+                        <div class="step-content">
+                            Conjugate of (<span class="constant">7</span> + <span class="surd-term">3√3</span>) is (<span class="constant">7</span> - <span class="surd-term">3√3</span>)
+                        </div>
+                        <div class="step-explanation">To rationalise, multiply by the conjugate</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Multiply numerator and denominator by conjugate</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">2</span></span>
+                                <span class="denominator">(<span class="constant">7</span> + <span class="surd-term">3√3</span>)</span>
+                            </div>
+                            × 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">(<span class="constant">7</span> - <span class="surd-term">3√3</span>)</span>
+                                <span class="denominator">(<span class="constant">7</span> - <span class="surd-term">3√3</span>)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Multiplying by conjugate/conjugate = 1</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Calculate the new numerator</div>
+                        <div class="step-content">
+                            <span class="constant">2</span>(<span class="constant">7</span> - <span class="surd-term">3√3</span>) = <span class="constant">14</span> - <span class="surd-term">6√3</span>
+                        </div>
+                        <div class="step-explanation">Distribute 2 to both terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Calculate the new denominator (difference of squares)</div>
+                        <div class="step-content">
+                            (<span class="constant">7</span> + <span class="surd-term">3√3</span>)(<span class="constant">7</span> - <span class="surd-term">3√3</span>) = <span class="constant">7²</span> - <span class="surd-term">(3√3)²</span><br>
+                            = <span class="constant">49</span> - <span class="constant">9×3</span> = <span class="constant">49</span> - <span class="constant">27</span> = <span class="constant">22</span>
+                        </div>
+                        <div class="step-explanation">(3√3)² = 9×3 = 27</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Write the final result</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">14</span> - <span class="surd-term">6√3</span></span>
+                                <span class="denominator"><span class="constant">22</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Combine the calculated numerator and denominator</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Simplify by factoring out 2</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator">2(<span class="constant">7</span> - <span class="surd-term">3√3</span>)</span>
+                                <span class="denominator"><span class="constant">22</span></span>
+                            </div>
+                            = 
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;">
+                                <span class="numerator"><span class="constant">7</span> - <span class="surd-term">3√3</span></span>
+                                <span class="denominator"><span class="constant">11</span></span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Factor 2 from numerator and cancel: 2/22 = 1/11</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <div class="fraction" style="display: inline-flex; font-size: 0.9em; vertical-align: middle;"><span class="numerator">7 - 3√3</span><span class="denominator">11</span></div> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

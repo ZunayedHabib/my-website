@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1E: Surds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .new-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .question-text {
+            font-size: 1.6em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 8px;
+            align-items: center;
+        }
+
+        .fraction .numerator {
+            padding: 8px 15px;
+            border-bottom: 3px solid #000000;
+        }
+
+        .fraction .denominator {
+            padding: 8px 15px;
+        }
+
+        .final-answer .fraction .numerator {
+            border-bottom-color: #ffffff;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-1a.html" class="section-link">1A</a>
+                <a href="P1-section-1b.html" class="section-link">1B</a>
+                <a href="P1-section-1c.html" class="section-link">1C</a>
+                <a href="P1-section-1d.html" class="section-link">1D</a>
+                <a href="P1-section-1e.html" class="section-link active">1E</a>
+                <a href="P1-section-1f.html" class="section-link">1F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 1E: Surds</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Surds - Simplifying Radicals</h3>
+            </div>
+
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    √12 + 3√48 + √75
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Simplify √12</div>
+                        <div class="step-content">
+                            √12 = √(4 × 3) = √4 × √3 = 2√3
+                        </div>
+                        <div class="step-explanation">Find the largest perfect square factor of 12</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Simplify 3√48</div>
+                        <div class="step-content">
+                            √48 = √(16 × 3) = √16 × √3 = 4√3<br>
+                            3√48 = 3 × 4√3 = 12√3
+                        </div>
+                        <div class="step-explanation">Find the largest perfect square factor of 48, then multiply by the coefficient</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Simplify √75</div>
+                        <div class="step-content">
+                            √75 = √(25 × 3) = √25 × √3 = 5√3
+                        </div>
+                        <div class="step-explanation">Find the largest perfect square factor of 75</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Write all terms with common surd</div>
+                        <div class="step-content">
+                            2√3 + 12√3 + 5√3
+                        </div>
+                        <div class="step-explanation">All terms now have √3 as a common factor</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Combine like terms</div>
+                        <div class="step-content">
+                            (2 + 12 + 5)√3 = 19√3
+                        </div>
+                        <div class="step-explanation">Add the coefficients: 2 + 12 + 5 = 19</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 19√3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    <div class="fraction" style="display: inline-flex; vertical-align: middle;"><span class="numerator">√44</span><span class="denominator">√11</span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Simplify √44</div>
+                        <div class="step-content">
+                            √44 = √(4 × 11) = √4 × √11 = 2√11
+                        </div>
+                        <div class="step-explanation">Find the largest perfect square factor of 44: 44 = 4 × 11, where 4 is a perfect square</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute back into the expression</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;"><span class="numerator">√44</span><span class="denominator">√11</span></div> = <div class="fraction" style="display: inline-flex; vertical-align: middle;"><span class="numerator">2√11</span><span class="denominator">√11</span></div>
+                        </div>
+                        <div class="step-explanation">Replace √44 with 2√11 in the original expression</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Simplify the fraction</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;"><span class="numerator">2√11</span><span class="denominator">√11</span></div> = 2
+                        </div>
+                        <div class="step-explanation">√11 ÷ √11 = 1, so the √11 terms cancel out, leaving 2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Alternative method using division rule for surds</div>
+                        <div class="step-content">
+                            <div class="fraction" style="display: inline-flex; vertical-align: middle;"><span class="numerator">√44</span><span class="denominator">√11</span></div> = √<div class="fraction" style="display: inline-flex; vertical-align: middle; font-size: 0.85em;"><span class="numerator">44</span><span class="denominator">11</span></div> = √4 = 2
+                        </div>
+                        <div class="step-explanation">Using the surd property: √a/√b = √(a/b). Then 44÷11 = 4, and √4 = 2</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    (7 - √11)(2 + √11)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply FOIL method</div>
+                        <div class="step-content">
+                            First: 7 × 2 = 14<br>
+                            Outer: 7 × √11 = 7√11<br>
+                            Inner: -√11 × 2 = -2√11<br>
+                            Last: -√11 × √11 = -11
+                        </div>
+                        <div class="step-explanation">Multiply each term in the first bracket by each term in the second bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Combine all terms</div>
+                        <div class="step-content">
+                            14 + 7√11 - 2√11 - 11
+                        </div>
+                        <div class="step-explanation">Write all four products together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Combine like terms (surds)</div>
+                        <div class="step-content">
+                            7√11 - 2√11 = 5√11
+                        </div>
+                        <div class="step-explanation">Combine the √11 terms: 7 - 2 = 5</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Combine like terms (constants)</div>
+                        <div class="step-content">
+                            14 - 11 = 3
+                        </div>
+                        <div class="step-explanation">Combine the constant terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Write the final simplified form</div>
+                        <div class="step-content">
+                            3 + 5√11
+                        </div>
+                        <div class="step-explanation">Combine all simplified terms</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 3 + 5√11 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

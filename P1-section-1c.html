@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1C: Factorising</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-1a.html" class="section-link">1A</a>
+                <a href="P1-section-1b.html" class="section-link">1B</a>
+                <a href="P1-section-1c.html" class="section-link active">1C</a>
+                <a href="P1-section-1d.html" class="section-link">1D</a>
+                <a href="P1-section-1e.html" class="section-link">1E</a>
+                <a href="P1-section-1f.html" class="section-link">1F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 1C: Factorising</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Factorising - Quadratics & More</h3>
+            </div>
+
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    9xy<sup>2</sup> + 12x<sup>2</sup>y
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify common factors in both terms</div>
+                        <div class="step-content">
+                            9xy<sup>2</sup> = 3 × 3 × x × y × y<br>
+                            12x<sup>2</sup>y = 3 × 4 × x × x × y
+                        </div>
+                        <div class="step-explanation">Break down each term into its prime factors</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the common numerical factor</div>
+                        <div class="step-content">
+                            Common numerical factor: 3
+                        </div>
+                        <div class="step-explanation">The greatest common factor of 9 and 12 is 3</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the common variable factors</div>
+                        <div class="step-content">
+                            Common variable factors: x and y
+                        </div>
+                        <div class="step-explanation">Take the lowest power of each variable: x¹ and y¹</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Determine the HCF</div>
+                        <div class="step-content">
+                            HCF = 3xy
+                        </div>
+                        <div class="step-explanation">Combine the numerical and variable factors</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Divide each term by the HCF</div>
+                        <div class="step-content">
+                            9xy<sup>2</sup> ÷ 3xy = 3y<br>
+                            12x<sup>2</sup>y ÷ 3xy = 4x
+                        </div>
+                        <div class="step-explanation">Divide each original term by 3xy</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write in factorised form</div>
+                        <div class="step-content">
+                            3xy(3y + 4x)
+                        </div>
+                        <div class="step-explanation">Place HCF outside brackets with remaining terms inside</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check by expanding</div>
+                        <div class="step-content">
+                            3xy × 3y = 9xy<sup>2</sup> ✓<br>
+                            3xy × 4x = 12x<sup>2</sup>y ✓
+                        </div>
+                        <div class="step-explanation">Verify the answer by expanding back to the original expression</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 3xy(3y + 4x) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    x<sup>2</sup> - 2x - 24
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the coefficients</div>
+                        <div class="step-content">
+                            For x<sup>2</sup> - 2x - 24, we have:<br>
+                            Coefficient of x<sup>2</sup> = 1<br>
+                            Coefficient of x = -2<br>
+                            Constant term = -24
+                        </div>
+                        <div class="step-explanation">This is in the form x² + bx + c</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply the product and sum rule</div>
+                        <div class="step-content">
+                            We need two numbers that:<br>
+                            • <strong>Product</strong> = -24 (the constant term)<br>
+                            • <strong>Sum</strong> = -2 (the coefficient of x)
+                        </div>
+                        <div class="step-explanation">Find two numbers that multiply to give -24 and add to give -2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: List factor pairs of -24</div>
+                        <div class="step-content">
+                            Possible pairs:<br>
+                            1 and -24 → sum = -23 ✗<br>
+                            -1 and 24 → sum = 23 ✗<br>
+                            2 and -12 → sum = -10 ✗<br>
+                            -2 and 12 → sum = 10 ✗<br>
+                            3 and -8 → sum = -5 ✗<br>
+                            -3 and 8 → sum = 5 ✗<br>
+                            4 and -6 → sum = -2 ✓<br>
+                        </div>
+                        <div class="step-explanation">Check each pair until the sum equals -2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Identify the correct pair</div>
+                        <div class="step-content">
+                            The numbers are: 4 and -6<br>
+                            Product: 4 × (-6) = -24 ✓<br>
+                            Sum: 4 + (-6) = -2 ✓
+                        </div>
+                        <div class="step-explanation">Both conditions are satisfied</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Write in factorised form</div>
+                        <div class="step-content">
+                            (x + 4)(x - 6)
+                        </div>
+                        <div class="step-explanation">The factors are (x + first number)(x + second number)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Check by expanding using FOIL</div>
+                        <div class="step-content">
+                            (x + 4)(x - 6)<br>
+                            = x² - 6x + 4x - 24<br>
+                            = x² - 2x - 24 ✓
+                        </div>
+                        <div class="step-explanation">Expand to verify we get the original expression</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (x + 4)(x - 6) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    15x<sup>2</sup> + 42x - 9
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Check for common factors first</div>
+                        <div class="step-content">
+                            15, 42, and 9 have a common factor of 3
+                        </div>
+                        <div class="step-explanation">Always look for a common factor across all terms before factorising</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Factor out the HCF</div>
+                        <div class="step-content">
+                            3(5x<sup>2</sup> + 14x - 3)
+                        </div>
+                        <div class="step-explanation">Divide each term by 3</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factorise the quadratic inside the bracket</div>
+                        <div class="step-content">
+                            For 5x<sup>2</sup> + 14x - 3:<br>
+                            a = 5, b = 14, c = -3
+                        </div>
+                        <div class="step-explanation">Use the product and sum method: find two numbers that multiply to a × c = 5 × (-3) = -15 and add to b = 14</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find factor pairs of -15</div>
+                        <div class="step-content">
+                            Possible pairs:<br>
+                            1 and -15 → sum = -14 ✗<br>
+                            -1 and 15 → sum = 14 ✓
+                        </div>
+                        <div class="step-explanation">We need numbers that multiply to -15 and add to 14</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Rewrite the middle term</div>
+                        <div class="step-content">
+                            5x<sup>2</sup> + 14x - 3<br>
+                            = 5x<sup>2</sup> - 1x + 15x - 3
+                        </div>
+                        <div class="step-explanation">Split 14x into -1x + 15x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Factor by grouping</div>
+                        <div class="step-content">
+                            = x(5x - 1) + 3(5x - 1)<br>
+                            = (5x - 1)(x + 3)
+                        </div>
+                        <div class="step-explanation">Group first two terms and last two terms, then factor out common terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Write the complete factorised form</div>
+                        <div class="step-content">
+                            3(5x - 1)(x + 3)
+                        </div>
+                        <div class="step-explanation">Don't forget the 3 we factored out at the beginning!</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Verify by expanding</div>
+                        <div class="step-content">
+                            3(5x - 1)(x + 3)<br>
+                            = 3(5x<sup>2</sup> + 15x - x - 3)<br>
+                            = 3(5x<sup>2</sup> + 14x - 3)<br>
+                            = 15x<sup>2</sup> + 42x - 9 ✓
+                        </div>
+                        <div class="step-explanation">Expand to verify we get the original expression</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 3(5x - 1)(x + 3) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    3x<sup>3</sup> + 27x<sup>2</sup> + 60x
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify common factors</div>
+                        <div class="step-content">
+                            All terms contain:<br>
+                            • Common numerical factor: 3<br>
+                            • Common variable: x
+                        </div>
+                        <div class="step-explanation">Check what's common across all three terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Determine the HCF</div>
+                        <div class="step-content">
+                            HCF = 3x
+                        </div>
+                        <div class="step-explanation">Combine the numerical factor and lowest power of x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factor out the HCF</div>
+                        <div class="step-content">
+                            3x(x<sup>2</sup> + 9x + 20)
+                        </div>
+                        <div class="step-explanation">Divide each term by 3x: 3x³÷3x = x², 27x²÷3x = 9x, 60x÷3x = 20</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Factorise the quadratic inside</div>
+                        <div class="step-content">
+                            For x<sup>2</sup> + 9x + 20:<br>
+                            We need two numbers that:<br>
+                            • Product = 20<br>
+                            • Sum = 9
+                        </div>
+                        <div class="step-explanation">Apply the product and sum rule</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find factor pairs of 20</div>
+                        <div class="step-content">
+                            Possible pairs:<br>
+                            1 and 20 → sum = 21 ✗<br>
+                            2 and 10 → sum = 12 ✗<br>
+                            4 and 5 → sum = 9 ✓
+                        </div>
+                        <div class="step-explanation">Check each pair until the sum equals 9</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write the quadratic in factorised form</div>
+                        <div class="step-content">
+                            x<sup>2</sup> + 9x + 20 = (x + 4)(x + 5)
+                        </div>
+                        <div class="step-explanation">The numbers 4 and 5 give us the factors</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Write the complete factorised form</div>
+                        <div class="step-content">
+                            3x(x + 4)(x + 5)
+                        </div>
+                        <div class="step-explanation">Include the 3x we factored out initially</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Verify by expanding</div>
+                        <div class="step-content">
+                            3x(x + 4)(x + 5)<br>
+                            = 3x(x<sup>2</sup> + 5x + 4x + 20)<br>
+                            = 3x(x<sup>2</sup> + 9x + 20)<br>
+                            = 3x<sup>3</sup> + 27x<sup>2</sup> + 60x ✓
+                        </div>
+                        <div class="step-explanation">Expand to confirm we get the original expression</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 3x(x + 4)(x + 5) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    36x<sup>2</sup> - 4
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Recognize the pattern</div>
+                        <div class="step-content">
+                            This is a difference of two squares: a<sup>2</sup> - b<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">The form a² - b² can be factorised as (a + b)(a - b)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Identify the perfect squares</div>
+                        <div class="step-content">
+                            36x<sup>2</sup> = (6x)<sup>2</sup><br>
+                            4 = 2<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Express each term as a perfect square</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Rewrite the expression</div>
+                        <div class="step-content">
+                            36x<sup>2</sup> - 4 = (6x)<sup>2</sup> - 2<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Write the question in the form a² - b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Identify a and b</div>
+                        <div class="step-content">
+                            a = 6x<br>
+                            b = 2
+                        </div>
+                        <div class="step-explanation">These are the square roots of each term</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the difference of squares formula</div>
+                        <div class="step-content">
+                            a<sup>2</sup> - b<sup>2</sup> = (a + b)(a - b)<br>
+                            (6x)<sup>2</sup> - 2<sup>2</sup> = (6x + 2)(6x - 2)
+                        </div>
+                        <div class="step-explanation">Substitute a = 6x and b = 2 into the formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Check for common factors</div>
+                        <div class="step-content">
+                            (6x + 2)(6x - 2)<br>
+                            = 2(3x + 1) × 2(3x - 1)<br>
+                            = 4(3x + 1)(3x - 1)
+                        </div>
+                        <div class="step-explanation">Factor out 2 from each bracket, giving 2 × 2 = 4</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Verify by expanding</div>
+                        <div class="step-content">
+                            4(3x + 1)(3x - 1)<br>
+                            = 4(9x<sup>2</sup> - 3x + 3x - 1)<br>
+                            = 4(9x<sup>2</sup> - 1)<br>
+                            = 36x<sup>2</sup> - 4 ✓
+                        </div>
+                        <div class="step-explanation">Expand to confirm we get the original expression</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 4(3x + 1)(3x - 1) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

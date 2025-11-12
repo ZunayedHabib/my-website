@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2F: Quadratic Graphs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .graph-sketch {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .graph-sketch svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffbea 100%);
+            border: 3px solid #f0c75e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(240, 199, 94, 0.2);
+        }
+
+        .formula-title {
+            font-weight: 700;
+            color: #b8860b;
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .formula-content {
+            font-size: 1.2em;
+            font-family: 'Times New Roman', serif;
+            color: #000;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .formula-explanation {
+            color: #7a6b2e;
+            font-size: 0.95em;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .question-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+            }
+            
+            .section-links {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Index</a>
+            <div class="section-links">
+                <a href="P1-section-2a.html" class="section-link">2A</a>
+                <a href="P1-section-2b.html" class="section-link">2B</a>
+                <a href="P1-section-2c.html" class="section-link">2C</a>
+                <a href="P1-section-2d.html" class="section-link">2D</a>
+                <a href="P1-section-2e.html" class="section-link">2E</a>
+                <a href="P1-section-2f.html" class="section-link active">2F</a>
+                <a href="P1-section-2g.html" class="section-link">2G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 2F: Quadratic Graphs</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Sketching Quadratic Graphs</h3>
+                <p>Learn to sketch parabolas by finding intercepts and turning points</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    Sketch the graph of:<br>
+                    y = 2x² + 7x - 15
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Find the y-intercept</div>
+                        <div class="step-content">
+                            Set x = 0:<br>
+                            y = 2(0)² + 7(0) - 15<br>
+                            y = -15
+                        </div>
+                        <div class="step-explanation">The y-intercept is at (0, -15)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the x-intercepts</div>
+                        <div class="step-content">
+                            Set y = 0:<br>
+                            2x² + 7x - 15 = 0<br>
+                            Factorize: (2x - 3)(x + 5) = 0<br>
+                            x = 3/2 or x = -5<br>
+                            x = 1.50 or x = -5.00
+                        </div>
+                        <div class="step-explanation">The x-intercepts are at (1.50, 0) and (-5.00, 0)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the x-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Using x = -b/(2a) where a = 2, b = 7:<br>
+                            x = -7/(2 × 2)<br>
+                            x = -7/4 = -1.75
+                        </div>
+                        <div class="step-explanation">The turning point occurs at x = -1.75</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the y-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Substitute x = -1.75 into the equation:<br>
+                            y = 2(-1.75)² + 7(-1.75) - 15<br>
+                            y = 2(3.0625) - 12.25 - 15<br>
+                            y = 6.125 - 12.25 - 15<br>
+                            y = -21.125<br>
+                            y = -21.1 (3 sf)
+                        </div>
+                        <div class="step-explanation">The turning point is at (-1.75, -21.1)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Determine the shape</div>
+                        <div class="step-content">
+                            Since a = 2 > 0, the parabola opens upward (U-shaped)
+                        </div>
+                        <div class="step-explanation">Positive coefficient of x² means minimum turning point</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Sketch the graph</div>
+                        <div class="graph-sketch" style="text-align: center;">
+                            <img src="P1-section-2f-graph1.png" alt="Graph of y = 2x² + 7x - 15" style="max-width: 60%; height: auto; border-radius: 10px;">
+                        </div>
+                        <div class="step-explanation">
+                            Key features:<br>
+                            • Y-intercept: (0, -15)<br>
+                            • X-intercepts: (-5, 0) and (1.5, 0)<br>
+                            • Minimum turning point: (-1.75, -21.1)<br>
+                            • Opens upward
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Graph sketched with all key points labeled ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    Sketch the graph of:<br>
+                    y = 4 - 7x - 2x²
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Rewrite in standard form</div>
+                        <div class="step-content">
+                            y = -2x² - 7x + 4
+                        </div>
+                        <div class="step-explanation">Standard form is y = ax² + bx + c where a = -2, b = -7, c = 4</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the y-intercept</div>
+                        <div class="step-content">
+                            Set x = 0:<br>
+                            y = 4 - 7(0) - 2(0)²<br>
+                            y = 4
+                        </div>
+                        <div class="step-explanation">The y-intercept is at (0, 4)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the x-intercepts</div>
+                        <div class="step-content">
+                            Set y = 0:<br>
+                            -2x² - 7x + 4 = 0<br>
+                            Multiply by -1: 2x² + 7x - 4 = 0<br>
+                            Factorize: (2x - 1)(x + 4) = 0<br>
+                            x = 1/2 or x = -4<br>
+                            x = 0.500 or x = -4.00
+                        </div>
+                        <div class="step-explanation">The x-intercepts are at (0.500, 0) and (-4.00, 0)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the x-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Using x = -b/(2a) where a = -2, b = -7:<br>
+                            x = -(-7)/(2 × (-2))<br>
+                            x = 7/(-4) = -1.75
+                        </div>
+                        <div class="step-explanation">The turning point occurs at x = -1.75</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find the y-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Substitute x = -1.75:<br>
+                            y = 4 - 7(-1.75) - 2(-1.75)²<br>
+                            y = 4 + 12.25 - 2(3.0625)<br>
+                            y = 4 + 12.25 - 6.125<br>
+                            y = 10.125<br>
+                            y = 10.1 (3 sf)
+                        </div>
+                        <div class="step-explanation">The turning point is at (-1.75, 10.1)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Determine the shape</div>
+                        <div class="step-content">
+                            Since a = -2 < 0, the parabola opens downward (∩-shaped)
+                        </div>
+                        <div class="step-explanation">Negative coefficient of x² means maximum turning point</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Sketch the graph</div>
+                        <div class="graph-sketch" style="text-align: center;">
+                            <img src="P1-section-2f-graph2.png" alt="Graph of y = 4 - 7x - 2x²" style="max-width: 60%; height: auto; border-radius: 10px;">
+                        </div>
+                        <div class="step-explanation">
+                            Key features:<br>
+                            • Y-intercept: (0, 4)<br>
+                            • X-intercepts: (-4, 0) and (0.5, 0)<br>
+                            • Maximum turning point: (-1.75, 10.1)<br>
+                            • Opens downward
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Graph sketched with all key points labeled ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    Sketch the graph of:<br>
+                    y = 0.5x² + 0.2x + 0.02
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Find the y-intercept</div>
+                        <div class="step-content">
+                            Set x = 0:<br>
+                            y = 0.5(0)² + 0.2(0) + 0.02<br>
+                            y = 0.02
+                        </div>
+                        <div class="step-explanation">The y-intercept is at (0, 0.02)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the x-intercepts</div>
+                        <div class="step-content">
+                            Set y = 0:<br>
+                            0.5x² + 0.2x + 0.02 = 0<br>
+                            Multiply by 100: 50x² + 20x + 2 = 0<br>
+                            Using the quadratic formula:<br>
+                            x = (-20 ± √(400 - 400))/(100)<br>
+                            x = (-20 ± 0)/100<br>
+                            Discriminant = 0, so there is no real x-intercept (touches x-axis at turning point)
+                        </div>
+                        <div class="step-explanation">Since discriminant = 0, the graph touches but doesn't cross the x-axis</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the x-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Using x = -b/(2a) where a = 0.5, b = 0.2:<br>
+                            x = -0.2/(2 × 0.5)<br>
+                            x = -0.2/1 = -0.2
+                        </div>
+                        <div class="step-explanation">The turning point occurs at x = -0.2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the y-coordinate of the turning point</div>
+                        <div class="step-content">
+                            Substitute x = -0.2:<br>
+                            y = 0.5(-0.2)² + 0.2(-0.2) + 0.02<br>
+                            y = 0.5(0.04) - 0.04 + 0.02<br>
+                            y = 0.02 - 0.04 + 0.02<br>
+                            y = 0
+                        </div>
+                        <div class="step-explanation">The turning point is at (-0.2, 0). This is where the parabola touches the x-axis</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Determine the shape</div>
+                        <div class="step-content">
+                            Since a = 0.5 > 0, the parabola opens upward (U-shaped)
+                        </div>
+                        <div class="step-explanation">Positive coefficient of x² means minimum turning point</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Sketch the graph</div>
+                        <div class="graph-sketch">
+                            <img src="P1-section-2f-graph3.png" alt="Graph of y = 0.5x² + 0.2x + 0.02" style="max-width: 100%; height: auto; border-radius: 10px;">
+                        </div>
+                        <div class="step-explanation">
+                            Key features:<br>
+                            • Y-intercept: (0, 0.02)<br>
+                            • X-intercept (touching point): (-0.2, 0)<br>
+                            • Minimum turning point: (-0.2, 0)<br>
+                            • Opens upward<br>
+                            • Graph just touches the x-axis at the turning point
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Graph sketched with all key points labeled ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    The diagram shows the graph of y = ax² + bx + c where a, b and c are integers.<br>
+                    Find the values of a, b and c.
+                </div>
+                
+                <div class="graph-sketch" style="margin: 20px 0; text-align: center;">
+                    <img src="P1-section-2f-graph4.png" alt="Graph for Question 4" style="max-width: 60%; height: auto; border-radius: 10px;">
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features from the graph</div>
+                        <div class="step-content">
+                            From the graph:<br>
+                            • Y-intercept: (0, 10)<br>
+                            • X-intercepts: (-2, 0) and (5, 0)<br>
+                            • Parabola opens downward (a < 0)
+                        </div>
+                        <div class="step-explanation">Read the coordinates of the intercepts from the graph</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Intercept Form of a Quadratic Equation</div>
+                        <div class="formula-content">
+                            y = a(x - p)(x - q)
+                        </div>
+                        <div class="formula-explanation">
+                            <strong>Where:</strong><br>
+                            • <strong>p</strong> and <strong>q</strong> are the x-intercepts (roots) of the parabola<br>
+                            • <strong>a</strong> is a constant that determines the width and direction of the parabola<br>
+                            • If a > 0, the parabola opens upward<br>
+                            • If a < 0, the parabola opens downward
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Use the factored form with x-intercepts</div>
+                        <div class="step-content">
+                            Since x-intercepts are -2 and 5:<br>
+                            y = a(x + 2)(x - 5)
+                        </div>
+                        <div class="step-explanation">The factored form uses the roots of the equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Use the y-intercept to find a</div>
+                        <div class="step-content">
+                            When x = 0, y = 10:<br>
+                            10 = a(0 + 2)(0 - 5)<br>
+                            10 = a(2)(-5)<br>
+                            10 = -10a<br>
+                            a = -1
+                        </div>
+                        <div class="step-explanation">Substitute the y-intercept coordinates to find the value of a</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand to find b and c</div>
+                        <div class="step-content">
+                            y = -1(x + 2)(x - 5)<br>
+                            y = -(x² - 5x + 2x - 10)<br>
+                            y = -(x² - 3x - 10)<br>
+                            y = -x² + 3x + 10
+                        </div>
+                        <div class="step-explanation">Expand the brackets and simplify</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Identify a, b, and c</div>
+                        <div class="step-content">
+                            Comparing y = -x² + 3x + 10 with y = ax² + bx + c:<br>
+                            a = -1<br>
+                            b = 3<br>
+                            c = 10
+                        </div>
+                        <div class="step-explanation">Match coefficients with the standard form</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: a = -1, b = 3, c = 10 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    The diagram shows the graph of y = ax² + bx + c where a, b and c are integers.<br>
+                    Find the values of a, b and c.
+                </div>
+                
+                <div class="graph-sketch" style="margin: 20px 0; text-align: center;">
+                    <img src="P1-section-2f-graph5.png" alt="Graph for Question 5" style="max-width: 60%; height: auto; border-radius: 10px;">
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features from the graph</div>
+                        <div class="step-content">
+                            From the graph:<br>
+                            • Y-intercept: (0, -18)<br>
+                            • X-intercepts: (-3, 0) and (3, 0)<br>
+                            • Parabola opens upward (a > 0)
+                        </div>
+                        <div class="step-explanation">Read the coordinates of the intercepts from the graph</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Intercept Form of a Quadratic Equation</div>
+                        <div class="formula-content">
+                            y = a(x - p)(x - q)
+                        </div>
+                        <div class="formula-explanation">
+                            <strong>Where:</strong><br>
+                            • <strong>p</strong> and <strong>q</strong> are the x-intercepts (roots) of the parabola<br>
+                            • <strong>a</strong> is a constant that determines the width and direction of the parabola<br>
+                            • If a > 0, the parabola opens upward<br>
+                            • If a < 0, the parabola opens downward
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Use the factored form with x-intercepts</div>
+                        <div class="step-content">
+                            Since x-intercepts are -3 and 3:<br>
+                            y = a(x + 3)(x - 3)
+                        </div>
+                        <div class="step-explanation">The factored form uses the roots of the equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Use the y-intercept to find a</div>
+                        <div class="step-content">
+                            When x = 0, y = -18:<br>
+                            -18 = a(0 + 3)(0 - 3)<br>
+                            -18 = a(3)(-3)<br>
+                            -18 = -9a<br>
+                            a = 2
+                        </div>
+                        <div class="step-explanation">Substitute the y-intercept coordinates to find the value of a</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand to find b and c</div>
+                        <div class="step-content">
+                            y = 2(x + 3)(x - 3)<br>
+                            y = 2(x² - 9)<br>
+                            y = 2x² - 18
+                        </div>
+                        <div class="step-explanation">Expand using difference of two squares: (x + 3)(x - 3) = x² - 9</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Identify a, b, and c</div>
+                        <div class="step-content">
+                            Comparing y = 2x² - 18 with y = ax² + bx + c:<br>
+                            a = 2<br>
+                            b = 0<br>
+                            c = -18
+                        </div>
+                        <div class="step-explanation">Match coefficients with the standard form (note: no x term means b = 0)</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: a = 2, b = 0, c = -18 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title">Question 6:</div>
+                <div class="question-text">
+                    The graph of y = ax² + bx + c has a minimum at (5, -3) and passes through (4, 0).<br>
+                    Find the values of a, b and c.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the given information</div>
+                        <div class="step-content">
+                            • Minimum (vertex) at (5, -3)<br>
+                            • Passes through the point (4, 0)
+                        </div>
+                        <div class="step-explanation">The vertex is the turning point of the parabola</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Vertex Form of a Quadratic Equation</div>
+                        <div class="formula-content">
+                            y = a(x - h)² + k
+                        </div>
+                        <div class="formula-explanation">
+                            <strong>Where:</strong><br>
+                            • <strong>(h, k)</strong> is the vertex (turning point) of the parabola<br>
+                            • <strong>a</strong> is a constant that determines the width and direction of the parabola<br>
+                            • If a > 0, the parabola opens upward (minimum)<br>
+                            • If a < 0, the parabola opens downward (maximum)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the equation in vertex form</div>
+                        <div class="step-content">
+                            Vertex is (5, -3), so h = 5 and k = -3:<br>
+                            y = a(x - 5)² - 3
+                        </div>
+                        <div class="step-explanation">Substitute the vertex coordinates into the vertex form</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Use the point (4, 0) to find a</div>
+                        <div class="step-content">
+                            Substitute x = 4 and y = 0:<br>
+                            0 = a(4 - 5)² - 3<br>
+                            0 = a(-1)² - 3<br>
+                            0 = a - 3<br>
+                            a = 3
+                        </div>
+                        <div class="step-explanation">The parabola passes through (4, 0), so these values satisfy the equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Write the complete equation in vertex form</div>
+                        <div class="step-content">
+                            y = 3(x - 5)² - 3
+                        </div>
+                        <div class="step-explanation">Now we have the full vertex form with a = 3</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Expand to standard form</div>
+                        <div class="step-content">
+                            y = 3(x - 5)² - 3<br>
+                            y = 3(x² - 10x + 25) - 3<br>
+                            y = 3x² - 30x + 75 - 3<br>
+                            y = 3x² - 30x + 72
+                        </div>
+                        <div class="step-explanation">Expand the bracket and simplify to get standard form</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Identify a, b, and c</div>
+                        <div class="step-content">
+                            Comparing y = 3x² - 30x + 72 with y = ax² + bx + c:<br>
+                            a = 3<br>
+                            b = -30<br>
+                            c = 72
+                        </div>
+                        <div class="step-explanation">Match coefficients with the standard form</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: a = 3, b = -30, c = 72 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-nav">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

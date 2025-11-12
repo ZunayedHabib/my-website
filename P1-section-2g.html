@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2G: The Discriminant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffbea 100%);
+            border: 3px solid #f0c75e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(240, 199, 94, 0.2);
+        }
+
+        .formula-title {
+            font-weight: 700;
+            color: #b8860b;
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .formula-content {
+            font-size: 1.2em;
+            font-family: 'Times New Roman', serif;
+            color: #000;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .formula-explanation {
+            color: #7a6b2e;
+            font-size: 0.95em;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .sketch-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .sketch-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .question-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+            }
+            
+            .section-links {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Index</a>
+            <div class="section-links">
+                <a href="P1-section-2a.html" class="section-link">2A</a>
+                <a href="P1-section-2b.html" class="section-link">2B</a>
+                <a href="P1-section-2c.html" class="section-link">2C</a>
+                <a href="P1-section-2d.html" class="section-link">2D</a>
+                <a href="P1-section-2e.html" class="section-link">2E</a>
+                <a href="P1-section-2f.html" class="section-link">2F</a>
+                <a href="P1-section-2g.html" class="section-link active">2G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 2G: The Discriminant</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Understanding the Discriminant</h3>
+                <p>Determine the nature of roots using b² - 4ac</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    Calculate the value of the discriminant for each of the following functions.<br>
+                    Based on the discriminant value, sketch the general shape of each graph.<br><br>
+                    <strong>a</strong> g(x) = 2x² - 3x + 4<br>
+                    <strong>b</strong> h(x) = -x² + 7x - 3<br>
+                    <strong>c</strong> j(x) = x² - 8x + 16
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Discriminant</div>
+                        <div class="formula-content">
+                            For ax² + bx + c = 0, the discriminant is: Δ = b² - 4ac
+                        </div>
+                        <div class="formula-explanation">
+                            <strong>The discriminant determines the number of real roots:</strong><br>
+                            • <strong>Δ > 0:</strong> Two distinct real roots (graph crosses x-axis twice)<br>
+                            • <strong>Δ = 0:</strong> One repeated real root (graph touches x-axis once)<br>
+                            • <strong>Δ < 0:</strong> No real roots (graph does not touch x-axis)
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Part a - Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            g(x) = 2x² - 3x + 4<br>
+                            a = 2, b = -3, c = 4
+                        </div>
+                        <div class="step-explanation">Already in standard form ax² + bx + c</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part a - Step 2: Calculate the discriminant</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (-3)² - 4(2)(4)<br>
+                            Δ = 9 - 32<br>
+                            Δ = -23
+                        </div>
+                        <div class="step-explanation">Substitute a = 2, b = -3, c = 4 into the formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part a - Step 3: Interpret the discriminant</div>
+                        <div class="step-content">
+                            Since Δ = -23 < 0:<br>
+                            • No real roots<br>
+                            • Graph does not cross or touch the x-axis<br>
+                            • Since a = 2 > 0, parabola opens upward
+                        </div>
+                        <div class="step-explanation">Negative discriminant means the parabola is entirely above the x-axis (opens up)</div>
+                    </div>
+
+                    <div class="sketch-box">
+                        <div class="sketch-label">Sketch for g(x) = 2x² - 3x + 4:</div>
+                        <img src="P1-section-2g-graph1.png" alt="Graph of g(x)" style="max-width: 70%; height: auto; border-radius: 10px;">
+                    </div>
+
+                    <div class="final-answer" style="margin-bottom: 30px;">
+                        ✨ Discriminant = -23 ✨
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            h(x) = -x² + 7x - 3<br>
+                            a = -1, b = 7, c = -3
+                        </div>
+                        <div class="step-explanation">Already in standard form ax² + bx + c</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 2: Calculate the discriminant</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (7)² - 4(-1)(-3)<br>
+                            Δ = 49 - 12<br>
+                            Δ = 37
+                        </div>
+                        <div class="step-explanation">Substitute a = -1, b = 7, c = -3 into the formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 3: Interpret the discriminant</div>
+                        <div class="step-content">
+                            Since Δ = 37 > 0:<br>
+                            • Two distinct real roots<br>
+                            • Graph crosses the x-axis twice<br>
+                            • Since a = -1 < 0, parabola opens downward
+                        </div>
+                        <div class="step-explanation">Positive discriminant means two x-intercepts</div>
+                    </div>
+
+                    <div class="sketch-box">
+                        <div class="sketch-label">Sketch for h(x) = -x² + 7x - 3:</div>
+                        <img src="P1-section-2g-graph2.png" alt="Graph of h(x)" style="max-width: 70%; height: auto; border-radius: 10px;">
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Discriminant = 37 ✨
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part c - Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            j(x) = x² - 8x + 16<br>
+                            a = 1, b = -8, c = 16
+                        </div>
+                        <div class="step-explanation">Already in standard form ax² + bx + c</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part c - Step 2: Calculate the discriminant</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (-8)² - 4(1)(16)<br>
+                            Δ = 64 - 64<br>
+                            Δ = 0
+                        </div>
+                        <div class="step-explanation">Substitute a = 1, b = -8, c = 16 into the formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part c - Step 3: Interpret the discriminant</div>
+                        <div class="step-content">
+                            Since Δ = 0:<br>
+                            • One repeated real root<br>
+                            • Graph touches the x-axis at exactly one point<br>
+                            • Since a = 1 > 0, parabola opens upward
+                        </div>
+                        <div class="step-explanation">Zero discriminant means the parabola touches the x-axis at the vertex</div>
+                    </div>
+
+                    <div class="sketch-box">
+                        <div class="sketch-label">Sketch for j(x) = x² - 8x + 16:</div>
+                        <img src="P1-section-2g-graph3.png" alt="Graph of j(x)" style="max-width: 70%; height: auto; border-radius: 10px;">
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Discriminant = 0 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    Find the values of <i>k</i> for which x² + 6x + <i>k</i> = 0 has two real solutions.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Concept</div>
+                        <div class="formula-content">
+                            For a quadratic equation to have two real solutions:<br>
+                            The discriminant must be greater than zero (Δ > 0)
+                        </div>
+                        <div class="formula-explanation">
+                            Two real solutions means the parabola crosses the x-axis at two distinct points
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            x² + 6x + k = 0<br>
+                            a = 1, b = 6, c = k
+                        </div>
+                        <div class="step-explanation">The constant term is our unknown k</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the discriminant formula</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (6)² - 4(1)(k)<br>
+                            Δ = 36 - 4k
+                        </div>
+                        <div class="step-explanation">Substitute the coefficients into the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the condition for two real solutions</div>
+                        <div class="step-content">
+                            For two real solutions, Δ > 0:<br>
+                            36 - 4k > 0
+                        </div>
+                        <div class="step-explanation">Set up an inequality since we need the discriminant to be positive</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve the inequality</div>
+                        <div class="step-content">
+                            36 - 4k > 0<br>
+                            36 > 4k<br>
+                            9 > k<br>
+                            k < 9
+                        </div>
+                        <div class="step-explanation">Isolate k by dividing both sides by 4</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ k < 9 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    Find the value of <i>t</i> for which 2x² - 3x + <i>t</i> = 0 has exactly one solution.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Concept</div>
+                        <div class="formula-content">
+                            For a quadratic equation to have exactly one solution:<br>
+                            The discriminant must equal zero (Δ = 0)
+                        </div>
+                        <div class="formula-explanation">
+                            Exactly one solution means the parabola touches the x-axis at one point (repeated root)
+                        </div>
+                        <div style="color: #dc2626; font-size: 0.95em; margin-top: 12px; font-weight: 600; border-top: 1px solid #f0c75e; padding-top: 12px;">
+                            Note: 'Exactly one solution', 'equal roots', and 'repeated root' all refer to the same condition where Δ = 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            2x² - 3x + t = 0<br>
+                            a = 2, b = -3, c = t
+                        </div>
+                        <div class="step-explanation">The constant term is our unknown t</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the discriminant formula</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (-3)² - 4(2)(t)<br>
+                            Δ = 9 - 8t
+                        </div>
+                        <div class="step-explanation">Substitute the coefficients into the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the condition for exactly one solution</div>
+                        <div class="step-content">
+                            For exactly one solution, Δ = 0:<br>
+                            9 - 8t = 0
+                        </div>
+                        <div class="step-explanation">Set discriminant equal to zero for a repeated root</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for t</div>
+                        <div class="step-content">
+                            9 - 8t = 0<br>
+                            9 = 8t<br>
+                            t = 9/8
+                        </div>
+                        <div class="step-explanation">Isolate t by dividing both sides by 8</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ t = 9/8 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    Given that the function f(x) = sx² + 8x + <i>s</i> has equal roots, find the value of the positive constant <i>s</i>.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Concept</div>
+                        <div class="formula-content">
+                            For a quadratic function to have equal roots:<br>
+                            The discriminant must equal zero (Δ = 0)
+                        </div>
+                        <div class="formula-explanation">
+                            Equal roots means the same as exactly one solution or a repeated root
+                        </div>
+                        <div style="color: #dc2626; font-size: 0.95em; margin-top: 12px; font-weight: 600; border-top: 1px solid #f0c75e; padding-top: 12px;">
+                            Note: 'Exactly one solution', 'equal roots', and 'repeated root' all refer to the same condition where Δ = 0
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            f(x) = sx² + 8x + s<br>
+                            a = s, b = 8, c = s
+                        </div>
+                        <div class="step-explanation">Both the coefficient of x² and the constant term are s</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the discriminant formula</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (8)² - 4(s)(s)<br>
+                            Δ = 64 - 4s²
+                        </div>
+                        <div class="step-explanation">Substitute the coefficients into the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the condition for equal roots</div>
+                        <div class="step-content">
+                            For equal roots, Δ = 0:<br>
+                            64 - 4s² = 0
+                        </div>
+                        <div class="step-explanation">Set discriminant equal to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for s</div>
+                        <div class="step-content">
+                            64 - 4s² = 0<br>
+                            64 = 4s²<br>
+                            16 = s²<br>
+                            s = ±4
+                        </div>
+                        <div class="step-explanation">Divide by 4 and take the square root of both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Select the positive value</div>
+                        <div class="step-content">
+                            Since we need the positive constant:<br>
+                            s = 4
+                        </div>
+                        <div class="step-explanation">The question specifies the positive constant, so we reject s = -4</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ s = 4 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    Find the range of values of <i>k</i> for which 3x² - 4x + <i>k</i> = 0 has no real solutions.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Concept</div>
+                        <div class="formula-content">
+                            For a quadratic equation to have no real solutions:<br>
+                            The discriminant must be less than zero (Δ < 0)
+                        </div>
+                        <div class="formula-explanation">
+                            No real solutions means the parabola does not touch or cross the x-axis
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            3x² - 4x + k = 0<br>
+                            a = 3, b = -4, c = k
+                        </div>
+                        <div class="step-explanation">The constant term is our unknown k</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the discriminant formula</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (-4)² - 4(3)(k)<br>
+                            Δ = 16 - 12k
+                        </div>
+                        <div class="step-explanation">Substitute the coefficients into the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the condition for no real solutions</div>
+                        <div class="step-content">
+                            For no real solutions, Δ < 0:<br>
+                            16 - 12k < 0
+                        </div>
+                        <div class="step-explanation">Set up an inequality since we need the discriminant to be negative</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve the inequality</div>
+                        <div class="step-content">
+                            16 - 12k < 0<br>
+                            16 < 12k<br>
+                            4/3 < k<br>
+                            k > 4/3
+                        </div>
+                        <div class="step-explanation">Isolate k by dividing both sides by 12</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ k > 4/3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title">Question 6:</div>
+                <div class="question-text">
+                    h(x) = 2x² + (<i>k</i> + 4)x + <i>k</i>, where <i>k</i> is a real constant.<br><br>
+                    <strong>a</strong> Find the discriminant of h(x) in terms of <i>k</i>.<br>
+                    <strong>b</strong> Hence or otherwise, prove that h(x) has two distinct real roots for all values of <i>k</i>.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Discriminant</div>
+                        <div class="formula-content">
+                            For ax² + bx + c = 0, the discriminant is: Δ = b² - 4ac
+                        </div>
+                        <div class="formula-explanation">
+                            The discriminant determines the nature of roots
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Part a - Step 1: Identify coefficients</div>
+                        <div class="step-content">
+                            h(x) = 2x² + (k + 4)x + k<br>
+                            a = 2, b = (k + 4), c = k
+                        </div>
+                        <div class="step-explanation">The coefficient of x is (k + 4) and the constant term is k</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part a - Step 2: Apply the discriminant formula</div>
+                        <div class="step-content">
+                            Δ = b² - 4ac<br>
+                            Δ = (k + 4)² - 4(2)(k)
+                        </div>
+                        <div class="step-explanation">Substitute the coefficients into the formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part a - Step 3: Expand and simplify</div>
+                        <div class="step-content">
+                            Δ = (k + 4)² - 8k<br>
+                            Δ = k² + 8k + 16 - 8k<br>
+                            Δ = k² + 16
+                        </div>
+                        <div class="step-explanation">Expand (k + 4)² using the formula (a + b)² = a² + 2ab + b², then collect like terms</div>
+                    </div>
+
+                    <div class="final-answer" style="margin-bottom: 30px;">
+                        ✨ Discriminant = k² + 16 ✨
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 1: Analyze the discriminant</div>
+                        <div class="step-content">
+                            From part a: Δ = k² + 16
+                        </div>
+                        <div class="step-explanation">We need to show that this discriminant is always positive</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 2: Consider k²</div>
+                        <div class="step-content">
+                            For any real value of k:<br>
+                            k² ≥ 0
+                        </div>
+                        <div class="step-explanation">The square of any real number is always non-negative</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 3: Add 16 to both sides</div>
+                        <div class="step-content">
+                            If k² ≥ 0, then:<br>
+                            k² + 16 ≥ 0 + 16<br>
+                            k² + 16 ≥ 16
+                        </div>
+                        <div class="step-explanation">Adding 16 to both sides preserves the inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 4: Conclude about the discriminant</div>
+                        <div class="step-content">
+                            Since k² + 16 ≥ 16:<br>
+                            Δ ≥ 16 > 0
+                        </div>
+                        <div class="step-explanation">The discriminant is always greater than 16, which means it's always positive</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Part b - Step 5: State the conclusion</div>
+                        <div class="step-content">
+                            Since Δ > 0 for all values of k:<br>
+                            h(x) has two distinct real roots for all values of k
+                        </div>
+                        <div class="step-explanation">A positive discriminant always means two distinct real roots</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Proven: h(x) has two distinct real roots for all values of k ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-nav">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

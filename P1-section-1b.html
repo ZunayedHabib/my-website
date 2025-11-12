@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1B: Expanding Brackets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-1a.html" class="section-link">1A</a>
+                <a href="P1-section-1b.html" class="section-link active">1B</a>
+                <a href="P1-section-1c.html" class="section-link">1C</a>
+                <a href="P1-section-1d.html" class="section-link">1D</a>
+                <a href="P1-section-1e.html" class="section-link">1E</a>
+                <a href="P1-section-1f.html" class="section-link">1F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 1B: Expanding Brackets</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Expanding Brackets - FOIL Method & More</h3>
+            </div>
+
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    (2x - 3)(x - 4)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply FOIL method (First, Outer, Inner, Last)</div>
+                        <div class="step-content">
+                            <svg width="400" height="180" viewBox="0 0 400 180" style="display: block; margin: 20px auto;">
+                                <text x="50" y="90" font-size="24" font-family="Times New Roman">(</text>
+                                <text x="70" y="90" font-size="24" font-family="Times New Roman">2x</text>
+                                <text x="110" y="90" font-size="24" font-family="Times New Roman">-</text>
+                                <text x="130" y="90" font-size="24" font-family="Times New Roman">3</text>
+                                <text x="150" y="90" font-size="24" font-family="Times New Roman">)(</text>
+                                <text x="170" y="90" font-size="24" font-family="Times New Roman">x</text>
+                                <text x="190" y="90" font-size="24" font-family="Times New Roman">-</text>
+                                <text x="210" y="90" font-size="24" font-family="Times New Roman">4</text>
+                                <text x="230" y="90" font-size="24" font-family="Times New Roman">)</text>
+                                
+                                <path d="M 80,75 Q 120,30 175,75" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+                                <text x="115" y="28" font-size="14" fill="#27ae60" font-weight="bold">First</text>
+                                
+                                <path d="M 80,70 Q 140,15 215,70" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#arrowpurple)"/>
+                                <text x="140" y="15" font-size="14" fill="#9b59b6" font-weight="bold">Outer</text>
+                                
+                                <path d="M 140,105 Q 150,130 175,105" stroke="#e67e22" stroke-width="2" fill="none" marker-end="url(#arroworange)"/>
+                                <text x="145" y="150" font-size="14" fill="#e67e22" font-weight="bold">Inner</text>
+                                
+                                <path d="M 140,110 Q 175,160 215,110" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrowred)"/>
+                                <text x="165" y="175" font-size="14" fill="#e74c3c" font-weight="bold">Last</text>
+                                
+                                <defs>
+                                    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                        <path d="M0,0 L0,6 L9,3 z" fill="#27ae60" />
+                                    </marker>
+                                    <marker id="arrowpurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                        <path d="M0,0 L0,6 L9,3 z" fill="#9b59b6" />
+                                    </marker>
+                                    <marker id="arroworange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                        <path d="M0,0 L0,6 L9,3 z" fill="#e67e22" />
+                                    </marker>
+                                    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                        <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="step-explanation">Visual representation of FOIL: multiply the terms connected by each arrow</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Calculate First</div>
+                        <div class="step-content">
+                            First: 2x × x = 2x<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Multiply the first terms in each bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate Outer</div>
+                        <div class="step-content">
+                            Outer: 2x × (-4) = -8x
+                        </div>
+                        <div class="step-explanation">Multiply the outer terms of the expression</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Calculate Inner</div>
+                        <div class="step-content">
+                            Inner: (-3) × x = -3x
+                        </div>
+                        <div class="step-explanation">Multiply the inner terms of the expression</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Calculate Last</div>
+                        <div class="step-content">
+                            Last: (-3) × (-4) = 12
+                        </div>
+                        <div class="step-explanation">Multiply the last terms in each bracket (negative × negative = positive)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Combine all terms</div>
+                        <div class="step-content">
+                            2x<sup>2</sup> + (-8x) + (-3x) + 12
+                        </div>
+                        <div class="step-explanation">Write all four products together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Combine like terms</div>
+                        <div class="step-content">
+                            2x<sup>2</sup> + (-8x - 3x) + 12 = 2x<sup>2</sup> - 11x + 12
+                        </div>
+                        <div class="step-explanation">Combine the x terms: -8x - 3x = -11x</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 2x<sup>2</sup> - 11x + 12 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    (4y - x - 2)(5 - y)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Multiply the first bracket by the first term of the second bracket</div>
+                        <div class="step-content">
+                            5 × (4y - x - 2) = 20y - 5x - 10
+                        </div>
+                        <div class="step-explanation">Multiply each term in the first bracket by 5</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Multiply the first bracket by the second term of the second bracket</div>
+                        <div class="step-content">
+                            (-y) × (4y - x - 2) = -4y<sup>2</sup> + xy + 2y
+                        </div>
+                        <div class="step-explanation">Multiply each term in the first bracket by -y</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Combine all terms</div>
+                        <div class="step-content">
+                            20y - 5x - 10 + (-4y<sup>2</sup> + xy + 2y)
+                        </div>
+                        <div class="step-explanation">Write all products together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Rearrange in standard form (highest powers first)</div>
+                        <div class="step-content">
+                            -4y<sup>2</sup> + 20y + 2y + xy - 5x - 10
+                        </div>
+                        <div class="step-explanation">Group terms by their variable powers</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Combine like terms (y terms)</div>
+                        <div class="step-content">
+                            20y + 2y = 22y
+                        </div>
+                        <div class="step-explanation">Add the y terms together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Write the final simplified expression</div>
+                        <div class="step-content">
+                            -4y<sup>2</sup> + 22y + xy - 5x - 10
+                        </div>
+                        <div class="step-explanation">Combine all simplified terms in standard order</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: -4y<sup>2</sup> + 22y + xy - 5x - 10 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    (2x - 3y)<sup>3</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write out the expansion</div>
+                        <div class="step-content">
+                            (2x - 3y)<sup>3</sup> = (2x - 3y)(2x - 3y)(2x - 3y)
+                        </div>
+                        <div class="step-explanation">Express the cube as three factors multiplied together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: First multiply the first two brackets</div>
+                        <div class="step-content">
+                            (2x - 3y)(2x - 3y)
+                        </div>
+                        <div class="step-explanation">We'll use FOIL method for these two brackets</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply FOIL to the first two brackets</div>
+                        <div class="step-content">
+                            First: 2x × 2x = 4x<sup>2</sup><br>
+                            Outer: 2x × (-3y) = -6xy<br>
+                            Inner: (-3y) × 2x = -6xy<br>
+                            Last: (-3y) × (-3y) = 9y<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Multiply each term using FOIL</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Combine like terms from first multiplication</div>
+                        <div class="step-content">
+                            4x<sup>2</sup> + (-6xy - 6xy) + 9y<sup>2</sup> = 4x<sup>2</sup> - 12xy + 9y<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Combine the xy terms: -6xy - 6xy = -12xy</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Now multiply this result by the third bracket</div>
+                        <div class="step-content">
+                            (4x<sup>2</sup> - 12xy + 9y<sup>2</sup>)(2x - 3y)
+                        </div>
+                        <div class="step-explanation">Multiply each term in the first bracket by each term in the second bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Multiply by 2x</div>
+                        <div class="step-content">
+                            2x × (4x<sup>2</sup> - 12xy + 9y<sup>2</sup>) = 8x<sup>3</sup> - 24x<sup>2</sup>y + 18xy<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Distribute 2x to each term</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Multiply by -3y</div>
+                        <div class="step-content">
+                            (-3y) × (4x<sup>2</sup> - 12xy + 9y<sup>2</sup>) = -12x<sup>2</sup>y + 36xy<sup>2</sup> - 27y<sup>3</sup>
+                        </div>
+                        <div class="step-explanation">Distribute -3y to each term</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Combine all terms</div>
+                        <div class="step-content">
+                            8x<sup>3</sup> - 24x<sup>2</sup>y + 18xy<sup>2</sup> + (-12x<sup>2</sup>y + 36xy<sup>2</sup> - 27y<sup>3</sup>)
+                        </div>
+                        <div class="step-explanation">Write all terms together</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Combine like terms (x²y terms)</div>
+                        <div class="step-content">
+                            -24x<sup>2</sup>y - 12x<sup>2</sup>y = -36x<sup>2</sup>y
+                        </div>
+                        <div class="step-explanation">Add the x²y terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 10: Combine like terms (xy² terms)</div>
+                        <div class="step-content">
+                            18xy<sup>2</sup> + 36xy<sup>2</sup> = 54xy<sup>2</sup>
+                        </div>
+                        <div class="step-explanation">Add the xy² terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 11: Write the final expanded form</div>
+                        <div class="step-content">
+                            8x<sup>3</sup> - 36x<sup>2</sup>y + 54xy<sup>2</sup> - 27y<sup>3</sup>
+                        </div>
+                        <div class="step-explanation">Arrange in descending order of powers</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: 8x<sup>3</sup> - 36x<sup>2</sup>y + 54xy<sup>2</sup> - 27y<sup>3</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
