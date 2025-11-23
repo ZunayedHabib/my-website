@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 6A: The Cosine Rule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+            text-align: center;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: white;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 6px;
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #000000;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 6px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        .x-squared {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .x-term {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .constant {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .formula-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Fraction Styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .numerator {
+            border-bottom: 2px solid #333;
+            padding: 0 5px;
+        }
+        .denominator {
+            padding: 0 5px;
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+        
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            margin-left: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-6a.html" class="section-link active">6A</a>
+                <a href="P1-section-6b.html" class="section-link">6B</a>
+                <a href="P1-section-6c.html" class="section-link">6C</a>
+                <a href="P1-section-6d.html" class="section-link">6D</a>
+                <a href="P1-section-6e.html" class="section-link">6E</a>
+                <a href="P1-section-6f.html" class="section-link">6F</a>
+                <a href="P1-section-6g.html" class="section-link">6G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 6A: The Cosine Rule</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>The Cosine Rule</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Calculating side lengths and angles in non-right-angled triangles</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1: Finding missing side</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Calculate the length of the side <i>AB</i>.<br>
+                    Give your answer correct to 3 significant figures.
+                    
+                    <!-- SVG Diagram corresponding to User Image 1 -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="350" height="220" viewBox="0 0 350 220">
+                            <!-- Triangle vertices -->
+                            <path d="M 48 160 L 160 160 L 200 36 Z" stroke="black" stroke-width="2" fill="none"/>
+                            
+                            <!-- Labels -->
+                            <text x="30" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                            <text x="155" y="180" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                            <text x="205" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                            
+                            <!-- Dimensions -->
+                            <text x="85" y="185" font-family="Times New Roman">5.6 cm</text>
+                            <text x="190" y="110" font-family="Times New Roman">6.5 cm</text>
+                            
+                            <!-- Angle Arc (Obtuse 108 deg) - Pushed Up to 115 -->
+                            <path d="M 130 160 A 30 30 0 0 1 168 132" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="125" y="115" fill="#333" font-family="Times New Roman">108°</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify sides and angle</div>
+                        <div class="step-content">
+                                For any given triangle:<br>
+                            Using the Cosine Rule: <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>.<br>
+                            In our triangle:<br>
+                            • The "<i>a</i>" term is the side we want to find (side <i>AB</i>).<br>
+                            • The angle "<i>A</i>" is the included angle 108° (Angle <i>C</i> in the triangle from question).<br>
+                            • The adjacent sides "<i>b</i>" and "<i>c</i>" are 6.5 and 5.6.
+                            
+                            <!-- Triangle diagram with green labels -->
+                            <div style="margin-top: 20px; display: flex; justify-content: center;">
+                                <svg width="350" height="220" viewBox="0 0 350 220">
+                                    <!-- Triangle vertices -->
+                                    <path d="M 48 160 L 160 160 L 200 36 Z" stroke="black" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Original Labels -->
+                                    <text x="30" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                    <text x="155" y="180" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                                    <text x="205" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                    
+                                    <!-- Dimensions -->
+                                    <text x="85" y="185" font-family="Times New Roman">5.6 cm</text>
+                                    <text x="190" y="110" font-family="Times New Roman">6.5 cm</text>
+                                    
+                                    <!-- Angle Arc (Obtuse 108 deg) -->
+                                    <path d="M 130 160 A 30 30 0 0 1 168 132" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                                    <text x="125" y="115" fill="#333" font-family="Times New Roman">108°</text>
+                                    
+                                    <!-- Green labels for cosine rule variables -->
+                                    <text x="85" y="95" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">a</text>
+                                    <text x="195" y="90" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">b</text>
+                                    <text x="100" y="200" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">c</text>
+                                    <text x="145" y="150" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">A</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Write down the given known values.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute values into the formula</div>
+                        <div class="step-content">
+                            <i>AB</i>² = 6.5² + 5.6² − 2(6.5)(5.6) cos 108°
+                        </div>
+                        <div class="step-explanation">Plug the known values into the Cosine Rule formula.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate and Solve</div>
+                        <div class="step-content">
+                            <i>AB</i>² = 42.25 + 31.36 − (72.8 × −0.309...)<br>
+                            <i>AB</i>² = 73.61 − (−22.497...)<br>
+                            <i>AB</i>² ≈ 96.107<br>
+                            <i>AB</i> = √96.107...<br>
+                            <i>AB</i> = 9.8034...
+                        </div>
+                        <div class="step-explanation">Evaluate the expression and take the square root to find the length.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>AB</i> = 9.80 cm (3 s.f.) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2: Finding missing angle</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Calculate the size of the angle marked <i>x</i>.<br>
+                    Give your answer to 1 decimal place.
+                    
+                    <!-- SVG Diagram -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="250" height="300" viewBox="0 0 250 300">
+                            <!-- Triangle vertices -->
+                            <path d="M 50 50 L 200 60 L 120 280 Z" stroke="black" stroke-width="2" fill="none"/>
+                            
+                            <!-- Labels -->
+                            <text x="30" y="55" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                            <text x="210" y="65" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                            <text x="115" y="300" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                            
+                            <!-- Dimensions -->
+                            <text x="100" y="40" font-family="Times New Roman">3.8 cm</text>
+                            <text x="5" y="170" font-family="Times New Roman">6.2 cm</text>
+                            <text x="170" y="170" font-family="Times New Roman">6.2 cm</text>
+                            
+                            <!-- Angle Arc x at B -->
+                            <path d="M 180 60 Q 175 70 190 90" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="165" y="85" fill="#333" font-family="Times New Roman" font-style="italic">x</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify sides relative to the angle</div>
+                        <div class="step-content">
+                            We are using the formula: cos <i>A</i> = (<i>b</i>² + <i>c</i>² − <i>a</i>²) / 2<i>bc</i>.<br>
+                            In our triangle:<br>
+                            • The angle "<i>A</i>" is the one we want to find (Angle <i>x</i> at vertex <i>B</i> in the question).<br>
+                            • The "<i>a</i>" term is the opposite side (<i>AC</i> = 6.2 cm).<br>
+                            • The adjacent sides "<i>b</i>" and "<i>c</i>" are 3.8 and 6.2.
+                            
+                            <!-- Triangle diagram with green labels -->
+                            <div style="margin-top: 20px; display: flex; justify-content: center;">
+                                <svg width="250" height="300" viewBox="0 0 250 300">
+                                    <!-- Triangle vertices -->
+                                    <path d="M 50 50 L 200 60 L 120 280 Z" stroke="black" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Original Labels -->
+                                    <text x="30" y="55" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                    <text x="210" y="65" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                    <text x="115" y="295" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                                    
+                                    <!-- Dimensions -->
+                                    <text x="100" y="40" font-family="Times New Roman">3.8 cm</text>
+                                    <text x="5" y="170" font-family="Times New Roman">6.2 cm</text>
+                                    <text x="170" y="170" font-family="Times New Roman">6.2 cm</text>
+                                    
+                                    <!-- Angle Arc x at B -->
+                                    <path d="M 180 60 Q 175 70 190 90" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                                    <text x="165" y="85" fill="#333" font-family="Times New Roman" font-style="italic">x</text>
+                                    
+                                    <!-- Green labels for cosine rule variables -->
+                                    <text x="70" y="190" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">a</text>
+                                    <text x="85" y="30" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">b</text>
+                                    <text x="165" y="190" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">c</text>
+                                    <text x="183" y="75" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">A</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Assign variables based on the angle we are finding.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute into the formula</div>
+                        <div class="step-content">
+                            cos <i>x</i> = <div class="fraction">
+                                <span class="numerator">3.8² + 6.2² − 6.2²</span>
+                                <span class="denominator">2(3.8)(6.2)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Substitute the values into the position of a, b, and c.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate and Solve</div>
+                        <div class="step-content">
+                            cos <i>x</i> = <div class="fraction">
+                                <span class="numerator">14.44</span>
+                                <span class="denominator">47.12</span>
+                            </div> ≈ 0.30645...<br>
+                            <i>x</i> = cos⁻¹(0.30645...)<br>
+                            <i>x</i> = 72.15...°
+                        </div>
+                        <div class="step-explanation">Simplify the fraction and use the inverse cosine function.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>x</i> = 72.2° (1 d.p.) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3: Finding a Proof</span><button class="nav-arrow" onclick="showQuestion(4)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    <span style="display: inline-block; vertical-align: middle;">Show that cos <i>P</i> = −<div class="fraction" style="font-size: 1em;"><span class="numerator">1</span><span class="denominator">4</span></div>.</span>
+                    
+                    <!-- SVG Diagram -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="250" height="180" viewBox="0 0 250 180">
+                            <!-- Vertices: Q(20, 50), P(100, 45), R(160, 150) -->
+                            <path d="M 20 50 L 100 45 L 160 150 Z" stroke="black" stroke-width="2" fill="none"/>
+                            
+                            <!-- Labels -->
+                            <text x="0" y="55" font-weight="bold" font-family="Times New Roman" font-style="italic">Q</text>
+                            <text x="100" y="35" font-weight="bold" font-family="Times New Roman" font-style="italic">P</text>
+                            <text x="160" y="170" font-weight="bold" font-family="Times New Roman" font-style="italic">R</text>
+                            
+                            <!-- Dimensions -->
+                            <text x="45" y="35" font-family="Times New Roman">2 cm</text>
+                            <text x="135" y="90" font-family="Times New Roman">3 cm</text>
+                            <text x="70" y="135" font-family="Times New Roman">4 cm</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify sides relative to the angle</div>
+                        <div class="step-content">
+                            We want to find an expression for cos <i>P</i>.<br>
+                            • The angle is <i>P</i>.<br>
+                            • The opposite side is <i>QR</i> = 4 cm.<br>
+                            • The adjacent sides are <i>PQ</i> = 2 cm and <i>PR</i> = 3 cm.
+                            
+                            <!-- Triangle diagram with green labels -->
+                            <div style="margin-top: 20px; display: flex; justify-content: center;">
+                                <svg width="250" height="180" viewBox="0 0 250 180">
+                                    <!-- Vertices: Q(20, 50), P(100, 45), R(160, 150) -->
+                                    <path d="M 20 50 L 100 45 L 160 150 Z" stroke="black" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Original Labels -->
+                                    <text x="0" y="55" font-weight="bold" font-family="Times New Roman" font-style="italic">Q</text>
+                                    <text x="100" y="35" font-weight="bold" font-family="Times New Roman" font-style="italic">P</text>
+                                    <text x="160" y="170" font-weight="bold" font-family="Times New Roman" font-style="italic">R</text>
+                                    
+                                    <!-- Dimensions -->
+                                    <text x="55" y="35" font-family="Times New Roman">2 cm</text>
+                                    <text x="135" y="90" font-family="Times New Roman">3 cm</text>
+                                    <text x="70" y="135" font-family="Times New Roman">4 cm</text>
+                                    
+                                    <!-- Green labels for cosine rule variables -->
+                                    <text x="65" y="105" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">a</text>
+                                    <text x="35" y="30" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">b</text>
+                                    <text x="130" y="67" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">c</text>
+                                    <text x="85" y="61" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60" stroke="#27ae60" stroke-width="0.5">A</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Assign variables based on the angle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute into the formula</div>
+                        <div class="step-content">
+                            cos <i>P</i> = <div class="fraction">
+                                <span class="numerator">2² + 3² − 4²</span>
+                                <span class="denominator">2(2)(3)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Plug the values into the rearranged Cosine Rule.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate and Simplify</div>
+                        <div class="step-content">
+                            cos <i>P</i> = <div class="fraction">
+                                <span class="numerator">4 + 9 − 16</span>
+                                <span class="denominator">12</span>
+                            </div><br>
+                            cos <i>P</i> = <div class="fraction">
+                                <span class="numerator">13 − 16</span>
+                                <span class="denominator">12</span>
+                            </div><br>
+                            cos <i>P</i> = <div class="fraction">
+                                <span class="numerator">−3</span>
+                                <span class="denominator">12</span>
+                            </div><br>
+                            cos <i>P</i> = −<div class="fraction">
+                                <span class="numerator">1</span>
+                                <span class="denominator">4</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Simplify the numerator and denominator, then reduce the fraction.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: cos <i>P</i> = −<div class="fraction" style="color: white; border-color: white;"><span class="numerator" style="border-color: white;">1</span><span class="denominator">4</span></div> (Shown) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(3)" title="Previous Question">←</button><span>Question 4: Bearing Problem - Boat Navigation</span><button class="nav-arrow" onclick="showQuestion(5)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    From a point <i>A</i>, a boat sails due north for 7 km to <i>B</i>. The boat leaves <i>B</i> and moves on a bearing of 100° for 10 km until it reaches <i>C</i>.<br>
+                    Calculate the distance of <i>C</i> from <i>A</i>.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Understand the bearing and identify the angle at B</div>
+                        <div class="step-content">
+                            • Point A is at the origin<br>
+                            • Boat travels due north 7 km to B (AB = 7 km)<br>
+                            • From B, boat travels on bearing 100° for 10 km to C (BC = 10 km)<br>
+                            • Bearing 100° means 100° clockwise from north<br>
+                            
+                            The angle at B in the triangle ABC is:<br>
+                            Angle ABC = 180° − 100° = 80°
+                            
+                            <!-- Diagram with green labels and orange compass -->
+                            <div style="margin-top: 20px; display: flex; justify-content: center;">
+                                <svg width="450" height="380" viewBox="0 280 450 270">
+                                    <g>
+                                        <!-- Tri∠ABC -->
+                                        <path d="M 225 500 L 225 325 L 370 368 Z" 
+                                              stroke="#999999" stroke-width="2.5" fill="none"/>
+
+                                        <!-- ========== COMPASS AT A ========== -->
+                                        <!-- North -->
+                                        <line x1="225" y1="500" x2="225" y2="470" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="225" y1="500" x2="225" y2="530" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="225" y1="500" x2="255" y2="500" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="225" y1="500" x2="195" y2="500" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at A -->
+                                        <text x="215" y="463" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="216" y="548" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="262" y="507" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="176" y="507" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- ========== COMPASS AT B ========== -->
+                                        <!-- North -->
+                                        <line x1="225" y1="325" x2="225" y2="295" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="225" y1="325" x2="225" y2="355" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="225" y1="325" x2="255" y2="325" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="225" y1="325" x2="195" y2="325" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at B -->
+                                        <text x="215" y="288" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="216" y="373" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="262" y="332" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="176" y="332" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- Bearing angle at B (100°) - pushed down further -->
+                                        <path d="M 225 315 A 30 30 0 0 1 248 332" 
+                                              stroke="#e74c3c" stroke-width="3" fill="none"/>
+                                        <text x="240" y="320" fill="#e74c3c" font-size="14" font-weight="bold">100°</text>
+
+                                        <!-- Interior ∠ABC (80°) - arc curving OUTWARD (convex) from BA to BC, pushed very slightly higher -->
+                                        <path d="M 225 343 A 35 35 0 0 0 255 336" 
+                                              stroke="#9b59b6" stroke-width="2.5" fill="none"/>
+                                        <text x="245" y="358" fill="#9b59b6" font-size="13" font-weight="bold">80°</text>
+
+                                        <!-- ========== COMPASS AT C ========== -->
+                                        <!-- North -->
+                                        <line x1="370" y1="368" x2="370" y2="338" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="370" y1="368" x2="370" y2="398" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="370" y1="368" x2="400" y2="368" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="370" y1="368" x2="340" y2="368" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at C -->
+                                        <text x="360" y="331" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="361" y="416" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="407" y="375" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="321" y="375" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- ========== VERTEX LABELS ========== -->
+                                        <text x="205" y="522" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                        <text x="205" y="320" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                        <text x="380" y="365" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+
+                                        <!-- ========== SIDE LABELS ========== -->
+                                        <!-- AB (c = 7 km) - left side, pushed slightly to left -->
+                                        <text x="185" y="415" font-size="15" font-family="Times New Roman">7 km</text>
+                                        
+                                        <!-- BC (a = 10 km) - top right side -->
+                                        <text x="305" y="340" font-size="15" font-family="Times New Roman">10 km</text>
+                                        
+                                        <!-- AC (b = ?) - bottom right side -->
+                                        <text x="305" y="450" font-size="15" font-family="Times New Roman" fill="#666">? km</text>
+
+                                        <!-- ========== VARIABLE LABELS (Green, Italic) ========== -->
+                                        <!-- Variable b (opposite vertex B, side AC) -->
+                                        <text x="305" y="320" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">b</text>
+                                        
+                                        <!-- Variable a (opposite vertex A, side BC) -->
+                                        <text x="305" y="475" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">a</text>
+                                        
+                                        <!-- Variable c (opposite vertex C, side AB) -->
+                                        <text x="195" y="390" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">c</text>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">The bearing creates an exterior angle, so the interior angle is 180° − 100°. Note: Angles on a straight line add to 180°.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply the Cosine Rule</div>
+                        <div class="step-content">
+                            We want to find AC (side <i>a</i> opposite to angle A at B).<br>
+                                For any given triangle:<br>
+                            Using: <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i><br>
+                            Where:<br>
+                            • <i>a</i> = AC (what we're finding)<br>
+                            • <i>b</i> = BC = 10 km<br>
+                            • <i>c</i> = AB = 7 km<br>
+                            • <i>A</i> = angle at B = 80°<br>
+                            <i>AC</i><sup>2</sup> = 10² + 7² − 2(10)(7) cos 80°
+                        </div>
+                        <div class="step-explanation">Substitute the known values into the cosine rule.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate</div>
+                        <div class="step-content">
+                            <i>AC</i><sup>2</sup> = 100 + 49 − 140 × cos 80°<br>
+                            <i>AC</i><sup>2</sup> = 149 − 140 × 0.1736...<br>
+                            <i>AC</i><sup>2</sup> = 149 − 24.304...<br>
+                            <i>AC</i><sup>2</sup> = 124.696...<br>
+                            <i>AC</i> = √124.696...<br>
+                            <i>AC</i> = 11.167... km
+                        </div>
+                        <div class="step-explanation">Evaluate the expression and take the square root.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>AC</i> = 11.2 km (3 s.f.) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(4)" title="Previous Question">←</button><span>Question 5: Bearing Problem - Helicopter Navigation</span><button class="nav-arrow" onclick="showQuestion(6)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    A helicopter flies on a bearing of 80° from <i>A</i> to <i>B</i>, where <i>AB</i> = 50 km.<br>
+                    It then flies for 60 km to a point <i>C</i>.<br>
+                    Given that <i>C</i> is 80 km from <i>A</i>, calculate the bearing of <i>C</i> from <i>A</i>.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the given information and understand the problem</div>
+                        <div class="step-content">
+                            • Helicopter flies on bearing <span style="color: #e74c3c; font-weight: bold;">80°</span> from A to B<br>
+                            • AB = 50 km<br>
+                            • From B, helicopter flies 60 km to C (BC = 60 km)<br>
+                            • C is 80 km from A (AC = 80 km)<br>
+                            • We need to find the bearing of <span style="color: #9b59b6; font-weight: bold;">C from A</span>. This is the angle measured clockwise from north at point A to the line AC.<br>
+                            • We know all three sides of triangle ABC, so we can use the cosine rule to find ∠BAC first.
+                            
+                            <!-- Diagram with orange compass and adjusted green labels -->
+                            <div style="margin-top: 20px; margin-bottom: 5px; display: flex; justify-content: center;">
+                                <svg width="500" height="280" viewBox="150 400 400 260">
+                                    <g>
+                                        <!-- Tri∠ABC -->
+                                        <path d="M 200 600 L 348 574 L 387 451 Z" 
+                                              stroke="#999999" stroke-width="2.5" fill="none"/>
+
+                                        <!-- ========== COMPASS AT A ========== -->
+                                        <!-- North -->
+                                        <line x1="200" y1="600" x2="200" y2="570" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="200" y1="600" x2="200" y2="630" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="200" y1="600" x2="230" y2="600" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="200" y1="600" x2="170" y2="600" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at A -->
+                                        <text x="193" y="563" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="193" y="648" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="237" y="607" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="153" y="607" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- Bearing angle at A (80°) - from N to B -->
+                                        <path d="M 200 570 A 35 35 0 0 1 228 595" 
+                                              stroke="#e74c3c" stroke-width="3" fill="none"/>
+                                        <text x="217" y="572" fill="#e74c3c" font-size="14" font-weight="bold">80°</text>
+                                        
+                                        <!-- Bearing angle ? (from N to C) - arc moved down -->
+                                        <path d="M 200 580 A 18 18 0 0 1 209 594" 
+                                              stroke="#9b59b6" stroke-width="2.5" fill="none"/>
+                                        <text x="190" y="594" fill="#9b59b6" font-size="13" font-weight="bold">?</text>
+                                        
+                                        <!-- Angle BAC (green curved angle between AB and AC) -->
+                                        <path d="M 250 593 A 40 40 0 0 0 245 565" 
+                                              stroke="#27ae60" stroke-width="2.5" fill="none"/>
+
+                                        <!-- ========== COMPASS AT B ========== -->
+                                        <!-- North -->
+                                        <line x1="348" y1="574" x2="348" y2="544" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="348" y1="574" x2="348" y2="604" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="348" y1="574" x2="378" y2="574" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="348" y1="574" x2="318" y2="574" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at B -->
+                                        <text x="341" y="537" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="341" y="622" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="385" y="581" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="301" y="581" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- ========== COMPASS AT C ========== -->
+                                        <!-- North -->
+                                        <line x1="387" y1="451" x2="387" y2="421" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="387" y1="451" x2="387" y2="481" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="387" y1="451" x2="417" y2="451" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="387" y1="451" x2="357" y2="451" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at C -->
+                                        <text x="380" y="414" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="380" y="499" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="424" y="458" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="340" y="458" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- ========== VERTEX LABELS ========== -->
+                                        <text x="180" y="622" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                        <text x="353" y="570" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                        <text x="397" y="448" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+
+                                        <!-- ========== SIDE LABELS ========== -->
+                                        <!-- AB (c = 50 km) -->
+                                        <text x="265" y="605" font-size="15" font-family="Times New Roman">50 km</text>
+                                        
+                                        <!-- BC (a = 60 km) -->
+                                        <text x="375" y="543" font-size="15" font-family="Times New Roman">60 km</text>
+                                        
+                                        <!-- AC (b = 80 km) -->
+                                        <text x="250" y="525" font-size="15" font-family="Times New Roman">80 km</text>
+
+                                        <!-- ========== VARIABLE LABELS (Green, Italic) ========== -->
+                                        <!-- Variable a (opposite vertex A, side BC) -->
+                                        <text x="385" y="523" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">a</text>
+                                        
+                                        <!-- Variable b (opposite vertex B, side AC) -->
+                                        <text x="280" y="500" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">b</text>
+                                        
+                                        <!-- Variable c (opposite vertex C, side AB) -->
+                                        <text x="275" y="620" font-size="20" font-weight="bold" font-style="italic" fill="#27ae60">c</text>
+                                    </g>
+                                </svg>
+                            </div>
+                            <br>
+                            <span style="color: #e74c3c; font-weight: bold;">Note:</span> <span style="color: #e74c3c;">The bearing of C from A (shown in purple) can be found by subtracting ∠BAC from the bearing of B from A, which is 80°.</span>
+                        </div>
+                        <div class="step-explanation">Identify all given information and visualize the triangle with compass bearings.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply the Cosine Rule to find ∠BAC</div>
+                        <div class="step-content">
+                            We need to find angle <span style="color: #27ae60; font-weight: bold;">BAC</span>. Using the rearranged cosine rule:<br>
+                            cos <i>A</i> = <div class="fraction">
+                                <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                <span class="denominator">2<i>bc</i></span>
+                            </div><br>
+                            
+                            Where:<br>
+                            • <i>a</i> = BC = 60 km (opposite to angle A)<br>
+                            • <i>b</i> = AC = 80 km<br>
+                            • <i>c</i> = AB = 50 km<br>
+                            
+                            cos(BAC) = <div class="fraction">
+                                <span class="numerator">80² + 50² − 60²</span>
+                                <span class="denominator">2(80)(50)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Substitute the known values into the cosine rule to find the angle at A.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate ∠BAC</div>
+                        <div class="step-content">
+                            cos(BAC) = <div class="fraction">
+                                <span class="numerator">6400 + 2500 − 3600</span>
+                                <span class="denominator">8000</span>
+                            </div><br>
+                            cos(BAC) = <div class="fraction">
+                                <span class="numerator">5300</span>
+                                <span class="denominator">8000</span>
+                            </div><br>
+                            cos(BAC) = 0.6625<br>
+                            ∠BAC = cos⁻¹(0.6625)<br>
+                            ∠BAC = 48.52...°
+                        </div>
+                        <div class="step-explanation">Evaluate the cosine and find the angle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Calculate the bearing of C from A</div>
+                        <div class="step-content">
+                            The bearing of B from A is 80°.<br>
+                            The ∠BAC = 48.52°<br>
+                            
+                            Bearing of C from A = 80° − 48.52° = 31.48° = 31.5° (3 s.f.)
+                        </div>
+                        <div class="step-explanation">Subtract the ∠BAC from the bearing of B to find the bearing of C from A.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: Bearing of C from A = 31.5° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(5)" title="Previous Question">←</button><span>Question 6: Cargo Ships Bearing Problem</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    The diagram shows three cargo ships, <i>A</i>, <i>B</i> and <i>C</i>, which are in the same horizontal plane. 
+                    Ship <i>B</i> is 50 km due north of ship <i>A</i> and ship <i>C</i> is 70 km from ship <i>A</i>. 
+                    The bearing of <i>C</i> from <i>A</i> is 020°.<br><br>
+                    <b>a</b> Calculate the distance between ships <i>B</i> and <i>C</i>, in kilometres to 3 s.f.<br>
+                    <b>b</b> Calculate the bearing of ship <i>C</i> from ship <i>B</i>.
+                    
+                    <!-- Diagram -->
+                    <div style="margin-top: 20px; margin-bottom: 5px; display: flex; justify-content: center;">
+                        <svg width="400" height="320" viewBox="0 0 450 320">
+                            <g>
+                                <!-- ========== COMPASS (Rose) ========== -->
+                                <!-- North -->
+                                <line x1="80" y1="160" x2="80" y2="130" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                <!-- South -->
+                                <line x1="80" y1="160" x2="80" y2="190" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                <!-- East -->
+                                <line x1="80" y1="160" x2="110" y2="160" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                <!-- West -->
+                                <line x1="80" y1="160" x2="50" y2="160" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                
+                                <!-- Compass labels -->
+                                <text x="70" y="123" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                <text x="71" y="208" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                <text x="117" y="167" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                <text x="31" y="167" font-size="18" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+                                
+                                <!-- Triangle ABC -->
+                                <path d="M 250 280 L 250 130 L 370 50 Z" 
+                                      stroke="#999999" stroke-width="2.5" fill="none"/>
+
+                                <!-- Bearing angle at A (20°) - pushed up more -->
+                                <path d="M 250 230 A 30 30 0 0 1 262 257" 
+                                      stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                <text x="258" y="225" fill="#e74c3c" font-size="14" font-weight="bold">20°</text>
+
+                                <!-- Vertex labels -->
+                                <text x="235" y="300" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                <text x="235" y="125" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                <text x="380" y="50" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+
+                                <!-- Side labels -->
+                                <text x="190" y="210" font-size="16" font-family="Times New Roman">50 km</text>
+                                <text x="330" y="165" font-size="16" font-family="Times New Roman">70 km</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Cosine Rule</div>
+                        <div class="formula-content" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+                            <div>
+                                For any given triangle:<br>
+                                <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i>
+                                <br>
+                                cos <i>A</i> = <div class="fraction">
+                                    <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                    <span class="denominator">2<i>bc</i></span>
+                                </div>
+                            </div>
+                            <!-- Small Illustrative Triangle -->
+                            <svg width="120" height="90" viewBox="0 0 120 90">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Marked Angle A -->
+                                <path d="M 35 70 Q 40 50 25 45" stroke="#ff0000" stroke-width="3" fill="none"/>
+                                <text x="20" y="65" font-size="11" font-weight="bold" font-style="italic">A</text>
+                                
+                                <!-- Side labels only -->
+                                <text x="75" y="32" font-size="12" font-style="italic">a</text>
+                                <text x="15" y="38" font-size="12" font-style="italic">b</text>
+                                <text x="58" y="83" font-size="12" font-style="italic">c</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Calculate the distance between ships B and C</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the given information and understand the problem</div>
+                        <div class="step-content">
+                            
+                            • Ship B is 50 km due north of ship A (AB = 50 km)<br>
+                            • Ship C is 70 km from ship A (AC = 70 km)<br>
+                            • Bearing of C from A is 020°<br>
+                            • We need to find BC (side <i>a</i>)<br>
+                            
+                            <!-- Labeled diagram -->
+                            <div style="margin-top: 15px; margin-bottom: 5px; display: flex; justify-content: center;">
+                                <svg width="400" height="320" viewBox="50 0 400 320">
+                                    <g>
+                                        <!-- Tri∠ABC -->
+                                        <path d="M 200 280 L 200 130 L 320 50 Z" 
+                                              stroke="#999999" stroke-width="2.5" fill="none"/>
+
+                                        <!-- Bearing angle at A (20°) - pushed up more -->
+                                        <path d="M 200 230 A 30 30 0 0 1 212 257" 
+                                              stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                        <text x="208" y="220" fill="#e74c3c" font-size="14" font-weight="bold">20°</text>
+                                        
+                                        <!-- Green letter A below 20° label -->
+                                        <text x="208" y="235" fill="#27ae60" font-size="18" font-weight="900" font-style="italic">A</text>
+
+                                        <!-- Vertex labels -->
+                                        <text x="185" y="300" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                        <text x="185" y="125" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                        <text x="330" y="50" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+
+                                        <!-- Side labels -->
+                                        <text x="140" y="210" font-size="16" font-family="Times New Roman">50 km</text>
+                                        <text x="280" y="165" font-size="16" font-family="Times New Roman">70 km</text>
+
+                                        <!-- Variable labels (Green) -->
+                                        <text x="260" y="70" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">a</text>
+                                        <text x="290" y="190" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">b</text>
+                                        <text x="155" y="225" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">c</text>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Identify all given information and visualize the triangle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply the Cosine Rule to find BC</div>
+                        <div class="step-content">
+                            We have two sides and the included angle, so we use:<br>
+                            <i>a</i>² = <i>b</i>² + <i>c</i>² − 2<i>bc</i> cos <i>A</i><br>
+                            
+                            Where:<br>
+                            • <i>a</i> = BC (what we want to find)<br>
+                            • <i>b</i> = AC = 70 km<br>
+                            • <i>c</i> = AB = 50 km<br>
+                            • Angle <i>A</i> = 20°<br>
+                            
+                            BC² = 70² + 50² − 2(70)(50) cos 20°
+                        </div>
+                        <div class="step-explanation">Use the cosine rule with the known sides and angle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate BC</div>
+                        <div class="step-content">
+                            BC² = 4900 + 2500 − 7000 × cos 20°<br>
+                            BC² = 7400 − 7000 × 0.9397...<br>
+                            BC² = 7400 − 6577.9...<br>
+                            BC² = 822.1...<br>
+                            BC = √822.1...<br>
+                            BC = 28.67... km<br>
+                            BC = 28.7 km (to 3 s.f.)
+                        </div>
+                        <div class="step-explanation">Evaluate the expression and take the square root to find the distance.</div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Calculate the bearing of ship C from ship B</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find ∠ABC</div>
+                        <div class="step-content">
+                            
+                            To find the bearing of C from B, we first need ∠ABC.<br>
+                            
+                            <!-- Enhanced diagram with compass at B and angles -->
+                            <div style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center;">
+                                <svg width="400" height="320" viewBox="50 0 400 320">
+                                    <g>
+                                        <!-- Triangle ABC -->
+                                        <path d="M 200 280 L 200 130 L 320 50 Z" 
+                                              stroke="#999999" stroke-width="2.5" fill="none"/>
+
+                                        <!-- Bearing angle at A (20°) -->
+                                        <path d="M 200 230 A 30 30 0 0 1 212 257" 
+                                              stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                        <text x="208" y="220" fill="#e74c3c" font-size="14" font-weight="bold">20°</text>
+
+                                        <!-- ========== COMPASS AT B ========== -->
+                                        <!-- North -->
+                                        <line x1="200" y1="130" x2="200" y2="110" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- South -->
+                                        <line x1="200" y1="130" x2="200" y2="150" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- East -->
+                                        <line x1="200" y1="130" x2="220" y2="130" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        <!-- West -->
+                                        <line x1="200" y1="130" x2="180" y2="130" stroke="#ff8c00" stroke-width="2" stroke-dasharray="5,5"/>
+                                        
+                                        <!-- Compass labels at B -->
+                                        <text x="192" y="103" font-size="16" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                        <text x="193" y="168" font-size="16" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                        <text x="227" y="137" font-size="16" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                        <text x="161" y="137" font-size="16" font-weight="900" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+
+                                        <!-- Purple bearing angle from North at B to BC with question mark -->
+                                        <path d="M 200 112 A 20 20 0 0 1 214 122" 
+                                              stroke="#9b59b6" stroke-width="2.5" fill="none"/>
+                                        <text x="210" y="110" fill="#9b59b6" font-size="16" font-weight="bold">?</text>
+
+                                        <!-- Dark blue angle ABC (interior angle) - small arc from AB to BC -->
+                                        <path d="M 200 147 A 25 25 0 0 0 223 117" 
+                                              stroke="#2c3e50" stroke-width="2.5" fill="none"/>
+                                        <text x="215" y="152" fill="#2c3e50" font-size="14" font-weight="bold">∠ABC</text>
+
+                                        <!-- Vertex labels -->
+                                        <text x="185" y="300" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                                        <text x="185" y="125" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                                        <text x="330" y="50" font-size="22" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+
+                                        <!-- Side labels -->
+                                        <text x="140" y="210" font-size="16" font-family="Times New Roman">50 km</text>
+                                        <text x="280" y="165" font-size="16" font-family="Times New Roman">70 km</text>
+                                        <text x="230" y="60" font-size="16" font-family="Times New Roman">28.7 km</text>
+
+                                        <!-- Variable labels (Green) -->
+                                        <text x="260" y="80" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">b</text>
+                                        <text x="290" y="190" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">a</text>
+                                        <text x="155" y="225" font-size="18" font-weight="bold" font-style="italic" fill="#27ae60">c</text>
+                                    </g>
+                                </svg>
+                            </div>
+                            
+                            To find the bearing of C from B, we first need ∠ABC.<br>
+                            <br>
+                            Using the cosine rule:<br>
+                            cos <i>A</i> = <div class="fraction">
+                                <span class="numerator"><i>b</i>² + <i>c</i>² − <i>a</i>²</span>
+                                <span class="denominator">2<i>bc</i></span>
+                            </div><br>
+                            
+                            Where:<br>
+                            • <i>a</i> = AC = 70 km<br>
+                            • <i>b</i> = BC = 28.7 km<br>
+                            • <i>c</i> = AB = 50 km<br>
+                            • Angle <i>A</i> = ∠ABC (what we want to find)<br>
+                            <br>
+                            cos(ABC) = <div class="fraction">
+                                <span class="numerator">822.1 + 2500 − 4900</span>
+                                <span class="denominator">2(28.7)(50)</span>
+                            </div>
+                        </div>
+                        <div class="step-explanation">Use the cosine rule to find ∠ABC, which we'll need for the bearing calculation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Calculate ∠ABC</div>
+                        <div class="step-content">
+                            cos(ABC) = <div class="fraction">
+                                <span class="numerator">−1577.9</span>
+                                <span class="denominator">2867</span>
+                            </div><br>
+                            cos(ABC) = −0.5503...<br>
+                            ∠ABC = cos⁻¹(−0.5503...)<br>
+                            ∠ABC = 123.4...°
+                        </div>
+                        <div class="step-explanation">Calculate the angle at B in the triangle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Calculate the bearing of C from B</div>
+                        <div class="step-content">
+                            Using the straight line property:<br>
+                            Bearing of C from B + ∠ABC = 180°<br>
+                            Bearing of C from B + 123.4° = 180°<br>
+                            Bearing of C from B = 180° − 123.4°<br>
+                            Bearing of C from B = 56.6° (3 s.f.)
+                        </div>
+                        <div class="step-explanation">Use the property that angles on a straight line sum to 180° to find the bearing.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <b>Part (a):</b> Distance BC = 28.7 km (to 3 s.f.) ✨<br>
+                        <b>Part (b):</b> Bearing of C from B = 56.6° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 6; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            }
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
