@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 6B: The Sine Rule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+            text-align: center;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        .x-squared {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .x-term {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .constant {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Fraction Styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .numerator {
+            border-bottom: 2px solid #333;
+            padding: 0 5px;
+        }
+        .denominator {
+            padding: 0 5px;
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+        
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            margin-left: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-6a.html" class="section-link">6A</a>
+                <a href="P1-section-6b.html" class="section-link active">6B</a>
+                <a href="P1-section-6c.html" class="section-link">6C</a>
+                <a href="P1-section-6d.html" class="section-link">6D</a>
+                <a href="P1-section-6e.html" class="section-link">6E</a>
+                <a href="P1-section-6f.html" class="section-link">6F</a>
+                <a href="P1-section-6g.html" class="section-link">6G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 6B: The Sine Rule</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>The Sine Rule</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Using the sine rule to find missing sides and angles</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1: Finding sides using Sine Rule</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Find the values of <i>x</i> and <i>y</i>.<br>
+                    Give your answers to 3 significant figures.
+
+                    <!-- SVG Diagram for Q1 -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="350" height="180" viewBox="0 0 350 180">
+                            <!-- Triangle with vertices: Left(30,150), Top(170,40), Right(320,150) -->
+                            <path d="M 30 150 L 170 40 L 320 150 Z" stroke="black" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Side labels -->
+                            <!-- Left side: 6 cm -->
+                            <text x="70" y="85" font-family="Times New Roman" font-size="16">6 cm</text>
+                            
+                            <!-- Right side: x cm -->
+                            <text x="255" y="85" font-family="Times New Roman" font-size="16">x cm</text>
+                            
+                            <!-- Bottom side: y cm -->
+                            <text x="165" y="170" font-family="Times New Roman" font-size="16">y cm</text>
+                            
+                            <!-- Left angle arc (36.8°) -->
+                            <path d="M 90 150 A 25 25 0 0 0 65 125" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="92" y="138" font-family="Times New Roman" font-size="14" font-weight="bold" fill="#e74c3c">36.8°</text>
+                            
+                            <!-- Right angle arc (53.2°) -->
+                            <path d="M 285 125 A 25 25 0 0 0 260 150" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="232" y="138" font-family="Times New Roman" font-size="14" font-weight="bold" fill="#e74c3c">53.2°</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                                <div>
+                                    <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                    <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                    <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                                <svg width="120" height="80" viewBox="0 0 120 80">
+                                    <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Side labels -->
+                                    <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                    <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                    <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                    
+                                    <!-- Angle arcs - A pushed right, B pushed left, C shortened slightly -->
+                                    <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    
+                                    <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                    <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                    <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                    <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                                </svg>
+                            </div>
+                            <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify Opposite Pairs</div>
+                        <div class="step-content">
+                            • 6 cm is opposite the angle 53.2°.<br>
+                            • <i>x</i> cm is opposite the angle 36.8°.<br>
+                            • <i>y</i> cm is opposite the third angle.
+                        </div>
+                        <div class="step-explanation">Match sides with their opposite angles to set up the Sine Rule ratios.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the third angle</div>
+                        <div class="step-content">
+                            Sum of angles in a triangle = 180°.<br>
+                            Third angle = 180° − (36.8° + 53.2°)<br>
+                            Third angle = 180° − 90° = 90°
+                        </div>
+                        <div class="step-explanation">Calculate the missing angle to help find side y.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate x using the Sine Rule</div>
+                        <div class="step-content">
+                            <strong>Using the two pairs:</strong><br>
+                            • <i>x</i> cm is opposite the angle 36.8°<br>
+                            • 6 cm is opposite the angle 53.2°<br>
+                            <br>
+                            This gives us: <i>a</i> = <i>x</i>, <i>A</i> = 36.8°, <i>b</i> = 6, <i>B</i> = 53.2°<br>
+                            <br>
+                            <div class="fraction"><span class="numerator"><i>x</i></span><span class="denominator">sin 36.8°</span></div> = 
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin 53.2°</span></div><br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">6 × sin 36.8°</span><span class="denominator">sin 53.2°</span></div><br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">6 × 0.599...</span><span class="denominator">0.800...</span></div> ≈ 4.49
+                        </div>
+                        <div class="step-explanation">Solve for x by multiplying both sides by sin 36.8°.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Calculate y using the Sine Rule</div>
+                        <div class="step-content">
+                            <strong>Using the two pairs:</strong><br>
+                            • <i>y</i> cm is opposite the angle 90°<br>
+                            • 6 cm is opposite the angle 53.2°<br>
+                            <br>
+                            This gives us: <i>a</i> = <i>y</i>, <i>A</i> = 90°, <i>b</i> = 6, <i>B</i> = 53.2°<br>
+                            <br>
+                            <div class="fraction"><span class="numerator"><i>y</i></span><span class="denominator">sin 90°</span></div> = 
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin 53.2°</span></div><br>
+                            <i>y</i> = <div class="fraction"><span class="numerator">6 × sin 90°</span><span class="denominator">sin 53.2°</span></div><br>
+                            <i>y</i> = <div class="fraction"><span class="numerator">6 × 1</span><span class="denominator">0.800...</span></div> ≈ 7.50
+                        </div>
+                        <div class="step-explanation">Solve for y by multiplying both sides by sin 90°.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>x</i> = 4.49 cm, <i>y</i> = 7.50 cm ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2: Finding an angle using Sine Rule</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Find the value of <i>x</i>.<br>
+                    Give your answer to 1 decimal place.
+
+                    <!-- SVG Diagram for Q2 -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="350" height="200" viewBox="0 0 350 200">
+                            <!-- Vertices: A(20, 150), B(250, 20), C(320, 180) -->
+                            <!-- A is left, B is top right, C is bottom right -->
+                            <path d="M 20 150 L 250 20 L 320 180 Z" stroke="black" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex Labels -->
+                            <text x="0" y="155" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                            <text x="240" y="15" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                            <text x="330" y="185" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                            
+                            <!-- Side length labels -->
+                            <text x="90" y="70" font-family="Times New Roman" font-size="16">12.4 cm</text>
+                            <text x="150" y="195" font-family="Times New Roman" font-size="16">9.7 cm</text>
+                            
+                            <!-- Angle x at A - pushed to the right -->
+                            <path d="M 65 125 A 35 35 0 0 1 70 155" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="75" y="140" fill="#e74c3c" font-family="Times New Roman" font-style="italic" font-weight="bold">x</text>
+                            
+                            <!-- Angle 60° at C - arc pushed down -->
+                            <path d="M 310 155 A 35 35 0 0 0 280 175" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="260" y="165" fill="#e74c3c" font-family="Times New Roman" font-weight="bold">60°</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                            <div>
+                                <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                            <svg width="120" height="80" viewBox="0 0 120 80">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Side labels -->
+                                <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                
+                                <!-- Angle arcs - A pushed right, B pushed left, C extended -->
+                                <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                
+                                <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                            </svg>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify pairs of angles and opposite sides</div>
+                        <div class="step-content">
+                            • Angle 60° is opposite side 12.4 cm.<br>
+                            • Angle <i>B</i> is opposite side 9.7 cm.<br>
+                            • Angle <i>x</i> is opposite side <i>BC</i>.<br>
+                            <br>
+                            Since we know a complete pair (60° and 12.4), we can use the Sine Rule to find Angle <i>B</i> first.
+                        </div>
+                        <div class="step-explanation">Match the known angle-side pair. We need to find Angle B before we can find x.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find Angle B</div>
+                        <div class="step-content">
+                            <div style="color: #e74c3c; font-weight: bold; margin-bottom: 10px;">
+                                We can flip the Sine Rule to find angles: 
+                                <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                    <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                        <span style="border-bottom: 2px solid #e74c3c; padding: 0 5px;">sin <i>A</i></span>
+                                        <span style="padding: 0 5px;"><i>a</i></span>
+                                    </span>
+                                </span>
+                                = 
+                                <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                    <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                        <span style="border-bottom: 2px solid #e74c3c; padding: 0 5px;">sin <i>B</i></span>
+                                        <span style="padding: 0 5px;"><i>b</i></span>
+                                    </span>
+                                </span>
+                            </div>
+                            <strong>Using the two pairs:</strong><br>
+                            • Angle 60° opposite side 12.4 cm.<br>
+                            • Angle <i>B</i> opposite side 9.7 cm.<br>
+                            <br>
+                            This gives us: <i>a</i> = 12.4, <i>A</i> = 60°, <i>b</i> = 9.7, <i>B</i> = <i>B</i>°<br>
+                            <br>
+                            <div class="fraction"><span class="numerator">sin 60°</span><span class="denominator">12.4</span></div> = 
+                            <div class="fraction"><span class="numerator">sin <i>B</i></span><span class="denominator">9.7</span></div><br>
+                            sin <i>B</i> = <div class="fraction"><span class="numerator">9.7 × sin 60°</span><span class="denominator">12.4</span></div><br>
+                            sin <i>B</i> ≈ 0.677...<br>
+                            <i>B</i> = sin⁻¹(0.677...) ≈ 42.64°
+                        </div>
+                        <div class="step-explanation">Calculate the value of angle B using the Sine Rule.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find Angle x</div>
+                        <div class="step-content">
+                            Sum of angles in a triangle = 180°.<br>
+                            <i>x</i> = 180° − (60° + 42.64°)<br>
+                            <i>x</i> = 180° − 102.64°<br>
+                            <i>x</i> = 77.36...°
+                        </div>
+                        <div class="step-explanation">Subtract the known angles from 180° to find the remaining angle x.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>x</i> = 77.4° (1 d.p.) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3: Multi-triangle problem</span><button class="nav-arrow" onclick="showQuestion(4)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Find the values of <i>x</i> and <i>y</i>.<br>
+                    Give your answers to 1 decimal place for angles and 3 significant figures for lengths.
+
+                    <!-- SVG Diagram for Q3 -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="350" height="180" viewBox="0 0 350 180">
+                            <!-- Triangle ABC: A(20, 160), C(320, 160), B(150, 40) -->
+                            <!-- D on AC moved to the left (closer to A) with less bend -->
+                            
+                            <!-- Vertices -->
+                            <path d="M 20 160 L 150 40 L 320 160 Z" stroke="black" stroke-width="2.5" fill="none"/>
+                            <!-- Line BD - less bent to the left -->
+                            <path d="M 150 40 L 110 160" stroke="black" stroke-width="2.5"/>
+                            
+                            <!-- Vertex Labels -->
+                            <text x="0" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                            <text x="150" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                            <text x="330" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                            <text x="105" y="180" font-weight="bold" font-family="Times New Roman" font-style="italic">D</text>
+                            
+                            <!-- Side length labels -->
+                            <text x="35" y="90" font-family="Times New Roman" font-size="16">6.4 cm</text>
+                            <text x="240" y="90" font-family="Times New Roman" font-size="16">7 cm</text>
+                            <text x="145" y="95" font-family="Times New Roman" font-size="16">y cm</text>
+                            
+                            <!-- Angle 24° at A - pushed slightly to left -->
+                            <path d="M 40 143 A 45 45 0 0 1 40 160" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="50" y="152" font-family="Times New Roman" font-weight="bold" fill="#e74c3c">24°</text>
+                            
+                            <!-- 60° angle arc at D - shifted extremely slightly to the left -->
+                            <path d="M 116 145 A 30 30 0 0 1 143 160" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="140" y="150" font-family="Times New Roman" font-weight="bold" fill="#e74c3c">60°</text>
+                            
+                            <!-- Angle x at C - pushed slightly down -->
+                            <path d="M 295 143 A 45 45 0 0 0 295 160" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="280" y="152" font-family="Times New Roman" font-style="italic" font-weight="bold" fill="#e74c3c">x</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                            <div>
+                                <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                            <svg width="120" height="80" viewBox="0 0 120 80">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Side labels -->
+                                <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                
+                                <!-- Angle arcs - A pushed right, B pushed left, C extended -->
+                                <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                
+                                <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                            </svg>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find angles in Triangle ABD</div>
+                        <div class="step-content">
+                            Angles on a straight line add to 180°.<br>
+                            Angle <i>ADB</i> = 180° − 60° = 120°.
+                        </div>
+                        <div class="step-explanation">Use the angles on the straight line AC to find the obtuse angle at D.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y using Triangle ABD</div>
+                        <div class="step-content">
+                            In triangle <i>ABD</i>:<br>
+                            • Side <i>y</i> is opposite 24°.<br>
+                            • Side 6.4 cm is opposite 120°.<br>
+                            Using Sine Rule:<br>
+                            <div class="fraction"><span class="numerator"><i>y</i></span><span class="denominator">sin 24°</span></div> = 
+                            <div class="fraction"><span class="numerator">6.4</span><span class="denominator">sin 120°</span></div><br>
+                            <i>y</i> = <div class="fraction"><span class="numerator">6.4 × sin 24°</span><span class="denominator">sin 120°</span></div> ≈ 3.01 cm
+                        </div>
+                        <div class="step-explanation">Apply the Sine Rule to the left-hand triangle.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find x using Triangle BDC</div>
+                        <div class="step-content">
+                            In triangle <i>BDC</i>:<br>
+                            • Angle <i>x</i> is opposite side <i>y</i> (3.01 cm).<br>
+                            • Angle 60° is opposite side 7 cm.<br>
+                            Using Sine Rule:<br>
+                            <div class="fraction"><span class="numerator">sin <i>x</i></span><span class="denominator">3.01</span></div> = 
+                            <div class="fraction"><span class="numerator">sin 60°</span><span class="denominator">7</span></div><br>
+                            sin <i>x</i> = <div class="fraction"><span class="numerator">3.01 × sin 60°</span><span class="denominator">7</span></div> ≈ 0.372<br>
+                            <i>x</i> = sin⁻¹(0.372...) ≈ 21.8°
+                        </div>
+                        <div class="step-explanation">Apply the Sine Rule to the right-hand triangle using the value of y we just found.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>x</i> = 21.8°, <i>y</i> = 3.01 cm ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(3)" title="Previous Question">←</button><span>Question 4: Exact values in triangles</span><button class="nav-arrow" onclick="showQuestion(5)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In triangle <i>PQR</i>, <i>QR</i> = √3 cm, ∠<i>PQR</i> = 45° and ∠<i>QPR</i> = 60°.<br><br>
+                    <strong>a</strong> Find the exact length of <i>PR</i>.<br>
+                    <strong>b</strong> Find the length of <i>PQ</i> to 3 significant figures.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                         <!-- Triangle P (top), Q (left), R (right) -->
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <path d="M 150 30 L 50 170 L 250 170 Z" stroke="black" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex Labels -->
+                            <text x="145" y="25" font-weight="bold" font-family="Times New Roman" font-style="italic">P</text>
+                            <text x="35" y="180" font-weight="bold" font-family="Times New Roman" font-style="italic">Q</text>
+                            <text x="255" y="180" font-weight="bold" font-family="Times New Roman" font-style="italic">R</text>
+                            
+                            <!-- Angle 60° at P with arc - moved slightly up -->
+                            <path d="M 140 45 A 25 25 0 0 0 160 45" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="140" y="60" fill="#e74c3c" font-family="Times New Roman" font-weight="bold">60°</text>
+                            
+                            <!-- Angle 45° at Q with arc - pushed to the right -->
+                            <path d="M 75 170 A 12 12 0 0 0 60 155" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="88" y="163" fill="#e74c3c" font-family="Times New Roman" font-weight="bold">45°</text>
+                            
+                            <!-- Side labels -->
+                            <text x="130" y="190" font-family="Times New Roman" font-size="16">√3 cm</text>
+                            <text x="211" y="100" font-family="Times New Roman" font-style="italic" font-size="16">q</text>
+                            <text x="80" y="100" font-family="Times New Roman" font-style="italic" font-size="16">r</text>
+                        </svg>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                            <div>
+                                <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                            <svg width="120" height="80" viewBox="0 0 120 80">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Side labels -->
+                                <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                
+                                <!-- Angle arcs - A pushed right, B pushed left, C extended -->
+                                <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                
+                                <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                            </svg>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Find PR (side q)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify knowns</div>
+                        <div class="step-content">
+                            • Side <i>p</i> (QR) = √3, Angle <i>P</i> = 60°.<br>
+                            • Side <i>q</i> (PR) is unknown, Angle <i>Q</i> = 45°.
+                        </div>
+                        <div class="step-explanation">We have a known pair (p, P) and need to find q given Q.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply Sine Rule</div>
+                        <div class="step-content">
+                            <div class="fraction"><span class="numerator"><i>q</i></span><span class="denominator">sin 45°</span></div> = 
+                            <div class="fraction"><span class="numerator">√3</span><span class="denominator">sin 60°</span></div><br>
+                            <i>q</i> = <div class="fraction"><span class="numerator">√3 × sin 45°</span><span class="denominator">sin 60°</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Calculate Exact Value</div>
+                        <div class="step-content">
+                            <div style="color: #e74c3c; font-weight: bold; margin-bottom: 10px;">
+                                Note: sin 45° = 
+                                <span style="display: inline-flex; vertical-align: middle; margin: 0 3px;">
+                                    <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                        <span style="border-bottom: 2px solid #e74c3c; padding: 0 5px;">1</span>
+                                        <span style="padding: 0 5px;">√2</span>
+                                    </span>
+                                </span>
+                                and sin 60° = 
+                                <span style="display: inline-flex; vertical-align: middle; margin: 0 3px;">
+                                    <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                        <span style="border-bottom: 2px solid #e74c3c; padding: 0 5px;">√3</span>
+                                        <span style="padding: 0 5px;">2</span>
+                                    </span>
+                                </span>
+                            </div>
+                            <i>q</i> = <div class="fraction"><span class="numerator">√3 × (1/√2)</span><span class="denominator">√3/2</span></div><br>
+                            <i>q</i> = <div class="fraction"><span class="numerator">√3/√2</span><span class="denominator">√3/2</span></div><br>
+                            <i>q</i> = <div class="fraction"><span class="numerator">√3</span><span class="denominator">√2</span></div> × <div class="fraction"><span class="numerator">2</span><span class="denominator">√3</span></div><br>
+                            <i>q</i> = <div class="fraction"><span class="numerator">2</span><span class="denominator">√2</span></div> = <div class="fraction"><span class="numerator">2√2</span><span class="denominator">2</span></div> = √2
+                        </div>
+                        <div class="step-explanation">Substitute exact trigonometric values and simplify.</div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Find PQ (side r)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find Angle R</div>
+                        <div class="step-content">
+                            Sum of angles = 180°.<br>
+                            <i>R</i> = 180° − (60° + 45°) = 75°
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find PQ using Sine Rule</div>
+                        <div class="step-content">
+                            • Side <i>r</i> (PQ) is unknown, Angle <i>R</i> = 75°.<br>
+                            • Side <i>p</i> (QR) = √3, Angle <i>P</i> = 60°.<br>
+                            <br>
+                            <div class="fraction"><span class="numerator"><i>r</i></span><span class="denominator">sin 75°</span></div> = 
+                            <div class="fraction"><span class="numerator">√3</span><span class="denominator">sin 60°</span></div><br>
+                            <i>r</i> = <div class="fraction"><span class="numerator">√3 × sin 75°</span><span class="denominator">sin 60°</span></div><br>
+                            <i>r</i> = <div class="fraction"><span class="numerator">√3 × 0.9659...</span><span class="denominator">0.8660...</span></div> ≈ 1.93 cm
+                        </div>
+                        <div class="step-explanation">Use the angle we found and apply the Sine Rule for the third side.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <b>Part (a):</b> PR = √2 cm (exact) ✨<br>
+                        <b>Part (b):</b> PQ = 1.93 cm (3 s.f.) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(4)" title="Previous Question">←</button><span>Question 5: Finding remaining angles</span><button class="nav-arrow" onclick="showQuestion(6)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In triangle <i>PQR</i>, <i>PQ</i> = 15 cm, <i>QR</i> = 12 cm and ∠<i>PRQ</i> = 75°.<br>
+                    Find the values of ∠<i>P</i> and ∠<i>Q</i>.<br>
+                    Give your answers to 1 decimal place.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                        <svg width="300" height="180" viewBox="0 0 300 180">
+                            <path d="M 40 150 L 260 150 L 150 30 Z" stroke="black" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex Labels -->
+                            <text x="25" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">P</text>
+                            <text x="265" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">Q</text>
+                            <text x="150" y="20" font-weight="bold" font-family="Times New Roman" font-style="italic">R</text>
+                            
+                            <!-- Side labels -->
+                            <text x="130" y="175" font-family="Times New Roman" font-size="16">15 cm</text>
+                            <text x="210" y="90" font-family="Times New Roman" font-size="16">12 cm</text>
+                            
+                            <!-- Angle 75° at R with arc -->
+                            <path d="M 135 45 A 20 20 0 0 0 165 45" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <text x="140" y="70" fill="#e74c3c" font-family="Times New Roman" font-weight="bold">75°</text>
+                        </svg>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                            <div>
+                                <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                            <svg width="120" height="80" viewBox="0 0 120 80">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Side labels -->
+                                <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                
+                                <!-- Angle arcs - A pushed right, B pushed left, C extended -->
+                                <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                
+                                <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                            </svg>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify pairs</div>
+                        <div class="step-content">
+                            • Pair 1: Angle <i>R</i> = 75°, Side <i>r</i> (PQ) = 15 cm.<br>
+                            • Pair 2: Side <i>p</i> (QR) = 12 cm, Angle <i>P</i> is unknown.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find Angle P</div>
+                        <div class="step-content">
+                            <div class="fraction"><span class="numerator">sin <i>P</i></span><span class="denominator">12</span></div> = 
+                            <div class="fraction"><span class="numerator">sin 75°</span><span class="denominator">15</span></div><br>
+                            sin <i>P</i> = <div class="fraction"><span class="numerator">12 × sin 75°</span><span class="denominator">15</span></div> ≈ 0.7727...<br>
+                            <i>P</i> = sin⁻¹(0.7727...) ≈ 50.6°
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find Angle Q</div>
+                        <div class="step-content">
+                            Sum of angles in a triangle = 180°.<br>
+                            <i>Q</i> = 180° − (75° + 50.6°)<br>
+                            <i>Q</i> = 180° − 125.6° = 54.4°
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: ∠<i>P</i> = 50.6°, ∠<i>Q</i> = 54.4° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(5)" title="Previous Question">←</button><span>Question 6: Exact Values Proof</span><button class="nav-arrow" onclick="showQuestion(7)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In triangle <i>ABC</i>, <i>AB</i> = <i>x</i> cm, <i>BC</i> = (4 − <i>x</i>) cm, ∠<i>BAC</i> = <i>y</i> and ∠<i>BCA</i> = 30°.<br>
+                    Given that sin <i>y</i> = <div class="fraction" style="font-size: 0.9em;"><span class="numerator">1</span><span class="denominator">√2</span></div>, show that <i>x</i> = 4(√2 − 1).
+
+                    <!-- SVG Diagram for Q6 -->
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <!-- A at bottom left, C at bottom right -->
+                            <!-- A(30, 150), C(260, 150), B(180, 50) - shifted left by 20 units -->
+                            <path d="M 30 150 L 180 50 L 260 150 Z" stroke="black" stroke-width="2" fill="none"/>
+                            
+                            <!-- Vertex Labels -->
+                            <text x="15" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">A</text>
+                            <text x="180" y="40" font-weight="bold" font-family="Times New Roman" font-style="italic">B</text>
+                            <text x="270" y="165" font-weight="bold" font-family="Times New Roman" font-style="italic">C</text>
+                            
+                            <!-- Angle labels -->
+                            <text x="62" y="145" font-family="Times New Roman" font-style="italic" font-weight="bold" fill="#e74c3c">y</text>
+                            <text x="210" y="145" font-family="Times New Roman" font-weight="bold" fill="#e74c3c">30°</text>
+                            
+                            <!-- Side labels -->
+                            <text x="90" y="95" font-family="Times New Roman" font-style="italic" font-size="16">x</text> <!-- AB -->
+                            <text x="230" y="95" font-family="Times New Roman" font-size="16">4 - x</text> <!-- BC -->
+                            
+                            <!-- Angle Arcs -->
+                            <path d="M 57 150 A 20 20 0 0 0 49 138" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                            <path d="M 240 150 A 20 20 0 0 1 248 138" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                            <div>
+                                <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                            <svg width="120" height="80" viewBox="0 0 120 80">
+                                <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                
+                                <!-- Side labels -->
+                                <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                
+                                <!-- Angle arcs - A pushed right, B pushed left, C extended -->
+                                <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                
+                                <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                            </svg>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify pairs</div>
+                        <div class="step-content">
+                            • Pair 1: Angle <i>A</i> = <i>y</i>, Side opposite = <i>BC</i> = (4 − <i>x</i>).<br>
+                            • Pair 2: Angle <i>C</i> = 30°, Side opposite = <i>AB</i> = <i>x</i>.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Apply Sine Rule</div>
+                        <div class="step-content">
+                            <div class="fraction"><span class="numerator">4 − <i>x</i></span><span class="denominator">sin <i>y</i></span></div> = 
+                            <div class="fraction"><span class="numerator"><i>x</i></span><span class="denominator">sin 30°</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute exact values</div>
+                        <div class="step-content">
+                            Given sin <i>y</i> = <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div> and knowing sin 30° = <div class="fraction"><span class="numerator">1</span><span class="denominator">2</span></div>:<br>
+                            <div class="fraction"><span class="numerator">4 − <i>x</i></span><span class="denominator">1/√2</span></div> = 
+                            <div class="fraction"><span class="numerator"><i>x</i></span><span class="denominator">1/2</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Rearrange</div>
+                        <div class="step-content">
+                            <div class="fraction"><span class="numerator">1</span><span class="denominator">2</span></div>(4 − <i>x</i>) = 
+                            <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div><i>x</i><br>
+                            <div class="fraction"><span class="numerator">4 − <i>x</i></span><span class="denominator">2</span></div> = 
+                            <div class="fraction"><span class="numerator"><i>x</i></span><span class="denominator">√2</span></div><br>
+                            <br>
+                            Cross multiply:<br>
+                            √2(4 − <i>x</i>) = 2<i>x</i><br>
+                            4√2 − <i>x</i>√2 = 2<i>x</i><br>
+                            4√2 = 2<i>x</i> + <i>x</i>√2<br>
+                            4√2 = <i>x</i>(2 + √2)<br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">4√2</span><span class="denominator">2 + √2</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Rationalize the denominator</div>
+                        <div class="step-content">
+                            Multiply top and bottom by (2 − √2):<br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">4√2(2 − √2)</span><span class="denominator">(2 + √2)(2 − √2)</span></div><br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">8√2 − 4(2)</span><span class="denominator">4 − 2</span></div><br>
+                            <i>x</i> = <div class="fraction"><span class="numerator">8√2 − 8</span><span class="denominator">2</span></div><br>
+                            <i>x</i> = 4√2 − 4<br>
+                            <i>x</i> = 4(√2 − 1)
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>x</i> = 4(√2 − 1) (Shown) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div id="q7" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(6)" title="Previous Question">←</button><span>Question 7: Bearing Problem with Sine Rule</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    Town <i>B</i> is 6 km, on a bearing of 020°, from town <i>A</i>.<br>
+                    Town <i>C</i> is located on a bearing of 055° from town <i>A</i> and on a bearing of 120° from town <i>B</i>.<br>
+                    Work out the distance of town <i>C</i> from:<br>
+                    <strong>(a)</strong> town <i>A</i><br>
+                    <strong>(b)</strong> town <i>B</i>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule</div>
+                        <div class="formula-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; width: 100%;">
+                                <div>
+                                    <div class="fraction"><span class="numerator"><i>a</i></span><span class="denominator">sin <i>A</i></span></div> = 
+                                    <div class="fraction"><span class="numerator"><i>b</i></span><span class="denominator">sin <i>B</i></span></div> = 
+                                    <div class="fraction"><span class="numerator"><i>c</i></span><span class="denominator">sin <i>C</i></span></div>
+                                </div>
+                                <!-- Illustrative Triangle -->
+                                <svg width="120" height="80" viewBox="0 0 120 80">
+                                    <path d="M 10 70 L 110 70 L 40 10 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Side labels -->
+                                    <text x="72" y="35" font-size="13" font-weight="bold" font-style="italic">a</text>
+                                    <text x="15" y="40" font-size="13" font-weight="bold" font-style="italic">b</text>
+                                    <text x="55" y="80" font-size="13" font-weight="bold" font-style="italic">c</text>
+                                    
+                                    <!-- Angle arcs - A pushed right, B pushed left, C shortened slightly -->
+                                    <path d="M 25 70 A 10 10 0 0 0 15 60" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    <path d="M 93 70 A 8 8 0 0 1 101 62" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    <path d="M 35 19 A 11 11 0 0 0 49 19" stroke="#e74c3c" stroke-width="1" fill="none"/>
+                                    
+                                    <!-- Vertex labels inside triangle - smaller, red, bold -->
+                                    <text x="27" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">A</text>
+                                    <text x="84" y="65" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">B</text>
+                                    <text x="38" y="33" font-size="11" font-weight="bold" font-family="Times New Roman" font-style="italic" fill="#e74c3c">C</text>
+                                </svg>
+                            </div>
+                            <div style="margin-top: 15px; padding: 10px 20px; background: #fff5f5; border-radius: 5px; color: #e74c3c; font-size: 0.95em; text-align: center; width: 90%;">
+                                <div><strong>Note:</strong> We only need two ratios, for example:</div>
+                                <div style="margin-top: 8px;">
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>a</i></span>
+                                            <span style="padding: 0 5px;">sin <i>A</i></span>
+                                        </span>
+                                    </span>
+                                    = 
+                                    <span style="display: inline-flex; vertical-align: middle; margin: 0 5px;">
+                                        <span style="display: inline-flex; flex-direction: column; align-items: center;">
+                                            <span style="border-bottom: 2px solid #333; padding: 0 5px;"><i>b</i></span>
+                                            <span style="padding: 0 5px;">sin <i>B</i></span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Understand the bearing problem and draw a diagram</div>
+                        <div class="step-content">
+                            Given from the question:<br>
+                            • Town A is at the origin<br>
+                            • Town B is 6 km on bearing 020° from A (AB = 6 km)<br>
+                            • Town C is on bearing 055° from A<br>
+                            • Town C is on bearing 120° from B<br>
+                            
+                            <div style="margin-top: 15px; display: flex; justify-content: center;">
+                                <svg width="500" height="500" viewBox="0 0 500 500">
+                                    <!-- Triangle ABC -->
+                                    <path d="M 150 400 L 200 150 L 400 320 Z" stroke="#2c3e50" stroke-width="3" fill="none"/>
+                                    
+                                    <!-- ========== COMPASS AT A ========== -->
+                                    <!-- North -->
+                                    <line x1="150" y1="400" x2="150" y2="340" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- South -->
+                                    <line x1="150" y1="400" x2="150" y2="460" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- East -->
+                                    <line x1="150" y1="400" x2="210" y2="400" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- West -->
+                                    <line x1="150" y1="400" x2="90" y2="400" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    
+                                    <!-- Compass labels at A -->
+                                    <text x="135" y="330" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                    <text x="136" y="485" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                    <text x="220" y="408" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                    <text x="68" y="408" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+                                    
+                                    <!-- ========== COMPASS AT B ========== -->
+                                    <!-- North -->
+                                    <line x1="200" y1="150" x2="200" y2="90" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- South -->
+                                    <line x1="200" y1="150" x2="200" y2="210" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- East -->
+                                    <line x1="200" y1="150" x2="260" y2="150" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    <!-- West -->
+                                    <line x1="200" y1="150" x2="140" y2="150" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="6,4"/>
+                                    
+                                    <!-- Compass labels at B -->
+                                    <text x="185" y="80" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">N</text>
+                                    <text x="186" y="235" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">S</text>
+                                    <text x="270" y="158" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">E</text>
+                                    <text x="118" y="158" font-size="18" font-weight="bold" fill="#ff8c00" stroke="#ff8c00" stroke-width="0.5">W</text>
+                                    
+                                    <!-- Bearing 020° from A to B (red arc - shortened from rightmost bit) -->
+                                    <path d="M 150 365 A 30 30 0 0 1 163 338" stroke="#e74c3c" stroke-width="3" fill="none"/>
+                                    <text x="122" y="355" fill="#e74c3c" font-size="16" font-weight="bold">20°</text>
+                                    
+                                    <!-- Bearing 055° from A to C (blue arc - moved down) -->
+                                    <path d="M 150 365 A 50 50 0 0 1 195 385" stroke="#3498db" stroke-width="3" fill="none"/>
+                                    <text x="195" y="375" fill="#3498db" font-size="16" font-weight="bold">55°</text>
+                                    
+                                    <!-- Bearing 120° from B to C (green arc - increased length on bottom side slightly again) -->
+                                    <path d="M 198 137 A 65 65 0 0 1 258 198" stroke="#27ae60" stroke-width="3" fill="none"/>
+                                    <text x="228" y="140" fill="#27ae60" font-size="16" font-weight="bold">120°</text>
+                                    
+                                    <!-- 60° angle from south line at B to BC (purple arc - changed to 60°) -->
+                                    <path d="M 200 185 A 40 40 0 0 0 238 185" stroke="#9b59b6" stroke-width="3" fill="none"/>
+                                    <text x="220" y="210" fill="#9b59b6" font-size="16" font-weight="bold">60°</text>
+                                    
+                                    <!-- 20° angle from south line at B to BA (red arc - label at top of B, pushed further to right) -->
+                                    <path d="M 200 185 A 40 40 0 0 1 192 192" stroke="#e74c3c" stroke-width="3" fill="none"/>
+                                    <text x="165" y="206" fill="#e74c3c" font-size="16" font-weight="bold">20°</text>
+                                    
+                                    <!-- 35° angle at A from AB to AC (black arc - moved extremely slightly down) -->
+                                    <path d="M 165 327 A 70 70 0 0 1 265 361" stroke="#000000" stroke-width="3" fill="none"/>
+                                    <text x="265" y="345" fill="#000000" font-size="16" font-weight="bold">35°</text>
+                                    
+                                    <!-- 65° angle at C (inverted and extended more towards top, orange arc) -->
+                                    <path d="M 360 285 A 35 35 0 0 0 370 330" stroke="#ff8c00" stroke-width="3" fill="none"/>
+                                    <text x="325" y="310" fill="#ff8c00" font-size="16" font-weight="bold">65°</text>
+                                    
+                                    <!-- Vertex labels -->
+                                    <text x="130" y="420" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                                    <text x="180" y="135" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                                    <text x="415" y="325" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                                    
+                                    <!-- Side label AB - moved much to left -->
+                                    <text x="125" y="270" font-family="Times New Roman" font-size="18" font-weight="bold">6 km</text>
+                                </svg>
+                            </div>
+                            
+                            <br>
+                            From the diagram, we can find the angles in triangle ABC:<br>
+                            <br>
+                            • <strong>Angle at A (∠BAC):</strong><br>
+                            &nbsp;&nbsp;∠BAC = 055° − 020° = 35°<br>
+                            &nbsp;&nbsp;(The angle between the two bearings from A)<br>
+                            <br>
+                            • <strong>Angle at B (∠ABC):</strong><br>
+                            &nbsp;&nbsp;The 20° angle at B is formed by alternate angles (the east-west lines are parallel)<br>
+                            &nbsp;&nbsp;The 60° angle is found using angles on a straight line: 180° − 120° = 60°<br>
+                            &nbsp;&nbsp;Therefore: ∠ABC = 20° + 60° = 80°<br>
+                            <br>
+                            • <strong>Angle at C (∠ACB):</strong><br>
+                            &nbsp;&nbsp;Sum of angles in a triangle = 180°<br>
+                            &nbsp;&nbsp;∠ACB = 180° − 35° − 80° = 65°
+                        </div>
+                        <div class="step-explanation">Bearings are measured clockwise from north.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Redrawing the triangle after simplifying</div>
+                        <div class="step-content">
+                            <div style="margin-top: 15px; display: flex; justify-content: center;">
+                                <svg width="400" height="250" viewBox="0 0 400 250">
+                                    <!-- Triangle ABC -->
+                                    <path d="M 50 200 L 200 50 L 350 200 Z" stroke="#2c3e50" stroke-width="3" fill="none"/>
+                                    
+                                    <!-- Vertex labels -->
+                                    <text x="35" y="220" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                                    <text x="195" y="35" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                                    <text x="360" y="220" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                                    
+                                    <!-- Angle labels -->
+                                    <text x="85" y="195" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="18">35°</text>
+                                    <text x="190" y="90" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="18">80°</text>
+                                    <text x="295" y="195" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="18">65°</text>
+                                    
+                                    <!-- Side label AB -->
+                                    <text x="100" y="110" font-family="Times New Roman" font-size="18" font-weight="bold">6 km</text>
+                                    
+                                    <!-- Angle arcs -->
+                                    <path d="M 84 200 A 25 25 0 0 0 74 180" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                    <path d="M 184 65 A 20 20 0 0 0 214 65" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                    <path d="M 319 200 A 25 25 0 0 1 329 180" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Find AC (distance from town A to town C)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply Sine Rule to find AC</div>
+                        <div class="step-content">
+                            Using the pairs:<br>
+                            • Side AC is opposite angle B (80°)<br>
+                            • Side AB = 6 km is opposite angle C (65°)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">AC</span><span class="denominator">sin B</span></div> = 
+                            <div class="fraction"><span class="numerator">AB</span><span class="denominator">sin C</span></div><br>
+                            <div class="fraction"><span class="numerator">AC</span><span class="denominator">sin 80°</span></div> = 
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin 65°</span></div><br>
+                            AC = <div class="fraction"><span class="numerator">6 × sin 80°</span><span class="denominator">sin 65°</span></div><br>
+                            AC = <div class="fraction"><span class="numerator">6 × 0.9848...</span><span class="denominator">0.9063...</span></div><br>
+                            AC ≈ 6.52 km
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Find BC (distance from town B to town C)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Apply Sine Rule to find BC</div>
+                        <div class="step-content">
+                            Using the pairs:<br>
+                            • Side BC is opposite angle A (35°)<br>
+                            • Side AB = 6 km is opposite angle C (65°)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">BC</span><span class="denominator">sin A</span></div> = 
+                            <div class="fraction"><span class="numerator">AB</span><span class="denominator">sin C</span></div><br>
+                            <div class="fraction"><span class="numerator">BC</span><span class="denominator">sin 35°</span></div> = 
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin 65°</span></div><br>
+                            BC = <div class="fraction"><span class="numerator">6 × sin 35°</span><span class="denominator">sin 65°</span></div><br>
+                            BC = <div class="fraction"><span class="numerator">6 × 0.5736...</span><span class="denominator">0.9063...</span></div><br>
+                            BC ≈ 3.80 km
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>(a)</strong> Distance from A to C = 6.52 km<br>
+                        <strong>(b)</strong> Distance from B to C = 3.80 km ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+                <button class="question-nav-btn" onclick="showQuestion(7)">7</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 7; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            }
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
