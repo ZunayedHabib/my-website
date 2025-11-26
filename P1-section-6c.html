@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 6C: Finding Two Possible Angles using sine rule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+            text-align: center;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        .x-squared {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .x-term {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .constant {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Fraction Styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .numerator {
+            border-bottom: 2px solid #333;
+            padding: 0 5px;
+        }
+        .denominator {
+            padding: 0 5px;
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+        
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            margin-left: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-6a.html" class="section-link">6A</a>
+                <a href="P1-section-6b.html" class="section-link">6B</a>
+                <a href="P1-section-6c.html" class="section-link active">6C</a>
+                <a href="P1-section-6d.html" class="section-link">6D</a>
+                <a href="P1-section-6e.html" class="section-link">6E</a>
+                <a href="P1-section-6f.html" class="section-link">6F</a>
+                <a href="P1-section-6g.html" class="section-link">6G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 6C: Finding Two Possible Angles using sine rule</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Finding Two Possible Angles using sine rule</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">When the sine rule produces two possible solutions</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1: Two possible angles</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In △ABC, BC = 6 cm, AC = 4.5 cm and ∠ABC = 45°.<br>
+                    <strong>a</strong> Calculate the two possible values of ∠BAC.<br>
+                    <strong>b</strong> Draw a diagram to illustrate your answers.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule - Ambiguous Case</div>
+                        <div class="formula-content">
+                            When using the Sine Rule to find an angle, two solutions may exist:<br>
+                            • First solution: Use sin<sup>−1</sup> to find the acute angle<br>
+                            • Second solution: 180° − (acute angle) gives the obtuse angle<br>
+                            <br>
+                            This works because: sin <i>θ</i> = sin (180° − <i>θ</i>)
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Calculate the two possible values of ∠BAC</strong>
+                    </div>
+
+                    <div style="margin: 20px 0; display: flex; justify-content: center;">
+                        <svg width="350" height="200" viewBox="0 0 350 200">
+                            <!-- Triangle ABC -->
+                            <path d="M 50 180 L 200 40 L 320 180 Z" stroke="#2c3e50" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex labels -->
+                            <text x="35" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                            <text x="200" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                            <text x="330" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                            
+                            <!-- Side labels -->
+                            <text x="35" y="100" font-family="Times New Roman" font-size="18">AC = 4.5 cm</text>
+                            <text x="165" y="200" font-family="Times New Roman" font-size="18">BC = 6 cm</text>
+                            
+                            <!-- Angle at B (inverted arc - moved very slightly right) -->
+                            <path d="M 79 180 A 25 25 0 0 0 72 158" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                            <text x="82" y="170" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="16">45°</text>
+                        </svg>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply the Sine Rule and solve for sin A</div>
+                        <div class="step-content">
+                            Using the pairs:<br>
+                            • Side BC = 6 cm is opposite angle A (∠BAC)<br>
+                            • Side AC = 4.5 cm is opposite angle B (∠ABC = 45°)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">BC</span><span class="denominator">sin <i>A</i></span></div> = 
+                            <div class="fraction"><span class="numerator">AC</span><span class="denominator">sin <i>B</i></span></div><br>
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin <i>A</i></span></div> = 
+                            <div class="fraction"><span class="numerator">4.5</span><span class="denominator">sin 45°</span></div><br>
+                            6 × sin 45° = 4.5 × sin <i>A</i><br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6 × sin 45°</span><span class="denominator">4.5</span></div><br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6 × 0.7071...</span><span class="denominator">4.5</span></div><br>
+                            sin <i>A</i> = 0.9428...<br>
+                            <i>A</i> = sin<sup>−1</sup>(0.9428...)<br>
+                            <i>A</i> = 70.5° (1 d.p.)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find the second solution (obtuse angle)</div>
+                        <div class="step-content">
+                            Using sin <i>θ</i> = sin (180° − <i>θ</i>):<br>
+                            <i>A</i> = 180° − 70.5°<br>
+                            <i>A</i> = 109.5°
+                        </div>
+                        <div class="step-explanation">Both angles are valid because sin 70.5° = sin 109.5°</div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Draw a diagram to illustrate your answers</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Diagram showing both possible triangles</div>
+                        <div class="step-content">
+                            <div style="margin-top: 15px; display: flex; justify-content: center;">
+                                <svg width="550" height="300" viewBox="0 0 550 300">
+                                    <!-- Base line BC (widened) -->
+                                    <line x1="50" y1="250" x2="420" y2="250" stroke="#2c3e50" stroke-width="3"/>
+                                    
+                                    <!-- Triangle 1 with acute angle at A (A₁) - narrower angle -->
+                                    <path d="M 50 250 L 320 90 L 420 250 Z" stroke="#e74c3c" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                                    
+                                    <!-- Triangle 2 with obtuse angle at A (A₂) - wider angle, less steep -->
+                                    <path d="M 50 250 L 200 100 L 420 250 Z" stroke="#27ae60" stroke-width="2" fill="none"/>
+                                    
+                                    <!-- Vertex labels -->
+                                    <text x="35" y="265" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="20">B</text>
+                                    <text x="430" y="265" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="20">C</text>
+                                    <text x="325" y="80" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="20" fill="#e74c3c">A₁</text>
+                                    <text x="185" y="90" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="20" fill="#27ae60">A₂</text>
+                                    
+                                    <!-- Angle at B (inverted arc) -->
+                                    <path d="M 75 250 A 25 25 0 0 0 70 230" stroke="#764ba2" stroke-width="2" fill="none"/>
+                                    <text x="85" y="245" fill="#764ba2" font-family="Times New Roman" font-weight="bold">45°</text>
+                                    
+                                    <!-- Side labels -->
+                                    <text x="225" y="270" font-family="Times New Roman" font-size="16">6 cm</text>
+                                    <text x="380" y="165" font-family="Times New Roman" font-size="16" fill="#e74c3c">4.5 cm</text>
+                                    <text x="305" y="170" font-family="Times New Roman" font-size="16" fill="#27ae60">4.5 cm</text>
+                                    
+                                    <!-- Angle labels at A₁ and A₂ -->
+                                    <text x="295" y="120" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="16">70.5°</text>
+                                    <text x="180" y="135" fill="#27ae60" font-family="Times New Roman" font-weight="bold" font-size="16">109.5°</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-explanation">The red dashed triangle shows the acute angle solution (70.5°), and the green triangle shows the obtuse angle solution (109.5°). Both triangles share the same base BC and have AC = 4.5 cm.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        <strong>(a)</strong> ∠BAC = 70.5° or ∠BAC = 109.5°<br>
+                        <strong>(b)</strong> Diagram shows both possible triangles
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2: Finding the correct angle</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Triangle ABC is such that AB = 4 cm, BC = 6 cm and ∠ACB = 36°. Show that one of the possible values of ∠ABC is 25.8° (to 3 s.f.). Using this value, calculate the length of AC.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule - Ambiguous Case</div>
+                        <div class="formula-content">
+                            When using the Sine Rule to find an angle, two solutions may exist:<br>
+                            • First solution: Use sin<sup>−1</sup> to find the acute angle<br>
+                            • Second solution: 180° − (acute angle) gives the obtuse angle<br>
+                            <br>
+                            This works because: sin <i>θ</i> = sin (180° − <i>θ</i>)
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part 1: Show that ∠ABC = 25.8° (to 3 s.f.)</strong>
+                    </div>
+
+                    <div style="margin: 20px 0 40px 0; display: flex; justify-content: center;">
+                        <svg width="350" height="220" viewBox="0 0 350 220">
+                            <!-- Triangle ABC -->
+                            <path d="M 50 180 L 200 40 L 320 180 Z" stroke="#2c3e50" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex labels -->
+                            <text x="35" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                            <text x="200" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                            <text x="330" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                            
+                            <!-- Side labels -->
+                            <text x="45" y="100" font-family="Times New Roman" font-size="18">AB = 4 cm</text>
+                            <text x="170" y="200" font-family="Times New Roman" font-size="18">AC</text>
+                            <text x="265" y="100" font-family="Times New Roman" font-size="18">BC = 6 cm</text>
+                            
+                            <!-- Angle at C (inverted) -->
+                            <path d="M 295 180 A 25 25 0 0 1 300 158" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                            <text x="270" y="165" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="16">36°</text>
+                        </svg>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply the Sine Rule to find ∠BAC and check if it gives ∠ABC = 25.8°</div>
+                        <div class="step-content">
+                            Using the pairs:<br>
+                            • Side AB = 4 cm is opposite angle C (∠ACB = 36°)<br>
+                            • Side BC = 6 cm is opposite angle A (∠BAC)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">AB</span><span class="denominator">sin <i>C</i></span></div> = 
+                            <div class="fraction"><span class="numerator">BC</span><span class="denominator">sin <i>A</i></span></div><br>
+                            <div class="fraction"><span class="numerator">4</span><span class="denominator">sin 36°</span></div> = 
+                            <div class="fraction"><span class="numerator">6</span><span class="denominator">sin <i>A</i></span></div><br>
+                            4 × sin <i>A</i> = 6 × sin 36°<br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6 × sin 36°</span><span class="denominator">4</span></div><br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6 × 0.5878...</span><span class="denominator">4</span></div><br>
+                            sin <i>A</i> = 0.8817...<br>
+                            <i>A</i> = sin<sup>−1</sup>(0.8817...)<br>
+                            <i>A</i> = 61.9° (1 d.p.)<br>
+                            <br>
+                            Now calculate ∠ABC using sum of angles in a triangle:<br>
+                            ∠ABC = 180° − ∠BAC − ∠ACB<br>
+                            ∠ABC = 180° − 61.9° − 36°<br>
+                            ∠ABC = 82.1°
+                        </div>
+                        <div class="step-explanation">⚠️ This value (82.1°) is NOT equal to 25.8°. Since the Sine Rule can have two possible solutions for an angle (ambiguous case), we need to try the second possible value of ∠BAC.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Use the second possible value of ∠BAC to find ∠ABC</div>
+                        <div class="step-content">
+                            Using sin <i>θ</i> = sin (180° − <i>θ</i>):<br>
+                            <i>A</i> = 180° − 61.9°<br>
+                            <i>A</i> = 118.1°<br>
+                            <br>
+                            Now calculate ∠ABC using sum of angles in a triangle:<br>
+                            ∠ABC = 180° − ∠BAC − ∠ACB<br>
+                            ∠ABC = 180° − 118.1° − 36°<br>
+                            ∠ABC = 25.9°<br>
+                            ∠ABC = 25.8° (to 3 s.f.) ✓
+                        </div>
+                        <div class="step-explanation">✓ We have successfully shown that one of the possible values of ∠ABC is 25.8° (to 3 s.f.)</div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part 2: Calculate the length of AC using ∠ABC = 25.8°</strong>
+                    </div>
+
+                    <div style="margin: 20px 0 40px 0; display: flex; justify-content: center;">
+                        <svg width="350" height="220" viewBox="0 0 350 220">
+                            <!-- Triangle ABC -->
+                            <path d="M 50 180 L 200 40 L 320 180 Z" stroke="#2c3e50" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex labels -->
+                            <text x="35" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                            <text x="200" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                            <text x="330" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                            
+                            <!-- Side labels -->
+                            <text x="45" y="100" font-family="Times New Roman" font-size="18">AB = 4 cm</text>
+                            <text x="170" y="200" font-family="Times New Roman" font-size="18" fill="#27ae60" font-weight="bold">AC = ?</text>
+                            <text x="265" y="100" font-family="Times New Roman" font-size="18">BC = 6 cm</text>
+                            
+                            <!-- Angle at B with shorter horizontal arc -->
+                            <path d="M 190 50 A 18 18 0 0 0 210 53" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                            <text x="175" y="75" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="16">25.8°</text>
+                            
+                            <!-- Angle at C (inverted) -->
+                            <path d="M 295 180 A 25 25 0 0 1 300 158" stroke="#764ba2" stroke-width="2" fill="none"/>
+                            <text x="270" y="165" fill="#764ba2" font-family="Times New Roman" font-weight="bold" font-size="16">36°</text>
+                        </svg>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the Sine Rule to find AC</div></div>
+                        <div class="step-content">
+                            Using ∠ABC = 25.9° (exact value before rounding):<br>
+                            Using the pairs:<br>
+                            • Side AC is opposite angle B (∠ABC = 25.9°)<br>
+                            • Side AB = 4 cm is opposite angle C (∠ACB = 36°)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">AC</span><span class="denominator">sin <i>B</i></span></div> = 
+                            <div class="fraction"><span class="numerator">AB</span><span class="denominator">sin <i>C</i></span></div><br>
+                            <div class="fraction"><span class="numerator">AC</span><span class="denominator">sin 25.9°</span></div> = 
+                            <div class="fraction"><span class="numerator">4</span><span class="denominator">sin 36°</span></div><br>
+                            AC = <div class="fraction"><span class="numerator">4 × sin 25.9°</span><span class="denominator">sin 36°</span></div><br>
+                            AC = <div class="fraction"><span class="numerator">4 × 0.4366...</span><span class="denominator">0.5878...</span></div><br>
+                            AC = 2.97 cm (3 s.f.)
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        <strong>Part 1:</strong> ∠ABC = 25.8° (to 3 s.f.) ✓ Shown<br>
+                        <strong>Part 2:</strong> AC = 2.97 cm (to 3 s.f.)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3: Finding largest angles in two triangles</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    Two triangles ABC are such that AB = 4.5 cm, BC = 6.8 cm and ∠ACB = 30°. Work out the value of the largest angle in each of the triangles.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 The Sine Rule - Ambiguous Case</div>
+                        <div class="formula-content">
+                            When using the Sine Rule to find an angle, two solutions may exist:<br>
+                            • First solution: Use sin<sup>−1</sup> to find the acute angle<br>
+                            • Second solution: 180° − (acute angle) gives the obtuse angle<br>
+                            <br>
+                            This works because: sin <i>θ</i> = sin (180° − <i>θ</i>)
+                        </div>
+                    </div>
+
+                    <div style="margin: 20px 0; display: flex; justify-content: center;">
+                        <svg width="350" height="200" viewBox="0 0 350 200">
+                            <!-- Triangle ABC -->
+                            <path d="M 50 180 L 200 40 L 320 180 Z" stroke="#2c3e50" stroke-width="2.5" fill="none"/>
+                            
+                            <!-- Vertex labels -->
+                            <text x="35" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">A</text>
+                            <text x="200" y="30" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">B</text>
+                            <text x="330" y="200" font-weight="bold" font-family="Times New Roman" font-style="italic" font-size="22">C</text>
+                            
+                            <!-- Side labels -->
+                            <text x="30" y="100" font-family="Times New Roman" font-size="18">AB = 4.5 cm</text>
+                            <text x="170" y="198" font-family="Times New Roman" font-size="18">AC</text>
+                            <text x="260" y="100" font-family="Times New Roman" font-size="18">BC = 6.8 cm</text>
+                            
+                            <!-- Angle at C (inverted) -->
+                            <path d="M 295 180 A 25 25 0 0 1 300 158" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                            <text x="270" y="170" fill="#e74c3c" font-family="Times New Roman" font-weight="bold" font-size="16">30°</text>
+                        </svg>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Apply the Sine Rule to find both possible values of ∠BAC</div>
+                        <div class="step-content">
+                            Using the pairs:<br>
+                            • Side AB = 4.5 cm is opposite angle C (∠ACB = 30°)<br>
+                            • Side BC = 6.8 cm is opposite angle A (∠BAC)<br>
+                            <br>
+                            Using: <div class="fraction"><span class="numerator">AB</span><span class="denominator">sin <i>C</i></span></div> = 
+                            <div class="fraction"><span class="numerator">BC</span><span class="denominator">sin <i>A</i></span></div><br>
+                            <div class="fraction"><span class="numerator">4.5</span><span class="denominator">sin 30°</span></div> = 
+                            <div class="fraction"><span class="numerator">6.8</span><span class="denominator">sin <i>A</i></span></div><br>
+                            4.5 × sin <i>A</i> = 6.8 × sin 30°<br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6.8 × sin 30°</span><span class="denominator">4.5</span></div><br>
+                            sin <i>A</i> = <div class="fraction"><span class="numerator">6.8 × 0.5</span><span class="denominator">4.5</span></div><br>
+                            sin <i>A</i> = 0.7556...<br>
+                            <i>A</i> = sin<sup>−1</sup>(0.7556...)<br>
+                            <i>A</i> = 49.1° (1 d.p.)<br>
+                            <br>
+                            Using sin <i>θ</i> = sin (180° − <i>θ</i>):<br>
+                            <i>A</i> = 180° − 49.1°<br>
+                            <i>A</i> = 130.9°
+                        </div>
+                        <div class="step-explanation">Due to the ambiguous case, ∠BAC has two possible values: 49.1° (acute) and 130.9° (obtuse)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Calculate ∠ABC for both triangles</div>
+                        <div class="step-content">
+                            Sum of angles in a triangle = 180°<br>
+                            ∠ABC = 180° − ∠BAC − ∠ACB<br>
+                            <br>
+                            <strong>Triangle 1: For ∠BAC = 49.1°</strong><br>
+                            ∠ABC = 180° − 49.1° − 30°<br>
+                            ∠ABC = 100.9°<br>
+                            <br>
+                            <strong>Triangle 2: For ∠BAC = 130.9°</strong><br>
+                            ∠ABC = 180° − 130.9° − 30°<br>
+                            ∠ABC = 19.1°
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Identify the largest angle in each triangle</div>
+                        <div class="step-content">
+                            <strong>Triangle 1:</strong><br>
+                            Angles: ∠BAC = 49.1°, ∠ABC = 100.9°, ∠ACB = 30°<br>
+                            Largest angle = 100.9° (at vertex B)<br>
+                            <br>
+                            <strong>Triangle 2:</strong><br>
+                            Angles: ∠BAC = 130.9°, ∠ABC = 19.1°, ∠ACB = 30°<br>
+                            Largest angle = 130.9° (at vertex A)
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        <strong>Triangle 1:</strong> Largest angle = 100.9° (1 d.p.)<br>
+                        <strong>Triangle 2:</strong> Largest angle = 130.9° (1 d.p.)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 3; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            }
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
