@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3F: Inequalities on Graph</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .step-explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 5px;
+            font-style: italic;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .graph-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .graph-placeholder img {
+            max-width: 300px;
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .graph-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Menu</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link active">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3F: Inequalities on Graph</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Inequalities on Graph</h3>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    For the pair of functions:<br><br>
+                    <i>f</i>(<i>x</i>) = 8 − 5<i>x</i><br>
+                    <i>g</i>(<i>x</i>) = 14 − 3<i>x</i><br><br>
+                    <strong>i</strong> Sketch the graphs of <i>y</i> = <i>f</i>(<i>x</i>) and <i>y</i> = <i>g</i>(<i>x</i>) on the same axes.<br>
+                    <strong>ii</strong> Find the coordinates of any points of intersection.<br>
+                    <strong>iii</strong> Write down the solutions to the inequality <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>).
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (i): Sketching the graphs</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Analyze f(x) = 8 − 5x</div>
+                        <div class="step-content">
+                            This is a linear function (straight line).<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 8 − 5(0) = 8<br>
+                            &nbsp;&nbsp;Point: (0, 8)<br>
+                            • <strong>x-intercept:</strong> When <i>y</i> = 0, 0 = 8 − 5<i>x</i> → <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">8</span>
+                                <span style="display: block; padding-top: 2px;">5</span>
+                            </span> = 1.6<br>
+                            &nbsp;&nbsp;Point: (1.6, 0)
+                        </div>
+                        <div class="step-explanation">Find the intercepts to sketch the line</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Analyze g(x) = 14 − 3x</div>
+                        <div class="step-content">
+                            This is also a linear function (straight line).<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 14 − 3(0) = 14<br>
+                            &nbsp;&nbsp;Point: (0, 14)<br>
+                            • <strong>x-intercept:</strong> When <i>y</i> = 0, 0 = 14 − 3<i>x</i> → <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">14</span>
+                                <span style="display: block; padding-top: 2px;">3</span>
+                            </span> ≈ 4.67<br>
+                            &nbsp;&nbsp;Point: (4.67, 0)
+                        </div>
+                        <div class="step-explanation">Find the intercepts to sketch the line</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graphs of <span style="color: #2196f3; font-weight: 600;"><i>f</i>(<i>x</i>) = 8 − 5<i>x</i></span> and <span style="color: #4caf50; font-weight: 600;"><i>g</i>(<i>x</i>) = 14 − 3<i>x</i></span></div>
+                        <img src="P1-section-3f-graph1.png" alt="Graph showing f(x) and g(x)">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Both lines are plotted on the same axes showing their intersection point
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (ii): Finding the point of intersection</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Set the functions equal</div>
+                        <div class="step-content">
+                            At the intersection point, <i>f</i>(<i>x</i>) = <i>g</i>(<i>x</i>)<br><br>
+                            8 − 5<i>x</i> = 14 − 3<i>x</i>
+                        </div>
+                        <div class="step-explanation">The intersection occurs where both functions have the same value</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for x</div>
+                        <div class="step-content">
+                            8 − 5<i>x</i> = 14 − 3<i>x</i><br>
+                            8 − 14 = −3<i>x</i> + 5<i>x</i><br>
+                            −6 = 2<i>x</i><br>
+                            <i>x</i> = −3
+                        </div>
+                        <div class="step-explanation">Rearrange to collect x terms on one side</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find the y-coordinate</div>
+                        <div class="step-content">
+                            Substitute <i>x</i> = −3 into either function:<br><br>
+                            Using <i>f</i>(<i>x</i>) = 8 − 5<i>x</i>:<br>
+                            <i>f</i>(−3) = 8 − 5(−3) = 8 + 15 = 23<br><br>
+                            <em style="color: #666; font-size: 0.95em;">Note: You can use either <i>f</i>(<i>x</i>) or <i>g</i>(<i>x</i>) to find the y-coordinate; both will give the same result at the intersection point.</em>
+                        </div>
+                        <div class="step-explanation">Substitute the x-value into one of the functions</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (ii) result: Point of intersection is (−3, 23)</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (iii): Solving the inequality f(x) ≤ g(x)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Rearrange the inequality</div>
+                        <div class="step-content">
+                            We need to find where <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>)<br><br>
+                            8 − 5<i>x</i> ≤ 14 − 3<i>x</i><br>
+                            8 − 14 ≤ −3<i>x</i> + 5<i>x</i><br>
+                            −6 ≤ 2<i>x</i><br>
+                            −3 ≤ <i>x</i><br>
+                            <i>x</i> ≥ −3
+                        </div>
+                        <div class="step-explanation">Solve the inequality algebraically</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (iii) result: <i>x</i> ≥ −3</strong>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer:<br>
+                        <strong>(i)</strong> Graphs sketched (see above)<br>
+                        <strong>(ii)</strong> Point of intersection: (−3, 23)<br>
+                        <strong>(iii)</strong> <i>x</i> ≥ −3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    For the pair of functions:<br><br>
+                    <i>f</i>(<i>x</i>) = <i>x</i>² − 5<br>
+                    <i>g</i>(<i>x</i>) = 7<i>x</i> + 13<br><br>
+                    <strong>i</strong> Sketch the graphs of <i>y</i> = <i>f</i>(<i>x</i>) and <i>y</i> = <i>g</i>(<i>x</i>) on the same axes.<br>
+                    <strong>ii</strong> Find the coordinates of any points of intersection.<br>
+                    <strong>iii</strong> Write down the solutions to the inequality <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>).
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (i): Sketching the graphs</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Analyze f(x) = x² − 5</div>
+                        <div class="step-content">
+                            This is a quadratic function (parabola).<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>Shape:</strong> U-shaped parabola (opens upward, positive x² coefficient)<br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 0² − 5 = −5<br>
+                            &nbsp;&nbsp;Point: (0, −5)<br>
+                            • <strong>x-intercepts:</strong> When <i>y</i> = 0, 0 = <i>x</i>² − 5 → <i>x</i>² = 5 → <i>x</i> = ±√5 ≈ ±2.24<br>
+                            &nbsp;&nbsp;Points: (−2.24, 0) and (2.24, 0)<br>
+                            • <strong>Vertex:</strong> Using <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;"><i>b</i></span>
+                                <span style="display: block; padding-top: 2px;">2<i>a</i></span>
+                            </span> where <i>a</i> = 1, <i>b</i> = 0, <i>c</i> = −5<br>
+                            &nbsp;&nbsp;<i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">0</span>
+                                <span style="display: block; padding-top: 2px;">2(1)</span>
+                            </span> = 0<br>
+                            &nbsp;&nbsp;Substitute back: <i>y</i> = (0)² − 5 = −5<br>
+                            &nbsp;&nbsp;Vertex (minimum point): (0, −5)
+                        </div>
+                        <div class="step-explanation">Identify key features to sketch the parabola</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Analyze g(x) = 7x + 13</div>
+                        <div class="step-content">
+                            This is a linear function (straight line).<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 7(0) + 13 = 13<br>
+                            &nbsp;&nbsp;Point: (0, 13)<br>
+                            • <strong>x-intercept:</strong> When <i>y</i> = 0, 0 = 7<i>x</i> + 13 → <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">13</span>
+                                <span style="display: block; padding-top: 2px;">7</span>
+                            </span> ≈ −1.86<br>
+                            &nbsp;&nbsp;Point: (−1.86, 0)
+                        </div>
+                        <div class="step-explanation">Find the intercepts to sketch the line</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graphs of <span style="color: #2196f3; font-weight: 600;"><i>f</i>(<i>x</i>) = <i>x</i>² − 5</span> and <span style="color: #4caf50; font-weight: 600;"><i>g</i>(<i>x</i>) = 7<i>x</i> + 13</span></div>
+                        <img src="P1-section-3f-graph2.png" alt="Graph showing f(x) and g(x)">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola and line are plotted on the same axes showing their intersection points
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (ii): Finding the points of intersection</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Set the functions equal</div>
+                        <div class="step-content">
+                            At the intersection points, <i>f</i>(<i>x</i>) = <i>g</i>(<i>x</i>)<br><br>
+                            <i>x</i>² − 5 = 7<i>x</i> + 13
+                        </div>
+                        <div class="step-explanation">The intersection occurs where both functions have the same value</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Rearrange to standard form</div>
+                        <div class="step-content">
+                            <i>x</i>² − 5 = 7<i>x</i> + 13<br>
+                            <i>x</i>² − 7<i>x</i> − 5 − 13 = 0<br>
+                            <i>x</i>² − 7<i>x</i> − 18 = 0
+                        </div>
+                        <div class="step-explanation">Rearrange to solve the quadratic equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need two numbers that multiply to −18 and add to −7<br>
+                            These numbers are −9 and +2<br><br>
+                            <i>x</i>² − 7<i>x</i> − 18 = 0<br>
+                            (<i>x</i> − 9)(<i>x</i> + 2) = 0
+                        </div>
+                        <div class="step-explanation">Factor by finding the correct pair of numbers</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x</div>
+                        <div class="step-content">
+                            (<i>x</i> − 9)(<i>x</i> + 2) = 0<br><br>
+                            <i>x</i> − 9 = 0  →  <i>x</i> = 9<br>
+                            <i>x</i> + 2 = 0  →  <i>x</i> = −2
+                        </div>
+                        <div class="step-explanation">Set each factor to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the y-coordinates</div>
+                        <div class="step-content">
+                            Substitute each x-value into either function:<br><br>
+                            <strong>For <i>x</i> = 9:</strong><br>
+                            <i>g</i>(9) = 7(9) + 13 = 63 + 13 = 76<br>
+                            Point: (9, 76)<br><br>
+                            <strong>For <i>x</i> = −2:</strong><br>
+                            <i>g</i>(−2) = 7(−2) + 13 = −14 + 13 = −1<br>
+                            Point: (−2, −1)<br><br>
+                            <em style="color: #666; font-size: 0.95em;">Note: You can use either <i>f</i>(<i>x</i>) or <i>g</i>(<i>x</i>) to find the y-coordinate; both will give the same result at the intersection points.</em>
+                        </div>
+                        <div class="step-explanation">Substitute the x-values into one of the functions</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (ii) result: Points of intersection are (−2, −1) and (9, 76)</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (iii): Solving the inequality f(x) ≤ g(x)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Rearrange the inequality</div>
+                        <div class="step-content">
+                            We need to find where <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>)<br><br>
+                            <i>x</i>² − 5 ≤ 7<i>x</i> + 13<br>
+                            <i>x</i>² − 7<i>x</i> − 5 − 13 ≤ 0<br>
+                            <i>x</i>² − 7<i>x</i> − 18 ≤ 0<br><br>
+                            From Step 5, this factors as (<i>x</i> − 9)(<i>x</i> + 2) ≤ 0<br><br>
+                            The critical values are <i>x</i> = −2 and <i>x</i> = 9<br><br>
+                            Since the inequality is ≤ 0 (less than or equal to zero), the solution is <strong>BETWEEN</strong> the critical values.<br>
+                            <span style="color: #d32f2f; font-size: 0.95em;"><em>Refer to Section 3E for Sign Rule of Quadratic Inequalities</em></span><br><br>
+                            <strong>Therefore:</strong> −2 ≤ <i>x</i> ≤ 9
+                        </div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (iii) result: −2 ≤ <i>x</i> ≤ 9</strong>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer:<br>
+                        <strong>(i)</strong> Graphs sketched (see above)<br>
+                        <strong>(ii)</strong> Points of intersection: (−2, −1) and (9, 76)<br>
+                        <strong>(iii)</strong> −2 ≤ <i>x</i> ≤ 9 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    For the pair of functions:<br><br>
+                    <i>f</i>(<i>x</i>) = 7 − <i>x</i>²<br>
+                    <i>g</i>(<i>x</i>) = 2<i>x</i> − 8<br><br>
+                    <strong>i</strong> Sketch the graphs of <i>y</i> = <i>f</i>(<i>x</i>) and <i>y</i> = <i>g</i>(<i>x</i>) on the same axes.<br>
+                    <strong>ii</strong> Find the coordinates of any points of intersection.<br>
+                    <strong>iii</strong> Write down the solutions to the inequality <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>).
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (i): Sketching the graphs</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Analyze f(x) = 7 − x²</div>
+                        <div class="step-content">
+                            This is a quadratic function (parabola).<br><br>
+                            We can rewrite as <i>f</i>(<i>x</i>) = −<i>x</i>² + 7 where <i>a</i> = −1, <i>b</i> = 0, <i>c</i> = 7<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>Shape:</strong> ∩-shaped parabola (opens downward, negative x² coefficient)<br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 7 − 0² = 7<br>
+                            &nbsp;&nbsp;Point: (0, 7)<br>
+                            • <strong>x-intercepts:</strong> When <i>y</i> = 0, 0 = 7 − <i>x</i>² → <i>x</i>² = 7 → <i>x</i> = ±√7 ≈ ±2.65<br>
+                            &nbsp;&nbsp;Points: (−2.65, 0) and (2.65, 0)<br>
+                            • <strong>Vertex:</strong> Using <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;"><i>b</i></span>
+                                <span style="display: block; padding-top: 2px;">2<i>a</i></span>
+                            </span> where <i>a</i> = −1, <i>b</i> = 0, <i>c</i> = 7<br>
+                            &nbsp;&nbsp;<i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">0</span>
+                                <span style="display: block; padding-top: 2px;">2(−1)</span>
+                            </span> = 0<br>
+                            &nbsp;&nbsp;Substitute back: <i>y</i> = 7 − (0)² = 7<br>
+                            &nbsp;&nbsp;Vertex (maximum point): (0, 7)
+                        </div>
+                        <div class="step-explanation">Identify key features to sketch the parabola</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Analyze g(x) = 2x − 8</div>
+                        <div class="step-content">
+                            This is a linear function (straight line).<br><br>
+                            <strong>Key features:</strong><br>
+                            • <strong>y-intercept:</strong> When <i>x</i> = 0, <i>y</i> = 2(0) − 8 = −8<br>
+                            &nbsp;&nbsp;Point: (0, −8)<br>
+                            • <strong>x-intercept:</strong> When <i>y</i> = 0, 0 = 2<i>x</i> − 8 → <i>x</i> = 4<br>
+                            &nbsp;&nbsp;Point: (4, 0)
+                        </div>
+                        <div class="step-explanation">Find the intercepts to sketch the line</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graphs of <span style="color: #9c27b0; font-weight: 600;"><i>f</i>(<i>x</i>) = 7 − <i>x</i>²</span> and <span style="color: #d32f2f; font-weight: 600;"><i>g</i>(<i>x</i>) = 2<i>x</i> − 8</span></div>
+                        <img src="P1-section-3f-graph3.png" alt="Graph showing f(x) and g(x)">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola (opening downward) and line are plotted on the same axes showing their intersection points
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (ii): Finding the points of intersection</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Set the functions equal</div>
+                        <div class="step-content">
+                            At the intersection points, <i>f</i>(<i>x</i>) = <i>g</i>(<i>x</i>)<br><br>
+                            7 − <i>x</i>² = 2<i>x</i> − 8
+                        </div>
+                        <div class="step-explanation">The intersection occurs where both functions have the same value</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Rearrange to standard form</div>
+                        <div class="step-content">
+                            7 − <i>x</i>² = 2<i>x</i> − 8<br>
+                            −<i>x</i>² − 2<i>x</i> + 7 + 8 = 0<br>
+                            −<i>x</i>² − 2<i>x</i> + 15 = 0<br><br>
+                            Multiply by −1 to make the x² coefficient positive:<br>
+                            <i>x</i>² + 2<i>x</i> − 15 = 0
+                        </div>
+                        <div class="step-explanation">Rearrange to solve the quadratic equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need two numbers that multiply to −15 and add to +2<br>
+                            These numbers are +5 and −3<br><br>
+                            <i>x</i>² + 2<i>x</i> − 15 = 0<br>
+                            (<i>x</i> + 5)(<i>x</i> − 3) = 0
+                        </div>
+                        <div class="step-explanation">Factor by finding the correct pair of numbers</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x</div>
+                        <div class="step-content">
+                            (<i>x</i> + 5)(<i>x</i> − 3) = 0<br><br>
+                            <i>x</i> + 5 = 0  →  <i>x</i> = −5<br>
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3
+                        </div>
+                        <div class="step-explanation">Set each factor to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the y-coordinates</div>
+                        <div class="step-content">
+                            Substitute each x-value into either function:<br><br>
+                            <strong>For <i>x</i> = −5:</strong><br>
+                            <i>g</i>(−5) = 2(−5) − 8 = −10 − 8 = −18<br>
+                            Point: (−5, −18)<br><br>
+                            <strong>For <i>x</i> = 3:</strong><br>
+                            <i>g</i>(3) = 2(3) − 8 = 6 − 8 = −2<br>
+                            Point: (3, −2)<br><br>
+                            <em style="color: #666; font-size: 0.95em;">Note: You can use either <i>f</i>(<i>x</i>) or <i>g</i>(<i>x</i>) to find the y-coordinate; both will give the same result at the intersection points.</em>
+                        </div>
+                        <div class="step-explanation">Substitute the x-values into one of the functions</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (ii) result: Points of intersection are (−5, −18) and (3, −2)</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (iii): Solving the inequality f(x) ≤ g(x)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Rearrange the inequality</div>
+                        <div class="step-content">
+                            We need to find where <i>f</i>(<i>x</i>) ≤ <i>g</i>(<i>x</i>)<br><br>
+                            7 − <i>x</i>² ≤ 2<i>x</i> − 8<br>
+                            −<i>x</i>² − 2<i>x</i> + 7 + 8 ≤ 0<br>
+                            −<i>x</i>² − 2<i>x</i> + 15 ≤ 0<br><br>
+                            Multiply by −1 (remember to flip the inequality sign):<br>
+                            <i>x</i>² + 2<i>x</i> − 15 ≥ 0<br><br>
+                            From Step 5, this factors as (<i>x</i> + 5)(<i>x</i> − 3) ≥ 0<br><br>
+                            The critical values are <i>x</i> = −5 and <i>x</i> = 3<br><br>
+                            Since the inequality is ≥ 0 (greater than or equal to zero), the solution is <strong>OUTSIDE</strong> the critical values.<br>
+                            <span style="color: #d32f2f; font-size: 0.95em;"><em>Refer to Section 3E for Sign Rule of Quadratic Inequalities</em></span><br><br>
+                            <strong>Therefore:</strong> <i>x</i> ≤ −5  or  <i>x</i> ≥ 3
+                        </div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (iii) result: <i>x</i> ≤ −5  or  <i>x</i> ≥ 3</strong>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer:<br>
+                        <strong>(i)</strong> Graphs sketched (see above)<br>
+                        <strong>(ii)</strong> Points of intersection: (−5, −18) and (3, −2)<br>
+                        <strong>(iii)</strong> <i>x</i> ≤ −5  or  <i>x</i> ≥ 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which the curve with equation <i>y</i> = <i>f</i>(<i>x</i>) is below the line with equation <i>y</i> = <i>g</i>(<i>x</i>).<br><br>
+                    <i>f</i>(<i>x</i>) = 5<i>x</i> − 2<i>x</i>² − 4<br>
+                    <i>g</i>(<i>x</i>) = −2<i>x</i> − 1
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Set up the inequality</div>
+                        <div class="step-content">
+                            We need to find where the curve <i>f</i>(<i>x</i>) is below the line <i>g</i>(<i>x</i>)<br><br>
+                            This means: <i>f</i>(<i>x</i>) < <i>g</i>(<i>x</i>)<br><br>
+                            5<i>x</i> − 2<i>x</i>² − 4 < −2<i>x</i> − 1
+                        </div>
+                        <div class="step-explanation">Translate "curve below line" into an inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange to standard form</div>
+                        <div class="step-content">
+                            5<i>x</i> − 2<i>x</i>² − 4 < −2<i>x</i> − 1<br>
+                            −2<i>x</i>² + 5<i>x</i> + 2<i>x</i> − 4 + 1 < 0<br>
+                            −2<i>x</i>² + 7<i>x</i> − 3 < 0<br><br>
+                            Multiply by −1 (remember to flip the inequality sign):<br>
+                            2<i>x</i>² − 7<i>x</i> + 3 > 0
+                        </div>
+                        <div class="step-explanation">Rearrange and make the x² coefficient positive</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need two numbers that multiply to (2)(3) = 6 and add to −7<br>
+                            These numbers are −6 and −1<br><br>
+                            2<i>x</i>² − 6<i>x</i> − <i>x</i> + 3 > 0<br>
+                            2<i>x</i>(<i>x</i> − 3) − 1(<i>x</i> − 3) > 0<br>
+                            (2<i>x</i> − 1)(<i>x</i> − 3) > 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            2<i>x</i> − 1 = 0  →  <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">1</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> = 0.5<br><br>
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the sign rule</div>
+                        <div class="step-content">
+                            The critical values are <i>x</i> = 0.5 and <i>x</i> = 3<br><br>
+                            Since the inequality is > 0 (greater than zero), the solution is <strong>OUTSIDE</strong> the critical values.<br>
+                            <span style="color: #d32f2f; font-size: 0.95em;"><em>Refer to Section 3E for Sign Rule of Quadratic Inequalities</em></span><br><br>
+                            <strong>Therefore:</strong> <i>x</i> < 0.5  or  <i>x</i> > 3
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> < 0.5  or  <i>x</i> > 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which the curve with equation <i>y</i> = <i>f</i>(<i>x</i>) is below the line with equation <i>y</i> = <i>g</i>(<i>x</i>).<br><br>
+                    <i>f</i>(<i>x</i>) = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">3</span>
+                        <span style="display: block; padding-top: 2px;"><i>x</i>²</span>
+                    </span> − <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">4</span>
+                        <span style="display: block; padding-top: 2px;"><i>x</i></span>
+                    </span>, <i>x</i> ≠ 0<br>
+                    <i>g</i>(<i>x</i>) = −1
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Set up the inequality</div>
+                        <div class="step-content">
+                            We need to find where the curve <i>f</i>(<i>x</i>) is below the line <i>g</i>(<i>x</i>)<br><br>
+                            This means: <i>f</i>(<i>x</i>) < <i>g</i>(<i>x</i>)<br><br>
+                            <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">3</span>
+                                <span style="display: block; padding-top: 2px;"><i>x</i>²</span>
+                            </span> − <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">4</span>
+                                <span style="display: block; padding-top: 2px;"><i>x</i></span>
+                            </span> < −1
+                        </div>
+                        <div class="step-explanation">Translate "curve below line" into an inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Clear the fractions</div>
+                        <div class="step-content">
+                            Multiply through by <i>x</i>²:<br><br>
+                            <strong>Important:</strong> We must consider two cases since multiplying by <i>x</i>² (which is always positive for <i>x</i> ≠ 0) doesn't change the inequality direction.<br><br>
+                            3 − 4<i>x</i> < −<i>x</i>²<br>
+                            <i>x</i>² − 4<i>x</i> + 3 < 0
+                        </div>
+                        <div class="step-explanation">Multiply by x² to eliminate fractions (x² is always positive)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need two numbers that multiply to 3 and add to −4<br>
+                            These numbers are −3 and −1<br><br>
+                            <i>x</i>² − 4<i>x</i> + 3 < 0<br>
+                            (<i>x</i> − 3)(<i>x</i> − 1) < 0
+                        </div>
+                        <div class="step-explanation">Factor the quadratic expression</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3<br>
+                            <i>x</i> − 1 = 0  →  <i>x</i> = 1
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the sign rule</div>
+                        <div class="step-content">
+                            The critical values are <i>x</i> = 1 and <i>x</i> = 3<br><br>
+                            Since the inequality is < 0 (less than zero), the solution is <strong>BETWEEN</strong> the critical values.<br>
+                            <span style="color: #d32f2f; font-size: 0.95em;"><em>Refer to Section 3E for Sign Rule of Quadratic Inequalities</em></span><br><br>
+                            <strong>Therefore:</strong> 1 < <i>x</i> < 3<br><br>
+                            <em style="color: #666; font-size: 0.95em;">Note: The solution excludes x = 0 (which is already stated in the domain restriction)</em>
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: 1 < <i>x</i> < 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 5; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            }
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

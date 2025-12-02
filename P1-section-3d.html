@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3D: Linear Inequalities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .formula-box {
+            background: #fff9e6;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .coordinate {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Menu</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link active">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3D: Linear Inequalities</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Master Linear Inequalities</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Learn to solve and represent inequality solutions</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    5<i>x</i> + 4 > 12 − 2<i>x</i>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Linear Inequalities</div>
+                        <div class="formula-content">
+                            <strong>Key Rules:</strong><br>
+                            • Treat inequalities like equations: collect like terms and isolate the variable<br>
+                            • <strong>Important:</strong> When multiplying or dividing by a negative number, reverse the inequality sign<br>
+                            • Write your final answer in set notation or inequality form
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down the inequality</div>
+                        <div class="step-content">
+                            5<i>x</i> + 4 > 12 − 2<i>x</i>
+                        </div>
+                        <div class="step-explanation">Start with the given inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Collect x terms on one side</div>
+                        <div class="step-content">
+                            5<i>x</i> + 4 > 12 − 2<i>x</i><br>
+                            5<i>x</i> + 2<i>x</i> + 4 > 12<br>
+                            7<i>x</i> + 4 > 12
+                        </div>
+                        <div class="step-explanation">Add 2x to both sides to collect x terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Collect constant terms on the other side</div>
+                        <div class="step-content">
+                            7<i>x</i> + 4 > 12<br>
+                            7<i>x</i> > 12 − 4<br>
+                            7<i>x</i> > 8
+                        </div>
+                        <div class="step-explanation">Subtract 4 from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for x</div>
+                        <div class="step-content">
+                            7<i>x</i> > 8<br>
+                            <i>x</i> > 8/7<br>
+                            <i>x</i> > 1.14 (to 2 d.p.)
+                        </div>
+                        <div class="step-explanation">Divide both sides by 7 (positive, so inequality sign stays the same)</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks with labels -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="175" y1="45" x2="175" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="175" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="243" y1="45" x2="243" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="243" y="75" text-anchor="middle" font-size="14" fill="#333">1.14</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="425" y1="45" x2="425" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="425" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Arrow for x > 1.14 (positioned above the line) -->
+                            <line x1="243" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Open circle at 1.14 (not included) -->
+                            <circle cx="243" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Open circle at 1.14, arrow extends to the right
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> > 1.14 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    3<i>x</i> + 2<i>x</i>(<i>x</i> − 3) ⩽ 2(5 + <i>x</i>²)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy</div>
+                        <div class="formula-content">
+                            <strong>Note:</strong> This inequality contains quadratic terms. Expand all brackets first, then simplify. If the x² terms cancel out, we're left with a linear inequality.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down the inequality</div>
+                        <div class="step-content">
+                            3<i>x</i> + 2<i>x</i>(<i>x</i> − 3) ⩽ 2(5 + <i>x</i>²)
+                        </div>
+                        <div class="step-explanation">Start with the given inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Expand the left side</div>
+                        <div class="step-content">
+                            3<i>x</i> + 2<i>x</i>(<i>x</i> − 3) = 3<i>x</i> + 2<i>x</i>² − 6<i>x</i><br>
+                            = 2<i>x</i>² − 3<i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute 2x and combine like terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Expand the right side</div>
+                        <div class="step-content">
+                            2(5 + <i>x</i>²) = 10 + 2<i>x</i>²
+                        </div>
+                        <div class="step-explanation">Distribute 2 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Form the complete inequality</div>
+                        <div class="step-content">
+                            2<i>x</i>² − 3<i>x</i> ⩽ 10 + 2<i>x</i>²
+                        </div>
+                        <div class="step-explanation">Combine the expanded forms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Subtract 2x² from both sides</div>
+                        <div class="step-content">
+                            2<i>x</i>² − 3<i>x</i> − 2<i>x</i>² ⩽ 10 + 2<i>x</i>² − 2<i>x</i>²<br>
+                            −3<i>x</i> ⩽ 10
+                        </div>
+                        <div class="step-explanation">The x² terms cancel out, leaving a linear inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x</div>
+                        <div class="step-content">
+                            −3<i>x</i> ⩽ 10<br>
+                            <i>x</i> ⩾ −10/3<br>
+                            <i>x</i> ⩾ −3.33 (to 2 d.p.)
+                        </div>
+                        <div class="step-explanation">Divide by −3 and reverse the inequality sign</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-5</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-4</text>
+                            
+                            <line x1="217" y1="45" x2="217" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="217" y="75" text-anchor="middle" font-size="14" fill="#333">-3.33</text>
+                            
+                            <line x1="250" y1="45" x2="250" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="250" y="75" text-anchor="middle" font-size="14" fill="#333">-3</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">-2</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <!-- Arrow for x ≥ -3.33 (positioned above the line) -->
+                            <line x1="217" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Filled circle at -3.33 (included) -->
+                            <circle cx="217" cy="35" r="6" fill="#667eea"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Filled circle at -3.33, arrow extends to the right
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> ⩾ −3.33 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    <i>x</i>(2<i>x</i> − 5) ⩽ <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">4<i>x</i>(<i>x</i> + 3)</span>
+                        <span style="display: block; padding-top: 2px;">2</span>
+                    </span> − 9
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down the inequality</div>
+                        <div class="step-content">
+                            <i>x</i>(2<i>x</i> − 5) ⩽ <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">4<i>x</i>(<i>x</i> + 3)</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> − 9
+                        </div>
+                        <div class="step-explanation">Start with the given inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Expand the left side</div>
+                        <div class="step-content">
+                            <i>x</i>(2<i>x</i> − 5) = 2<i>x</i>² − 5<i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute x across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Simplify the right side</div>
+                        <div class="step-content">
+                            <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">4<i>x</i>(<i>x</i> + 3)</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> − 9 = 2<i>x</i>(<i>x</i> + 3) − 9<br>
+                            = 2<i>x</i>² + 6<i>x</i> − 9
+                        </div>
+                        <div class="step-explanation">Simplify the fraction first, then expand</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Form the complete inequality</div>
+                        <div class="step-content">
+                            2<i>x</i>² − 5<i>x</i> ⩽ 2<i>x</i>² + 6<i>x</i> − 9
+                        </div>
+                        <div class="step-explanation">Combine the expanded forms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Subtract 2x² from both sides</div>
+                        <div class="step-content">
+                            2<i>x</i>² − 5<i>x</i> − 2<i>x</i>² ⩽ 2<i>x</i>² + 6<i>x</i> − 9 − 2<i>x</i>²<br>
+                            −5<i>x</i> ⩽ 6<i>x</i> − 9
+                        </div>
+                        <div class="step-explanation">The x² terms cancel out</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Collect x terms on one side</div>
+                        <div class="step-content">
+                            −5<i>x</i> − 6<i>x</i> ⩽ −9<br>
+                            −11<i>x</i> ⩽ −9
+                        </div>
+                        <div class="step-explanation">Subtract 6x from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Solve for x</div>
+                        <div class="step-content">
+                            −11<i>x</i> ⩽ −9<br>
+                            <i>x</i> ⩾ 9/11<br>
+                            <i>x</i> ⩾ 0.82 (to 2 d.p.)
+                        </div>
+                        <div class="step-explanation">Divide by −11 and reverse the inequality sign</div>
+                        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 0.95em;">
+                            <strong>⚠️ Important Rule:</strong> When multiplying or dividing both sides of an inequality by a negative number, the direction of the inequality sign must be reversed.
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="191" y1="45" x2="191" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="191" y="75" text-anchor="middle" font-size="14" fill="#333">0.82</text>
+                            
+                            <line x1="225" y1="45" x2="225" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="225" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="475" y1="45" x2="475" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="475" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">3.5</text>
+                            
+                            <!-- Arrow for x ≥ 0.82 (positioned above the line) -->
+                            <line x1="191" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Filled circle at 0.82 (included) -->
+                            <circle cx="191" cy="35" r="6" fill="#667eea"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Filled circle at 0.82, arrow extends to the right
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> ⩾ 0.82 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title">Question 6:</div>
+                <div class="question-text">
+                    Use set notation to describe the set of values of <i>x</i> for which:<br><br>
+                    15 − <i>x</i> < 2(11 − <i>x</i>) and 5(3<i>x</i> − 1) > 12<i>x</i> + 19
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Compound Inequalities</div>
+                        <div class="formula-content">
+                            <strong>AND:</strong> Both conditions must be satisfied simultaneously. Solve each inequality separately, then find the intersection (overlap) of the solution sets.
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the first inequality: 15 − x < 2(11 − x)</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the right side</div>
+                        <div class="step-content">
+                            15 − <i>x</i> < 2(11 − <i>x</i>)<br>
+                            15 − <i>x</i> < 22 − 2<i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute 2 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Collect x terms on one side</div>
+                        <div class="step-content">
+                            15 − <i>x</i> + 2<i>x</i> < 22<br>
+                            15 + <i>x</i> < 22
+                        </div>
+                        <div class="step-explanation">Add 2x to both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Solve for x</div>
+                        <div class="step-content">
+                            <i>x</i> < 22 − 15<br>
+                            <i>x</i> < 7
+                        </div>
+                        <div class="step-explanation">Subtract 15 from both sides</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>First inequality result: <i>x</i> < 7</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the second inequality: 5(3x − 1) > 12x + 19</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand the left side</div>
+                        <div class="step-content">
+                            5(3<i>x</i> − 1) > 12<i>x</i> + 19<br>
+                            15<i>x</i> − 5 > 12<i>x</i> + 19
+                        </div>
+                        <div class="step-explanation">Distribute 5 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Collect x terms on one side</div>
+                        <div class="step-content">
+                            15<i>x</i> − 12<i>x</i> − 5 > 19<br>
+                            3<i>x</i> − 5 > 19
+                        </div>
+                        <div class="step-explanation">Subtract 12x from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x</div>
+                        <div class="step-content">
+                            3<i>x</i> > 19 + 5<br>
+                            3<i>x</i> > 24<br>
+                            <i>x</i> > 8
+                        </div>
+                        <div class="step-explanation">Add 5 to both sides, then divide by 3</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Second inequality result: <i>x</i> > 8</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the intersection (AND condition)</div>
+                        <div class="step-content">
+                            First inequality: <i>x</i> < 7<br>
+                            Second inequality: <i>x</i> > 8<br><br>
+                            <strong>Intersection:</strong> There is <strong>no value</strong> of x that satisfies both <i>x</i> < 7 AND <i>x</i> > 8 simultaneously.
+                        </div>
+                        <div class="step-explanation">These conditions cannot both be true at the same time</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="100" y1="45" x2="100" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="100" y="75" text-anchor="middle" font-size="14" fill="#333">5</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">6</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">7</text>
+                            
+                            <line x1="425" y1="45" x2="425" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="425" y="75" text-anchor="middle" font-size="14" fill="#333">8</text>
+                            
+                            <line x1="500" y1="45" x2="500" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="500" y="75" text-anchor="middle" font-size="14" fill="#333">9</text>
+                            
+                            <!-- Left arrow for x < 7 (positioned above the line) -->
+                            <line x1="50" y1="35" x2="300" y2="35" stroke="#e74c3c" stroke-width="4"/>
+                            <polygon points="50,35 60,30 60,40" fill="#e74c3c"/>
+                            
+                            <!-- Open circle at 7 -->
+                            <circle cx="300" cy="35" r="6" fill="white" stroke="#e74c3c" stroke-width="3"/>
+                            
+                            <!-- Right arrow for x > 8 (positioned above the line) -->
+                            <line x1="425" y1="35" x2="550" y2="35" stroke="#27ae60" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#27ae60"/>
+                            
+                            <!-- Open circle at 8 -->
+                            <circle cx="425" cy="35" r="6" fill="white" stroke="#27ae60" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Red arrow: x < 7 | Green arrow: x > 8
+                        </div>
+                        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em; text-align: center;">
+                            <strong>⚠️ Note:</strong> There is no overlapping region between these two conditions. Since the question requires values that satisfy BOTH inequalities simultaneously (AND condition), and no such values exist, the solution is an empty set.
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: ∅ (empty set) or "No solution" ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    Use set notation to describe the set of values of <i>x</i> for which:<br><br>
+                    4(3<i>x</i> + 7) ⩽ 20 or 2(3<i>x</i> − 5) ⩾ <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">7 − 6<i>x</i></span>
+                        <span style="display: block; padding-top: 2px;">2</span>
+                    </span>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Compound Inequalities</div>
+                        <div class="formula-content">
+                            <strong>OR:</strong> At least one condition must be satisfied. Solve each inequality separately, then find the union of the solution sets.
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the first inequality: 4(3x + 7) ⩽ 20</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the left side</div>
+                        <div class="step-content">
+                            4(3<i>x</i> + 7) ⩽ 20<br>
+                            12<i>x</i> + 28 ⩽ 20
+                        </div>
+                        <div class="step-explanation">Distribute 4 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Solve for x</div>
+                        <div class="step-content">
+                            12<i>x</i> ⩽ 20 − 28<br>
+                            12<i>x</i> ⩽ −8<br>
+                            <i>x</i> ⩽ −8/12<br>
+                            <i>x</i> ⩽ −2/3<br>
+                            <i>x</i> ⩽ −0.67 (to 2 d.p.)
+                        </div>
+                        <div class="step-explanation">Subtract 28 from both sides, then divide by 12</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>First inequality result: <i>x</i> ⩽ −0.67</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the second inequality: 2(3<i>x</i> − 5) ⩾ <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                            <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">7 − 6<i>x</i></span>
+                            <span style="display: block; padding-top: 2px;">2</span>
+                        </span></strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 3: Multiply both sides by 2 to clear the fraction</div>
+                        <div class="step-content">
+                            2 × 2(3<i>x</i> − 5) ⩾ 7 − 6<i>x</i><br>
+                            4(3<i>x</i> − 5) ⩾ 7 − 6<i>x</i>
+                        </div>
+                        <div class="step-explanation">Multiply by 2 (positive, so inequality sign stays the same)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand the left side</div>
+                        <div class="step-content">
+                            12<i>x</i> − 20 ⩾ 7 − 6<i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute 4 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Collect x terms on one side</div>
+                        <div class="step-content">
+                            12<i>x</i> + 6<i>x</i> − 20 ⩾ 7<br>
+                            18<i>x</i> − 20 ⩾ 7
+                        </div>
+                        <div class="step-explanation">Add 6x to both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x</div>
+                        <div class="step-content">
+                            18<i>x</i> ⩾ 7 + 20<br>
+                            18<i>x</i> ⩾ 27<br>
+                            <i>x</i> ⩾ 27/18<br>
+                            <i>x</i> ⩾ 3/2<br>
+                            <i>x</i> ⩾ 1.5
+                        </div>
+                        <div class="step-explanation">Add 20 to both sides, then divide by 18 and simplify</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Second inequality result: <i>x</i> ⩾ 1.5</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the union (OR condition)</div>
+                        <div class="step-content">
+                            First inequality: <i>x</i> ⩽ −0.67<br>
+                            Second inequality: <i>x</i> ⩾ 1.5<br><br>
+                            <strong>Union:</strong> x satisfies at least one condition, so the solution is:<br>
+                            <i>x</i> ⩽ −0.67 or <i>x</i> ⩾ 1.5
+                        </div>
+                        <div class="step-explanation">Combine both solution sets</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-2</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="217" y1="45" x2="217" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="217" y="75" text-anchor="middle" font-size="14" fill="#333">-0.67</text>
+                            
+                            <line x1="250" y1="45" x2="250" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="250" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="425" y1="45" x2="425" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="425" y="75" text-anchor="middle" font-size="14" fill="#333">1.5</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <!-- Left arrow (x ≤ -0.67) - above the line -->
+                            <line x1="50" y1="35" x2="217" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="50,35 60,30 60,40" fill="#667eea"/>
+                            
+                            <!-- Right arrow (x ≥ 1.5) - above the line -->
+                            <line x1="425" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Filled circles -->
+                            <circle cx="217" cy="35" r="6" fill="#667eea"/>
+                            <circle cx="425" cy="35" r="6" fill="#667eea"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Two regions: x ≤ -0.67 (left arrow) OR x ≥ 1.5 (right arrow)
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> ⩽ −0.67 or <i>x</i> ⩾ 1.5 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    Use set notation to describe the set of values of <i>x</i> for which:<br><br>
+                    2<i>x</i> − 3 > 2 and 3(<i>x</i> + 2) < 12 + <i>x</i>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Compound Inequalities</div>
+                        <div class="formula-content">
+                            <strong>AND:</strong> Both conditions must be satisfied simultaneously. Solve each inequality separately, then find the intersection (overlap) of the solution sets.
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the first inequality: 2x − 3 > 2</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down the inequality</div>
+                        <div class="step-content">
+                            2<i>x</i> − 3 > 2
+                        </div>
+                        <div class="step-explanation">Start with the first inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Solve for x</div>
+                        <div class="step-content">
+                            2<i>x</i> > 2 + 3<br>
+                            2<i>x</i> > 5<br>
+                            <i>x</i> > 5/2<br>
+                            <i>x</i> > 2.5
+                        </div>
+                        <div class="step-explanation">Add 3 to both sides, then divide by 2</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>First inequality result: <i>x</i> > 2.5</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the second inequality: 3(x + 2) < 12 + x</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 3: Expand the left side</div>
+                        <div class="step-content">
+                            3(<i>x</i> + 2) < 12 + <i>x</i><br>
+                            3<i>x</i> + 6 < 12 + <i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute 3 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Collect x terms on one side</div>
+                        <div class="step-content">
+                            3<i>x</i> − <i>x</i> + 6 < 12<br>
+                            2<i>x</i> + 6 < 12
+                        </div>
+                        <div class="step-explanation">Subtract x from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for x</div>
+                        <div class="step-content">
+                            2<i>x</i> < 12 − 6<br>
+                            2<i>x</i> < 6<br>
+                            <i>x</i> < 3
+                        </div>
+                        <div class="step-explanation">Subtract 6 from both sides, then divide by 2</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Second inequality result: <i>x</i> < 3</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Find the intersection (AND condition)</div>
+                        <div class="step-content">
+                            First inequality: <i>x</i> > 2.5<br>
+                            Second inequality: <i>x</i> < 3<br><br>
+                            <strong>Intersection:</strong> Values of x must satisfy BOTH conditions:<br>
+                            2.5 < <i>x</i> < 3
+                        </div>
+                        <div class="step-explanation">Find the overlapping region where both conditions are true</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="100" y1="45" x2="100" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="100" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="275" y1="45" x2="275" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="275" y="75" text-anchor="middle" font-size="14" fill="#333">2.5</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">5</text>
+                            
+                            <!-- Overlapping region (2.5 < x < 3) - above the line -->
+                            <line x1="275" y1="35" x2="350" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Open circles at both endpoints (not included) -->
+                            <circle cx="275" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="350" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Open circles at 2.5 and 3, showing the overlapping region
+                        </div>
+                        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em; text-align: center;">
+                            <strong>✓ Note:</strong> There IS an overlapping region between x > 2.5 and x < 3. The solution includes all values between 2.5 and 3 (but not including 2.5 and 3 themselves).
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: 2.5 < <i>x</i> < 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div id="q7" class="question-box hidden">
+                <div class="question-title">Question 7:</div>
+                <div class="question-text">
+                    Use set notation to describe the set of values of <i>x</i> for which:<br><br>
+                    5<i>x</i> + 3 < 9 or 5(2<i>x</i> + 1) > 27
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Compound Inequalities</div>
+                        <div class="formula-content">
+                            <strong>OR:</strong> At least one condition must be satisfied. Solve each inequality separately, then find the union of the solution sets.
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the first inequality: 5x + 3 < 9</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down the inequality</div>
+                        <div class="step-content">
+                            5<i>x</i> + 3 < 9
+                        </div>
+                        <div class="step-explanation">Start with the first inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Solve for x</div>
+                        <div class="step-content">
+                            5<i>x</i> < 9 − 3<br>
+                            5<i>x</i> < 6<br>
+                            <i>x</i> < 6/5<br>
+                            <i>x</i> < 1.2
+                        </div>
+                        <div class="step-explanation">Subtract 3 from both sides, then divide by 5</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>First inequality result: <i>x</i> < 1.2</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the second inequality: 5(2x + 1) > 27</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 3: Expand the left side</div>
+                        <div class="step-content">
+                            5(2<i>x</i> + 1) > 27<br>
+                            10<i>x</i> + 5 > 27
+                        </div>
+                        <div class="step-explanation">Distribute 5 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for x</div>
+                        <div class="step-content">
+                            10<i>x</i> > 27 − 5<br>
+                            10<i>x</i> > 22<br>
+                            <i>x</i> > 22/10<br>
+                            <i>x</i> > 11/5<br>
+                            <i>x</i> > 2.2
+                        </div>
+                        <div class="step-explanation">Subtract 5 from both sides, then divide by 10</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Second inequality result: <i>x</i> > 2.2</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find the union (OR condition)</div>
+                        <div class="step-content">
+                            First inequality: <i>x</i> < 1.2<br>
+                            Second inequality: <i>x</i> > 2.2<br><br>
+                            <strong>Union:</strong> x satisfies at least one condition, so the solution is:<br>
+                            <i>x</i> < 1.2 or <i>x</i> > 2.2
+                        </div>
+                        <div class="step-explanation">Combine both solution sets</div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="240" y1="45" x2="240" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="240" y="75" text-anchor="middle" font-size="14" fill="#333">1.2</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="390" y1="45" x2="390" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="390" y="75" text-anchor="middle" font-size="14" fill="#333">2.2</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Left arrow (x < 1.2) - above the line -->
+                            <line x1="50" y1="35" x2="240" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="50,35 60,30 60,40" fill="#667eea"/>
+                            
+                            <!-- Right arrow (x > 2.2) - above the line -->
+                            <line x1="390" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Open circles -->
+                            <circle cx="240" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="390" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Two regions: x < 1.2 (left arrow) OR x > 2.2 (right arrow)
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> < 1.2 or <i>x</i> > 2.2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+                <button class="question-nav-btn" onclick="showQuestion(7)">7</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

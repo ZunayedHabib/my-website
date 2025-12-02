@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3A: Linear Simultaneous Equations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .formula-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .formula-box .formula-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-box .formula-content {
+            font-size: 1.05em;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .formula-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .formula-box li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link active">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3A: Linear Simultaneous Equations</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Linear Simultaneous Equations</h3>
+                <p>Solving systems of equations using elimination and substitution methods</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1: (Solve using Elimination Method)</div>
+                <div class="question-text">
+                    3x + 8y = 33<br>
+                    6x = 3 + 5y
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📌 Elimination Method Overview:</div>
+                        <div class="formula-content">
+                            The elimination method works by:
+                            <ul>
+                                <li>Making the coefficients of one variable the same in both equations</li>
+                                <li>Adding or subtracting the equations to eliminate that variable</li>
+                                <li>Solving for the remaining variable</li>
+                                <li>Substituting back to find the other variable</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Rearrange the second equation</div>
+                        <div class="step-content">
+                            6x = 3 + 5y<br>
+                            6x - 5y = 3
+                        </div>
+                        <div class="step-explanation">Rearrange so both equations are in the form ax + by = c</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write both equations together</div>
+                        <div class="step-content">
+                            Equation ①: 3x + 8y = 33<br>
+                            Equation ②: 6x - 5y = 3
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Eliminate x by making coefficients equal</div>
+                        <div class="step-content">
+                            Multiply equation ① by 2:<br>
+                            2 × (3x + 8y = 33)<br>
+                            6x + 16y = 66 ... ③
+                        </div>
+                        <div class="step-explanation">We multiply equation ① by 2 so that the x coefficient matches equation ②</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Subtract equation ② from equation ③</div>
+                        <div class="step-content">
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div>6x + 16y = 66</div>
+                                <div style="margin: 5px 0;">− (6x - 5y = 3)</div>
+                                <div style="border-top: 2px solid #333; padding-top: 10px; margin-top: 5px;">
+                                    0x + 21y = 63
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                21y = 63
+                            </div>
+                        </div>
+                        <div class="step-explanation">The x terms cancel out (6x - 6x = 0x), leaving us with an equation in y only</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for y</div>
+                        <div class="step-content">
+                            21y = 63<br>
+                            y = 63 ÷ 21<br>
+                            y = 3
+                        </div>
+                        <div class="step-explanation">Divide both sides by 21</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Substitute y = 3 into equation ①</div>
+                        <div class="step-content">
+                            3x + 8(3) = 33<br>
+                            3x + 24 = 33<br>
+                            3x = 33 - 24<br>
+                            3x = 9<br>
+                            x = 3
+                        </div>
+                        <div class="step-explanation">Substitute the value of y back into one of the original equations to find x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check the solution in equation ②</div>
+                        <div class="step-content">
+                            6x - 5y = 3<br>
+                            6(3) - 5(3) = 18 - 15 = 3 ✓
+                        </div>
+                        <div class="step-explanation">Verify our solution works in the other equation</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 3, y = 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2: (Solve using Substitution Method)</div>
+                <div class="question-text">
+                    2y = 2x - 3<br>
+                    3y = x - 1
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📌 Substitution Method Overview:</div>
+                        <div class="formula-content">
+                            The substitution method works by:
+                            <ul>
+                                <li>Rearranging one equation to make one variable the subject</li>
+                                <li>Substituting this expression into the other equation</li>
+                                <li>Solving the resulting equation with one variable</li>
+                                <li>Substituting back to find the other variable</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: 2y = 2x - 3<br>
+                            Equation ②: 3y = x - 1
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation ② to make x the subject</div>
+                        <div class="step-content">
+                            3y = x - 1<br>
+                            x = 3y + 1
+                        </div>
+                        <div class="step-explanation">Add 1 to both sides to isolate x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute x = 3y + 1 into equation ①</div>
+                        <div class="step-content">
+                            2y = 2x - 3<br>
+                            2y = 2(3y + 1) - 3
+                        </div>
+                        <div class="step-explanation">Replace x with the expression we found</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand the brackets</div>
+                        <div class="step-content">
+                            2y = 2(3y + 1) - 3<br>
+                            2y = 6y + 2 - 3<br>
+                            2y = 6y - 1
+                        </div>
+                        <div class="step-explanation">Multiply out and simplify</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for y</div>
+                        <div class="step-content">
+                            2y = 6y - 1<br>
+                            2y - 6y = -1<br>
+                            -4y = -1<br>
+                            y = -1 ÷ -4<br>
+                            y = 1/4
+                        </div>
+                        <div class="step-explanation">Collect y terms on one side and divide</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Substitute y = 1/4 back into x = 3y + 1</div>
+                        <div class="step-content">
+                            x = 3y + 1<br>
+                            x = 3(1/4) + 1<br>
+                            x = 3/4 + 1<br>
+                            x = 3/4 + 4/4<br>
+                            x = 7/4
+                        </div>
+                        <div class="step-explanation">Use the expression for x to find its value</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check the solution in equation ①</div>
+                        <div class="step-content">
+                            2y = 2x - 3<br>
+                            2(1/4) = 2(7/4) - 3<br>
+                            2/4 = 14/4 - 12/4<br>
+                            1/2 = 2/4<br>
+                            1/2 = 1/2 ✓
+                        </div>
+                        <div class="step-explanation">Verify our solution works in the original equation</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 7/4, y = 1/4 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+                        <div style="display: inline-block; text-align: center;">
+                            <div style="border-bottom: 2px solid #000; padding-bottom: 5px;">x - 2y</div>
+                            <div style="padding-top: 5px;">3</div>
+                        </div>
+                        <div style="margin: 0 10px;"> = 4</div>
+                    </div>
+                    2x + 3y + 4 = 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Substitution</div>
+                        <div class="formula-content">
+                            <strong>Why Substitution?</strong><br>
+                            The first equation has a fraction, so we can easily rearrange it to make x or y the subject. This avoids dealing with fractions during elimination and makes the algebra simpler.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Simplify the first equation</div>
+                        <div class="step-content">
+                            (x - 2y)/3 = 4<br>
+                            x - 2y = 12
+                        </div>
+                        <div class="step-explanation">Multiply both sides by 3 to eliminate the fraction</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: x - 2y = 12<br>
+                            Equation ②: 2x + 3y + 4 = 0
+                        </div>
+                        <div class="step-explanation">Write both equations clearly</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Rearrange equation ① to make x the subject</div>
+                        <div class="step-content">
+                            x - 2y = 12<br>
+                            x = 12 + 2y
+                        </div>
+                        <div class="step-explanation">Add 2y to both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Substitute x = 12 + 2y into equation ②</div>
+                        <div class="step-content">
+                            2x + 3y + 4 = 0<br>
+                            2(12 + 2y) + 3y + 4 = 0
+                        </div>
+                        <div class="step-explanation">Replace x with the expression we found</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Expand and simplify</div>
+                        <div class="step-content">
+                            24 + 4y + 3y + 4 = 0<br>
+                            28 + 7y = 0<br>
+                            7y = -28<br>
+                            y = -4
+                        </div>
+                        <div class="step-explanation">Expand brackets, collect like terms, and solve for y</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Substitute y = -4 back into x = 12 + 2y</div>
+                        <div class="step-content">
+                            x = 12 + 2y<br>
+                            x = 12 + 2(-4)<br>
+                            x = 12 - 8<br>
+                            x = 4
+                        </div>
+                        <div class="step-explanation">Find the value of x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check the solution in equation ②</div>
+                        <div class="step-content">
+                            2x + 3y + 4 = 0<br>
+                            2(4) + 3(-4) + 4 = 0<br>
+                            8 - 12 + 4 = 0<br>
+                            0 = 0 ✓
+                        </div>
+                        <div class="step-explanation">Verify our solution works</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = 4, y = -4 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    3x - 2y + 5 = 0<br>
+                    5(x + y) = 6(x + 1)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Elimination</div>
+                        <div class="formula-content">
+                            <strong>Why Elimination?</strong><br>
+                            After expanding the second equation, both equations will be in standard form (ax + by = c). The coefficients allow for straightforward elimination without dealing with awkward fractions.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the second equation</div>
+                        <div class="step-content">
+                            5(x + y) = 6(x + 1)<br>
+                            5x + 5y = 6x + 6
+                        </div>
+                        <div class="step-explanation">Expand both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange to standard form</div>
+                        <div class="step-content">
+                            5x + 5y = 6x + 6<br>
+                            5x + 5y - 6x = 6<br>
+                            -x + 5y = 6
+                        </div>
+                        <div class="step-explanation">Collect all terms with variables on the left side</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Label both equations</div>
+                        <div class="step-content">
+                            Equation ①: 3x - 2y + 5 = 0  →  3x - 2y = -5<br>
+                            Equation ②: -x + 5y = 6
+                        </div>
+                        <div class="step-explanation">Rewrite equation ① to match the form of equation ②</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Eliminate x by making coefficients equal</div>
+                        <div class="step-content">
+                            Multiply equation ② by 3:<br>
+                            3 × (-x + 5y = 6)<br>
+                            -3x + 15y = 18 ... ③
+                        </div>
+                        <div class="step-explanation">Make the x coefficient in equation ② match equation ①</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Add equation ① and equation ③</div>
+                        <div class="step-content">
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div>3x - 2y = -5</div>
+                                <div style="margin: 5px 0;">+ (-3x + 15y = 18)</div>
+                                <div style="border-top: 2px solid #333; padding-top: 10px; margin-top: 5px;">
+                                    0x + 13y = 13
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                13y = 13
+                            </div>
+                        </div>
+                        <div class="step-explanation">The x terms cancel out (3x + (-3x) = 0x), leaving us with an equation in y only</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for y</div>
+                        <div class="step-content">
+                            13y = 13<br>
+                            y = 13 ÷ 13<br>
+                            y = 1
+                        </div>
+                        <div class="step-explanation">Divide both sides by 13</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Substitute y = 1 into equation ②</div>
+                        <div class="step-content">
+                            -x + 5y = 6<br>
+                            -x + 5(1) = 6<br>
+                            -x + 5 = 6<br>
+                            -x = 6 - 5<br>
+                            -x = 1<br>
+                            x = -1
+                        </div>
+                        <div class="step-explanation">Substitute y and solve for x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Check the solution in equation ①</div>
+                        <div class="step-content">
+                            3x - 2y + 5 = 0<br>
+                            3(-1) - 2(1) + 5 = 0<br>
+                            -3 - 2 + 5 = 0<br>
+                            0 = 0 ✓
+                        </div>
+                        <div class="step-explanation">Verify our solution works in the original equation</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: x = -1, y = 1 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    3x + ky = 8<br>
+                    x - 2ky = 5<br>
+                    <div style="margin-top: 15px; font-size: 0.95em;">
+                        are simultaneous equations where <i>k</i> is a constant.
+                    </div>
+                    <div style="margin-top: 15px; text-align: left; padding-left: 20px;">
+                        <strong>a</strong> Show that x = 3.<br>
+                        <strong>b</strong> Given that y = 1/2, determine the value of k.
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Elimination</div>
+                        <div class="formula-content">
+                            <strong>Why Elimination?</strong><br>
+                            Since we need to show that x = 3 (eliminate y first), elimination is the most direct method. The equations are already in standard form, making it efficient to eliminate the y terms by making their coefficients equal.
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Show that x = 3</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: 3x + ky = 8<br>
+                            Equation ②: x - 2ky = 5
+                        </div>
+                        <div class="step-explanation">Write both equations clearly</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Eliminate y by making coefficients equal</div>
+                        <div class="step-content">
+                            Multiply equation ① by 2:<br>
+                            2 × (3x + ky = 8)<br>
+                            6x + 2ky = 16 ... ③
+                        </div>
+                        <div class="step-explanation">Multiply equation ① by 2 so the y coefficient matches equation ②</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Add equation ② and equation ③</div>
+                        <div class="step-content">
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div>6x + 2ky = 16</div>
+                                <div style="margin: 5px 0;">+ (x - 2ky = 5)</div>
+                                <div style="border-top: 2px solid #333; padding-top: 10px; margin-top: 5px;">
+                                    7x + 0ky = 21
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                7x = 21
+                            </div>
+                        </div>
+                        <div class="step-explanation">The ky terms cancel out (2ky + (-2ky) = 0ky), leaving us with an equation in x only</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Solve for x</div>
+                        <div class="step-content">
+                            7x = 21<br>
+                            x = 21 ÷ 7<br>
+                            x = 3
+                        </div>
+                        <div class="step-explanation">Divide both sides by 7</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Therefore, x = 3 (as required) ✨
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Find the value of k when y = 1/2</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Substitute x = 3 and y = 1/2 into equation ①</div>
+                        <div class="step-content">
+                            3x + ky = 8<br>
+                            3(3) + k(1/2) = 8<br>
+                            9 + k/2 = 8
+                        </div>
+                        <div class="step-explanation">Replace x with 3 and y with 1/2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for k</div>
+                        <div class="step-content">
+                            9 + k/2 = 8<br>
+                            k/2 = 8 - 9<br>
+                            k/2 = -1<br>
+                            k = -2
+                        </div>
+                        <div class="step-explanation">Isolate k/2 then multiply both sides by 2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Verify using equation ②</div>
+                        <div class="step-content">
+                            x - 2ky = 5<br>
+                            3 - 2(-2)(1/2) = 5<br>
+                            3 - (-2) = 5<br>
+                            3 + 2 = 5<br>
+                            5 = 5 ✓
+                        </div>
+                        <div class="step-explanation">Check that k = -2 works in the second equation</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: k = -2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3E: Quadratic Inequalities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .formula-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .graph-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .graph-placeholder img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .graph-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Menu</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link active">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3E: Quadratic Inequalities</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Quadratic Inequalities</h3>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    6<i>x</i>² + 11<i>x</i> − 10 > 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Check if already in standard form</div>
+                        <div class="step-content">
+                            6<i>x</i>² + 11<i>x</i> − 10 > 0
+                        </div>
+                        <div class="step-explanation">The inequality is already in standard form, which is <i>ax</i>² + <i>bx</i> + <i>c</i></div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need to find two numbers that multiply to (6)(−10) = −60 and add to 11<br>
+                            These numbers are 15 and −4<br><br>
+                            6<i>x</i>² + 15<i>x</i> − 4<i>x</i> − 10 > 0<br>
+                            3<i>x</i>(2<i>x</i> + 5) − 2(2<i>x</i> + 5) > 0<br>
+                            (3<i>x</i> − 2)(2<i>x</i> + 5) > 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            3<i>x</i> − 2 = 0  →  <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">2</span>
+                                <span style="display: block; padding-top: 2px;">3</span>
+                            </span> = 0.67<br><br>
+                            2<i>x</i> + 5 = 0  →  <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">5</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> = −2.5
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            After factorizing to (ax + b)(cx + d) compared to 0, with <strong>positive x² coefficient:</strong><br><br>
+                            <strong>• If &lt; or ≤ (less than):</strong> Solution is <strong>BETWEEN</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &lt; 0  →  −3 &lt; x &lt; 2<br><br>
+                            <strong>• If &gt; or ≥ (greater than):</strong> Solution is <strong>OUTSIDE</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &gt; 0  →  x &lt; −3 or x &gt; 2<br><br>
+                            <em>Note: This assumes the parabola opens upward (positive x² coefficient). If the x² coefficient is negative, factor it out first and flip the inequality sign.</em>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Apply the sign rule</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −2.5 and <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">2</span>
+                                <span style="display: block; padding-top: 2px;">3</span>
+                            </span> ≈ 0.67<br><br>
+                            
+                            Since the inequality is <strong>&gt; 0</strong> (greater than), the solution is <strong>OUTSIDE</strong> the critical values.<br><br>
+                            
+                            Therefore: <i>x</i> &lt; −2.5  or  <i>x</i> &gt; 0.67
+                        </div>
+                        <div class="step-explanation">Using the sign rule: > 0 means solution is outside the critical values</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph of y = 6x² + 11x − 10</div>
+                        <img src="P1-section-3e-graph1.png" alt="Graph of quadratic showing regions where y > 0">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola crosses the x-axis at x = −2.5 and x = 0.67<br>
+                            The required region where y > 0 is shaded
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-4</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-3</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">-2.5</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="367" y1="45" x2="367" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="367" y="75" text-anchor="middle" font-size="14" fill="#333">0.67</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Left arrow (x < -2.5) - above the line -->
+                            <line x1="50" y1="35" x2="200" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="50,35 60,30 60,40" fill="#667eea"/>
+                            
+                            <!-- Right arrow (x > 2/3) - above the line -->
+                            <line x1="367" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Open circles at critical values -->
+                            <circle cx="200" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="367" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solution regions: x < −2.5 (left arrow) OR x > 0.67 (right arrow)
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> < −2.5 or <i>x</i> > 0.67 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    10 + <i>x</i> − 2<i>x</i>² < 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Rearrange to standard form</div>
+                        <div class="step-content">
+                            10 + <i>x</i> − 2<i>x</i>² < 0<br>
+                            −2<i>x</i>² + <i>x</i> + 10 < 0
+                        </div>
+                        <div class="step-explanation">Rearrange terms in descending order of powers to get standard form <i>ax</i>² + <i>bx</i> + <i>c</i></div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Factor out the negative coefficient</div>
+                        <div class="step-content">
+                            −2<i>x</i>² + <i>x</i> + 10 < 0<br>
+                            −1(2<i>x</i>² − <i>x</i> − 10) < 0<br>
+                            2<i>x</i>² − <i>x</i> − 10 > 0
+                        </div>
+                        <div class="step-explanation">Factor out −1 and flip the inequality sign (multiplying or dividing by a negative reverses the inequality)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need to find two numbers that multiply to (2)(−10) = −20 and add to −1<br>
+                            These numbers are −5 and +4<br><br>
+                            2<i>x</i>² − 5<i>x</i> + 4<i>x</i> − 10 > 0<br>
+                            <i>x</i>(2<i>x</i> − 5) + 2(2<i>x</i> − 5) > 0<br>
+                            (<i>x</i> + 2)(2<i>x</i> − 5) > 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            <i>x</i> + 2 = 0  →  <i>x</i> = −2<br><br>
+                            2<i>x</i> − 5 = 0  →  <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">5</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> = 2.5
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            After factorizing to (ax + b)(cx + d) compared to 0, with <strong>positive x² coefficient:</strong><br><br>
+                            <strong>• If &lt; or ≤ (less than):</strong> Solution is <strong>BETWEEN</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &lt; 0  →  −3 &lt; x &lt; 2<br><br>
+                            <strong>• If &gt; or ≥ (greater than):</strong> Solution is <strong>OUTSIDE</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &gt; 0  →  x &lt; −3 or x &gt; 2<br><br>
+                            <em>Note: This assumes the parabola opens upward (positive x² coefficient). If the x² coefficient is negative, factor it out first and flip the inequality sign.</em>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the sign rule</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −2 and <i>x</i> = 2.5<br><br>
+                            
+                            Since the inequality is <strong>> 0</strong> (greater than), the solution is <strong>OUTSIDE</strong> the critical values.<br><br>
+                            
+                            Therefore: <i>x</i> < −2  or  <i>x</i> > 2.5
+                        </div>
+                        <div class="step-explanation">Using the sign rule: > 0 means solution is outside the critical values</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph of y = 10 + x − 2x²</div>
+                        <img src="P1-section-3e-graph2.png" alt="Graph of y = 10 + x - 2x²">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola crosses the x-axis at x = −2 and x = 2.5<br>
+                            The required region where y < 0 is shaded
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="100" y1="45" x2="100" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="100" y="75" text-anchor="middle" font-size="14" fill="#333">-4</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">-2</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">2.5</text>
+                            
+                            <line x1="500" y1="45" x2="500" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="500" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Solution regions: x < -2 or x > 2.5 -->
+                            <line x1="50" y1="35" x2="200" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <line x1="450" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Open circles at both critical values (not included) -->
+                            <circle cx="200" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="450" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            
+                            <!-- Arrows -->
+                            <polygon points="50,35 60,30 60,40" fill="#667eea"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solution region: x < −2 or x > 2.5
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> < −2  or  <i>x</i> > 2.5 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    <i>x</i>(<i>x</i> + 11) < 3(1 − <i>x</i>²)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Rearrange to standard form</div>
+                        <div class="step-content">
+                            <i>x</i>(<i>x</i> + 11) < 3(1 − <i>x</i>²)<br>
+                            <i>x</i>² + 11<i>x</i> < 3 − 3<i>x</i>²<br>
+                            <i>x</i>² + 3<i>x</i>² + 11<i>x</i> − 3 < 0<br>
+                            4<i>x</i>² + 11<i>x</i> − 3 < 0
+                        </div>
+                        <div class="step-explanation">Expand both sides and collect all terms on the left side</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need to find two numbers that multiply to (4)(−3) = −12 and add to 11<br>
+                            These numbers are 12 and −1<br><br>
+                            4<i>x</i>² + 12<i>x</i> − <i>x</i> − 3 < 0<br>
+                            4<i>x</i>(<i>x</i> + 3) − 1(<i>x</i> + 3) < 0<br>
+                            (4<i>x</i> − 1)(<i>x</i> + 3) < 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            4<i>x</i> − 1 = 0  →  <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">1</span>
+                                <span style="display: block; padding-top: 2px;">4</span>
+                            </span> = 0.25<br><br>
+                            <i>x</i> + 3 = 0  →  <i>x</i> = −3
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            After factorizing to (ax + b)(cx + d) compared to 0, with <strong>positive x² coefficient:</strong><br><br>
+                            <strong>• If &lt; or ≤ (less than):</strong> Solution is <strong>BETWEEN</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &lt; 0  →  −3 &lt; x &lt; 2<br><br>
+                            <strong>• If &gt; or ≥ (greater than):</strong> Solution is <strong>OUTSIDE</strong> the critical values<br>
+                            &nbsp;&nbsp;&nbsp;Example: (x − 2)(x + 3) &gt; 0  →  x &lt; −3 or x &gt; 2<br><br>
+                            <em>Note: This assumes the parabola opens upward (positive x² coefficient). If the x² coefficient is negative, factor it out first and flip the inequality sign.</em>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Apply the sign rule</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −3 and <i>x</i> = <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">1</span>
+                                <span style="display: block; padding-top: 2px;">4</span>
+                            </span> = 0.25<br><br>
+                            
+                            Since the inequality is <strong>&lt; 0</strong> (less than), the solution is <strong>BETWEEN</strong> the critical values.<br><br>
+                            
+                            Therefore: −3 &lt; <i>x</i> &lt; 0.25
+                        </div>
+                        <div class="step-explanation">Using the sign rule: < 0 means solution is between the critical values</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph of y = 4x² + 11x − 3</div>
+                        <img src="P1-section-3e-graph3.png" alt="Graph of quadratic showing regions where y < 0">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola crosses the x-axis at x = −3 and x = 0.25<br>
+                            The required region where y < 0 is shaded
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-5</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-4</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">-3</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="400" y1="45" x2="400" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="400" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">0.25</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <!-- Region between -3 and 1/4 (above the line) -->
+                            <line x1="200" y1="35" x2="450" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Open circles at critical values -->
+                            <circle cx="200" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="450" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solution region: −3 < x < 0.25
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: −3 < <i>x</i> < 0.25 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    Use set notation to describe the set of values of <i>x</i> for which:<br><br>
+                    <i>x</i>² − 2<i>x</i> − 3 < 0 and <i>x</i>² − 3<i>x</i> + 2 > 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Compound Inequalities</div>
+                        <div class="formula-content">
+                            <strong>AND:</strong> Both conditions must be satisfied simultaneously. Solve each inequality separately, then find the intersection (overlap) of the solution sets.
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the first inequality: x² − 2x − 3 < 0</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Factorize the first quadratic</div>
+                        <div class="step-content">
+                            <i>x</i>² − 2<i>x</i> − 3 < 0<br>
+                            (<i>x</i> − 3)(<i>x</i> + 1) < 0
+                        </div>
+                        <div class="step-explanation">Find two numbers that multiply to −3 and add to −2: these are −3 and +1</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find critical values for first inequality</div>
+                        <div class="step-content">
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3<br>
+                            <i>x</i> + 1 = 0  →  <i>x</i> = −1<br><br>
+                            Critical values: <i>x</i> = −1 and <i>x</i> = 3
+                        </div>
+                        <div class="step-explanation">These are the points where the expression equals zero</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            Refer to <strong>Questions 1, 2, and 3</strong> for the complete sign rule explanation.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Apply the sign rule to first inequality</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −1 and <i>x</i> = 3<br><br>
+                            
+                            Since the inequality is <strong>&lt; 0</strong> (less than), the solution is <strong>BETWEEN</strong> the critical values.<br><br>
+                            
+                            First inequality solution: −1 &lt; <i>x</i> &lt; 3
+                        </div>
+                        <div class="step-explanation">Using the sign rule: < 0 means solution is between the critical values</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>First inequality result: −1 < <i>x</i> < 3</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Solving the second inequality: x² − 3x + 2 > 0</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 4: Factorize the second quadratic</div>
+                        <div class="step-content">
+                            <i>x</i>² − 3<i>x</i> + 2 > 0<br>
+                            (<i>x</i> − 1)(<i>x</i> − 2) > 0
+                        </div>
+                        <div class="step-explanation">Find two numbers that multiply to +2 and add to −3: these are −1 and −2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find critical values for second inequality</div>
+                        <div class="step-content">
+                            <i>x</i> − 1 = 0  →  <i>x</i> = 1<br>
+                            <i>x</i> − 2 = 0  →  <i>x</i> = 2<br><br>
+                            Critical values: <i>x</i> = 1 and <i>x</i> = 2
+                        </div>
+                        <div class="step-explanation">These are the points where the expression equals zero</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            Refer to <strong>Questions 1, 2, and 3</strong> for the complete sign rule explanation.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Apply the sign rule to second inequality</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = 1 and <i>x</i> = 2<br><br>
+                            
+                            Since the inequality is <strong>&gt; 0</strong> (greater than), the solution is <strong>OUTSIDE</strong> the critical values.<br><br>
+                            
+                            Second inequality solution: <i>x</i> &lt; 1  or  <i>x</i> &gt; 2
+                        </div>
+                        <div class="step-explanation">Using the sign rule: > 0 means solution is outside the critical values</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Second inequality result: <i>x</i> < 1 or <i>x</i> > 2</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the intersection (AND condition)</div>
+                        <div class="step-content">
+                            First inequality: <span style="color: #d32f2f; font-weight: 600;">−1 < <i>x</i> < 3</span><br>
+                            Second inequality: <span style="color: #4caf50; font-weight: 600;"><i>x</i> < 1</span> or <span style="color: #9c27b0; font-weight: 600;"><i>x</i> > 2</span><br><br>
+                            <strong>Intersection:</strong> Values of x must satisfy BOTH conditions:<br>
+                            • From <span style="color: #d32f2f; font-weight: 600;">−1 < <i>x</i> < 3</span> AND <span style="color: #4caf50; font-weight: 600;"><i>x</i> < 1</span>: we get −1 < <i>x</i> < 1<br>
+                            &nbsp;&nbsp;<em style="color: #666; font-size: 0.95em;">The <span style="color: #d32f2f; font-weight: 600;">first inequality</span> allows values from −1, but the <span style="color: #4caf50; font-weight: 600;">second inequality</span> restricts us to stop at 1</em><br><br>
+                            • From <span style="color: #d32f2f; font-weight: 600;">−1 < <i>x</i> < 3</span> AND <span style="color: #9c27b0; font-weight: 600;"><i>x</i> > 2</span>: we get 2 < <i>x</i> < 3<br>
+                            &nbsp;&nbsp;<em style="color: #666; font-size: 0.95em;">The <span style="color: #d32f2f; font-weight: 600;">first inequality</span> allows us to finish at 3, but the <span style="color: #9c27b0; font-weight: 600;">second inequality</span> prevents us from starting at −1, so we start at 2</em>
+                        </div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph Analysis</div>
+                        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph4a.png" alt="Graph of first inequality" style="width: 150px; height: 150px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    y = x² − 2x − 3
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph4b.png" alt="Graph of second inequality" style="width: 150px; height: 150px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    y = x² − 3x + 2
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph4c.png" alt="Combined graph showing both inequalities" style="width: 150px; height: 150px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    Both graphs combined
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 0.9em; margin-top: 15px; font-style: italic;">
+                            In the combined graph (right), identify the overlapping shaded region where both conditions are satisfied simultaneously
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-2</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="250" y1="45" x2="250" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="250" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="350" y1="45" x2="350" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="350" y="75" text-anchor="middle" font-size="14" fill="#333">1</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <!-- First region: -1 < x < 1 -->
+                            <line x1="150" y1="35" x2="350" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Second region: 2 < x < 3 -->
+                            <line x1="450" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Open circles at all boundary points -->
+                            <circle cx="150" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="350" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="450" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="550" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Two solution regions: −1 < x < 1 OR 2 < x < 3
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: −1 < <i>x</i> < 1 or 2 < <i>x</i> < 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    Given that <i>x</i> ≠ 0, find the set of values of <i>x</i> for which:<br><br>
+                    <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">6</span>
+                        <span style="display: block; padding-top: 2px;"><i>x</i>²</span>
+                    </span> + <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                        <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">7</span>
+                        <span style="display: block; padding-top: 2px;"><i>x</i></span>
+                    </span> ≤ 3
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Multiply through by x²</div>
+                        <div class="step-content">
+                            <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">6</span>
+                                <span style="display: block; padding-top: 2px;"><i>x</i>²</span>
+                            </span> + <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">7</span>
+                                <span style="display: block; padding-top: 2px;"><i>x</i></span>
+                            </span> ≤ 3<br><br>
+                            
+                            Multiply both sides by <i>x</i>² (note: <i>x</i>² is always positive, so inequality sign stays the same):<br>
+                            6 + 7<i>x</i> ≤ 3<i>x</i>²
+                        </div>
+                        <div class="step-explanation">Since x² > 0 for all x ≠ 0, we don't reverse the inequality</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange to standard form</div>
+                        <div class="step-content">
+                            6 + 7<i>x</i> ≤ 3<i>x</i>²<br>
+                            0 ≤ 3<i>x</i>² − 7<i>x</i> − 6<br>
+                            3<i>x</i>² − 7<i>x</i> − 6 ≥ 0
+                        </div>
+                        <div class="step-explanation">Rearrange with x² term positive on the left</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need to find two numbers that multiply to (3)(−6) = −18 and add to −7<br>
+                            These numbers are −9 and 2<br><br>
+                            3<i>x</i>² − 9<i>x</i> + 2<i>x</i> − 6 ≥ 0<br>
+                            3<i>x</i>(<i>x</i> − 3) + 2(<i>x</i> − 3) ≥ 0<br>
+                            (3<i>x</i> + 2)(<i>x</i> − 3) ≥ 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            3<i>x</i> + 2 = 0  →  <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">2</span>
+                                <span style="display: block; padding-top: 2px;">3</span>
+                            </span> = −0.67<br><br>
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            Refer to <strong>Questions 1, 2, and 3</strong> for the complete sign rule explanation and examples.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Apply the sign rule</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −0.67 and <i>x</i> = 3<br><br>
+                            
+                            Since the inequality is <strong>≥ 0</strong> (greater than or equal to), the solution is <strong>OUTSIDE</strong> the critical values (including the endpoints).<br><br>
+                            
+                            Therefore: <i>x</i> ≤ −0.67  or  <i>x</i> ≥ 3
+                        </div>
+                        <div class="step-explanation">Using the sign rule: ≥ 0 means solution is outside the critical values, including the boundary points</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph of y = 3x² − 7x − 6</div>
+                        <img src="P1-section-3e-graph5.png" alt="Graph of quadratic showing regions where y ≥ 0">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The parabola crosses the x-axis at x = −0.67 and x = 3<br>
+                            The required region where y ≥ 0 is shaded
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14" fill="#333">-2</text>
+                            
+                            <line x1="150" y1="45" x2="150" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="217" y1="45" x2="217" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="217" y="75" text-anchor="middle" font-size="14" fill="#333">-0.67</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="400" y1="45" x2="400" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="400" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="500" y1="45" x2="500" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="500" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Left arrow (x ≤ -0.67) - above the line -->
+                            <line x1="50" y1="35" x2="217" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="50,35 60,30 60,40" fill="#667eea"/>
+                            
+                            <!-- Right arrow (x ≥ 3) - above the line -->
+                            <line x1="500" y1="35" x2="550" y2="35" stroke="#667eea" stroke-width="4"/>
+                            <polygon points="550,35 540,30 540,40" fill="#667eea"/>
+                            
+                            <!-- Filled circles at critical values (included) -->
+                            <circle cx="217" cy="35" r="6" fill="#667eea"/>
+                            <circle cx="500" cy="35" r="6" fill="#667eea"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solution regions: x ≤ −0.67 (left arrow) OR x ≥ 3 (right arrow)
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: <i>x</i> ≤ −0.67 or <i>x</i> ≥ 3 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title">Question 6:</div>
+                <div class="question-text">
+                    Find the set of values of <i>x</i> for which:<br><br>
+                    <strong>a</strong>&nbsp; 2(3<i>x</i> − 1) < 4 − 3<i>x</i><br>
+                    <strong>b</strong>&nbsp; 2<i>x</i>² − 5<i>x</i> − 3 < 0<br>
+                    <strong>c</strong>&nbsp; both 2(3<i>x</i> − 1) < 4 − 3<i>x</i> <strong>and</strong> 2<i>x</i>² − 5<i>x</i> − 3 < 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (a): Solving 2(3x − 1) < 4 − 3x</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the left side</div>
+                        <div class="step-content">
+                            2(3<i>x</i> − 1) < 4 − 3<i>x</i><br>
+                            6<i>x</i> − 2 < 4 − 3<i>x</i>
+                        </div>
+                        <div class="step-explanation">Distribute 2 across the bracket</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Collect x terms on one side</div>
+                        <div class="step-content">
+                            6<i>x</i> + 3<i>x</i> − 2 < 4<br>
+                            9<i>x</i> − 2 < 4
+                        </div>
+                        <div class="step-explanation">Add 3x to both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Solve for x</div>
+                        <div class="step-content">
+                            9<i>x</i> < 4 + 2<br>
+                            9<i>x</i> < 6<br>
+                            <i>x</i> < <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">6</span>
+                                <span style="display: block; padding-top: 2px;">9</span>
+                            </span><br>
+                            <i>x</i> < <span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">2</span>
+                                <span style="display: block; padding-top: 2px;">3</span>
+                            </span> = 0.67
+                        </div>
+                        <div class="step-explanation">Add 2 to both sides, divide by 9, and simplify</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (a) result: <i>x</i> < 0.67</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (b): Solving 2x² − 5x − 3 < 0</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 4: Factorize the quadratic</div>
+                        <div class="step-content">
+                            We need to find two numbers that multiply to (2)(−3) = −6 and add to −5<br>
+                            These numbers are −6 and 1<br><br>
+                            2<i>x</i>² − 6<i>x</i> + <i>x</i> − 3 < 0<br>
+                            2<i>x</i>(<i>x</i> − 3) + 1(<i>x</i> − 3) < 0<br>
+                            (2<i>x</i> + 1)(<i>x</i> − 3) < 0
+                        </div>
+                        <div class="step-explanation">Split the middle term and factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Find the critical values</div>
+                        <div class="step-content">
+                            Set each factor equal to zero:<br><br>
+                            2<i>x</i> + 1 = 0  →  <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">1</span>
+                                <span style="display: block; padding-top: 2px;">2</span>
+                            </span> = −0.5<br><br>
+                            <i>x</i> − 3 = 0  →  <i>x</i> = 3
+                        </div>
+                        <div class="step-explanation">The critical values divide the number line into regions</div>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Sign Rule for Quadratic Inequalities</div>
+                        <div class="formula-content">
+                            Refer to <strong>Questions 1, 2, and 3</strong> for the complete sign rule explanation.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Apply the sign rule</div>
+                        <div class="step-content">
+                            Critical values: <i>x</i> = −0.5 and <i>x</i> = 3<br><br>
+                            
+                            Since the inequality is <strong>< 0</strong> (less than), the solution is <strong>BETWEEN</strong> the critical values.<br><br>
+                            
+                            Therefore: −0.5 < <i>x</i> < 3
+                        </div>
+                        <div class="step-explanation">Using the sign rule: < 0 means solution is between the critical values</div>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Part (b) result: −0.5 < <i>x</i> < 3</strong>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.95em;">
+                        <strong>📌 Part (c): Finding the intersection (AND condition)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find the intersection of both solutions</div>
+                        <div class="step-content">
+                            Part (a): <span style="color: #2196f3; font-weight: 600;"><i>x</i> < 0.67</span><br>
+                            Part (b): <span style="color: #d32f2f; font-weight: 600;">−0.5 < <i>x</i> < 3</span><br><br>
+                            <strong>Intersection:</strong> Values of x must satisfy BOTH conditions:<br>
+                            −0.5 < <i>x</i> < 0.67<br>
+                            &nbsp;&nbsp;<em style="color: #666; font-size: 0.95em;">The <span style="color: #d32f2f; font-weight: 600;">Part (b)</span> (quadratic) allows values from −0.5, but <span style="color: #2196f3; font-weight: 600;">Part (a)</span> (linear) restricts us to stop at 0.67</em>
+                        </div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">📊 Graph Analysis</div>
+                        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph6a.png" alt="Graph showing linear inequality" style="width: 250px; height: 250px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    Linear: x < 0.67
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph6b.png" alt="Graph of quadratic inequality" style="width: 250px; height: 250px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    Quadratic: y = 2x² − 5x − 3
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <img src="P1-section-3e-graph6c.png" alt="Combined graph showing both inequalities" style="width: 250px; height: 250px; object-fit: contain; display: block; margin: 0 auto;">
+                                <div style="color: #666; font-size: 0.85em; margin-top: 8px; font-weight: 600;">
+                                    Both combined
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 0.9em; margin-top: 15px; font-style: italic;">
+                            In the combined graph (right), identify the overlapping shaded region where both conditions are satisfied simultaneously
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-weight: 600; color: #667eea; margin-bottom: 15px; text-align: center;">📊 Number Line Representation</div>
+                        <svg viewBox="0 0 600 100" style="width: 100%; max-width: 600px; height: 100px; display: block; margin: 0 auto;">
+                            <!-- Main line -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                            
+                            <!-- Tick marks -->
+                            <line x1="100" y1="45" x2="100" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="100" y="75" text-anchor="middle" font-size="14" fill="#333">-1</text>
+                            
+                            <line x1="200" y1="45" x2="200" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="200" y="75" text-anchor="middle" font-size="14" fill="#333">-0.5</text>
+                            
+                            <line x1="300" y1="45" x2="300" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="300" y="75" text-anchor="middle" font-size="14" fill="#333">0</text>
+                            
+                            <line x1="367" y1="45" x2="367" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="367" y="75" text-anchor="middle" font-size="14" fill="#333">0.67</text>
+                            
+                            <line x1="450" y1="45" x2="450" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="450" y="75" text-anchor="middle" font-size="14" fill="#333">2</text>
+                            
+                            <line x1="500" y1="45" x2="500" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="500" y="75" text-anchor="middle" font-size="14" fill="#333">3</text>
+                            
+                            <line x1="550" y1="45" x2="550" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="550" y="75" text-anchor="middle" font-size="14" fill="#333">4</text>
+                            
+                            <!-- Intersection region: -0.5 < x < 0.67 -->
+                            <line x1="200" y1="35" x2="367" y2="35" stroke="#667eea" stroke-width="4"/>
+                            
+                            <!-- Open circles at both endpoints (not included) -->
+                            <circle cx="200" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                            <circle cx="367" cy="35" r="6" fill="white" stroke="#667eea" stroke-width="3"/>
+                        </svg>
+                        <div style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solution region: −0.5 < x < 0.67
+                        </div>
+                        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.9em;">
+                            <strong>📝 Note:</strong> The circle is <strong>solid (filled)</strong> when using ≤ or ≥ symbols, indicating the value is included. The circle is <strong>hollow (open)</strong> when using &lt; or &gt; symbols, indicating the value is not included.
+                        </div>
+                    </div>
+
+                    <div style="background: #ffe6e6; border-left: 4px solid #d32f2f; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                        <div style="color: #d32f2f; font-weight: 600; font-size: 0.95em;">
+                            💡 <strong>Exam Tip:</strong> Sketching the graph and drawing a number line is not required in exams unless specifically asked. However, doing so can help you visualize the solution.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer:<br>
+                        <strong>(a)</strong> <i>x</i> < 0.67<br>
+                        <strong>(b)</strong> −0.5 < <i>x</i> < 3<br>
+                        <strong>(c)</strong> −0.5 < <i>x</i> < 0.67 ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

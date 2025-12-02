@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3G: Regions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .step-explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 5px;
+            font-style: italic;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .graph-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .graph-placeholder img {
+            max-width: 400px;
+            width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .graph-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Menu</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link active">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3G: Regions</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Regions</h3>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    On a coordinate grid, shade the region that satisfies the inequalities:<br>
+                    <i>x</i> ≥ −1, <i>y</i> + <i>x</i> < 4, 2<i>x</i> + <i>y</i> ≤ 5 and <i>y</i> > −2
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Key Rules for Shading Regions</div>
+                        <div class="formula-content">
+                            <strong>Understanding inequalities on a coordinate grid:</strong><br>
+                            • <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>below</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            • <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>above</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            <strong>Line representation:</strong><br>
+                            • If <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>dotted line</strong><br>
+                            • If <strong><i>y</i> ≥ <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> ≤ <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>solid line</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Inequality 1</div>
+                        <div class="step-content">
+                            <strong>Inequality 1:</strong> <i>x</i> ≥ −1<br>
+                            <strong>Boundary:</strong> <i>x</i> = −1 <strong>(solid line)</strong><br>
+                            This is a vertical line passing through (−1, 0)<br>
+                            • Region: <i>x</i> ≥ −1 means to the right of the line
+                        </div>
+                        <div class="step-explanation">Identify the boundary line and which region satisfies the inequality</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 1</div>
+                        <img src="P1-section-3g-graph1a.png" alt="Graph showing x ≥ −1" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>x</i> ≥ −1
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Inequality 2</div>
+                        <div class="step-content">
+                            <strong>Inequality 2:</strong> <i>y</i> + <i>x</i> < 4<br>
+                            Rearrange: <i>y</i> < 4 − <i>x</i> → <i>y</i> < −<i>x</i> + 4<br>
+                            <strong>Boundary:</strong> <i>y</i> = −<i>x</i> + 4 <strong>(dotted line)</strong><br>
+                            • y-intercept: When <i>x</i> = 0, <i>y</i> = 4, Point: (0, 4)<br>
+                            • x-intercept: When <i>y</i> = 0, 0 = −<i>x</i> + 4 → <i>x</i> = 4, Point: (4, 0)<br>
+                            • Region: <i>y</i> < −<i>x</i> + 4 means below the line
+                        </div>
+                        <div class="step-explanation">Rearrange the inequality, identify the boundary line and region</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 2</div>
+                        <img src="P1-section-3g-graph1b.png" alt="Graph showing y < −x + 4" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>y</i> < −<i>x</i> + 4
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Inequality 3</div>
+                        <div class="step-content">
+                            <strong>Inequality 3:</strong> 2<i>x</i> + <i>y</i> ≤ 5<br>
+                            Rearrange: <i>y</i> ≤ 5 − 2<i>x</i> → <i>y</i> ≤ −2<i>x</i> + 5<br>
+                            <strong>Boundary:</strong> <i>y</i> = −2<i>x</i> + 5 <strong>(solid line)</strong><br>
+                            • y-intercept: When <i>x</i> = 0, <i>y</i> = 5, Point: (0, 5)<br>
+                            • x-intercept: When <i>y</i> = 0, 0 = −2<i>x</i> + 5 → <i>x</i> = 2.5, Point: (2.5, 0)<br>
+                            • Region: <i>y</i> ≤ −2<i>x</i> + 5 means below the line
+                        </div>
+                        <div class="step-explanation">Rearrange the inequality, identify the boundary line and region</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 3</div>
+                        <img src="P1-section-3g-graph1c.png" alt="Graph showing y ≤ −2x + 5" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>y</i> ≤ −2<i>x</i> + 5
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Inequality 4</div>
+                        <div class="step-content">
+                            <strong>Inequality 4:</strong> <i>y</i> > −2<br>
+                            <strong>Boundary:</strong> <i>y</i> = −2 <strong>(dotted line)</strong><br>
+                            This is a horizontal line passing through (0, −2)<br>
+                            • Region: <i>y</i> > −2 means above the line
+                        </div>
+                        <div class="step-explanation">Identify the boundary line and which region satisfies the inequality</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 4</div>
+                        <img src="P1-section-3g-graph1d.png" alt="Graph showing y > −2" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>y</i> > −2
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Combine the graphs</div>
+                        <div class="step-content">
+                            The required region satisfies ALL four inequalities simultaneously:<br><br>
+                            • <i>x</i> ≥ −1 (right of <i>x</i> = −1)<br>
+                            • <i>y</i> < −<i>x</i> + 4 (below <i>y</i> = −<i>x</i> + 4)<br>
+                            • <i>y</i> ≤ −2<i>x</i> + 5 (below <i>y</i> = −2<i>x</i> + 5)<br>
+                            • <i>y</i> > −2 (above <i>y</i> = −2)<br><br>
+                            <strong>The shaded region is where all four conditions overlap</strong>
+                        </div>
+                        <div class="step-explanation">The solution region is the intersection of all four individual regions</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Combined Graph - Final Answer</div>
+                        <img src="P1-section-3g-graph1e.png" alt="Combined graph showing shaded region" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The shaded region shows where all four inequalities are satisfied simultaneously.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: The shaded region on the graph represents all points (<i>x</i>, <i>y</i>) that satisfy all four inequalities simultaneously ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    On a coordinate grid, shade the region that satisfies the inequalities:<br>
+                    <i>y</i> < (3 − <i>x</i>)(2 + <i>x</i>) and <i>y</i> + <i>x</i> ≥ 3
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Key Rules for Shading Regions</div>
+                        <div class="formula-content">
+                            <strong>Understanding inequalities on a coordinate grid:</strong><br>
+                            • <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>below</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            • <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>above</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            <strong>Line representation:</strong><br>
+                            • If <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>dotted line</strong><br>
+                            • If <strong><i>y</i> ≥ <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> ≤ <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>solid line</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Inequality 1</div>
+                        <div class="step-content">
+                            <strong>Inequality 1:</strong> <i>y</i> < (3 − <i>x</i>)(2 + <i>x</i>)<br>
+                            Expand the right side:<br>
+                            (3 − <i>x</i>)(2 + <i>x</i>) = 3(2) + 3<i>x</i> − 2<i>x</i> − <i>x</i>²<br>
+                            = 6 + 3<i>x</i> − 2<i>x</i> − <i>x</i>²<br>
+                            = 6 + <i>x</i> − <i>x</i>²<br>
+                            = −<i>x</i>² + <i>x</i> + 6<br>
+                            Therefore: <i>y</i> < −<i>x</i>² + <i>x</i> + 6<br>
+                            <strong>Boundary:</strong> <i>y</i> = −<i>x</i>² + <i>x</i> + 6 <strong>(dotted line)</strong><br>
+                            This is a parabola opening downward (negative <i>x</i>² coefficient)<br>
+                            • y-intercept: When <i>x</i> = 0, <i>y</i> = 6, Point: (0, 6)<br>
+                            • x-intercepts: When <i>y</i> = 0, 0 = −<i>x</i>² + <i>x</i> + 6<br>
+                            &nbsp;&nbsp;Factorizing: 0 = −(<i>x</i>² − <i>x</i> − 6) = −(<i>x</i> − 3)(<i>x</i> + 2)<br>
+                            &nbsp;&nbsp;<i>x</i> = 3 or <i>x</i> = −2<br>
+                            &nbsp;&nbsp;Points: (−2, 0) and (3, 0)<br>
+                            • Vertex: Using <i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;"><i>b</i></span>
+                                <span style="display: block; padding-top: 2px;">2<i>a</i></span>
+                            </span> where <i>a</i> = −1, <i>b</i> = 1, <i>c</i> = 6<br>
+                            &nbsp;&nbsp;<i>x</i> = −<span style="display: inline-block; vertical-align: middle; text-align: center;">
+                                <span style="display: block; border-bottom: 1px solid #000; padding-bottom: 2px;">1</span>
+                                <span style="display: block; padding-top: 2px;">2(−1)</span>
+                            </span> = 0.5<br>
+                            &nbsp;&nbsp;Substitute back: <i>y</i> = −(0.5)² + 0.5 + 6 = −0.25 + 0.5 + 6 = 6.25<br>
+                            &nbsp;&nbsp;Vertex (maximum point): (0.5, 6.25)<br>
+                            • Region: <i>y</i> < −<i>x</i>² + <i>x</i> + 6 means below the parabola
+                        </div>
+                        <div class="step-explanation">Expand and rearrange the inequality to identify the boundary curve and region</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 1</div>
+                        <img src="P1-section-3g-graph2a.png" alt="Graph showing y < −x² + x + 6" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>y</i> < −<i>x</i>² + <i>x</i> + 6
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Inequality 2</div>
+                        <div class="step-content">
+                            <strong>Inequality 2:</strong> <i>y</i> + <i>x</i> ≥ 3<br>
+                            Rearrange: <i>y</i> ≥ 3 − <i>x</i> → <i>y</i> ≥ −<i>x</i> + 3<br>
+                            <strong>Boundary:</strong> <i>y</i> = −<i>x</i> + 3 <strong>(solid line)</strong><br>
+                            • y-intercept: When <i>x</i> = 0, <i>y</i> = 3, Point: (0, 3)<br>
+                            • x-intercept: When <i>y</i> = 0, 0 = −<i>x</i> + 3 → <i>x</i> = 3, Point: (3, 0)<br>
+                            • Region: <i>y</i> ≥ −<i>x</i> + 3 means above the line
+                        </div>
+                        <div class="step-explanation">Rearrange the inequality to identify the boundary line and region</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 2</div>
+                        <img src="P1-section-3g-graph2b.png" alt="Graph showing y ≥ −x + 3" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Graph showing <i>y</i> ≥ −<i>x</i> + 3
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Combine the graphs</div>
+                        <div class="step-content">
+                            The required region satisfies BOTH inequalities simultaneously:<br><br>
+                            • <i>y</i> < −<i>x</i>² + <i>x</i> + 6 (below the parabola)<br>
+                            • <i>y</i> ≥ −<i>x</i> + 3 (above the line)<br><br>
+                            <strong>The shaded region is where both conditions overlap</strong>
+                        </div>
+                        <div class="step-explanation">The solution region is the intersection of both individual regions</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Combined Graph - Final Answer</div>
+                        <img src="P1-section-3g-graph2c.png" alt="Combined graph showing shaded region" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The shaded region shows where both inequalities are satisfied simultaneously.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: The shaded region on the graph represents all points (<i>x</i>, <i>y</i>) that satisfy both inequalities simultaneously ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    On a coordinate grid, shade the region that satisfies the inequalities:<br>
+                    <i>y</i> > (<i>x</i> − 3)², <i>y</i> + <i>x</i> ≥ 5 and <i>y</i> < <i>x</i> − 1
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Key Rules for Shading Regions</div>
+                        <div class="formula-content">
+                            <strong>Understanding inequalities on a coordinate grid:</strong><br>
+                            • <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>below</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            • <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>above</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            <strong>Line representation:</strong><br>
+                            • If <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>dotted line</strong><br>
+                            • If <strong><i>y</i> ≥ <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> ≤ <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>solid line</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Inequality 1</div>
+                        <div class="step-content">
+                            <strong>Inequality:</strong> <i>y</i> > (<i>x</i> − 3)²<br>
+                            <strong>Boundary:</strong> <i>y</i> = (<i>x</i> − 3)² <strong>(dotted line)</strong><br><br>
+                            
+                            <strong>Vertex:</strong><br>
+                            The equation is in vertex form <i>y</i> = (<i>x</i> − <i>h</i>)² + <i>k</i> (where <i>h</i> and <i>k</i> are the coordinates of the vertex).<br>
+                            Here, <i>y</i> = (<i>x</i> − 3)² + 0, so <i>h</i> = 3 and <i>k</i> = 0.<br>
+                            • Vertex: (3, 0) (Minimum point).<br><br>
+                            
+                            <strong>Intercepts:</strong><br>
+                            • x-intercept: Set <i>y</i> = 0. (<i>x</i> − 3)² = 0 → <i>x</i> = 3. Point: (3, 0).<br>
+                            • y-intercept: Set <i>x</i> = 0. <i>y</i> = (0 − 3)² = 9. Point: (0, 9).<br><br>
+
+                            • <strong>Region:</strong> <i>y</i> > (<i>x</i> − 3)² means the area <strong>above/inside</strong> the parabola.
+                        </div>
+                        <div class="step-explanation">Identify the boundary curve using vertex form and intercepts, then determine the region direction.</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 1</div>
+                        <img src="P1-section-3g-graph3a.png" alt="Graph showing y > (x-3)²" style="width: 200px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Dotted parabola, shaded inside.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Inequality 2</div>
+                        <div class="step-content">
+                            <strong>Inequality:</strong> <i>y</i> + <i>x</i> ≥ 5<br>
+                            Rearrange: <i>y</i> ≥ 5 − <i>x</i><br>
+                            <strong>Boundary:</strong> <i>y</i> = 5 − <i>x</i> <strong>(solid line)</strong><br>
+                            • Intercepts: (0, 5) and (5, 0).<br>
+                            • <strong>Region:</strong> <i>y</i> ≥ 5 − <i>x</i> means the area <strong>above</strong> the line.
+                        </div>
+                        <div class="step-explanation">Rearrange to y = mx + c form to find the region easily.</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 2</div>
+                        <img src="P1-section-3g-graph3b.png" alt="Graph showing y ≥ 5-x" style="width: 200px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Solid line passing through (0,5) and (5,0), shaded above.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Inequality 3</div>
+                        <div class="step-content">
+                            <strong>Inequality:</strong> <i>y</i> < <i>x</i> − 1<br>
+                            <strong>Boundary:</strong> <i>y</i> = <i>x</i> − 1 <strong>(dotted line)</strong><br>
+                            • Intercepts: (0, -1) and (1, 0).<br>
+                            • <strong>Region:</strong> <i>y</i> < <i>x</i> − 1 means the area <strong>below</strong> the line.
+                        </div>
+                        <div class="step-explanation">Identify the boundary line type (dotted because strictly less than) and region.</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Graph for Inequality 3</div>
+                        <img src="P1-section-3g-graph3c.png" alt="Graph showing y < x-1" style="width: 200px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            Dotted line with positive gradient, shaded below.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Combine the graphs</div>
+                        <div class="step-content">
+                            The required region satisfies ALL three inequalities simultaneously:<br><br>
+                            • <i>y</i> > (<i>x</i> − 3)² (inside/above the dotted parabola)<br>
+                            • <i>y</i> ≥ 5 − <i>x</i> (above the solid line)<br>
+                            • <i>y</i> < <i>x</i> − 1 (below the dotted line)<br><br>
+                            <strong>The shaded region is where all three conditions overlap</strong>
+                        </div>
+                        <div class="step-explanation">The solution region is the intersection of all individual regions</div>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="graph-title">Combined Graph - Final Answer</div>
+                        <img src="P1-section-3g-graph3d.png" alt="Combined graph showing final shaded region" style="width: 250px; height: auto;">
+                        <div style="color: #666; font-size: 0.9em; margin-top: 10px; font-style: italic;">
+                            The shaded region is "trapped" between the two lines and the parabola.
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: The shaded region on the graph represents all points (<i>x</i>, <i>y</i>) that satisfy all three inequalities simultaneously ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    The sketch shows the graphs of the straight lines with equations:<br>
+                    <i>y</i> = <i>x</i> + 1, <i>y</i> = 7 − <i>x</i> and <i>x</i> = 1<br><br>
+                    <strong>a</strong> Work out the coordinates of the points of intersection of the functions.<br>
+                    <strong>b</strong> Write down the set of inequalities that represent the shaded region shown in the sketch.<br><br>
+                    <img src="P1-section-3g-graph4.png" alt="Sketch of the graph showing three intersecting lines forming a shaded triangular region" style="width: 250px; height: auto; display: block; margin: 15px auto; border-radius: 8px;">
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Coordinates of Intersection</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the three boundary lines</div>
+                        <div class="step-content">
+                            Line 1: <i>x</i> = 1 (Vertical line)<br>
+                            Line 2: <i>y</i> = <i>x</i> + 1 (Line with positive gradient, passing through -1 on x-axis)<br>
+                            Line 3: <i>y</i> = 7 − <i>x</i> (Line with negative gradient, passing through 7 on x-axis)
+                        </div>
+                        <div class="step-explanation">Associate the equations with the visual lines on the graph.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Intersection of x = 1 and y = x + 1</div>
+                        <div class="step-content">
+                            Substitute <i>x</i> = 1 into <i>y</i> = <i>x</i> + 1:<br>
+                            <i>y</i> = 1 + 1 = 2<br>
+                            <strong>Point A: (1, 2)</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Intersection of x = 1 and y = 7 − x</div>
+                        <div class="step-content">
+                            Substitute <i>x</i> = 1 into <i>y</i> = 7 − <i>x</i>:<br>
+                            <i>y</i> = 7 − 1 = 6<br>
+                            <strong>Point B: (1, 6)</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Intersection of y = x + 1 and y = 7 − x</div>
+                        <div class="step-content">
+                            Set the two expressions for <i>y</i> equal to each other:<br>
+                            <i>x</i> + 1 = 7 − <i>x</i><br>
+                            2<i>x</i> = 6<br>
+                            <i>x</i> = 3<br><br>
+                            Substitute <i>x</i> = 3 back into either equation:<br>
+                            <i>y</i> = 3 + 1 = 4<br>
+                            <strong>Point C: (3, 4)</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Set of Inequalities</strong>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Key Rules for Shading Regions</div>
+                        <div class="formula-content">
+                            <strong>Understanding inequalities on a coordinate grid:</strong><br>
+                            • <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>below</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            • <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>above</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            <strong>Line representation:</strong><br>
+                            • If <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>dotted line</strong><br>
+                            • If <strong><i>y</i> ≥ <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> ≤ <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>solid line</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Analyze the vertical boundary (x = 1)</div>
+                        <div class="step-content">
+                            The shaded region is to the <strong>right</strong> of the line <i>x</i> = 1.<br>
+                            The line is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>x</i> ≥ 1
+                        </div>
+                        <div class="step-explanation">Right means greater than (>), Left means less than (<).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Analyze the bottom boundary (y = x + 1)</div>
+                        <div class="step-content">
+                            The shaded region is <strong>above</strong> the line <i>y</i> = <i>x</i> + 1.<br>
+                            The line is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>y</i> ≥ <i>x</i> + 1
+                        </div>
+                        <div class="step-explanation">Above means greater than (>), Below means less than (<).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Analyze the top boundary (y = 7 − x)</div>
+                        <div class="step-content">
+                            The shaded region is <strong>below</strong> the line <i>y</i> = 7 − <i>x</i>.<br>
+                            The line is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>y</i> ≤ 7 − <i>x</i>
+                        </div>
+                        <div class="step-explanation">Above means greater than (>), Below means less than (<).</div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer:<br>
+                        <strong>a</strong> The points of intersection are (1, 2), (1, 6) and (3, 4).<br>
+                        <strong>b</strong> The inequalities are <i>x</i> ≥ 1, <i>y</i> ≥ <i>x</i> + 1 and <i>y</i> ≤ 7 − <i>x</i>. ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    The sketch shows the graphs of the curves with equations:<br>
+                    <i>y</i> = 2 − 5<i>x</i> − <i>x</i>², 2<i>x</i> + <i>y</i> = 0 and <i>x</i> + <i>y</i> = 4<br><br>
+                    Write down the set of inequalities that represent the shaded region shown in the sketch.<br><br>
+                    <img src="P1-section-3g-graph5.png" alt="Sketch of the graph showing a shaded region bounded by a parabola and two lines" style="width: 250px; height: auto; display: block; margin: 15px auto; border-radius: 8px;">
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">📏 Key Rules for Shading Regions</div>
+                        <div class="formula-content">
+                            <strong>Understanding inequalities on a coordinate grid:</strong><br>
+                            • <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>below</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            • <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> represents the points on the coordinate grid <strong>above</strong> the curve <i>y</i> = <i>f</i>(<i>x</i>)<br>
+                            <strong>Line representation:</strong><br>
+                            • If <strong><i>y</i> > <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> < <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>dotted line</strong><br>
+                            • If <strong><i>y</i> ≥ <i>f</i>(<i>x</i>)</strong> or <strong><i>y</i> ≤ <i>f</i>(<i>x</i>)</strong> then the curve <i>y</i> = <i>f</i>(<i>x</i>) is represented by a <strong>solid line</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the three boundaries</div>
+                        <div class="step-content">
+                            Curve 1: <i>y</i> = 2 − 5<i>x</i> − <i>x</i>² (Parabola opening downwards)<br>
+                            Line 1: 2<i>x</i> + <i>y</i> = 0 (Steeper line passing through origin)<br>
+                            Line 2: <i>x</i> + <i>y</i> = 4 (Line passing through (0,4) and (4,0))
+                        </div>
+                        <div class="step-explanation">Match the given equations to the curves on the graph.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Analyze the parabola (y = 2 − 5x − x²)</div>
+                        <div class="step-content">
+                            The shaded region is <strong>below</strong> the curve.<br>
+                            The curve is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>y</i> ≤ 2 − 5<i>x</i> − <i>x</i>²
+                        </div>
+                        <div class="step-explanation">Below means less than (<).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Analyze the first line (2x + y = 0)</div>
+                        <div class="step-content">
+                            Rearrange to: <i>y</i> = −2<i>x</i><br>
+                            The shaded region is <strong>above</strong> this line.<br>
+                            The line is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>y</i> ≥ −2<i>x</i> (or 2<i>x</i> + <i>y</i> ≥ 0)
+                        </div>
+                        <div class="step-explanation">Above means greater than (>).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Analyze the second line (x + y = 4)</div>
+                        <div class="step-content">
+                            Rearrange to: <i>y</i> = 4 − <i>x</i><br>
+                            The shaded region is <strong>below</strong> this line.<br>
+                            The line is solid, so the symbol will be ≥ or ≤.<br>
+                            <strong>Inequality:</strong> <i>y</i> ≤ 4 − <i>x</i> (or <i>x</i> + <i>y</i> ≤ 4)
+                        </div>
+                        <div class="step-explanation">Below means less than (<).</div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer: The inequalities are <i>y</i> ≤ 2 − 5<i>x</i> − <i>x</i>², 2<i>x</i> + <i>y</i> ≥ 0 and <i>x</i> + <i>y</i> ≤ 4. ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 5; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            }
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3B: Quadratic Simultaneous Equations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .formula-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .formula-box .formula-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-box .formula-content {
+            font-size: 1.05em;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .formula-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .formula-box li {
+            margin: 5px 0;
+        }
+
+        .sqrt {
+            text-decoration: overline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link active">3B</a>
+                <a href="P1-section-3c.html" class="section-link">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3B: Quadratic Simultaneous Equations</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Quadratic Simultaneous Equations</h3>
+                <p>Solving systems with one linear and one quadratic equation</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    3x + 2y = 7<br>
+                    x<sup>2</sup> + y = 8
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Substitution</div>
+                        <div class="formula-content">
+                            <strong>Why Substitution?</strong><br>
+                            When we have one linear and one quadratic equation, substitution is the standard method. We can easily rearrange the linear equation to express one variable in terms of the other, then substitute into the quadratic equation.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: 3x + 2y = 7<br>
+                            Equation ②: x<sup>2</sup> + y = 8
+                        </div>
+                        <div class="step-explanation">Identify the linear equation ① and the quadratic equation ②</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation ① to make y the subject</div>
+                        <div class="step-content">
+                            3x + 2y = 7<br>
+                            2y = 7 - 3x<br>
+                            y = (7 - 3x)/2<br><br>
+                            Equation ③: y = (7 - 3x)/2
+                        </div>
+                        <div class="step-explanation">Isolate y in the simpler linear equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute equation ③ into equation ②</div>
+                        <div class="step-content">
+                            x<sup>2</sup> + y = 8<br>
+                            x<sup>2</sup> + (7 - 3x)/2 = 8
+                        </div>
+                        <div class="step-explanation">Replace y in the quadratic equation with equation ③</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Multiply through by 2 to eliminate the fraction</div>
+                        <div class="step-content">
+                            2 × [x<sup>2</sup> + (7 - 3x)/2] = 2 × 8<br>
+                            2x<sup>2</sup> + (7 - 3x) = 16<br>
+                            2x<sup>2</sup> + 7 - 3x = 16
+                        </div>
+                        <div class="step-explanation">Clear the fraction by multiplying every term by 2</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Rearrange to standard quadratic form</div>
+                        <div class="step-content">
+                            2x<sup>2</sup> - 3x + 7 - 16 = 0<br>
+                            2x<sup>2</sup> - 3x - 9 = 0
+                        </div>
+                        <div class="step-explanation">Move all terms to one side to get ax² + bx + c = 0</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Factorise the quadratic using the product and sum rule</div>
+                        <div class="step-content">
+                            For 2x<sup>2</sup> - 3x - 9 = 0:<br>
+                            Product (a × c) = 2 × (-9) = -18<br>
+                            Sum (b) = -3<br>
+                            We need two numbers that multiply to -18 and add to -3<br>
+                            These are: -6 and +3<br><br>
+                            Rewrite: 2x<sup>2</sup> - 6x + 3x - 9 = 0<br>
+                            Factor by grouping: 2x(x - 3) + 3(x - 3) = 0<br>
+                            (2x + 3)(x - 3) = 0
+                        </div>
+                        <div class="step-explanation">Use product and sum to split the middle term, then factor by grouping</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Solve for x</div>
+                        <div class="step-content">
+                            2x + 3 = 0  or  x - 3 = 0<br>
+                            x = -3/2  or  x = 3
+                        </div>
+                        <div class="step-explanation">Set each factor equal to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Find corresponding y values using equation ③</div>
+                        <div class="step-content">
+                            When x = -3/2:<br>
+                            y = (7 - 3(-3/2))/2 = (7 + 9/2)/2 = (14/2 + 9/2)/2 = (23/2)/2 = 23/4<br><br>
+                            When x = 3:<br>
+                            y = (7 - 3(3))/2 = (7 - 9)/2 = -2/2 = -1
+                        </div>
+                        <div class="step-explanation">Substitute each x value back into equation ③ to find the corresponding y values</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (x, y) = (-3/2, 23/4) or (3, -1) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    5y - 4x = 1<br>
+                    x<sup>2</sup> - y<sup>2</sup> + 5x = 41
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Substitution</div>
+                        <div class="formula-content">
+                            <strong>Why Substitution?</strong><br>
+                            With one linear and one quadratic equation, substitution is most efficient. We rearrange the linear equation to express one variable in terms of the other, then substitute into the quadratic.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: 5y - 4x = 1<br>
+                            Equation ②: x<sup>2</sup> - y<sup>2</sup> + 5x = 41
+                        </div>
+                        <div class="step-explanation">Identify the linear equation ① and the quadratic equation ②</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation ① to make y the subject</div>
+                        <div class="step-content">
+                            5y - 4x = 1<br>
+                            5y = 1 + 4x<br>
+                            y = (1 + 4x)/5<br><br>
+                            Equation ③: y = (1 + 4x)/5
+                        </div>
+                        <div class="step-explanation">Isolate y in the linear equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute equation ③ into equation ②</div>
+                        <div class="step-content">
+                            x<sup>2</sup> - y<sup>2</sup> + 5x = 41<br>
+                            x<sup>2</sup> - [(1 + 4x)/5]<sup>2</sup> + 5x = 41
+                        </div>
+                        <div class="step-explanation">Replace y with equation ③</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand (1 + 4x)<sup>2</sup></div>
+                        <div class="step-content">
+                            (1 + 4x)<sup>2</sup> = 1 + 8x + 16x<sup>2</sup><br><br>
+                            So: x<sup>2</sup> - (1 + 8x + 16x<sup>2</sup>)/25 + 5x = 41
+                        </div>
+                        <div class="step-explanation">Expand the squared term using (a + b)² = a² + 2ab + b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Multiply through by 25 to clear the fraction</div>
+                        <div class="step-content">
+                            25x<sup>2</sup> - (1 + 8x + 16x<sup>2</sup>) + 125x = 1025<br>
+                            25x<sup>2</sup> - 1 - 8x - 16x<sup>2</sup> + 125x = 1025<br>
+                            9x<sup>2</sup> + 117x - 1 = 1025
+                        </div>
+                        <div class="step-explanation">Multiply every term by 25 and simplify</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Rearrange to standard form</div>
+                        <div class="step-content">
+                            9x<sup>2</sup> + 117x - 1 - 1025 = 0<br>
+                            9x<sup>2</sup> + 117x - 1026 = 0<br>
+                            Divide by 9: x<sup>2</sup> + 13x - 114 = 0
+                        </div>
+                        <div class="step-explanation">Simplify by dividing through by 9</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Factorise the quadratic using the product and sum rule</div>
+                        <div class="step-content">
+                            For x<sup>2</sup> + 13x - 114 = 0:<br>
+                            Product (a × c) = 1 × (-114) = -114<br>
+                            Sum (b) = 13<br>
+                            We need two numbers that multiply to -114 and add to 13<br>
+                            These are: +19 and -6<br><br>
+                            Therefore: (x + 19)(x - 6) = 0
+                        </div>
+                        <div class="step-explanation">Use product and sum to find the factors</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Solve for x</div>
+                        <div class="step-content">
+                            x + 19 = 0  or  x - 6 = 0<br>
+                            x = -19  or  x = 6
+                        </div>
+                        <div class="step-explanation">Set each factor to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Find corresponding y values using equation ③</div>
+                        <div class="step-content">
+                            When x = -19:<br>
+                            y = (1 + 4(-19))/5 = (1 - 76)/5 = -75/5 = -15<br><br>
+                            When x = 6:<br>
+                            y = (1 + 4(6))/5 = (1 + 24)/5 = 25/5 = 5
+                        </div>
+                        <div class="step-explanation">Substitute each x value into equation ③ to find the corresponding y values</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (x, y) = (-19, -15) or (6, 5) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3: (Give answers in simplest surd form)</div>
+                <div class="question-text">
+                    2x + 3y = 13<br>
+                    x<sup>2</sup> + y<sup>2</sup> = 78
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Substitution</div>
+                        <div class="formula-content">
+                            <strong>Why Substitution?</strong><br>
+                            For one linear and one quadratic equation, substitution is the standard approach. We rearrange the linear equation and substitute into the quadratic equation.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Label the equations</div>
+                        <div class="step-content">
+                            Equation ①: 2x + 3y = 13<br>
+                            Equation ②: x<sup>2</sup> + y<sup>2</sup> = 78
+                        </div>
+                        <div class="step-explanation">Identify the linear and quadratic equations</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation ① to make x the subject</div>
+                        <div class="step-content">
+                            2x + 3y = 13<br>
+                            2x = 13 - 3y<br>
+                            x = (13 - 3y)/2<br><br>
+                            Equation ③: x = (13 - 3y)/2
+                        </div>
+                        <div class="step-explanation">Express x in terms of y</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute equation ③ into equation ②</div>
+                        <div class="step-content">
+                            x<sup>2</sup> + y<sup>2</sup> = 78<br>
+                            [(13 - 3y)/2]<sup>2</sup> + y<sup>2</sup> = 78
+                        </div>
+                        <div class="step-explanation">Replace x with equation ③ in the quadratic equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand (13 - 3y)<sup>2</sup></div>
+                        <div class="step-content">
+                            (13 - 3y)<sup>2</sup> = 169 - 78y + 9y<sup>2</sup><br><br>
+                            So: (169 - 78y + 9y<sup>2</sup>)/4 + y<sup>2</sup> = 78
+                        </div>
+                        <div class="step-explanation">Expand using (a - b)² = a² - 2ab + b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Multiply through by 4</div>
+                        <div class="step-content">
+                            169 - 78y + 9y<sup>2</sup> + 4y<sup>2</sup> = 312<br>
+                            13y<sup>2</sup> - 78y + 169 = 312
+                        </div>
+                        <div class="step-explanation">Clear the fraction by multiplying by 4</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Rearrange to standard form</div>
+                        <div class="step-content">
+                            13y<sup>2</sup> - 78y + 169 - 312 = 0<br>
+                            13y<sup>2</sup> - 78y - 143 = 0<br>
+                            Divide by 13: y<sup>2</sup> - 6y - 11 = 0
+                        </div>
+                        <div class="step-explanation">Simplify by dividing through by 13</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Use the quadratic formula</div>
+                        <div class="step-content">
+                            For y<sup>2</sup> - 6y - 11 = 0:<br>
+                            Product (a × c) = 1 × (-11) = -11<br>
+                            Sum (b) = -6<br>
+                            Since we cannot find two integers that multiply to -11 and add to -6, we use the quadratic formula:<br><br>
+                            y = (6 ± √(36 + 44))/2<br>
+                            y = (6 ± √80)/2<br>
+                            y = (6 ± 4√5)/2<br>
+                            y = 3 ± 2√5
+                        </div>
+                        <div class="step-explanation">
+                            Product and sum rule cannot be used as suitable factors cannot be found.<br>
+                            Simplify √80 = √(16 × 5) = 4√5
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Find corresponding x values using equation ③</div>
+                        <div class="step-content">
+                            When y = 3 + 2√5:<br>
+                            x = (13 - 3(3 + 2√5))/2 = (13 - 9 - 6√5)/2 = (4 - 6√5)/2 = 2 - 3√5<br><br>
+                            When y = 3 - 2√5:<br>
+                            x = (13 - 3(3 - 2√5))/2 = (13 - 9 + 6√5)/2 = (4 + 6√5)/2 = 2 + 3√5
+                        </div>
+                        <div class="step-explanation">Substitute each y value into equation ③ to find the corresponding x values</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (x, y) = (2 - 3√5, 3 + 2√5) or (2 + 3√5, 3 - 2√5) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    <div style="margin-bottom: 15px; text-align: left; padding-left: 20px;">
+                        <strong>a</strong> By eliminating y from the equations<br>
+                        <div style="margin-left: 30px; margin-top: 10px;">
+                            y = 2 - 4x<br>
+                            3x<sup>2</sup> + xy + 11 = 0
+                        </div>
+                        <div style="margin-top: 10px;">show that x<sup>2</sup> - 2x - 11 = 0.</div>
+                    </div>
+                    <div style="text-align: left; padding-left: 20px;">
+                        <strong>b</strong> Hence, or otherwise, solve the simultaneous equations<br>
+                        <div style="margin-left: 30px; margin-top: 10px;">
+                            y = 2 - 4x<br>
+                            3x<sup>2</sup> + xy + 11 = 0
+                        </div>
+                        <div style="margin-top: 10px;">giving your answers in the form a ± b√3, where a and b are integers.</div>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Method Choice: Substitution</div>
+                        <div class="formula-content">
+                            <strong>Why Substitution?</strong><br>
+                            The first equation already gives y explicitly in terms of x (y = 2 - 4x), making substitution the obvious and most efficient method.
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Show that x² - 2x - 11 = 0</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Substitute y = 2 - 4x into the second equation</div>
+                        <div class="step-content">
+                            Let equation ①: y = 2 - 4x<br>
+                            Let equation ②: 3x<sup>2</sup> + xy + 11 = 0<br><br>
+                            Substituting ① into ②:<br>
+                            3x<sup>2</sup> + x(2 - 4x) + 11 = 0
+                        </div>
+                        <div class="step-explanation">Replace y with 2 - 4x from equation ①</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Expand the bracket</div>
+                        <div class="step-content">
+                            3x<sup>2</sup> + 2x - 4x<sup>2</sup> + 11 = 0
+                        </div>
+                        <div class="step-explanation">Multiply out x(2 - 4x)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Collect like terms</div>
+                        <div class="step-content">
+                            3x<sup>2</sup> - 4x<sup>2</sup> + 2x + 11 = 0<br>
+                            -x<sup>2</sup> + 2x + 11 = 0
+                        </div>
+                        <div class="step-explanation">Combine the x² terms</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Multiply through by -1</div>
+                        <div class="step-content">
+                            x<sup>2</sup> - 2x - 11 = 0
+                        </div>
+                        <div class="step-explanation">Make the leading coefficient positive (as required)</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Therefore, x<sup>2</sup> - 2x - 11 = 0 (as required) ✨
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Solve the simultaneous equations</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Use the quadratic formula on x<sup>2</sup> - 2x - 11 = 0</div>
+                        <div class="step-content">
+                            For x<sup>2</sup> - 2x - 11 = 0:<br>
+                            Product (a × c) = 1 × (-11) = -11<br>
+                            Sum (b) = -2<br>
+                            Since we cannot find two integers that multiply to -11 and add to -2, we use the quadratic formula:<br><br>
+                            For a = 1, b = -2, c = -11<br>
+                            x = (2 ± √(4 + 44))/2<br>
+                            x = (2 ± √48)/2<br>
+                            x = (2 ± 4√3)/2<br>
+                            x = 1 ± 2√3
+                        </div>
+                        <div class="step-explanation">
+                            Product and sum rule cannot be used as suitable factors cannot be found.<br>
+                            Simplify √48 = √(16 × 3) = 4√3
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Find corresponding y values using equation ①</div>
+                        <div class="step-content">
+                            When x = 1 + 2√3:<br>
+                            y = 2 - 4(1 + 2√3) = 2 - 4 - 8√3 = -2 - 8√3<br><br>
+                            When x = 1 - 2√3:<br>
+                            y = 2 - 4(1 - 2√3) = 2 - 4 + 8√3 = -2 + 8√3
+                        </div>
+                        <div class="step-explanation">Substitute each x value into equation ① to find the corresponding y values</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (x, y) = (1 + 2√3, -2 - 8√3) or (1 - 2√3, -2 + 8√3) ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

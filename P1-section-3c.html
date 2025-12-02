@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3C: Simultaneous Equations on Graphs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .formula-box {
+            background: #fff9e6;
+            border: 2px solid #f1c40f;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-title {
+            color: #f39c12;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .question-nav-btn:hover {
+            background: #f0f0ff;
+            transform: scale(1.05);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .graph-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #667eea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .graph-container img {
+            max-width: 70%;
+            max-height: 500px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .graph-description {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .coordinate {
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter Menu</a>
+            <div class="section-links">
+                <a href="P1-section-3a.html" class="section-link">3A</a>
+                <a href="P1-section-3b.html" class="section-link">3B</a>
+                <a href="P1-section-3c.html" class="section-link active">3C</a>
+                <a href="P1-section-3d.html" class="section-link">3D</a>
+                <a href="P1-section-3e.html" class="section-link">3E</a>
+                <a href="P1-section-3f.html" class="section-link">3F</a>
+                <a href="P1-section-3g.html" class="section-link">3G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 3C: Simultaneous Equations on Graphs</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Solving Simultaneous Equations Graphically</h3>
+                <p style="font-size: 0.95em; margin-top: 10px; opacity: 0.95;">
+                    Learn to solve systems of equations by finding intersection points on graphs
+                </p>
+            </div>
+
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title">Question 1:</div>
+                <div class="question-text">
+                    <strong>a</strong> Use graph paper to accurately draw the graphs of 2<i>y</i> = 2<i>x</i> + 11 and <i>y</i> = 2<i>x</i>² − 3<i>x</i> − 5 on the same axes.<br><br>
+                    <strong>b</strong> Use your graphs to find the coordinates of the points of intersection.<br><br>
+                    <strong>c</strong> Verify your solutions by substitution.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 2<i>x</i>² − 3<i>x</i> − 5</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Curve)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;">2<i>y</i> = 2<i>x</i> + 11</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Draw the graphs</strong>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 20px 0; font-size: 0.95em;">
+                        <strong>💡 Choosing x-values:</strong> You are free to choose any x-values for your table. Choose values that show where the graphs cross and capture the full shape of the curves. More x-values can be taken if needed for accuracy.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Create a table of values for equation <span style="color: #e74c3c; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            For <i>y</i> = 2<i>x</i>² − 3<i>x</i> − 5:<br><br>
+                            <table>
+                                <tr>
+                                    <th><i>x</i></th>
+                                    <td>-2</td>
+                                    <td>-1</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <th><i>y</i></th>
+                                    <td>9</td>
+                                    <td>0</td>
+                                    <td>-5</td>
+                                    <td>-6</td>
+                                    <td>-3</td>
+                                    <td>4</td>
+                                    <td>15</td>
+                                </tr>
+                            </table>
+                            <div style="margin-top: 15px; font-size: 0.95em; color: #666;">
+                                <strong>Example calculation for x = -2:</strong><br>
+                                y = 2(-2)² − 3(-2) − 5 = 2(4) + 6 − 5 = 8 + 6 − 5 = 9
+                            </div>
+                        </div>
+                        <div class="step-explanation">Calculate y-values by substituting x-values into the quadratic equation</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation <span style="color: #27ae60; font-weight: 700;">②</span></div>
+                        <div class="step-content">
+                            2<i>y</i> = 2<i>x</i> + 11<br>
+                            <i>y</i> = <i>x</i> + 5.5
+                        </div>
+                        <div class="step-explanation">Divide both sides by 2 to get y in terms of x</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Create a table of values for equation <span style="color: #27ae60; font-weight: 700;">②</span></div>
+                        <div class="step-content">
+                            For <i>y</i> = <i>x</i> + 5.5:<br><br>
+                            <table>
+                                <tr>
+                                    <th><i>x</i></th>
+                                    <td>-2</td>
+                                    <td>-1</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <th><i>y</i></th>
+                                    <td>3.5</td>
+                                    <td>4.5</td>
+                                    <td>5.5</td>
+                                    <td>6.5</td>
+                                    <td>7.5</td>
+                                    <td>8.5</td>
+                                    <td>9.5</td>
+                                </tr>
+                            </table>
+                            <div style="margin-top: 15px; font-size: 0.95em; color: #666;">
+                                <strong>Example calculation for x = 1:</strong><br>
+                                y = 1 + 5.5 = 6.5
+                            </div>
+                        </div>
+                        <div class="step-explanation">Calculate y-values by substituting x-values into y = x + 5.5</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Plot both graphs on the same axes</div>
+                        <div class="step-content">
+                            <strong>For equation <span style="color: #e74c3c; font-weight: 700;">①</span> <i>y</i> = 2<i>x</i>² − 3<i>x</i> − 5:</strong><br>
+                            • Plot all points from the table<br>
+                            • Sketch a smooth parabola through the points<br><br>
+                            
+                            <strong>For equation <span style="color: #27ae60; font-weight: 700;">②</span> <i>y</i> = <i>x</i> + 5.5:</strong><br>
+                            • Plot all points from the table<br>
+                            • Draw a straight line through the points<br><br>
+                            
+                            • Label both graphs clearly
+                        </div>
+                        <div class="graph-container">
+                            <img src="P1-section-3C-graph1.png" alt="Graph showing the line y = x + 5.5 and curve y = 2x² - 3x - 5">
+                            <div class="graph-description">Graph showing the intersection of the line and parabola</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Find the coordinates of intersection points</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Read the intersection points from the graph</div>
+                        <div class="step-content">
+                            From the graph, the two curves intersect at approximately:<br><br>
+                            Point 1: <span class="coordinate">(-1.5, 4)</span><br>
+                            Point 2: <span class="coordinate">(3.5, 9)</span>
+                        </div>
+                        <div class="step-explanation">Read the x and y coordinates where the line crosses the parabola</div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (c): Verify by substitution</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve algebraically for exact values</div>
+                        <div class="step-content">
+                            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.95em;">
+                                <strong>💡 Note:</strong> Since both equations equal y, we can equate them to eliminate y.
+                            </div>
+                            
+                            Substitute y = x + 5.5 into y = 2x² − 3x − 5:<br>
+                            x + 5.5 = 2x² − 3x − 5<br>
+                            0 = 2x² − 4x − 10.5<br>
+                            0 = 4x² − 8x − 21 (multiply by 2)<br><br>
+                            
+                            <strong>Try to factorise:</strong><br>
+                            We need two numbers that multiply to give <i>ac</i> = 4 × (−21) = −84<br>
+                            and add to give <i>b</i> = −8<br><br>
+                            
+                            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 0.95em;">
+                                <strong>💡 Note:</strong> We cannot find factors that multiply to −84 and add to −8, so we will use the quadratic formula.
+                            </div>
+                            
+                            <strong>Using the quadratic formula:</strong><br>
+                            For 4x² − 8x − 21 = 0, where <i>a</i> = 4, <i>b</i> = −8, <i>c</i> = −21:<br><br>
+                            
+                            x = (−<i>b</i> ± √(<i>b</i>² − 4<i>ac</i>))/(2<i>a</i>)<br>
+                            x = (8 ± √(64 + 336))/8<br>
+                            x = (8 ± √400)/8<br>
+                            x = (8 ± 20)/8<br><br>
+                            
+                            x = 28/8 = 3.5 or x = -12/8 = -1.5<br><br>
+                            
+                            <strong>When x = 3.5:</strong><br>
+                            y = 3.5 + 5.5 = 9<br>
+                            Point: <span class="coordinate">(3.5, 9)</span><br><br>
+                            
+                            <strong>When x = -1.5:</strong><br>
+                            y = -1.5 + 5.5 = 4<br>
+                            Point: <span class="coordinate">(-1.5, 4)</span>
+                        </div>
+                        <div class="step-explanation">Find exact intersection points algebraically</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Check Point 1 (-1.5, 4)</div>
+                        <div class="step-content">
+                            <strong>Check in 2y = 2x + 11:</strong><br>
+                            2(4) = 2(-1.5) + 11<br>
+                            8 = -3 + 11<br>
+                            8 = 8 ✓<br><br>
+                            
+                            <strong>Check in y = 2x² − 3x − 5:</strong><br>
+                            4 = 2(-1.5)² − 3(-1.5) − 5<br>
+                            4 = 2(2.25) + 4.5 − 5<br>
+                            4 = 4.5 + 4.5 − 5<br>
+                            4 = 4 ✓
+                        </div>
+                        <div class="step-explanation">Both equations are satisfied</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Check Point 2 (3.5, 9)</div>
+                        <div class="step-content">
+                            <strong>Check in 2y = 2x + 11:</strong><br>
+                            2(9) = 2(3.5) + 11<br>
+                            18 = 7 + 11<br>
+                            18 = 18 ✓<br><br>
+                            
+                            <strong>Check in y = 2x² − 3x − 5:</strong><br>
+                            9 = 2(3.5)² − 3(3.5) − 5<br>
+                            9 = 2(12.25) − 10.5 − 5<br>
+                            9 = 24.5 − 10.5 − 5<br>
+                            9 = 9 ✓
+                        </div>
+                        <div class="step-explanation">Both equations are satisfied</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: The graphs intersect at (-1.5, 4) and (3.5, 9) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title">Question 2:</div>
+                <div class="question-text">
+                    <strong>a</strong> On the same axes, sketch the curve with equation <i>y</i> = (<i>x</i> − 2)² and the line with equation <i>y</i> = 3<i>x</i> − 2.<br><br>
+                    <strong>b</strong> Find the coordinates of the point of intersection.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 3<i>x</i> − 2</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = (<i>x</i> − 2)²</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Curve)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (a): Sketch the graphs</strong>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95em;">
+                        <strong>💡 Choosing x-values:</strong> You are free to choose any x-values for your table. Choose values that show where the graphs cross and capture the full shape of the curves. More x-values can be taken if needed for accuracy.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Create a table of values for equation <span style="color: #27ae60; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            For <i>y</i> = 3<i>x</i> − 2:<br><br>
+                            <table>
+                                <tr>
+                                    <th><i>x</i></th>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <th><i>y</i></th>
+                                    <td>-2</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>7</td>
+                                    <td>10</td>
+                                    <td>13</td>
+                                    <td>16</td>
+                                </tr>
+                            </table>
+                            <div style="margin-top: 15px; font-size: 0.95em; color: #666;">
+                                <strong>Example calculation for x = 2:</strong><br>
+                                y = 3(2) − 2 = 6 − 2 = 4
+                            </div>
+                        </div>
+                        <div class="step-explanation">Calculate y-values for plotting the line</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Create a table of values for equation <span style="color: #e74c3c; font-weight: 700;">②</span></div>
+                        <div class="step-content">
+                            For <i>y</i> = (<i>x</i> − 2)²:<br><br>
+                            <table>
+                                <tr>
+                                    <th><i>x</i></th>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <th><i>y</i></th>
+                                    <td>4</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>9</td>
+                                    <td>16</td>
+                                </tr>
+                            </table>
+                            <div style="margin-top: 15px; font-size: 0.95em; color: #666;">
+                                <strong>Example calculation for x = 3:</strong><br>
+                                y = (3 − 2)² = 1² = 1<br><br>
+                                <strong>Note:</strong> Vertex at (2, 0) — minimum point
+                            </div>
+                        </div>
+                        <div class="step-explanation">Calculate y-values for plotting the parabola</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both graphs on the same axes</div>
+                        <div class="step-content">
+                            <strong>For equation <span style="color: #27ae60; font-weight: 700;">①</span> <i>y</i> = 3<i>x</i> − 2:</strong><br>
+                            • Plot all points from the table<br>
+                            • Draw a straight line through the points<br><br>
+                            
+                            <strong>For equation <span style="color: #e74c3c; font-weight: 700;">②</span> <i>y</i> = (<i>x</i> − 2)²:</strong><br>
+                            • Plot all points from the table<br>
+                            • Sketch a smooth parabola through the points<br><br>
+                            
+                            • Mark the intersection point(s) and label both graphs
+                        </div>
+                        <div class="graph-container">
+                            <img src="P1-section-3C-graph2.png" alt="Sketch showing the curve y = (x-2)² and line y = 3x - 2">
+                            <div class="graph-description">Sketch showing the parabola and line intersection</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+                        <strong style="color: #2c3e50;">Part (b): Find the exact coordinates of intersection</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Set the equations equal (algebraic method)</div>
+                        <div class="step-content">
+                            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.95em;">
+                                <strong>💡 Note:</strong> Since both equations equal y, we can equate them to eliminate y.
+                            </div>
+                            
+                            At the intersection point, both equations give the same y-value:<br>
+                            (<i>x</i> − 2)² = 3<i>x</i> − 2
+                        </div>
+                        <div class="step-explanation">Substitute to eliminate y</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Expand and rearrange</div>
+                        <div class="step-content">
+                            <i>x</i>² − 4<i>x</i> + 4 = 3<i>x</i> − 2<br>
+                            <i>x</i>² − 4<i>x</i> + 4 − 3<i>x</i> + 2 = 0<br>
+                            <i>x</i>² − 7<i>x</i> + 6 = 0
+                        </div>
+                        <div class="step-explanation">Rearrange into standard quadratic form</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Factorise the quadratic</div>
+                        <div class="step-content">
+                            x² − 7x + 6 = 0<br><br>
+                            
+                            <strong>Find factors using product and sum:</strong><br>
+                            We need two numbers that multiply to give <i>c</i> = +6<br>
+                            and add to give <i>b</i> = −7<br><br>
+                            
+                            The factors are −1 and −6<br><br>
+                            
+                            (x − 1)(x − 6) = 0<br><br>
+                            
+                            Therefore: x = 1 or x = 6
+                        </div>
+                        <div class="step-explanation">Find factors that multiply to +6 and add to -7</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find corresponding y-values</div>
+                        <div class="step-content">
+                            <strong>When x = 1:</strong><br>
+                            y = 3(1) − 2 = 1<br>
+                            Point: <span class="coordinate">(1, 1)</span><br><br>
+                            
+                            <strong>When x = 6:</strong><br>
+                            y = 3(6) − 2 = 16<br>
+                            Point: <span class="coordinate">(6, 16)</span>
+                        </div>
+                        <div class="step-explanation">Substitute x-values into either equation to find y-coordinates</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Verify the solutions</div>
+                        <div class="step-content">
+                            <strong>Check (1, 1) in y = (x − 2)²:</strong><br>
+                            1 = (1 − 2)² = (-1)² = 1 ✓<br><br>
+                            
+                            <strong>Check (6, 16) in y = (x − 2)²:</strong><br>
+                            16 = (6 − 2)² = 4² = 16 ✓
+                        </div>
+                        <div class="step-explanation">Both points satisfy both equations</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: The graphs intersect at (1, 1) and (6, 16) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title">Question 3:</div>
+                <div class="question-text">
+                    Find the coordinates of the points at which the line with equation <i>y</i> = 3<i>x</i> − 1 intersects the curve with equation <i>y</i>² = <i>xy</i> + 15.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i>² = <i>xy</i> + 15</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Curve)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 3<i>x</i> − 1</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Non-Standard Form</div>
+                        <div class="formula-content">
+                            <strong>Note:</strong> The curve equation y² = xy + 15 is not in the standard form y = f(x). We need to substitute the line equation into the curve equation and solve the resulting quadratic.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down both equations</div>
+                        <div class="step-content">
+                            <span style="color: #e74c3c; font-weight: 700;">①</span> <i>y</i>² = <i>xy</i> + 15<br>
+                            <span style="color: #27ae60; font-weight: 700;">②</span> <i>y</i> = 3<i>x</i> − 1
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute equation <span style="color: #27ae60; font-weight: 700;">②</span> into equation <span style="color: #e74c3c; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            Substitute <i>y</i> = 3<i>x</i> − 1 into <i>y</i>² = <i>xy</i> + 15:<br><br>
+                            (3<i>x</i> − 1)² = <i>x</i>(3<i>x</i> − 1) + 15
+                        </div>
+                        <div class="step-explanation">Replace y with 3x − 1 in both places</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Expand the left side</div>
+                        <div class="step-content">
+                            (3<i>x</i> − 1)² = 9<i>x</i>² − 6<i>x</i> + 1
+                        </div>
+                        <div class="step-explanation">Use (a − b)² = a² − 2ab + b²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand the right side</div>
+                        <div class="step-content">
+                            <i>x</i>(3<i>x</i> − 1) + 15 = 3<i>x</i>² − <i>x</i> + 15
+                        </div>
+                        <div class="step-explanation">Distribute x across the brackets</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Form the equation</div>
+                        <div class="step-content">
+                            9<i>x</i>² − 6<i>x</i> + 1 = 3<i>x</i>² − <i>x</i> + 15
+                        </div>
+                        <div class="step-explanation">Set left side equal to right side</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Rearrange to standard form</div>
+                        <div class="step-content">
+                            9<i>x</i>² − 6<i>x</i> + 1 − 3<i>x</i>² + <i>x</i> − 15 = 0<br>
+                            6<i>x</i>² − 5<i>x</i> − 14 = 0
+                        </div>
+                        <div class="step-explanation">Collect like terms and move everything to one side</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Solve using the quadratic formula</div>
+                        <div class="step-content">
+                            6x² − 5x − 14 = 0<br><br>
+                            
+                            <strong>Try to factorise:</strong><br>
+                            We need two numbers that multiply to give <i>ac</i> = 6 × (−14) = −84<br>
+                            and add to give <i>b</i> = −5<br><br>
+                            
+                            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 0.95em;">
+                                <strong>💡 Note:</strong> We cannot find factors that multiply to −84 and add to −5, so we will use the quadratic formula.
+                            </div>
+                            
+                            <strong>Using the quadratic formula:</strong><br>
+                            For 6x² − 5x − 14 = 0, where <i>a</i> = 6, <i>b</i> = −5, <i>c</i> = −14:<br><br>
+                            
+                            <i>x</i> = (−<i>b</i> ± √(<i>b</i>² − 4<i>ac</i>))/(2<i>a</i>)<br><br>
+                            <i>x</i> = (5 ± √(25 + 336))/12<br>
+                            <i>x</i> = (5 ± √361)/12<br>
+                            <i>x</i> = (5 ± 19)/12
+                        </div>
+                        <div class="step-explanation">Apply the quadratic formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Calculate the two x-values</div>
+                        <div class="step-content">
+                            <i>x</i> = (5 + 19)/12 = 24/12 = 2<br><br>
+                            <i>x</i> = (5 − 19)/12 = −14/12 = −7/6
+                        </div>
+                        <div class="step-explanation">Evaluate both solutions</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Find corresponding y-values</div>
+                        <div class="step-content">
+                            <strong>When x = 2:</strong><br>
+                            <i>y</i> = 3(2) − 1 = 6 − 1 = 5<br>
+                            Point: <span class="coordinate">(2, 5)</span><br><br>
+                            
+                            <strong>When x = −7/6:</strong><br>
+                            <i>y</i> = 3(−7/6) − 1 = −7/2 − 1 = −9/2<br>
+                            Point: <span class="coordinate">(−7/6, −9/2)</span>
+                        </div>
+                        <div class="step-explanation">Substitute x-values into the line equation y = 3x − 1</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 10: Verify the solutions</div>
+                        <div class="step-content">
+                            <strong>Check (2, 5) in y² = xy + 15:</strong><br>
+                            5² = 2(5) + 15<br>
+                            25 = 10 + 15<br>
+                            25 = 25 ✓<br><br>
+                            
+                            <strong>Check (−7/6, −9/2) in y² = xy + 15:</strong><br>
+                            (−9/2)² = (−7/6)(−9/2) + 15<br>
+                            81/4 = 63/12 + 15<br>
+                            81/4 = 21/4 + 60/4<br>
+                            81/4 = 81/4 ✓
+                        </div>
+                        <div class="step-explanation">Both points satisfy the curve equation</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+
+                    <div class="final-answer">
+                        ✨ Final Answer: (2, 5) and (−7/6, −9/2) or (−1.167, −4.5) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title">Question 4:</div>
+                <div class="question-text">
+                    Determine the number of points of intersection for these pairs of simultaneous equations.<br><br>
+                    <strong>a</strong><br>
+                    <i>y</i> = 4<i>x</i>² − 18<i>x</i> + 40<br>
+                    <i>y</i> = 10<i>x</i> − 9<br><br>
+                    <strong>b</strong><br>
+                    <i>y</i> = 3<i>x</i>² − 2<i>x</i> + 4<br>
+                    7<i>x</i> + <i>y</i> + 3 = 0
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <!-- Part A -->
+                    <div style="background: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 8px;">
+                        <strong style="color: #17a2b8; font-size: 1.2em;">Part (a):</strong>
+                    </div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 4<i>x</i>² − 18<i>x</i> + 40</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Parabola)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 10<i>x</i> − 9</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy</div>
+                        <div class="formula-content">
+                            <strong>Note:</strong> To find the number of intersection points, we substitute one equation into the other and examine the discriminant (b² − 4ac) of the resulting quadratic equation.<br><br>
+                            • If discriminant > 0: Two points of intersection<br>
+                            • If discriminant = 0: One point of intersection (tangent)<br>
+                            • If discriminant < 0: No points of intersection
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down both equations</div>
+                        <div class="step-content">
+                            <span style="color: #e74c3c; font-weight: 700;">①</span> <i>y</i> = 4<i>x</i>² − 18<i>x</i> + 40<br>
+                            <span style="color: #27ae60; font-weight: 700;">②</span> <i>y</i> = 10<i>x</i> − 9
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Substitute equation <span style="color: #27ae60; font-weight: 700;">②</span> into equation <span style="color: #e74c3c; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            Substitute <i>y</i> = 10<i>x</i> − 9 into <i>y</i> = 4<i>x</i>² − 18<i>x</i> + 40:<br><br>
+                            10<i>x</i> − 9 = 4<i>x</i>² − 18<i>x</i> + 40
+                        </div>
+                        <div class="step-explanation">Set both expressions for y equal to each other</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Rearrange to standard form</div>
+                        <div class="step-content">
+                            10<i>x</i> − 9 = 4<i>x</i>² − 18<i>x</i> + 40<br>
+                            0 = 4<i>x</i>² − 18<i>x</i> + 40 − 10<i>x</i> + 9<br>
+                            4<i>x</i>² − 28<i>x</i> + 49 = 0
+                        </div>
+                        <div class="step-explanation">Move all terms to one side and simplify</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Identify coefficients</div>
+                        <div class="step-content">
+                            For 4<i>x</i>² − 28<i>x</i> + 49 = 0:<br><br>
+                            <i>a</i> = 4<br>
+                            <i>b</i> = −28<br>
+                            <i>c</i> = 49
+                        </div>
+                        <div class="step-explanation">Extract coefficients for the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Calculate the discriminant</div>
+                        <div class="step-content">
+                            Discriminant = <i>b</i>² − 4<i>ac</i><br><br>
+                            = (−28)² − 4(4)(49)<br>
+                            = 784 − 784<br>
+                            = 0
+                        </div>
+                        <div class="step-explanation">Apply the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Interpret the discriminant</div>
+                        <div class="step-content">
+                            Since the discriminant = 0, the quadratic equation has one repeated solution (equal roots).
+                        </div>
+                        <div class="step-explanation">A zero discriminant means the line is tangent to the parabola</div>
+                    </div>
+
+                    <div style="background: #d4edda; border: 2px solid #28a745; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+                        <strong style="color: #155724; font-size: 1.1em;">✓ Part (a) answer: The line and parabola have <strong>one point of intersection</strong> (the line is tangent to the parabola)</strong>
+                    </div>
+
+                    <!-- Part B -->
+                    <div style="background: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 8px;">
+                        <strong style="color: #17a2b8; font-size: 1.2em;">Part (b):</strong>
+                    </div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>y</i> = 3<i>x</i>² − 2<i>x</i> + 4</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Parabola)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;">7<i>x</i> + <i>y</i> + 3 = 0</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 7: Write down both equations</div>
+                        <div class="step-content">
+                            <span style="color: #e74c3c; font-weight: 700;">①</span> <i>y</i> = 3<i>x</i>² − 2<i>x</i> + 4<br>
+                            <span style="color: #27ae60; font-weight: 700;">②</span> 7<i>x</i> + <i>y</i> + 3 = 0
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Rearrange equation <span style="color: #27ae60; font-weight: 700;">②</span> to make y the subject</div>
+                        <div class="step-content">
+                            7<i>x</i> + <i>y</i> + 3 = 0<br>
+                            <i>y</i> = −7<i>x</i> − 3
+                        </div>
+                        <div class="step-explanation">Isolate y by subtracting 7x and 3 from both sides</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Substitute into equation <span style="color: #e74c3c; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            Substitute <i>y</i> = −7<i>x</i> − 3 into <i>y</i> = 3<i>x</i>² − 2<i>x</i> + 4:<br><br>
+                            −7<i>x</i> − 3 = 3<i>x</i>² − 2<i>x</i> + 4
+                        </div>
+                        <div class="step-explanation">Set both expressions for y equal to each other</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 10: Rearrange to standard form</div>
+                        <div class="step-content">
+                            −7<i>x</i> − 3 = 3<i>x</i>² − 2<i>x</i> + 4<br>
+                            0 = 3<i>x</i>² − 2<i>x</i> + 4 + 7<i>x</i> + 3<br>
+                            3<i>x</i>² + 5<i>x</i> + 7 = 0
+                        </div>
+                        <div class="step-explanation">Move all terms to one side and simplify</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 11: Identify coefficients</div>
+                        <div class="step-content">
+                            For 3<i>x</i>² + 5<i>x</i> + 7 = 0:<br><br>
+                            <i>a</i> = 3<br>
+                            <i>b</i> = 5<br>
+                            <i>c</i> = 7
+                        </div>
+                        <div class="step-explanation">Extract coefficients for the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 12: Calculate the discriminant</div>
+                        <div class="step-content">
+                            Discriminant = <i>b</i>² − 4<i>ac</i><br><br>
+                            = (5)² − 4(3)(7)<br>
+                            = 25 − 84<br>
+                            = −59
+                        </div>
+                        <div class="step-explanation">Apply the discriminant formula</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 13: Interpret the discriminant</div>
+                        <div class="step-content">
+                            Since the discriminant = −59 < 0, the quadratic equation has no real solutions.
+                        </div>
+                        <div class="step-explanation">A negative discriminant means no real intersection points</div>
+                    </div>
+
+                    <div style="background: #d4edda; border: 2px solid #28a745; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+                        <strong style="color: #155724; font-size: 1.1em;">✓ Part (b) answer: The line and parabola have <strong>no points of intersection</strong> (they do not intersect)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title">Question 5:</div>
+                <div class="question-text">
+                    Given the simultaneous equations<br>
+                    2<i>x</i> − <i>y</i> = 1<br>
+                    <i>x</i>² + 4<i>ky</i> + 5<i>k</i> = 0<br>
+                    where <i>k</i> is a non-zero constant<br><br>
+                    <strong>a</strong> show that <i>x</i>² + 8<i>kx</i> + <i>k</i> = 0.<br>
+                    Given that <i>x</i>² + 8<i>kx</i> + <i>k</i> = 0 has equal roots<br>
+                    <strong>b</strong> find the value of <i>k</i><br>
+                    <strong>c</strong> for this value of <i>k</i>, find the solution of the simultaneous equations.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div style="background: #f0f4ff; border: 3px solid #667eea; border-radius: 12px; padding: 25px; margin: 20px 0;">
+                        <div style="text-align: center; font-weight: 600; font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">
+                            📝 Given Equations
+                        </div>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #e74c3c; font-weight: 700; font-size: 1.1em; margin-right: 10px;">①</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;">2<i>x</i> − <i>y</i> = 1</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Line)</span>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #667eea;">
+                                <span style="color: #27ae60; font-weight: 700; font-size: 1.1em; margin-right: 10px;">②</span>
+                                <span style="font-size: 1.3em; font-family: 'Times New Roman', serif;"><i>x</i>² + 4<i>ky</i> + 5<i>k</i> = 0</span>
+                                <span style="margin-left: 15px; color: #666; font-weight: 600;">(Curve)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Strategy for Multi-Part Questions</div>
+                        <div class="formula-content">
+                            <strong>Part (a):</strong> Substitute the linear equation into the curve equation to eliminate y and derive the given form.<br>
+                            <strong>Part (b):</strong> Use the condition for equal roots (discriminant = 0) to find k.<br>
+                            <strong>Part (c):</strong> Substitute k back into the equations to find the actual solution.
+                        </div>
+                    </div>
+                    
+                    <!-- Part A -->
+                    <div style="background: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 8px;">
+                        <strong style="color: #17a2b8; font-size: 1.2em;">Part (a): Show that x² + 8kx + k = 0</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">Step 1: Write down both equations</div>
+                        <div class="step-content">
+                            <span style="color: #e74c3c; font-weight: 700;">①</span> 2<i>x</i> − <i>y</i> = 1<br>
+                            <span style="color: #27ae60; font-weight: 700;">②</span> <i>x</i>² + 4<i>ky</i> + 5<i>k</i> = 0
+                        </div>
+                        <div class="step-explanation">Label the equations for reference</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Rearrange equation <span style="color: #e74c3c; font-weight: 700;">①</span> to make y the subject</div>
+                        <div class="step-content">
+                            2<i>x</i> − <i>y</i> = 1<br>
+                            <i>y</i> = 2<i>x</i> − 1
+                        </div>
+                        <div class="step-explanation">Isolate y by moving terms around</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Substitute into equation <span style="color: #27ae60; font-weight: 700;">②</span></div>
+                        <div class="step-content">
+                            Substitute <i>y</i> = 2<i>x</i> − 1 into <i>x</i>² + 4<i>ky</i> + 5<i>k</i> = 0:<br><br>
+                            <i>x</i>² + 4<i>k</i>(2<i>x</i> − 1) + 5<i>k</i> = 0
+                        </div>
+                        <div class="step-explanation">Replace y with the expression from equation ①</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Expand the brackets</div>
+                        <div class="step-content">
+                            <i>x</i>² + 4<i>k</i>(2<i>x</i> − 1) + 5<i>k</i> = 0<br>
+                            <i>x</i>² + 8<i>kx</i> − 4<i>k</i> + 5<i>k</i> = 0
+                        </div>
+                        <div class="step-explanation">Distribute 4k across (2x − 1)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Simplify</div>
+                        <div class="step-content">
+                            <i>x</i>² + 8<i>kx</i> − 4<i>k</i> + 5<i>k</i> = 0<br>
+                            <i>x</i>² + 8<i>kx</i> + <i>k</i> = 0
+                        </div>
+                        <div class="step-explanation">Combine like terms: −4k + 5k = k</div>
+                    </div>
+
+                    <div style="background: #d4edda; border: 2px solid #28a745; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+                        <strong style="color: #155724; font-size: 1.1em;">✓ Part (a) shown: x² + 8kx + k = 0</strong>
+                    </div>
+
+                    <!-- Part B -->
+                    <div style="background: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 8px;">
+                        <strong style="color: #17a2b8; font-size: 1.2em;">Part (b): Find the value of k</strong>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">💡 Key Concept</div>
+                        <div class="formula-content">
+                            A quadratic equation has <strong>equal roots</strong> when its discriminant equals zero:<br>
+                            <i>b</i>² − 4<i>ac</i> = 0
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Identify coefficients from x² + 8kx + k = 0</div>
+                        <div class="step-content">
+                            <i>a</i> = 1<br>
+                            <i>b</i> = 8<i>k</i><br>
+                            <i>c</i> = <i>k</i>
+                        </div>
+                        <div class="step-explanation">Extract coefficients for the discriminant</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Apply the condition for equal roots</div>
+                        <div class="step-content">
+                            For equal roots: <i>b</i>² − 4<i>ac</i> = 0<br><br>
+                            (8<i>k</i>)² − 4(1)(<i>k</i>) = 0
+                        </div>
+                        <div class="step-explanation">Set discriminant equal to zero</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 8: Simplify and solve for k</div>
+                        <div class="step-content">
+                            64<i>k</i>² − 4<i>k</i> = 0<br>
+                            4<i>k</i>(16<i>k</i> − 1) = 0
+                        </div>
+                        <div class="step-explanation">Expand (8k)² and factorize</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 9: Find possible values of k</div>
+                        <div class="step-content">
+                            4<i>k</i> = 0  or  16<i>k</i> − 1 = 0<br><br>
+                            <i>k</i> = 0  or  <i>k</i> = 1/16<br><br>
+                            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 0.95em;">
+                                <strong>⚠️ Important:</strong> Since we're told k is a non-zero constant, we reject k = 0.
+                            </div>
+                        </div>
+                        <div class="step-explanation">Solve each factor, but exclude k = 0</div>
+                    </div>
+
+                    <div style="background: #d4edda; border: 2px solid #28a745; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+                        <strong style="color: #155724; font-size: 1.1em;">✓ Part (b) answer: k = 1/16</strong>
+                    </div>
+
+                    <!-- Part C -->
+                    <div style="background: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 8px;">
+                        <strong style="color: #17a2b8; font-size: 1.2em;">Part (c): Find the solution of the simultaneous equations</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 10: Substitute k = 1/16 into x² + 8kx + k = 0</div>
+                        <div class="step-content">
+                            <i>x</i>² + 8(1/16)<i>x</i> + 1/16 = 0<br>
+                            <i>x</i>² + (1/2)<i>x</i> + 1/16 = 0
+                        </div>
+                        <div class="step-explanation">Replace k with 1/16</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 11: Multiply through by 16 to clear fractions</div>
+                        <div class="step-content">
+                            16<i>x</i>² + 8<i>x</i> + 1 = 0
+                        </div>
+                        <div class="step-explanation">Multiplying by 16 makes the equation easier to work with</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 12: Factorize</div>
+                        <div class="step-content">
+                            16<i>x</i>² + 8<i>x</i> + 1 = 0<br><br>
+                            This is a perfect square trinomial:<br>
+                            (4<i>x</i> + 1)² = 0
+                        </div>
+                        <div class="step-explanation">Recognize the pattern a² + 2ab + b² = (a + b)²</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 13: Solve for x</div>
+                        <div class="step-content">
+                            (4<i>x</i> + 1)² = 0<br>
+                            4<i>x</i> + 1 = 0<br>
+                            <i>x</i> = −1/4
+                        </div>
+                        <div class="step-explanation">Take the square root and solve (equal roots give one solution)</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 14: Find y using equation <span style="color: #e74c3c; font-weight: 700;">①</span></div>
+                        <div class="step-content">
+                            From <i>y</i> = 2<i>x</i> − 1:<br><br>
+                            <i>y</i> = 2(−1/4) − 1<br>
+                            <i>y</i> = −1/2 − 1<br>
+                            <i>y</i> = −3/2
+                        </div>
+                        <div class="step-explanation">Substitute x = −1/4 into y = 2x − 1</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 15: Verify the solution (optional)</div>
+                        <div class="step-content">
+                            <strong>Check in equation <span style="color: #e74c3c; font-weight: 700;">①</span>: 2x − y = 1</strong><br>
+                            2(−1/4) − (−3/2) = −1/2 + 3/2 = 1 ✓<br><br>
+                            
+                            <strong>Check in equation <span style="color: #27ae60; font-weight: 700;">②</span>: x² + 4ky + 5k = 0</strong><br>
+                            With k = 1/16, x = −1/4, y = −3/2:<br>
+                            (−1/4)² + 4(1/16)(−3/2) + 5(1/16)<br>
+                            = 1/16 − 3/8 + 5/16<br>
+                            = 1/16 − 6/16 + 5/16<br>
+                            = 0 ✓
+                        </div>
+                        <div class="step-explanation">Both equations are satisfied</div>
+                        <div style="color: #e74c3c; font-weight: 600; margin-top: 10px; font-size: 0.9em;">
+                            ⚠️ Note: This verification step is not required in exams
+                        </div>
+                    </div>
+
+                    <div class="final-answer" style="color: white;">
+                        ✨ Final Answer for Part (c): <span class="coordinate" style="color: white;">(−1/4, −3/2)</span> ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            
+            // Show selected question
+            document.getElementById('q' + num).classList.remove('hidden');
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
