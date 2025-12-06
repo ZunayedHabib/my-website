@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 6F: Graphs of sine, cosine and tangent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.0em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .formula-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formula-content li {
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+
+        .formula-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Fraction Styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .numerator {
+            border-bottom: 2px solid #333;
+            padding: 0 5px;
+        }
+
+        .denominator {
+            padding: 0 5px;
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Part dividers */
+        .part-divider {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .part-divider strong {
+            color: #2c3e50;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-6a.html" class="section-link">6A</a>
+                <a href="P1-section-6b.html" class="section-link">6B</a>
+                <a href="P1-section-6c.html" class="section-link">6C</a>
+                <a href="P1-section-6d.html" class="section-link">6D</a>
+                <a href="P1-section-6e.html" class="section-link">6E</a>
+                <a href="P1-section-6f.html" class="section-link active">6F</a>
+                <a href="P1-section-6g.html" class="section-link">6G</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 6F: Graphs of sine, cosine and tangent</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Graphs of sine, cosine and tangent</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Sketching trigonometric graphs and finding angle values</p>
+            </div>
+            
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1: Graph of sine</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    <strong>a)</strong> Sketch the graph of <i>y</i> = sin <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°.<br><br>
+                    <strong>b)</strong> sin 45° = 1/√2. Use your graph in question 1 to find other values of <i>θ</i> for which:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>i)</strong> sin <i>θ</i> = 1/√2<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ii)</strong> sin <i>θ</i> = −1/√2
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of y = sin θ</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Range:</span> −1 ⩽ sin <i>θ</i> ⩽ 1<br>
+                            • <span class="formula-name">Period:</span> 360° (repeats every 360°)<br>
+                            • <span class="formula-name">Key values:</span> sin(0°) = 0, sin(90°) = 1, sin(−90°) = −1, sin(±180°) = 0
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch the graph of y = sin θ</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key points for the sine graph</div>
+                        <div class="step-content">
+                            For <i>y</i> = sin <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°:<br>
+                            • At <i>θ</i> = −180°: sin(−180°) = 0<br>
+                            • At <i>θ</i> = −90°: sin(−90°) = −1<br>
+                            • At <i>θ</i> = 0°: sin(0°) = 0<br>
+                            • At <i>θ</i> = 90°: sin(90°) = 1<br>
+                            • At <i>θ</i> = 180°: sin(180°) = 0
+                        </div>
+                        <div class="step-explanation">These are the key turning points and intercepts that define the shape of the sine curve.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch the sine graph</div>
+                        <div class="step-content">
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph1a.png" alt="Graph of y = sin θ" style="max-width: 500px; height: auto;">
+                            </div>
+                            The graph shows a smooth wave that starts at (−180°, 0), reaches a minimum at (−90°, −1), passes through (0°, 0), reaches a maximum at (90°, 1), and returns to (180°, 0). The sine function passes through the origin.
+                        </div>
+                        <div class="step-explanation">The sine graph has a characteristic wave shape with maximum value 1 and minimum value −1, and is symmetric about the origin.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Finding values from the graph</strong>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">🔑 Key Properties for Finding Angles</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Symmetry:</span> sin(−<i>θ</i>) = −sin(<i>θ</i>) (odd function)<br>
+                            • <span class="formula-name">Supplementary angle:</span> sin(<i>θ</i>) = sin(180° − <i>θ</i>)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find another value where sin θ = 1/√2</div>
+                        <div class="step-content">
+                            Given that sin 45° = <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div> ≈ 0.70711...<br>
+                            Using the property sin(<i>θ</i>) = sin(180° − <i>θ</i>):<br>
+                            sin(180° − 45°) = sin(135°) = <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div><br>
+                            Therefore, <i>θ</i> = 135°<br>
+                            We can also find where the horizontal line <i>y</i> = <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div> ≈ 0.70711 intersects the sine graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph1b.png" alt="Finding sin θ = 1/√2 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the symmetry property sin(θ) = sin(180° − θ), we find another angle where the sine function equals 1/√2 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find values where sin θ = −1/√2</div>
+                        <div class="step-content">
+                            Given that sin 45° = <div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div> ≈ 0.70711...<br>
+                            Since sine is an odd function: sin(−<i>θ</i>) = −sin(<i>θ</i>)<br>
+                            Therefore: sin(−45°) = −sin(45°) = −<div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div><br>
+                            So <i>θ</i> = −45°<br>
+                            Using the property sin(<i>θ</i>) = sin(180° − <i>θ</i>) in the negative region:<br>
+                            sin(−180° + 45°) = sin(−135°) = −<div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div><br>
+                            So <i>θ</i> = −135°<br>
+                            We can also find where the horizontal line <i>y</i> = −<div class="fraction"><span class="numerator">1</span><span class="denominator">√2</span></div> ≈ −0.70711 intersects the sine graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph1c.png" alt="Finding sin θ = −1/√2 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the odd function property and symmetry, we find two angles where the sine function equals −1/√2 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> Graph sketched (see above)<br>
+                        <strong>b i)</strong> <i>θ</i> = 135°<br>
+                        <strong>b ii)</strong> <i>θ</i> = −45° or <i>θ</i> = −135° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2: Graph of cosine</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    <strong>a)</strong> Sketch the graph of <i>y</i> = cos <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°.<br><br>
+                    <strong>b)</strong> cos 30° = √3/2. Use your graph in question 2 to find other values of <i>θ</i> for which:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>i)</strong> cos <i>θ</i> = √3/2<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ii)</strong> cos <i>θ</i> = −√3/2
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of y = cos θ</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Range:</span> −1 ⩽ cos <i>θ</i> ⩽ 1<br>
+                            • <span class="formula-name">Period:</span> 360° (repeats every 360°)<br>
+                            • <span class="formula-name">Key values:</span> cos(0°) = 1, cos(±90°) = 0, cos(±180°) = −1
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch the graph of y = cos θ</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key points for the cosine graph</div>
+                        <div class="step-content">
+                            For <i>y</i> = cos <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°:<br>
+                            • At <i>θ</i> = −180°: cos(−180°) = −1<br>
+                            • At <i>θ</i> = −90°: cos(−90°) = 0<br>
+                            • At <i>θ</i> = 0°: cos(0°) = 1<br>
+                            • At <i>θ</i> = 90°: cos(90°) = 0<br>
+                            • At <i>θ</i> = 180°: cos(180°) = −1
+                        </div>
+                        <div class="step-explanation">These are the key turning points and intercepts that define the shape of the cosine curve.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch the cosine graph</div>
+                        <div class="step-content">
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph2a.png" alt="Graph of y = cos θ" style="max-width: 500px; height: auto;">
+                            </div>
+                            The graph shows a smooth wave that starts at (−180°, −1), rises to (0°, 1), and returns to (180°, −1). The cosine function is symmetric about the y-axis.
+                        </div>
+                        <div class="step-explanation">The cosine graph has a characteristic wave shape with maximum value 1 and minimum value −1.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Finding values from the graph</strong>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">🔑 Key Properties for Finding Angles</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Symmetry:</span> cos(−<i>θ</i>) = cos(<i>θ</i>) (even function)<br>
+                            • <span class="formula-name">Supplementary angle:</span> cos(180° − <i>θ</i>) = −cos(<i>θ</i>)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find another value where cos θ = √3/2</div>
+                        <div class="step-content">
+                            Given that cos 30° = <div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div> ≈ 0.86603...<br>
+                            Using the symmetry property cos(−<i>θ</i>) = cos(<i>θ</i>):<br>
+                            cos(−30°) = cos(30°) = <div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div><br>
+                            Therefore, <i>θ</i> = −30°<br>
+                            We can also find where the horizontal line <i>y</i> = <div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div> ≈ 0.86603 intersects the cosine graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph2b.png" alt="Finding cos θ = √3/2 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the even function property cos(−θ) = cos(θ), we find another angle where the cosine function equals √3/2 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find values where cos θ = −√3/2</div>
+                        <div class="step-content">
+                            Given that cos 30° = <div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div> ≈ 0.86603...<br>
+                            Using the property cos(180° − <i>θ</i>) = −cos(<i>θ</i>):<br>
+                            cos(180° − 30°) = cos(150°) = −<div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div><br>
+                            So <i>θ</i> = 150°<br>
+                            Using the symmetry property cos(−<i>θ</i>) = cos(<i>θ</i>):<br>
+                            cos(−150°) = cos(150°) = −<div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div><br>
+                            So <i>θ</i> = −150°<br>
+                            We can also find where the horizontal line <i>y</i> = −<div class="fraction"><span class="numerator">√3</span><span class="denominator">2</span></div> ≈ −0.86603 intersects the cosine graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph2c.png" alt="Finding cos θ = −√3/2 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the supplementary angle property and even function property, we find two angles where the cosine function equals −√3/2 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> Graph sketched (see above)<br>
+                        <strong>b i)</strong> <i>θ</i> = −30°<br>
+                        <strong>b ii)</strong> <i>θ</i> = 150° or <i>θ</i> = −150° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3: Graph of tangent</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    <strong>a)</strong> Sketch the graph of <i>y</i> = tan <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°.<br><br>
+                    <strong>b)</strong> tan 60° = √3. Use your graph in question 3 to find other values of <i>θ</i> for which:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>i)</strong> tan <i>θ</i> = √3<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ii)</strong> tan <i>θ</i> = −√3
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of y = tan θ</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Range:</span> −∞ < tan <i>θ</i> < ∞ (all real numbers)<br>
+                            • <span class="formula-name">Period:</span> 180° (repeats every 180°)<br>
+                            • <span class="formula-name">Asymptotes:</span> Vertical asymptotes at <i>θ</i> = ±90°<br>
+                            • <span class="formula-name">Key values:</span> tan(0°) = 0, tan(45°) = 1, tan(−45°) = −1<br><br>
+                            <span style="color: #d32f2f;"><strong>Note:</strong> An asymptote is a line that the graph approaches but never touches.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch the graph of y = tan θ</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features for the tangent graph</div>
+                        <div class="step-content">
+                            For <i>y</i> = tan <i>θ</i> in the interval −180° ⩽ <i>θ</i> ⩽ 180°:<br>
+                            • Vertical asymptotes at <i>θ</i> = −90° and <i>θ</i> = 90°<br>
+                            • At <i>θ</i> = −180°: tan(−180°) = 0<br>
+                            • At <i>θ</i> = −45°: tan(−45°) = −1<br>
+                            • At <i>θ</i> = 0°: tan(0°) = 0<br>
+                            • At <i>θ</i> = 45°: tan(45°) = 1<br>
+                            • At <i>θ</i> = 180°: tan(180°) = 0
+                        </div>
+                        <div class="step-explanation">The tangent function has vertical asymptotes where cosine equals zero, and passes through the origin.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch the tangent graph</div>
+                        <div class="step-content">
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph3a.png" alt="Graph of y = tan θ" style="max-width: 250px; height: auto;">
+                            </div>
+                            The graph shows two branches separated by asymptotes at ±90°. The tangent function passes through zero at −180°, 0°, and 180°, with the curve increasing from −∞ to +∞ in each branch.
+                        </div>
+                        <div class="step-explanation">The tangent graph has a repeating pattern with period 180° and vertical asymptotes where the function is undefined.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Finding values from the graph</strong>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula-title">🔑 Key Properties for Finding Angles</div>
+                        <div class="formula-content">
+                            • <span class="formula-name">Symmetry:</span> tan(−<i>θ</i>) = −tan(<i>θ</i>) (odd function)<br>
+                            • <span class="formula-name">Periodic property:</span> tan(<i>θ</i>) = tan(<i>θ</i> − 180°)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find another value where tan θ = √3</div>
+                        <div class="step-content">
+                            Given that tan 60° = √3 ≈ 1.7321...<br>
+                            Using the periodic property: tan(<i>θ</i>) = tan(<i>θ</i> − 180°)<br>
+                            tan(60° − 180°) = tan(−120°) = √3<br>
+                            Therefore, <i>θ</i> = −120°<br>
+                            We can also find where the horizontal line <i>y</i> = √3 ≈ 1.73205 intersects the tangent graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph3b.png" alt="Finding tan θ = √3 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the periodic property tan(θ) = tan(θ − 180°), we find another angle where the tangent function equals √3 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Find values where tan θ = −√3</div>
+                        <div class="step-content">
+                            Given that tan 60° = √3 ≈ 1.7321...<br>
+                            Since tangent is an odd function: tan(−<i>θ</i>) = −tan(<i>θ</i>)<br>
+                            Therefore: tan(−60°) = −tan(60°) = −√3<br>
+                            So <i>θ</i> = −60°<br>
+                            Using the periodic property: tan(<i>θ</i>) = tan(<i>θ</i> + 180°)<br>
+                            tan(−60° + 180°) = tan(120°) = −√3<br>
+                            So <i>θ</i> = 120°<br>
+                            We can also find where the horizontal line <i>y</i> = −√3 ≈ −1.73205 intersects the tangent graph.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-6f-graph3c.png" alt="Finding tan θ = −√3 on graph" style="max-width: 500px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Using the odd function property and periodic property, we find two angles where the tangent function equals −√3 in the range −180° ⩽ θ ⩽ 180°.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> Graph sketched (see above)<br>
+                        <strong>b i)</strong> <i>θ</i> = −120°<br>
+                        <strong>b ii)</strong> <i>θ</i> = −60° or <i>θ</i> = 120° ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            const allQuestions = document.querySelectorAll('[id^="q"]');
+            allQuestions.forEach(q => q.classList.add('hidden'));
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
