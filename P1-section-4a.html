@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 4A: Cubic graphs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.0em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .formula-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formula-content li {
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+
+        .formula-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Part dividers */
+        .part-divider {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .part-divider strong {
+            color: #2c3e50;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-4a.html" class="section-link active">4A</a>
+                <a href="P1-section-4b.html" class="section-link">4B</a>
+                <a href="P1-section-4c.html" class="section-link">4C</a>
+                <a href="P1-section-4d.html" class="section-link">4D</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 4A: Cubic graphs</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Cubic graphs</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Sketching cubic curves and finding points of intersection</p>
+            </div>
+            
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Sketch the following curves and indicate clearly the points of intersection with the axes:<br><br>
+                    <strong>a)</strong> <i>y</i> = (<i>x</i> − 2)(2<i>x</i> − 1)(2<i>x</i> + 1)<br>
+                    <strong>b)</strong> <i>y</i> = <i>x</i>(2<i>x</i> − 1)(<i>x</i> + 3)<br>
+                    <strong>c)</strong> <i>y</i> = (<i>x</i> − 1)<sup>2</sup>(3 − <i>x</i>)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Steps for Sketching Cubic Curves</div>
+                        <div class="formula-content">
+                            <span class="formula-name">1. Find x-intercepts:</span> Set <i>y</i> = 0 and solve for <i>x</i> (roots of the equation)<br>
+                            <span class="formula-name">2. Find y-intercept:</span> Set <i>x</i> = 0 and find the value of <i>y</i><br>
+                            <span class="formula-name">3. Determine the shape:</span> Check the coefficient of <i>x</i><sup>3</sup> (positive = rises right, negative = falls right)<br>
+                            <span class="formula-name">4. Plot key points:</span> Mark intercepts on axes<br>
+                            <span class="formula-name">5. Sketch the curve:</span> Draw smooth curve through the points following cubic shape<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: For sketching, we focus on intercepts and general shape. The exact coordinates of turning points (maximum and minimum) are not required.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) y = (x − 2)(2x − 1)(2x + 1)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 2)(2<i>x</i> − 1)(2<i>x</i> + 1)<br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> − 2)(2<i>x</i> − 1)(2<i>x</i> + 1) = 0<br>
+                            This gives us three roots:<br>
+                            • <i>x</i> − 2 = 0 → <i>x</i> = 2<br>
+                            • 2<i>x</i> − 1 = 0 → <i>x</i> = 1/2 = 0.5<br>
+                            • 2<i>x</i> + 1 = 0 → <i>x</i> = −1/2 = −0.5<br>
+                            <strong>x-intercepts: (−0.5, 0), (0.5, 0), (2, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercepts are found by setting each factor equal to zero.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 2)(2<i>x</i> − 1)(2<i>x</i> + 1)<br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 − 2)(2(0) − 1)(2(0) + 1)<br>
+                            <i>y</i> = (−2)(−1)(1)<br>
+                            <i>y</i> = 2<br>
+                            <strong>y-intercept: (0, 2)</strong>
+                        </div>
+                        <div class="step-explanation">The y-intercept is found by substituting x = 0 into the equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 2)(2<i>x</i> − 1)(2<i>x</i> + 1)<br>
+                            Expanding the leading terms: (<i>x</i>)(2<i>x</i>)(2<i>x</i>) = 4<i>x</i><sup>3</sup><br>
+                            The coefficient of <i>x</i><sup>3</sup> is positive (4), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (−0.5, 0), (0.5, 0), (2, 0)<br>
+                            • y-intercept: (0, 2)<br>
+                            Draw a smooth cubic curve passing through these points, starting from bottom-left, crossing x-axis at −0.5, rising to cross y-axis at 2, crossing x-axis again at 0.5 and 2, then continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph1a.png" alt="Graph of y = (x − 2)(2x − 1)(2x + 1)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve has three x-intercepts and passes through all marked points with the characteristic S-shape.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) y = x(2x − 1)(x + 3)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(2<i>x</i> − 1)(<i>x</i> + 3)<br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i>(2<i>x</i> − 1)(<i>x</i> + 3) = 0<br>
+                            This gives us three roots:<br>
+                            • <i>x</i> = 0<br>
+                            • 2<i>x</i> − 1 = 0 → <i>x</i> = 1/2 = 0.5<br>
+                            • <i>x</i> + 3 = 0 → <i>x</i> = −3<br>
+                            <strong>x-intercepts: (−3, 0), (0, 0), (0.5, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercepts are found by setting each factor equal to zero.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(2<i>x</i> − 1)(<i>x</i> + 3)<br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0(2(0) − 1)(0 + 3)<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The curve passes through the origin, so the y-intercept is at (0, 0).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(2<i>x</i> − 1)(<i>x</i> + 3)<br>
+                            Expanding the leading terms: (<i>x</i>)(2<i>x</i>)(<i>x</i>) = 2<i>x</i><sup>3</sup><br>
+                            The coefficient of <i>x</i><sup>3</sup> is positive (2), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (−3, 0), (0, 0), (0.5, 0)<br>
+                            • y-intercept: (0, 0) (same as one of the x-intercepts)<br>
+                            Draw a smooth cubic curve passing through these points, starting from bottom-left, crossing x-axis at −3, passing through the origin at (0, 0), crossing x-axis again at 0.5, then continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph1b.png" alt="Graph of y = x(2x − 1)(x + 3)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve has three x-intercepts including the origin and follows the characteristic S-shape of a cubic function.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) y = (x − 1)²(3 − x)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 1)<sup>2</sup>(3 − <i>x</i>)<br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> − 1)<sup>2</sup>(3 − <i>x</i>) = 0<br>
+                            This gives us:<br>
+                            • (<i>x</i> − 1)<sup>2</sup> = 0 → (<i>x</i> − 1)(<i>x</i> − 1) = 0 → <i>x</i> = 1, <i>x</i> = 1 (repeated root, touches x-axis)<br>
+                            • 3 − <i>x</i> = 0 → <i>x</i> = 3<br>
+                            <strong>x-intercepts: (1, 0) [repeated root], (3, 0)</strong>
+                        </div>
+                        <div class="step-explanation">A repeated root means the curve touches the x-axis at that point but doesn't cross it.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 1)<sup>2</sup>(3 − <i>x</i>)<br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 − 1)<sup>2</sup>(3 − 0)<br>
+                            <i>y</i> = (−1)<sup>2</sup>(3)<br>
+                            <i>y</i> = 1 × 3<br>
+                            <i>y</i> = 3<br>
+                            <strong>y-intercept: (0, 3)</strong>
+                        </div>
+                        <div class="step-explanation">The y-intercept is found by substituting x = 0 into the equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 1)<sup>2</sup>(3 − <i>x</i>)<br>
+                            Expanding the leading terms: (<i>x</i>)(<i>x</i>)(−<i>x</i>) = −<i>x</i><sup>3</sup><br>
+                            The coefficient of <i>x</i><sup>3</sup> is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            <strong>Note:</strong> At <i>x</i> = 1, the curve has a repeated root, so it touches the x-axis and turns back (doesn't cross).
+                        </div>
+                        <div class="step-explanation">A negative coefficient of x³ means the curve goes from top-left to bottom-right. The repeated root creates a turning point on the x-axis.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (1, 0) [repeated root - curve touches here], (3, 0)<br>
+                            • y-intercept: (0, 3)<br>
+                            Draw a smooth cubic curve starting from top-left, passing through y-intercept at (0, 3), touching (but not crossing) the x-axis at (1, 0), turning back up briefly, then crossing x-axis at (3, 0) and continuing to bottom-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph1c.png" alt="Graph of y = (x − 1)²(3 − x)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve touches the x-axis at x = 1 due to the repeated root, creating a characteristic "wiggle" at that point.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> x-intercepts: (−0.5, 0), (0.5, 0), (2, 0); y-intercept: (0, 2)<br>
+                        <strong>b)</strong> x-intercepts: (−3, 0), (0, 0), (0.5, 0); y-intercept: (0, 0)<br>
+                        <strong>c)</strong> x-intercepts: (1, 0) [repeated], (3, 0); y-intercept: (0, 3) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Factorise the following equations and then sketch the curves:<br><br>
+                    <strong>a)</strong> <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup> − 2<i>x</i><br>
+                    <strong>b)</strong> <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup><br>
+                    <strong>c)</strong> <i>y</i> = <i>x</i><sup>3</sup> − 9<i>x</i>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Steps for Sketching Cubic Curves</div>
+                        <div class="formula-content">
+                            <span class="formula-name">1. Factorise:</span> Write the equation in factored form to identify roots<br>
+                            <span class="formula-name">2. Find x-intercepts:</span> Set <i>y</i> = 0 and solve for <i>x</i> (roots of the equation)<br>
+                            <span class="formula-name">3. Find y-intercept:</span> Set <i>x</i> = 0 and find the value of <i>y</i><br>
+                            <span class="formula-name">4. Determine the shape:</span> Check the coefficient of <i>x</i><sup>3</sup> (positive = rises right, negative = falls right)<br>
+                            <span class="formula-name">5. Plot key points:</span> Mark intercepts on axes<br>
+                            <span class="formula-name">6. Sketch the curve:</span> Draw smooth curve through the points following cubic shape<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: For sketching, we focus on intercepts and general shape. The exact coordinates of turning points (maximum and minimum) are not required.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) y = x³ − x² − 2x</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Factorise</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup> − 2<i>x</i><br>
+                            Factor out <i>x</i>:<br>
+                            <i>y</i> = <i>x</i>(<i>x</i><sup>2</sup> − <i>x</i> − 2)<br>
+                            Factor the quadratic using product and sum rule:<br>
+                            We need two numbers that multiply to −2 and add to −1:<br>
+                            −2 × 1 = −2 and −2 + 1 = −1 ✓<br>
+                            <i>y</i> = <i>x</i>(<i>x</i> − 2)(<i>x</i> + 1)<br>
+                            <strong>Factored form: y = x(x − 2)(x + 1)</strong>
+                        </div>
+                        <div class="step-explanation">We factor out the common factor x first, then factorise the quadratic expression using the product and sum rule.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(<i>x</i> − 2)(<i>x</i> + 1)<br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i>(<i>x</i> − 2)(<i>x</i> + 1) = 0<br>
+                            This gives us three roots:<br>
+                            • <i>x</i> = 0<br>
+                            • <i>x</i> − 2 = 0 → <i>x</i> = 2<br>
+                            • <i>x</i> + 1 = 0 → <i>x</i> = −1<br>
+                            <strong>x-intercepts: (−1, 0), (0, 0), (2, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercepts are found by setting each factor equal to zero.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup> − 2<i>x</i><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<sup>3</sup> − 0<sup>2</sup> − 2(0)<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The curve passes through the origin, so the y-intercept is at (0, 0).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup> − 2<i>x</i><br>
+                            The coefficient of <i>x</i><sup>3</sup> is positive (1), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (−1, 0), (0, 0), (2, 0)<br>
+                            • y-intercept: (0, 0) (same as one of the x-intercepts)<br>
+                            Draw a smooth cubic curve passing through these points, starting from bottom-left, crossing x-axis at −1, passing through the origin at (0, 0), crossing x-axis again at 2, then continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph2a.png" alt="Graph of y = x³ − x² − 2x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve has three x-intercepts including the origin and follows the characteristic S-shape of a cubic function.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) y = x³ − x²</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Factorise</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup><br>
+                            Factor out <i>x</i><sup>2</sup>:<br>
+                            <i>y</i> = <i>x</i><sup>2</sup>(<i>x</i> − 1)<br>
+                            <strong>Factored form: y = x²(x − 1)</strong>
+                        </div>
+                        <div class="step-explanation">We factor out the common factor x² from both terms.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>2</sup>(<i>x</i> − 1)<br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i><sup>2</sup>(<i>x</i> − 1) = 0<br>
+                            This gives us:<br>
+                            • <i>x</i><sup>2</sup> = 0 → <i>x</i> · <i>x</i> = 0 → <i>x</i> = 0, <i>x</i> = 0 (repeated root, touches x-axis)<br>
+                            • <i>x</i> − 1 = 0 → <i>x</i> = 1<br>
+                            <strong>x-intercepts: (0, 0) [repeated root], (1, 0)</strong>
+                        </div>
+                        <div class="step-explanation">A repeated root means the curve touches the x-axis at that point but doesn't cross it.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<sup>3</sup> − 0<sup>2</sup><br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The curve passes through the origin, so the y-intercept is at (0, 0).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − <i>x</i><sup>2</sup><br>
+                            The coefficient of <i>x</i><sup>3</sup> is positive (1), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right<br>
+                            <strong>Note:</strong> At <i>x</i> = 0, the curve has a repeated root, so it touches the x-axis and turns back (doesn't cross).
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right. The repeated root creates a turning point on the x-axis.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (0, 0) [repeated root - curve touches here], (1, 0)<br>
+                            • y-intercept: (0, 0) (same as one of the x-intercepts)<br>
+                            Draw a smooth cubic curve starting from bottom-left, touching (but not crossing) the x-axis at (0, 0), turning back down briefly, then crossing x-axis at (1, 0) and continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph2b.png" alt="Graph of y = x³ − x²" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve touches the x-axis at x = 0 due to the repeated root, creating a characteristic "wiggle" at the origin.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) y = x³ − 9x</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Factorise</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − 9<i>x</i><br>
+                            Factor out <i>x</i>:<br>
+                            <i>y</i> = <i>x</i>(<i>x</i><sup>2</sup> − 9)<br>
+                            Recognize difference of squares: <i>x</i><sup>2</sup> − 9 = (<i>x</i> − 3)(<i>x</i> + 3)<br>
+                            <i>y</i> = <i>x</i>(<i>x</i> − 3)(<i>x</i> + 3)<br>
+                            <strong>Factored form: y = x(x − 3)(x + 3)</strong>
+                        </div>
+                        <div class="step-explanation">We factor out x first, then use the difference of squares formula on x² − 9.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(<i>x</i> − 3)(<i>x</i> + 3)<br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i>(<i>x</i> − 3)(<i>x</i> + 3) = 0<br>
+                            This gives us three roots:<br>
+                            • <i>x</i> = 0<br>
+                            • <i>x</i> − 3 = 0 → <i>x</i> = 3<br>
+                            • <i>x</i> + 3 = 0 → <i>x</i> = −3<br>
+                            <strong>x-intercepts: (−3, 0), (0, 0), (3, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercepts are found by setting each factor equal to zero.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − 9<i>x</i><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<sup>3</sup> − 9(0)<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The curve passes through the origin, so the y-intercept is at (0, 0).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − 9<i>x</i><br>
+                            The coefficient of <i>x</i><sup>3</sup> is positive (1), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (−3, 0), (0, 0), (3, 0)<br>
+                            • y-intercept: (0, 0) (same as one of the x-intercepts)<br>
+                            Draw a smooth cubic curve passing through these points, starting from bottom-left, crossing x-axis at −3, passing through the origin at (0, 0), crossing x-axis again at 3, then continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph2c.png" alt="Graph of y = x³ − 9x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve has three x-intercepts including the origin and follows the characteristic S-shape of a cubic function with symmetry about the origin.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> y = x(x − 2)(x + 1); x-intercepts: (−1, 0), (0, 0), (2, 0); y-intercept: (0, 0)<br>
+                        <strong>b)</strong> y = x²(x − 1); x-intercepts: (0, 0) [repeated], (1, 0); y-intercept: (0, 0)<br>
+                        <strong>c)</strong> y = x(x − 3)(x + 3); x-intercepts: (−3, 0), (0, 0), (3, 0); y-intercept: (0, 0) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3</span><button class="nav-arrow" onclick="showQuestion(4)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    Sketch the following curves and indicate the coordinates of the points where the curves cross the axes:<br><br>
+                    <strong>a)</strong> <i>y</i> = (<i>x</i> + 2)<sup>3</sup><br>
+                    <strong>b)</strong> <i>y</i> = −(<i>x</i> − 2)<sup>3</sup><br>
+                    <strong>c)</strong> <i>y</i> = −(<i>x</i> − <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">1</span><span style="padding: 0 3px;">2</span></div>)<sup>3</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Steps for Sketching Cubic Curves</div>
+                        <div class="formula-content">
+                            <span class="formula-name">1. Find x-intercepts:</span> Set <i>y</i> = 0 and solve for <i>x</i> (roots of the equation)<br>
+                            <span class="formula-name">2. Find y-intercept:</span> Set <i>x</i> = 0 and find the value of <i>y</i><br>
+                            <span class="formula-name">3. Determine the shape:</span> Check the coefficient of <i>x</i><sup>3</sup> (positive = rises right, negative = falls right)<br>
+                            <span class="formula-name">4. Plot key points:</span> Mark intercepts on axes<br>
+                            <span class="formula-name">5. Sketch the curve:</span> Draw smooth curve through the points following cubic shape<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: For sketching, we focus on intercepts and general shape. The exact coordinates of turning points (maximum and minimum) are not required.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) y = (x + 2)³</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> + 2)<sup>3</sup><br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> + 2)<sup>3</sup> = 0<br>
+                            (<i>x</i> + 2)(<i>x</i> + 2)(<i>x</i> + 2) = 0<br>
+                            <i>x</i> + 2 = 0, <i>x</i> + 2 = 0, <i>x</i> + 2 = 0<br>
+                            <i>x</i> = −2, <i>x</i> = −2, <i>x</i> = −2<br>
+                            <strong>x-intercept: (−2, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercept is found by setting y = 0 and solving for x. All three factors give the same root.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> + 2)<sup>3</sup><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 + 2)<sup>3</sup><br>
+                            <i>y</i> = 2<sup>3</sup><br>
+                            <i>y</i> = 8<br>
+                            <strong>y-intercept: (0, 8)</strong>
+                        </div>
+                        <div class="step-explanation">The y-intercept is found by substituting x = 0 into the equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> + 2)<sup>3</sup><br>
+                            The coefficient is positive (1), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right<br>
+                            <strong>Note:</strong> The curve passes through (−2, 0) which is a point of inflection (where the curve changes its bend/curvature).
+                        </div>
+                        <div class="step-explanation">A positive cubic curve has the standard S-shape going from bottom-left to top-right. The x-intercept is a point of inflection.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercept: (−2, 0) [point of inflection]<br>
+                            • y-intercept: (0, 8)<br>
+                            Draw a smooth cubic curve passing through these points with the characteristic S-shape.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph3a.png" alt="Graph of y = (x + 2)³" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The point of inflection at (−2, 0) is where the curve transitions through the x-axis smoothly.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) y = −(x − 2)³</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 2)<sup>3</sup><br>
+                            Set <i>y</i> = 0:<br>
+                            −(<i>x</i> − 2)<sup>3</sup> = 0<br>
+                            −(<i>x</i> − 2)(<i>x</i> − 2)(<i>x</i> − 2) = 0<br>
+                            (<i>x</i> − 2)(<i>x</i> − 2)(<i>x</i> − 2) = 0<br>
+                            <i>x</i> − 2 = 0, <i>x</i> − 2 = 0, <i>x</i> − 2 = 0<br>
+                            <i>x</i> = 2, <i>x</i> = 2, <i>x</i> = 2<br>
+                            <strong>x-intercept: (2, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercept is found by setting y = 0 and solving for x. All three factors give the same root.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 2)<sup>3</sup><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −(0 − 2)<sup>3</sup><br>
+                            <i>y</i> = −(−2)<sup>3</sup><br>
+                            <i>y</i> = −(−8)<br>
+                            <i>y</i> = 8<br>
+                            <strong>y-intercept: (0, 8)</strong>
+                        </div>
+                        <div class="step-explanation">The y-intercept is found by substituting x = 0 into the equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 2)<sup>3</sup><br>
+                            The coefficient is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            <strong>Note:</strong> The curve passes through (2, 0) which is a point of inflection (where the curve changes its bend/curvature).
+                        </div>
+                        <div class="step-explanation">A negative cubic curve is reflected, going from top-left to bottom-right. The x-intercept is a point of inflection.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercept: (2, 0) [point of inflection]<br>
+                            • y-intercept: (0, 8)<br>
+                            Draw a smooth cubic curve passing through these points with the reflected S-shape (upside down).
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph3b.png" alt="Graph of y = −(x − 2)³" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The point of inflection at (2, 0) is where the curve transitions through the x-axis smoothly.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) y = −(x − 1/2)³</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 1/2)<sup>3</sup><br>
+                            Set <i>y</i> = 0:<br>
+                            −(<i>x</i> − 1/2)<sup>3</sup> = 0<br>
+                            −(<i>x</i> − 1/2)(<i>x</i> − 1/2)(<i>x</i> − 1/2) = 0<br>
+                            (<i>x</i> − 1/2)(<i>x</i> − 1/2)(<i>x</i> − 1/2) = 0<br>
+                            <i>x</i> − 1/2 = 0, <i>x</i> − 1/2 = 0, <i>x</i> − 1/2 = 0<br>
+                            <i>x</i> = 1/2, <i>x</i> = 1/2, <i>x</i> = 1/2<br>
+                            <i>x</i> = 0.5, <i>x</i> = 0.5, <i>x</i> = 0.5<br>
+                            <strong>x-intercept: (0.5, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercept is found by setting y = 0 and solving for x. All three factors give the same root.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 1/2)<sup>3</sup><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −(0 − 1/2)<sup>3</sup><br>
+                            <i>y</i> = −(−1/2)<sup>3</sup><br>
+                            <i>y</i> = −(−1/8)<br>
+                            <i>y</i> = 1/8 = 0.125<br>
+                            <strong>y-intercept: (0, 0.125)</strong>
+                        </div>
+                        <div class="step-explanation">The y-intercept is found by substituting x = 0 into the equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            <i>y</i> = −(<i>x</i> − 1/2)<sup>3</sup><br>
+                            The coefficient is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            <strong>Note:</strong> The curve passes through (0.5, 0) which is a point of inflection (where the curve changes its bend/curvature).
+                        </div>
+                        <div class="step-explanation">A negative cubic curve is reflected, going from top-left to bottom-right. The x-intercept is a point of inflection.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercept: (0.5, 0) [point of inflection]<br>
+                            • y-intercept: (0, 0.125)<br>
+                            Draw a smooth cubic curve passing through these points with the reflected S-shape (upside down).
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph3c.png" alt="Graph of y = −(x − 1/2)³" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The point of inflection at (0.5, 0) is where the curve transitions through the x-axis smoothly.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> x-intercept: (−2, 0); y-intercept: (0, 8)<br>
+                        <strong>b)</strong> x-intercept: (2, 0); y-intercept: (0, 8)<br>
+                        <strong>c)</strong> x-intercept: (0.5, 0); y-intercept: (0, 0.125) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(3)" title="Previous Question">←</button><span>Question 4</span><button class="nav-arrow" onclick="showQuestion(5)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    The graph of <i>y</i> = <i>ax</i><sup>3</sup> + <i>bx</i><sup>2</sup> + <i>cx</i> + <i>d</i> is shown opposite, where <i>a</i>, <i>b</i>, <i>c</i> and <i>d</i> are real constants.<br><br>
+                    <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                        <img src="P1-section-4a-graph4.png" alt="Graph of cubic function" style="width: 350px; height: auto;">
+                    </div>
+                    Find the values of <i>a</i>, <i>b</i>, <i>c</i> and <i>d</i>.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Information from Graph</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>ax</i><sup>3</sup> + <i>bx</i><sup>2</sup> + <i>cx</i> + <i>d</i><br>
+                            <span class="formula-name">From graph observations:</span><br>
+                            • x-intercepts (roots): <i>x</i> = −1, <i>x</i> = 2, <i>x</i> = 3<br>
+                            • y-intercept appears to be at (0, 2)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify the roots from the graph</div>
+                        <div class="step-content">
+                            From the graph, the curve crosses the x-axis at:<br>
+                            • <i>x</i> = −1<br>
+                            • <i>x</i> = 2<br>
+                            • <i>x</i> = 3<br>
+                            Therefore, the factored form must be:<br>
+                            <i>y</i> = <i>a</i>(<i>x</i> + 1)(<i>x</i> − 2)(<i>x</i> − 3)
+                        </div>
+                        <div class="step-explanation">The x-intercepts give us the roots of the cubic equation.<br>Rule: If the root is <i>x</i> = <i>p</i>, then the factor is (<i>x</i> − <i>p</i>). Change the sign when forming factors.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Expand the factored form</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>a</i>(<i>x</i> + 1)(<i>x</i> − 2)(<i>x</i> − 3)<br>
+                            First expand (<i>x</i> − 2)(<i>x</i> − 3):<br>
+                            (<i>x</i> − 2)(<i>x</i> − 3) = <i>x</i><sup>2</sup> − 3<i>x</i> − 2<i>x</i> + 6<br>
+                            (<i>x</i> − 2)(<i>x</i> − 3) = <i>x</i><sup>2</sup> − 5<i>x</i> + 6<br><br>
+                            Now multiply by (<i>x</i> + 1):<br>
+                            <i>y</i> = <i>a</i>(<i>x</i> + 1)(<i>x</i><sup>2</sup> − 5<i>x</i> + 6)<br>
+                            <i>y</i> = <i>a</i>(<i>x</i><sup>3</sup> − 5<i>x</i><sup>2</sup> + 6<i>x</i> + <i>x</i><sup>2</sup> − 5<i>x</i> + 6)<br>
+                            <i>y</i> = <i>a</i>(<i>x</i><sup>3</sup> − 4<i>x</i><sup>2</sup> + <i>x</i> + 6)<br>
+                            <i>y</i> = <i>ax</i><sup>3</sup> − 4<i>ax</i><sup>2</sup> + <i>ax</i> + 6<i>a</i>
+                        </div>
+                        <div class="step-explanation">We expand to get the polynomial in standard form.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Compare with general form</div>
+                        <div class="step-content">
+                            General form: <i>y</i> = <i>ax</i><sup>3</sup> + <i>bx</i><sup>2</sup> + <i>cx</i> + <i>d</i><br>
+                            Our form: <i>y</i> = <i>ax</i><sup>3</sup> − 4<i>ax</i><sup>2</sup> + <i>ax</i> + 6<i>a</i><br><br>
+                            Comparing coefficients:<br>
+                            • Coefficient of <i>x</i><sup>3</sup>: <i>a</i> = <i>a</i><br>
+                            • Coefficient of <i>x</i><sup>2</sup>: <i>b</i> = −4<i>a</i><br>
+                            • Coefficient of <i>x</i>: <i>c</i> = <i>a</i><br>
+                            • Constant term: <i>d</i> = 6<i>a</i>
+                        </div>
+                        <div class="step-explanation">We identify coefficients by comparing like terms.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Determine the value of a using the y-intercept</div>
+                        <div class="step-content">
+                            From the graph, the y-intercept is at (0, 2).<br>
+                            <i>y</i> = <i>ax</i><sup>3</sup> − 4<i>ax</i><sup>2</sup> + <i>ax</i> + 6<i>a</i><br>
+                            When <i>x</i> = 0 and <i>y</i> = 2:<br>
+                            2 = <i>a</i>(0)<sup>3</sup> − 4<i>a</i>(0)<sup>2</sup> + <i>a</i>(0) + 6<i>a</i><br>
+                            2 = 6<i>a</i><br>
+                            <i>a</i> = 2/6 = 1/3<br><br>
+                            Now we can find <i>b</i>, <i>c</i>, and <i>d</i>:<br>
+                            • <i>a</i> = 1/3<br>
+                            • <i>b</i> = −4<i>a</i> = −4(1/3) = −4/3<br>
+                            • <i>c</i> = <i>a</i> = 1/3<br>
+                            • <i>d</i> = 6<i>a</i> = 6(1/3) = 2<br><br>
+                            <strong>Therefore: a = 1/3, b = −4/3, c = 1/3, d = 2</strong><br><br>
+                            The complete equation is:<br>
+                            <i>y</i> = <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">1</span><span style="padding: 0 3px;">3</span></div><i>x</i><sup>3</sup> − <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">4</span><span style="padding: 0 3px;">3</span></div><i>x</i><sup>2</sup> + <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">1</span><span style="padding: 0 3px;">3</span></div><i>x</i> + 2
+                        </div>
+                        <div class="step-explanation">Using the y-intercept from the graph allows us to determine the value of a, and subsequently b, c, and d.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer: <i>a</i> = 1/3, <i>b</i> = −4/3, <i>c</i> = 1/3, <i>d</i> = 2 ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(4)" title="Previous Question">←</button><span>Question 5</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    Given that f(<i>x</i>) = (<i>x</i> − 10)(<i>x</i><sup>2</sup> − 2<i>x</i>) + 12<i>x</i><br><br>
+                    <strong>a)</strong> Express f(<i>x</i>) in the form <i>x</i>(<i>ax</i><sup>2</sup> + <i>bx</i> + <i>c</i>) where <i>a</i>, <i>b</i> and <i>c</i> are real constants.<br>
+                    <strong>b)</strong> Hence factorise f(<i>x</i>) completely.<br>
+                    <strong>c)</strong> Sketch the graph of <i>y</i> = f(<i>x</i>) showing clearly the points where the graph intersects the axes.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="part-divider">
+                        <strong>Part a) Express f(x) in the form x(ax² + bx + c)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Expand the expression</div>
+                        <div class="step-content">
+                            f(<i>x</i>) = (<i>x</i> − 10)(<i>x</i><sup>2</sup> − 2<i>x</i>) + 12<i>x</i><br><br>
+                            Expand (<i>x</i> − 10)(<i>x</i><sup>2</sup> − 2<i>x</i>):<br>
+                            = <i>x</i>(<i>x</i><sup>2</sup> − 2<i>x</i>) − 10(<i>x</i><sup>2</sup> − 2<i>x</i>)<br>
+                            = <i>x</i><sup>3</sup> − 2<i>x</i><sup>2</sup> − 10<i>x</i><sup>2</sup> + 20<i>x</i><br>
+                            = <i>x</i><sup>3</sup> − 12<i>x</i><sup>2</sup> + 20<i>x</i><br><br>
+                            Now add 12<i>x</i>:<br>
+                            f(<i>x</i>) = <i>x</i><sup>3</sup> − 12<i>x</i><sup>2</sup> + 20<i>x</i> + 12<i>x</i><br>
+                            f(<i>x</i>) = <i>x</i><sup>3</sup> − 12<i>x</i><sup>2</sup> + 32<i>x</i>
+                        </div>
+                        <div class="step-explanation">We expand the brackets and collect like terms.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Factor out x</div>
+                        <div class="step-content">
+                            f(<i>x</i>) = <i>x</i><sup>3</sup> − 12<i>x</i><sup>2</sup> + 32<i>x</i><br>
+                            Factor out <i>x</i>:<br>
+                            f(<i>x</i>) = <i>x</i>(<i>x</i><sup>2</sup> − 12<i>x</i> + 32)<br><br>
+                            Comparing with <i>x</i>(<i>ax</i><sup>2</sup> + <i>bx</i> + <i>c</i>):<br>
+                            • <i>a</i> = 1<br>
+                            • <i>b</i> = −12<br>
+                            • <i>c</i> = 32<br><br>
+                            <strong>Therefore: f(x) = x(x² − 12x + 32)</strong>
+                        </div>
+                        <div class="step-explanation">We factor out the common factor x and identify the coefficients a, b, and c.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Hence factorise f(x) completely</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Factorise the quadratic expression</div>
+                        <div class="step-content">
+                            From part a), we have:<br>
+                            f(<i>x</i>) = <i>x</i>(<i>x</i><sup>2</sup> − 12<i>x</i> + 32)<br><br>
+                            Now factorise <i>x</i><sup>2</sup> − 12<i>x</i> + 32 using product and sum rule:<br>
+                            We need two numbers that multiply to 32 and add to −12:<br>
+                            −4 × −8 = 32<br>
+                            −4 + (−8) = −12 ✓<br><br>
+                            Therefore:<br>
+                            <i>x</i><sup>2</sup> − 12<i>x</i> + 32 = (<i>x</i> − 4)(<i>x</i> − 8)
+                        </div>
+                        <div class="step-explanation">We use the product and sum rule to find two numbers that multiply to give the constant term and add to give the coefficient of x.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Write the complete factorisation</div>
+                        <div class="step-content">
+                            f(<i>x</i>) = <i>x</i>(<i>x</i> − 4)(<i>x</i> − 8)<br><br>
+                            <strong>Complete factorisation: f(x) = x(x − 4)(x − 8)</strong>
+                        </div>
+                        <div class="step-explanation">This is the fully factorised form with all three linear factors.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) Sketch the graph of y = f(x)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Find x-intercepts</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(<i>x</i> − 4)(<i>x</i> − 8)<br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i>(<i>x</i> − 4)(<i>x</i> − 8) = 0<br><br>
+                            This gives us three roots:<br>
+                            • <i>x</i> = 0<br>
+                            • <i>x</i> − 4 = 0 → <i>x</i> = 4<br>
+                            • <i>x</i> − 8 = 0 → <i>x</i> = 8<br><br>
+                            <strong>x-intercepts: (0, 0), (4, 0), (8, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The x-intercepts are found by setting each factor equal to zero.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Find y-intercept</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(<i>x</i> − 4)(<i>x</i> − 8)<br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0(0 − 4)(0 − 8)<br>
+                            <i>y</i> = 0<br><br>
+                            <strong>y-intercept: (0, 0)</strong>
+                        </div>
+                        <div class="step-explanation">The curve passes through the origin, so the y-intercept is at (0, 0).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Determine the shape</div>
+                        <div class="step-content">
+                            The coefficient of <i>x</i><sup>3</sup> in f(<i>x</i>) = <i>x</i><sup>3</sup> − 12<i>x</i><sup>2</sup> + 32<i>x</i> is positive (1), so the curve:<br>
+                            • Falls from top left<br>
+                            • Rises to top right
+                        </div>
+                        <div class="step-explanation">A positive coefficient of x³ means the curve goes from bottom-left to top-right.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Sketch the curve</div>
+                        <div class="step-content">
+                            Key points to plot:<br>
+                            • x-intercepts: (0, 0), (4, 0), (8, 0)<br>
+                            • y-intercept: (0, 0) (same as one of the x-intercepts)<br><br>
+                            Draw a smooth cubic curve passing through these points, starting from bottom-left, crossing x-axis at 0, passing through the origin, crossing x-axis again at 4 and 8, then continuing to top-right.
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4a-graph5.png" alt="Graph of y = f(x)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The cubic curve has three x-intercepts including the origin and follows the characteristic S-shape of a cubic function.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> f(<i>x</i>) = <i>x</i>(<i>x</i><sup>2</sup> − 12<i>x</i> + 32) where <i>a</i> = 1, <i>b</i> = −12, <i>c</i> = 32<br>
+                        <strong>b)</strong> f(<i>x</i>) = <i>x</i>(<i>x</i> − 4)(<i>x</i> − 8)<br>
+                        <strong>c)</strong> x-intercepts: (0, 0), (4, 0), (8, 0); y-intercept: (0, 0) ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            const allQuestions = document.querySelectorAll('[id^="q"]');
+            allQuestions.forEach(q => q.classList.add('hidden'));
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
