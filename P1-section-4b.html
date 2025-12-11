@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 4B: Reciprocal graphs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.0em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .formula-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formula-content li {
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+
+        .formula-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Part dividers */
+        .part-divider {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .part-divider strong {
+            color: #2c3e50;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 3px;
+        }
+
+        .fraction span:first-child {
+            border-bottom: 1px solid #333;
+            padding: 0 3px;
+        }
+
+        .fraction span:last-child {
+            padding: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-4a.html" class="section-link">4A</a>
+                <a href="P1-section-4b.html" class="section-link active">4B</a>
+                <a href="P1-section-4c.html" class="section-link">4C</a>
+                <a href="P1-section-4d.html" class="section-link">4D</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 4B: Reciprocal graphs</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Reciprocal graphs</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Sketching pairs of reciprocal functions on the same diagram</p>
+            </div>
+            
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = <div class="fraction"><span>2</span><span><i>x</i></span></div> and <i>y</i> = <div class="fraction"><span>4</span><span><i>x</i></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> Curves appear in quadrants 1 & 3 (if <i>k</i> > 0) or quadrants 2 & 4 (if <i>k</i> < 0)<br>
+                            <span class="formula-name">Behavior:</span> As |<i>x</i>| increases, <i>y</i> approaches 0; As <i>x</i> approaches 0, |<i>y</i>| increases<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i>:<br>
+                            • Constant <i>k</i> = 2 (positive)<br>
+                            • Curves in quadrants 1 and 3<br><br>
+                            For <i>y</i> = 4/<i>x</i>:<br>
+                            • Constant <i>k</i> = 4 (positive)<br>
+                            • Curves in quadrants 1 and 3<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)
+                        </div>
+                        <div class="step-explanation">Both curves have positive k, so they appear in quadrants 1 and 3. The larger k value means y = 4/x is further from the origin.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = 4/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−4</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">4</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">Notice that for the same x-value, y = 4/x has larger y-values than y = 2/x.<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = 2/<i>x</i> with smooth curves in quadrants 1 and 3<br>
+                            • Sketch <i>y</i> = 4/<i>x</i> with smooth curves in quadrants 1 and 3<br>
+                            • Label both curves clearly<br>
+                            • Note: <i>y</i> = 4/<i>x</i> is further from the origin than <i>y</i> = 2/<i>x</i>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph1.png" alt="Graphs of y = 2/x and y = 4/x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are in the same quadrants but y = 4/x is always further from the origin because it has a larger k value.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Both in quadrants 1 and 3<br>
+                        • <i>y</i> = 4/<i>x</i> is further from the origin than <i>y</i> = 2/<i>x</i> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = −<div class="fraction"><span>3</span><span><i>x</i></span></div> and <i>y</i> = −<div class="fraction"><span>8</span><span><i>x</i></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> Curves appear in quadrants 1 & 3 (if <i>k</i> > 0) or quadrants 2 & 4 (if <i>k</i> < 0)<br>
+                            <span class="formula-name">Behavior:</span> As |<i>x</i>| increases, <i>y</i> approaches 0; As <i>x</i> approaches 0, |<i>y</i>| increases<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = −3/<i>x</i>:<br>
+                            • Constant <i>k</i> = −3 (negative)<br>
+                            • Curves in quadrants 2 and 4<br><br>
+                            For <i>y</i> = −8/<i>x</i>:<br>
+                            • Constant <i>k</i> = −8 (negative)<br>
+                            • Curves in quadrants 2 and 4<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)
+                        </div>
+                        <div class="step-explanation">Both curves have negative k, so they appear in quadrants 2 and 4. The larger |k| value means y = −8/x is further from the origin.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = −3/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1.5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1.5</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = −8/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">4</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">8</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−8</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−4</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">For the same x-value, y = −8/x has larger |y|-values than y = −3/x.<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = −3/<i>x</i> with smooth curves in quadrants 2 and 4<br>
+                            • Sketch <i>y</i> = −8/<i>x</i> with smooth curves in quadrants 2 and 4<br>
+                            • Label both curves clearly<br>
+                            • Note: <i>y</i> = −8/<i>x</i> is further from the origin than <i>y</i> = −3/<i>x</i>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph2.png" alt="Graphs of y = −3/x and y = −8/x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are in the same quadrants but y = −8/x is always further from the origin because it has a larger |k| value.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Both in quadrants 2 and 4<br>
+                        • <i>y</i> = −8/<i>x</i> is further from the origin than <i>y</i> = −3/<i>x</i> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3</span><button class="nav-arrow" onclick="showQuestion(4)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = <div class="fraction"><span>2</span><span><i>x</i></span></div> and <i>y</i> = −<div class="fraction"><span>2</span><span><i>x</i></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> Curves appear in quadrants 1 & 3 (if <i>k</i> > 0) or quadrants 2 & 4 (if <i>k</i> < 0)<br>
+                            <span class="formula-name">Behavior:</span> As |<i>x</i>| increases, <i>y</i> approaches 0; As <i>x</i> approaches 0, |<i>y</i>| increases<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i>:<br>
+                            • Constant <i>k</i> = 2 (positive)<br>
+                            • Curves in quadrants 1 and 3<br><br>
+                            For <i>y</i> = −2/<i>x</i>:<br>
+                            • Constant <i>k</i> = −2 (negative)<br>
+                            • Curves in quadrants 2 and 4<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)<br>
+                            • Same distance from origin (|<i>k</i>| = 2)
+                        </div>
+                        <div class="step-explanation">The curves have opposite signs, so they appear in different quadrants. They are reflections of each other.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = −2/<i>x</i>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">Notice the y-values have opposite signs for the same x-values, showing the reflection property.<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = 2/<i>x</i> with smooth curves in quadrants 1 and 3<br>
+                            • Sketch <i>y</i> = −2/<i>x</i> with smooth curves in quadrants 2 and 4<br>
+                            • Label both curves clearly<br>
+                            • Note: The curves are reflections of each other in the x-axis
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph3.png" alt="Graphs of y = 2/x and y = −2/x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Changing the sign of k reflects the curve, moving it from quadrants 1 & 3 to quadrants 2 & 4.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Same distance from origin (|<i>k</i>| = 2)<br>
+                        • <i>y</i> = 2/<i>x</i> in quadrants 1 & 3; <i>y</i> = −2/<i>x</i> in quadrants 2 & 4<br>
+                        • The curves are reflections of each other ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(3)" title="Previous Question">←</button><span>Question 4</span><button class="nav-arrow" onclick="showQuestion(5)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = <div class="fraction"><span>2</span><span><i>x</i><sup>2</sup></span></div> and <i>y</i> = <div class="fraction"><span>5</span><span><i>x</i><sup>2</sup></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x²</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i><sup>2</sup> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> For <i>k</i> > 0: curves only above x-axis (quadrants 1 & 2); For <i>k</i> < 0: curves only below x-axis (quadrants 3 & 4)<br>
+                            <span class="formula-name">Behavior:</span> Always positive when <i>k</i> > 0, always negative when <i>k</i> < 0; As |<i>x</i>| increases, <i>y</i> approaches 0<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = 2 (positive)<br>
+                            • Curves above x-axis (quadrants 1 and 2)<br>
+                            • Always positive (<i>y</i> > 0 for all <i>x</i> ≠ 0)<br><br>
+                            For <i>y</i> = 5/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = 5 (positive)<br>
+                            • Curves above x-axis (quadrants 1 and 2)<br>
+                            • Always positive (<i>y</i> > 0 for all <i>x</i> ≠ 0)<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)<br>
+                            • Symmetry about the y-axis
+                        </div>
+                        <div class="step-explanation">Both curves have positive k, so they stay above the x-axis. The larger k value means y = 5/x² is higher than y = 2/x².</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 2/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">0.5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">0.5</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = 5/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1.25</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1.25</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">Notice both curves are symmetric about the y-axis, and y = 5/x² has larger y-values.<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = 2/<i>x</i><sup>2</sup> as a U-shaped curve above the x-axis<br>
+                            • Sketch <i>y</i> = 5/<i>x</i><sup>2</sup> as a U-shaped curve above the x-axis, higher than the first<br>
+                            • Label both curves clearly<br>
+                            • Note: Both curves approach the asymptotes but never touch them
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph4.png" alt="Graphs of y = 2/x² and y = 5/x²" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The curves are U-shaped and symmetric about the y-axis. Larger k values produce curves that are higher up.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Both above x-axis (quadrants 1 & 2)<br>
+                        • Both symmetric about y-axis<br>
+                        • <i>y</i> = 5/<i>x</i><sup>2</sup> is higher than <i>y</i> = 2/<i>x</i><sup>2</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(4)" title="Previous Question">←</button><span>Question 5</span><button class="nav-arrow" onclick="showQuestion(6)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = −<div class="fraction"><span>2</span><span><i>x</i><sup>2</sup></span></div> and <i>y</i> = −<div class="fraction"><span>6</span><span><i>x</i><sup>2</sup></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x²</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i><sup>2</sup> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> For <i>k</i> > 0: curves only above x-axis (quadrants 1 & 2); For <i>k</i> < 0: curves only below x-axis (quadrants 3 & 4)<br>
+                            <span class="formula-name">Behavior:</span> Always positive when <i>k</i> > 0, always negative when <i>k</i> < 0; As |<i>x</i>| increases, <i>y</i> approaches 0<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = −2/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = −2 (negative)<br>
+                            • Curves below x-axis (quadrants 3 and 4)<br>
+                            • Always negative (<i>y</i> < 0 for all <i>x</i> ≠ 0)<br><br>
+                            For <i>y</i> = −6/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = −6 (negative)<br>
+                            • Curves below x-axis (quadrants 3 and 4)<br>
+                            • Always negative (<i>y</i> < 0 for all <i>x</i> ≠ 0)<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)<br>
+                            • Symmetry about the y-axis
+                        </div>
+                        <div class="step-explanation">Both curves have negative k, so they stay below the x-axis. The larger |k| value means y = −6/x² is lower than y = −2/x².</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = −2/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−0.5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−0.5</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = −6/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1.5</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−6</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−6</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1.5</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">Notice both curves are symmetric about the y-axis, and y = −6/x² has larger |y|-values (more negative).<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = −2/<i>x</i><sup>2</sup> as an inverted U-shaped curve below the x-axis<br>
+                            • Sketch <i>y</i> = −6/<i>x</i><sup>2</sup> as an inverted U-shaped curve below the x-axis, lower than the first<br>
+                            • Label both curves clearly<br>
+                            • Note: Both curves approach the asymptotes but never touch them
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph5.png" alt="Graphs of y = −2/x² and y = −6/x²" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The curves are inverted U-shaped and symmetric about the y-axis. Larger |k| values produce curves that are lower down.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Both below x-axis (quadrants 3 & 4)<br>
+                        • Both symmetric about y-axis<br>
+                        • <i>y</i> = −6/<i>x</i><sup>2</sup> is lower than <i>y</i> = −2/<i>x</i><sup>2</sup> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div id="q6" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(5)" title="Previous Question">←</button><span>Question 6</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    On the same diagram, sketch the pair of graphs:<br><br>
+                    <i>y</i> = <div class="fraction"><span>3</span><span><i>x</i><sup>2</sup></span></div> and <i>y</i> = −<div class="fraction"><span>3</span><span><i>x</i><sup>2</sup></span></div>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Key Properties of Reciprocal Graphs y = k/x²</div>
+                        <div class="formula-content">
+                            <span class="formula-name">General form:</span> <i>y</i> = <i>k</i>/<i>x</i><sup>2</sup> where <i>k</i> is a constant<br>
+                            <span class="formula-name">Domain:</span> <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            <span class="formula-name">Asymptotes:</span> Vertical asymptote at <i>x</i> = 0; Horizontal asymptote at <i>y</i> = 0<br>
+                            <span class="formula-name">Symmetry:</span> For <i>k</i> > 0: curves only above x-axis (quadrants 1 & 2); For <i>k</i> < 0: curves only below x-axis (quadrants 3 & 4)<br>
+                            <span class="formula-name">Behavior:</span> Always positive when <i>k</i> > 0, always negative when <i>k</i> < 0; As |<i>x</i>| increases, <i>y</i> approaches 0<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The graphs never touch the axes as these are asymptotes.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Identify key features of both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 3/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = 3 (positive)<br>
+                            • Curves above x-axis (quadrants 1 and 2)<br>
+                            • Always positive (<i>y</i> > 0 for all <i>x</i> ≠ 0)<br><br>
+                            For <i>y</i> = −3/<i>x</i><sup>2</sup>:<br>
+                            • Constant <i>k</i> = −3 (negative)<br>
+                            • Curves below x-axis (quadrants 3 and 4)<br>
+                            • Always negative (<i>y</i> < 0 for all <i>x</i> ≠ 0)<br><br>
+                            Both curves have:<br>
+                            • Vertical asymptote: <i>x</i> = 0 (y-axis)<br>
+                            • Horizontal asymptote: <i>y</i> = 0 (x-axis)<br>
+                            • Symmetry about the y-axis<br>
+                            • Same distance from x-axis (|<i>k</i>| = 3)
+                        </div>
+                        <div class="step-explanation">The curves have opposite signs, so one is above and one is below the x-axis. They are reflections of each other in the x-axis.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Plot key points for both curves</div>
+                        <div class="step-content">
+                            For <i>y</i> = 3/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">0.75</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">0.75</td>
+                                </tr>
+                            </table>
+                            <br>
+                            For <i>y</i> = −3/<i>x</i><sup>2</sup>:<br>
+                            <table style="margin: 10px auto; border-collapse: collapse; text-align: center;">
+                                <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <td style="border: 1px solid #333; padding: 8px;"><i>x</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−2</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">2</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 8px; background-color: #f0f0f0; font-weight: bold;"><i>y</i></td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−0.75</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−3</td>
+                                    <td style="border: 1px solid #333; padding: 8px;">−0.75</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="step-explanation">The y-values have opposite signs for the same x-values, showing the reflection property.<br><br>
+                            <strong style="color: #764ba2;">Step 2 is optional.</strong><br><br>
+                            <span style="color: #c0392b;"><strong>Note:</strong> For sketching reciprocal graphs, calculating exact points is not necessary. What matters is understanding that:<br>
+                            • Larger values of |<i>k</i>| → curve is further from the origin<br>
+                            • Smaller values of |<i>k</i>| → curve is closer to the origin<br>
+                            The general shape and relative position are sufficient for a sketch.</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same diagram</div>
+                        <div class="step-content">
+                            On the same axes:<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Sketch <i>y</i> = 3/<i>x</i><sup>2</sup> as a U-shaped curve above the x-axis<br>
+                            • Sketch <i>y</i> = −3/<i>x</i><sup>2</sup> as an inverted U-shaped curve below the x-axis<br>
+                            • Label both curves clearly<br>
+                            • Note: The curves are reflections of each other in the x-axis
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4b-graph6.png" alt="Graphs of y = 3/x² and y = −3/x²" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Changing the sign of k reflects the curve from above to below the x-axis.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Both graphs on the same diagram:<br>
+                        • Same asymptotes: <i>x</i> = 0 and <i>y</i> = 0<br>
+                        • Same distance from x-axis (|<i>k</i>| = 3)<br>
+                        • Both symmetric about y-axis<br>
+                        • <i>y</i> = 3/<i>x</i><sup>2</sup> above x-axis; <i>y</i> = −3/<i>x</i><sup>2</sup> below x-axis<br>
+                        • The curves are reflections of each other ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+                <button class="question-nav-btn" onclick="showQuestion(6)">6</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            const allQuestions = document.querySelectorAll('[id^="q"]');
+            allQuestions.forEach(q => q.classList.add('hidden'));
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
