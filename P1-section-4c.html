@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 4C: Points of intersection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-link {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Box Styles */
+        .content-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Question Box Styles */
+        .question-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-family: 'Times New Roman', serif;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        /* Solution Styles */
+        .solution {
+            margin-top: 20px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            font-size: 1.15em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .step-explanation {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden { display: none; }
+
+        /* Formula Box */
+        .formula-box {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .formula-content {
+            font-size: 1.0em;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .formula-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formula-content li {
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+
+        .formula-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Arrow Navigation Buttons */
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c8df8 0%, #5a6bcf 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2.5em;
+            font-weight: 900;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            padding: 0 0 10px 0;
+            margin: 0;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5),
+                        inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(145deg, #8c9df8 0%, #6a7bcf 100%);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Question Navigation Buttons */
+        .question-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Part dividers */
+        .part-divider {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .part-divider strong {
+            color: #2c3e50;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="P1-index.html" class="home-btn">🏠 Back to Chapter</a>
+            <div class="section-links">
+                <a href="P1-section-4a.html" class="section-link">4A</a>
+                <a href="P1-section-4b.html" class="section-link">4B</a>
+                <a href="P1-section-4c.html" class="section-link active">4C</a>
+                <a href="P1-section-4d.html" class="section-link">4D</a>
+                <a href="P1-section-4e.html" class="section-link">4E</a>
+                <a href="P1-section-4f.html" class="section-link">4F</a>
+            </div>
+        </div>
+
+        <header>
+            <h1>Section 4C: Points of intersection</h1>
+        </header>
+
+        <div class="content-box">
+            <div class="section-header">
+                <h3>Points of intersection</h3>
+                <p style="opacity: 0.9; font-size: 0.95em;">Sketching combined graphs and finding intersection points</p>
+            </div>
+            
+            <!-- Question 1 -->
+            <div id="q1" class="question-box">
+                <div class="question-title"><span style="width: 50px;"></span><span>Question 1</span><button class="nav-arrow" onclick="showQuestion(2)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In each case:<br>
+                    <strong>i)</strong> sketch the two curves on the same axes<br>
+                    <strong>ii)</strong> state the number of points of intersection<br>
+                    <strong>iii)</strong> write down a suitable equation which would give the <i>x</i>-coordinates of these points. (You are not required to solve this equation.)<br><br>
+                    <strong>a)</strong> <i>y</i> = <i>x</i>(<i>x</i> − 4), <i>y</i> = (<i>x</i> − 2)<sup>3</sup><br>
+                    <strong>b)</strong> <i>y</i> = −<i>x</i><sup>3</sup>, <i>y</i> = −2/<i>x</i><br>
+                    <strong>c)</strong> <i>y</i> = −<i>x</i><sup>3</sup>, <i>y</i> = −<i>x</i>(<i>x</i> + 2)
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Approach for Finding Points of Intersection</div>
+                        <div class="formula-content">
+                            <span class="formula-name">1. Sketch both curves:</span> Use techniques from Sections 4A and 4B to sketch each curve separately on the same axes<br>
+                            <span class="formula-name">2. Identify intersections:</span> Count where the curves cross each other visually<br>
+                            <span class="formula-name">3. Set up equation:</span> At intersection points, both curves have the same <i>y</i>-value, so set the equations equal<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: The intersection equation is found by setting the two <i>y</i>-values equal: if <i>y</i> = f(<i>x</i>) and <i>y</i> = g(<i>x</i>), then f(<i>x</i>) = g(<i>x</i>) at intersection points.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) y = x(x − 4), y = (x − 2)³</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = x(x − 4)</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i>(<i>x</i> − 4)<br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i>(<i>x</i> − 4) = 0<br>
+                            <i>x</i> = 0 or <i>x</i> = 4<br>
+                            <strong>x-intercepts: (0, 0), (4, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0(0 − 4) = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the equation: <i>y</i> = <i>x</i><sup>2</sup> − 4<i>x</i><br>
+                            This is a parabola (quadratic) with positive coefficient, opening upward.<br>
+                            Vertex (turning point) is at <i>x</i> = 2 (midpoint between the roots 0 and 4).
+                        </div>
+                        <div class="step-explanation">This is a quadratic curve passing through the origin with roots at x = 0 and x = 4.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = (x − 2)³</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 2)<sup>3</sup><br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> − 2)<sup>3</sup> = 0<br>
+                            (<i>x</i> − 2)(<i>x</i> − 2)(<i>x</i> − 2) = 0<br>
+                            <i>x</i> = 2, <i>x</i> = 2, <i>x</i> = 2<br>
+                            <strong>x-intercept: (2, 0)</strong> [inflection point]<br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 − 2)<sup>3</sup> = −8<br>
+                            <strong>y-intercept: (0, −8)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Coefficient of <i>x</i><sup>3</sup> is positive (1), so curve rises to the right.<br>
+                            Point of inflection at (2, 0) where the curve passes through smoothly.
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with a repeated root at x = 2, creating a point of inflection where the curve touches the x-axis.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            <strong>i) Sketch:</strong><br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = <i>x</i>(<i>x</i> − 4)</span> as an upward-opening parabola through (0, 0) and (4, 0)<br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = (<i>x</i> − 2)<sup>3</sup></span> as a cubic curve through (2, 0) with point of inflection<br>
+                            • Label both curves clearly<br><br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph1a.png" alt="Graphs of y = x(x − 4) and y = (x − 2)³" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Count intersection points and write equation</div>
+                        <div class="step-content">
+                            <strong>ii) Number of points of intersection:</strong><br>
+                            By observing the sketch, the two curves (the parabola and the cubic) intersect at <strong>1 point</strong>.<br><br>
+                            <strong>iii) Equation for x-coordinates of intersection points:</strong><br>
+                            At intersection points, both <i>y</i>-values are equal:<br>
+                            <i>x</i>(<i>x</i> − 4) = (<i>x</i> − 2)<sup>3</sup><br><br>
+                            <strong>Intersection equation: x(x − 4) = (x − 2)³</strong>
+                        </div>
+                        <div class="step-explanation">For this question we are asked not to solve this equation, but solving it would give us the x-coordinates of the intersection points (where the curves meet each other).</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>i)</strong> Both curves sketched on same axes (see graph above)<br>
+                        <strong>ii)</strong> Number of intersection points: <strong>1</strong><br>
+                        <strong>iii)</strong> Intersection equation: <i>x</i>(<i>x</i> − 4) = (<i>x</i> − 2)<sup>3</sup> ✨
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) y = −x³, y = −2/x</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = −x³</div>
+                        <div class="step-content">
+                            <i>y</i> = −<i>x</i><sup>3</sup><br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            −<i>x</i><sup>3</sup> = 0<br>
+                            <i>x</i> = 0<br>
+                            <strong>x-intercept: (0, 0)</strong> [inflection point]<br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −(0)<sup>3</sup> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Coefficient of <i>x</i><sup>3</sup> is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            Point of inflection at origin (0, 0).
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with negative coefficient, passing through the origin with a point of inflection there.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = −2/x</div>
+                        <div class="step-content">
+                            <i>y</i> = −2/<i>x</i><br><br>
+                            <strong>Key features:</strong><br>
+                            • Domain: <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Constant <i>k</i> = −2 (negative), so curves appear in quadrants 2 and 4<br><br>
+                            <strong>Shape:</strong><br>
+                            • In quadrant 2 (negative <i>x</i>, positive <i>y</i>): curve approaches origin and axes<br>
+                            • In quadrant 4 (positive <i>x</i>, negative <i>y</i>): curve approaches origin and axes
+                        </div>
+                        <div class="step-explanation">This is a reciprocal curve with hyperbolic shape in quadrants 2 and 4, never touching the axes.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            <strong>i) Sketch:</strong><br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = −<i>x</i><sup>3</sup></span> passing through origin with characteristic cubic shape (falling to right)<br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = −2/<i>x</i></span> as hyperbola in quadrants 2 and 4<br>
+                            • Label both curves clearly<br><br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph1b.png" alt="Graphs of y = −x³ and y = −2/x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Count intersection points and write equation</div>
+                        <div class="step-content">
+                            <strong>ii) Number of points of intersection:</strong><br>
+                            By observing the sketch, the curves intersect at <strong>2 points</strong> (one in each of quadrants 2 and 4).<br><br>
+                            <strong>iii) Equation for x-coordinates of intersection points:</strong><br>
+                            At intersection points, both <i>y</i>-values are equal:<br>
+                            −<i>x</i><sup>3</sup> = −2/<i>x</i><br><br>
+                            <strong>Intersection equation: −x³ = −2/x</strong>
+                        </div>
+                        <div class="step-explanation">For this question we are asked not to solve this equation, but solving it would give us the x-coordinates of the intersection points (where the curves meet each other).</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>i)</strong> Both curves sketched on same axes (see graph above)<br>
+                        <strong>ii)</strong> Number of intersection points: <strong>2</strong><br>
+                        <strong>iii)</strong> Intersection equation: −<i>x</i><sup>3</sup> = −2/<i>x</i> ✨
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) y = −x³, y = −x(x + 2)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = −x³</div>
+                        <div class="step-content">
+                            <i>y</i> = −<i>x</i><sup>3</sup><br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            −<i>x</i><sup>3</sup> = 0<br>
+                            <i>x</i> = 0<br>
+                            <strong>x-intercept: (0, 0)</strong> [inflection point]<br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −(0)<sup>3</sup> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Coefficient of <i>x</i><sup>3</sup> is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            Point of inflection at origin (0, 0).
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with negative coefficient, passing through the origin with a point of inflection there.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = −x(x + 2)</div>
+                        <div class="step-content">
+                            <i>y</i> = −<i>x</i>(<i>x</i> + 2)<br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            −<i>x</i>(<i>x</i> + 2) = 0<br>
+                            <i>x</i> = 0 or <i>x</i> + 2 = 0<br>
+                            <i>x</i> = 0 or <i>x</i> = −2<br>
+                            <strong>x-intercepts: (−2, 0), (0, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −0(0 + 2) = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the equation: <i>y</i> = −<i>x</i><sup>2</sup> − 2<i>x</i><br>
+                            This is a parabola (quadratic) with negative coefficient, opening downward.<br>
+                            Vertex (turning point) is at <i>x</i> = −1 (midpoint between the roots −2 and 0).
+                        </div>
+                        <div class="step-explanation">This is a quadratic curve (inverted parabola) passing through the origin with roots at x = −2 and x = 0.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            <strong>i) Sketch:</strong><br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = −<i>x</i><sup>3</sup></span> passing through origin with characteristic cubic shape (falling to right)<br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = −<i>x</i>(<i>x</i> + 2)</span> as a downward-opening parabola through (−2, 0) and (0, 0)<br>
+                            • Label both curves clearly<br><br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph1c.png" alt="Graphs of y = −x³ and y = −x(x + 2)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Count intersection points and write equation</div>
+                        <div class="step-content">
+                            <strong>ii) Number of points of intersection:</strong><br>
+                            By observing the sketch, the two curves (the cubic and the parabola) intersect at <strong>3 points</strong>.<br><br>
+                            <strong>iii) Equation for x-coordinates of intersection points:</strong><br>
+                            At intersection points, both <i>y</i>-values are equal:<br>
+                            −<i>x</i><sup>3</sup> = −<i>x</i>(<i>x</i> + 2)<br><br>
+                            <strong>Intersection equation: −x³ = −x(x + 2)</strong>
+                        </div>
+                        <div class="step-explanation">For this question we are asked not to solve this equation, but solving it would give us the x-coordinates of the intersection points (where the curves meet each other).</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>i)</strong> Both curves sketched on same axes (see graph above)<br>
+                        <strong>ii)</strong> Number of intersection points: <strong>3</strong><br>
+                        <strong>iii)</strong> Intersection equation: −<i>x</i><sup>3</sup> = −<i>x</i>(<i>x</i> + 2) ✨
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Question 2 -->
+            <div id="q2" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(1)" title="Previous Question">←</button><span>Question 2</span><button class="nav-arrow" onclick="showQuestion(3)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    In each case:<br>
+                    • Sketch the curves on the same axes<br>
+                    • Explain how your sketch shows the stated number of real solutions and write down the equation that gives these points<br><br>
+                    <strong>a)</strong> <i>y</i> = <i>x</i><sup>2</sup>(<i>x</i> − 3) and <i>y</i> = 2/<i>x</i><br>
+                    <strong>b)</strong> <i>y</i> = (<i>x</i> + 1)<sup>3</sup> and <i>y</i> = 3<i>x</i>(<i>x</i> − 1)<br>
+                    <strong>c)</strong> <i>y</i> = 1/<i>x</i> and <i>y</i> = −<i>x</i>(<i>x</i> − 1)<sup>2</sup>
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Visual Interpretation of Solutions</div>
+                        <div class="formula-content">
+                            <span class="formula-name">Key concept:</span> The number of real solutions to an equation equals the number of intersection points between curves<br>
+                            <span class="formula-name">Strategy:</span> Sketch both curves and count where they meet visually<br>
+                            <span class="formula-name">Explanation:</span> Describe what the sketch shows about the intersection points<br><br>
+                            <span style="color: #2c3e50; font-style: italic;">Note: Here we use sketching to verify the number of solutions without solving algebraically.</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) y = x²(x − 3) and y = 2/x</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = x²(x − 3)</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>2</sup>(<i>x</i> − 3)<br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i><sup>2</sup>(<i>x</i> − 3) = 0<br>
+                            <i>x</i><sup>2</sup> = 0 → <i>x</i> = 0 (repeated root)<br>
+                            <i>x</i> − 3 = 0 → <i>x</i> = 3<br>
+                            <strong>x-intercepts: (0, 0) [repeated], (3, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the equation: <i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup><br>
+                            Coefficient of <i>x</i><sup>3</sup> is positive (1), so curve rises to the right.<br>
+                            At <i>x</i> = 0, the curve touches but doesn't cross the x-axis (repeated root).
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with a repeated root at the origin (touch point) and a simple root at x = 3.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = 2/x</div>
+                        <div class="step-content">
+                            <i>y</i> = 2/<i>x</i><br>
+                            <strong>Key features:</strong><br>
+                            • Domain: <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Constant <i>k</i> = 2 (positive), so curves appear in quadrants 1 and 3<br>
+                            <strong>Shape:</strong><br>
+                            • In quadrant 1: curve approaches both axes from above<br>
+                            • In quadrant 3: curve approaches both axes from below<br>
+                            • Never passes through origin
+                        </div>
+                        <div class="step-explanation">This is a reciprocal curve with hyperbolic shape in quadrants 1 and 3.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves and explain</div>
+                        <div class="step-content">
+                            <strong>Sketch:</strong><br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = <i>x</i><sup>2</sup>(<i>x</i> − 3)</span> touching origin and crossing at (3, 0)<br>
+                            • Draw <span style="color: #009900; font-weight: bold;"><i>y</i> = 2/<i>x</i></span> as hyperbola in quadrants 1 and 3<br>
+                            • Label both curves clearly<br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph2a.png" alt="Graphs of y = x²(x − 3) and y = 2/x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The sketch shows the two curves and their intersection points.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Explain the number of real solutions</div>
+                        <div class="step-content">
+                            From the sketch, there are only <strong>2 points of intersection</strong> of the curves. This means there are only two values of <i>x</i> where:<br>
+                            <i>x</i><sup>2</sup>(<i>x</i> − 3) = 2/<i>x</i><br>
+                            Multiply both sides by <i>x</i>:<br>
+                            <i>x</i><sup>3</sup>(<i>x</i> − 3) = 2<br>
+                            So the equation <i>x</i><sup>3</sup>(<i>x</i> − 3) = 2 has <strong>2 real solutions</strong>.
+                        </div>
+                        <div class="step-explanation">The number of intersection points equals the number of real solutions.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ The sketch shows <strong>2 intersection points</strong> (one in quadrant 1, one in quadrant 3), therefore the equation x²(x − 3) = 2 has exactly <strong>2 real solutions</strong>. ✨
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) y = (x + 1)³ and y = 3x(x − 1)</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = (x + 1)³</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> + 1)<sup>3</sup><br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> + 1)<sup>3</sup> = 0<br>
+                            <i>x</i> + 1 = 0<br>
+                            <i>x</i> = −1 (repeated root)<br>
+                            <strong>x-intercept: (−1, 0) [repeated]</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 + 1)<sup>3</sup> = 1<br>
+                            <strong>y-intercept: (0, 1)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Coefficient of <i>x</i><sup>3</sup> is positive (1), so curve rises to the right.<br>
+                            Point of inflection at (−1, 0) where the curve passes through smoothly.
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with a point of inflection at x = −1, similar to y = x³ but shifted left by 1 unit.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = 3x(x − 1)</div>
+                        <div class="step-content">
+                            <i>y</i> = 3<i>x</i>(<i>x</i> − 1)<br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            3<i>x</i>(<i>x</i> − 1) = 0<br>
+                            <i>x</i> = 0 or <i>x</i> = 1<br>
+                            <strong>x-intercepts: (0, 0), (1, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the equation: <i>y</i> = 3<i>x</i><sup>2</sup> − 3<i>x</i><br>
+                            This is a parabola with positive coefficient (3), opening upward.<br>
+                            Vertex at <i>x</i> = 1/2 (midpoint between the roots 0 and 1), <i>y</i> = 3(1/2)(1/2 − 1) = −3/4.
+                        </div>
+                        <div class="step-explanation">This is an upward-opening parabola with roots at x = 0 and x = 1.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves and explain</div>
+                        <div class="step-content">
+                            <strong>Sketch:</strong><br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = (<i>x</i> + 1)<sup>3</sup></span> as cubic curve with inflection point at (−1, 0)<br>
+                            • Draw <span style="color: #009900; font-weight: bold;"><i>y</i> = 3<i>x</i>(<i>x</i> − 1)</span> as upward-opening parabola through (0, 0) and (1, 0) and vertex/turning point at (1/2, −3/4)<br>
+                            • Label both curves clearly<br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph2b.png" alt="Graphs of y = (x + 1)³ and y = 3x(x − 1)" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The sketch shows the cubic curve and the parabola on the same axes.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Explain the number of real solutions</div>
+                        <div class="step-content">
+                            From the sketch, there is only <strong>1 point of intersection</strong> of the curves. This means there is only one value of <i>x</i> where:<br>
+                            (<i>x</i> + 1)<sup>3</sup> = 3<i>x</i>(<i>x</i> − 1)<br>
+                            Expand the left side:<br>
+                            <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup> + 3<i>x</i> + 1 = 3<i>x</i><sup>2</sup> − 3<i>x</i><br>
+                            Rearrange:<br>
+                            <i>x</i><sup>3</sup> + 6<i>x</i> + 1 = 0<br>
+                            So the equation <i>x</i><sup>3</sup> + 6<i>x</i> + 1 = 0 has <strong>1 real solution</strong>.
+                        </div>
+                        <div class="step-explanation">The number of intersection points equals the number of real solutions.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ The sketch shows <strong>1 intersection point</strong>, therefore the equation x³ + 6x + 1 = 0 has exactly <strong>1 real solution</strong>. ✨
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) y = 1/x and y = −x(x − 1)²</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = 1/x</div>
+                        <div class="step-content">
+                            <i>y</i> = 1/<i>x</i><br>
+                            <strong>Key features:</strong><br>
+                            • Domain: <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Constant <i>k</i> = 1 (positive), so curves appear in quadrants 1 and 3<br><br>
+                            <strong>Shape:</strong><br>
+                            • In quadrant 1: curve approaches both axes from above<br>
+                            • In quadrant 3: curve approaches both axes from below
+                        </div>
+                        <div class="step-explanation">This is a reciprocal curve with hyperbolic shape in quadrants 1 and 3.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = −x(x − 1)²</div>
+                        <div class="step-content">
+                            <i>y</i> = −<i>x</i>(<i>x</i> − 1)<sup>2</sup><br><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            −<i>x</i>(<i>x</i> − 1)<sup>2</sup> = 0<br>
+                            <i>x</i> = 0 or (<i>x</i> − 1)<sup>2</sup> = 0<br>
+                            <i>x</i> = 0 or <i>x</i> = 1 (repeated root)<br>
+                            <strong>x-intercepts: (0, 0), (1, 0) [repeated]</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the leading terms: −(<i>x</i>)(<i>x</i><sup>2</sup>) = −<i>x</i><sup>3</sup><br>
+                            Coefficient of <i>x</i><sup>3</sup> is negative (−1), so the curve:<br>
+                            • Rises from bottom left<br>
+                            • Falls to bottom right<br>
+                            At <i>x</i> = 1, the curve touches but doesn't cross the x-axis (repeated root).
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with negative leading coefficient, touching the x-axis at x = 1.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves and explain</div>
+                        <div class="step-content">
+                            <strong>Sketch:</strong><br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = 1/<i>x</i></span> as hyperbola in quadrants 1 and 3<br>
+                            • Draw <span style="color: #009900; font-weight: bold;"><i>y</i> = −<i>x</i>(<i>x</i> − 1)<sup>2</sup></span> as cubic curve passing through (0, 0) and touching at (1, 0)<br>
+                            • Label both curves clearly<br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph2c.png" alt="Graphs of y = 1/x and y = −x(x − 1)²" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">The sketch shows the reciprocal curve and the cubic curve on the same axes.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Explain the number of real solutions</div>
+                        <div class="step-content">
+                            From the sketch, there are <strong>no points of intersection</strong> of the curves. This means there are no values of <i>x</i> where:<br>
+                            1/<i>x</i> = −<i>x</i>(<i>x</i> − 1)<sup>2</sup><br>
+                            Multiply both sides by <i>x</i>:<br>
+                            1 = −<i>x</i><sup>2</sup>(<i>x</i> − 1)<sup>2</sup><br>
+                            Rearrange:<br>
+                            1 + <i>x</i><sup>2</sup>(<i>x</i> − 1)<sup>2</sup> = 0<br>
+                            So the equation 1 + <i>x</i><sup>2</sup>(<i>x</i> − 1)<sup>2</sup> = 0 has <strong>no real solutions</strong>.
+                        </div>
+                        <div class="step-explanation">The number of intersection points equals the number of real solutions.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ The sketch shows <strong>0 intersection points</strong>, therefore the equation 1 + x²(x − 1)² = 0 has <strong>no real solutions</strong>. ✨
+                    </div>
+                </div>
+            </div>
+            <!-- Question 3 -->
+            <div id="q3" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(2)" title="Previous Question">←</button><span>Question 3</span><button class="nav-arrow" onclick="showQuestion(4)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    <strong>a)</strong> On the same axes, sketch the curve <i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i> and the line <i>y</i> = 6<i>x</i>.<br><br>
+                    <strong>b)</strong> Find the coordinates of the points of intersection.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Strategy for This Problem</div>
+                        <div class="formula-content">
+                            <span class="formula-name">Part a:</span> Sketch cubic curve and straight line on same axes<br>
+                            <span class="formula-name">Part b:</span> Set equations equal, solve for x-coordinates, then find y-coordinates<br><br>
+                            <span style="color: #cc0000; font-style: italic;">Note: Intersection points can be found either by reading from the graph or algebraically (as will be shown in this question).</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch y = x³ − 3x² − 4x and y = 6x</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = x³ − 3x² − 4x</div>
+                        <div class="step-content">
+                            <i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i> = 0<br>
+                            Factor out <i>x</i>:<br>
+                            <i>x</i>(<i>x</i><sup>2</sup> − 3<i>x</i> − 4) = 0<br>
+                            Using the product and sum rule, (<i>x</i><sup>2</sup> − 3<i>x</i> − 4) = (<i>x</i> − 4)(<i>x</i> + 1)<br>
+                            <i>x</i>(<i>x</i> − 4)(<i>x</i> + 1) = 0<br>
+                            <i>x</i> = 0, <i>x</i> = 4, <i>x</i> = −1<br>
+                            <strong>x-intercepts: (−1, 0), (0, 0), (4, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 0<br>
+                            <strong>y-intercept: (0, 0)</strong><br>
+                            <strong>Shape:</strong><br>
+                            Coefficient of <i>x</i><sup>3</sup> is positive (1), so curve rises to the right.
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with three roots at x = −1, 0, and 4, passing through the origin.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = 6x</div>
+                        <div class="step-content">
+                            <i>y</i> = 6<i>x</i><br>
+                            This is a straight line through the origin.<br><br>
+                            <strong>y-intercept:</strong> (0, 0)<br>
+                            <strong>Gradient:</strong> <i>m</i> = 6 (steep positive slope)<br>
+                            Additional point: when <i>x</i> = 1, <i>y</i> = 6, giving point (1, 6).
+                        </div>
+                        <div class="step-explanation">This is a straight line passing through the origin with a steep positive gradient.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            <strong>a) Sketch:</strong><br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i></span> as cubic curve through (−1, 0), (0, 0), (4, 0)<br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = 6<i>x</i></span> as straight line through origin with gradient 6<br>
+                            • Label both curves clearly<br><br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph3.png" alt="Graphs of y = x³ − 3x² − 4x and y = 6x" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Find coordinates of intersection points</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Set up intersection equation</div>
+                        <div class="step-content">
+                            At intersection points, both <i>y</i>-values are equal:<br>
+                            <i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i>, <i>y</i> = 6<i>x</i><br>
+                            <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i> = 6<i>x</i><br>
+                            Rearrange:<br>
+                            <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i> − 6<i>x</i> = 0<br>
+                            <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 10<i>x</i> = 0<br>
+                            <strong>Equation to solve: x³ − 3x² − 10x = 0</strong>
+                        </div>
+                        <div class="step-explanation">We set the two equations equal and rearrange to standard form.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for x-coordinates</div>
+                        <div class="step-content">
+                            <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 10<i>x</i> = 0<br>
+                            Factor out <i>x</i>:<br>
+                            <i>x</i>(<i>x</i><sup>2</sup> − 3<i>x</i> − 10) = 0<br>
+                            Factor the quadratic:<br>
+                            <i>x</i><sup>2</sup> − 3<i>x</i> − 10 = (<i>x</i> − 5)(<i>x</i> + 2)<br>
+                            Therefore:<br>
+                            <i>x</i>(<i>x</i> − 5)(<i>x</i> + 2) = 0<br>
+                            <strong>x = 0, x = 5, x = −2</strong>
+                        </div>
+                        <div class="step-explanation">We factor the cubic equation to find the three x-coordinates.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Find corresponding y-coordinates</div>
+                        <div class="step-content">
+                            Using <i>y</i> = 6<i>x</i> (the simpler equation):<br>
+                            When <i>x</i> = 0:<br>
+                            <i>y</i> = 6(0) = 0<br>
+                            <strong>Point: (0, 0)</strong><br><br>
+                            When <i>x</i> = 5:<br>
+                            <i>y</i> = 6(5) = 30<br>
+                            <strong>Point: (5, 30)</strong><br><br>
+                            When <i>x</i> = −2:<br>
+                            <i>y</i> = 6(−2) = −12<br>
+                            <strong>Point: (−2, −12)</strong>
+                        </div>
+                        <div class="step-explanation">We substitute each x-value to find corresponding y-coordinates.<br>
+Note that we can use either <i>y</i> = <i>x</i><sup>3</sup> − 3<i>x</i><sup>2</sup> − 4<i>x</i> or <i>y</i> = 6<i>x</i> to find the y-coordinates, so we chose the simpler one.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> Both curves sketched on same axes (see graph above)<br>
+                        <strong>b)</strong> Coordinates of intersection points: <strong>(0, 0)</strong>, <strong>(5, 30)</strong>, <strong>(−2, −12)</strong> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div id="q4" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(3)" title="Previous Question">←</button><span>Question 4</span><button class="nav-arrow" onclick="showQuestion(5)" title="Next Question">→</button></div>
+                <div class="question-text">
+                    <strong>a)</strong> On the same axes, sketch the curves with equations<br>
+                    <i>y</i> = (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup> and <i>y</i> = −<i>x</i><sup>2</sup> − 8.<br><br>
+                    <strong>b)</strong> Find the coordinates of the points of intersection.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Strategy for This Problem</div>
+                        <div class="formula-content">
+                            <span class="formula-name">Part a:</span> Sketch both curves on same axes - identify key features (intercepts, shape)<br>
+                            <span class="formula-name">Part b:</span> Set equations equal, solve for x-coordinates, then find y-coordinates<br><br>
+                            <span style="color: #cc0000; font-style: italic;">Note: Intersection points can be found either by reading from the graph or algebraically (as will be shown in this question).</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch y = (x − 2)(x + 2)² and y = −x² − 8</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = (x − 2)(x + 2)²</div>
+                        <div class="step-content">
+                            <i>y</i> = (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup><br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup> = 0<br>
+                            <i>x</i> − 2 = 0 → <i>x</i> = 2<br>
+                            (<i>x</i> + 2)<sup>2</sup> = 0 → <i>x</i> = −2 (repeated root)<br>
+                            <strong>x-intercepts: (−2, 0) [repeated], (2, 0)</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = (0 − 2)(0 + 2)<sup>2</sup><br>
+                            <i>y</i> = (−2)(4)<br>
+                            <i>y</i> = −8<br>
+                            <strong>y-intercept: (0, −8)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            Expanding the leading terms: (<i>x</i>)(<i>x</i><sup>2</sup>) = <i>x</i><sup>3</sup><br>
+                            Coefficient of <i>x</i><sup>3</sup> is positive (1), so curve rises to the right.<br>
+                            At <i>x</i> = −2, the curve touches but doesn't cross the x-axis (repeated root).
+                        </div>
+                        <div class="step-explanation">This is a cubic curve with a repeated root at x = −2 (touch point) and a simple root at x = 2.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = −x² − 8</div>
+                        <div class="step-content">
+                            <i>y</i> = −<i>x</i><sup>2</sup> − 8<br>
+                            <strong>Find x-intercepts:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            −<i>x</i><sup>2</sup> − 8 = 0<br>
+                            −<i>x</i><sup>2</sup> = 8<br>
+                            <i>x</i><sup>2</sup> = −8<br>
+                            This has no real solutions (cannot have negative under square root).<br>
+                            <strong>No x-intercepts</strong><br><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = −0 − 8 = −8<br>
+                            <strong>y-intercept: (0, −8)</strong><br><br>
+                            <strong>Shape:</strong><br>
+                            This is a parabola: <i>y</i> = −<i>x</i><sup>2</sup> − 8<br>
+                            Coefficient of <i>x</i><sup>2</sup> is negative (−1), so parabola opens downward.<br>
+                            Vertex at (0, −8), maximum point.<br>
+                            The curve is entirely below the x-axis (always negative).
+                        </div>
+                        <div class="step-explanation">This is an inverted parabola shifted down 8 units, with vertex at (0, −8).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            <strong>Sketch:</strong><br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup></span> as cubic curve touching at (−2, 0), crossing at (2, 0), and y-intercept at (0, −8)<br>
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = −<i>x</i><sup>2</sup> − 8</span> as downward-opening parabola with vertex at (0, −8)<br>
+                            • Both curves pass through (0, −8)<br>
+                            • Label both curves clearly<br><br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph4.png" alt="Graphs of y = (x − 2)(x + 2)² and y = −x² − 8" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Find coordinates of intersection points</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Set up intersection equation</div>
+                        <div class="step-content">
+                            At intersection points, both <i>y</i>-values are equal:<br>
+                            <i>y</i> = (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup>, <i>y</i> = −<i>x</i><sup>2</sup> − 8<br>
+                            (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup> = −<i>x</i><sup>2</sup> − 8<br>
+                            Expand the left side:<br>
+                            (<i>x</i> + 2)<sup>2</sup> = <i>x</i><sup>2</sup> + 4<i>x</i> + 4<br>
+                            (<i>x</i> − 2)(<i>x</i><sup>2</sup> + 4<i>x</i> + 4) = −<i>x</i><sup>2</sup> − 8<br>
+                            <i>x</i><sup>3</sup> + 4<i>x</i><sup>2</sup> + 4<i>x</i> − 2<i>x</i><sup>2</sup> − 8<i>x</i> − 8 = −<i>x</i><sup>2</sup> − 8<br>
+                            <i>x</i><sup>3</sup> + 2<i>x</i><sup>2</sup> − 4<i>x</i> − 8 = −<i>x</i><sup>2</sup> − 8<br>
+                            Rearrange:<br>
+                            <i>x</i><sup>3</sup> + 2<i>x</i><sup>2</sup> − 4<i>x</i> − 8 + <i>x</i><sup>2</sup> + 8 = 0<br>
+                            <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup> − 4<i>x</i> = 0<br>
+                            <strong>Equation to solve: x³ + 3x² − 4x = 0</strong>
+                        </div>
+                        <div class="step-explanation">We set the two equations equal and expand to get a cubic equation.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Solve for x-coordinates</div>
+                        <div class="step-content">
+                            <i>x</i><sup>3</sup> + 3<i>x</i><sup>2</sup> − 4<i>x</i> = 0<br>
+                            Factor out <i>x</i>:<br>
+                            <i>x</i>(<i>x</i><sup>2</sup> + 3<i>x</i> − 4) = 0<br>
+                            Factor the quadratic using product and sum rule:<br>
+                            <i>x</i><sup>2</sup> + 3<i>x</i> − 4 = (<i>x</i> + 4)(<i>x</i> − 1)<br>
+                            Therefore:<br>
+                            <i>x</i>(<i>x</i> + 4)(<i>x</i> − 1) = 0<br>
+                            <strong>x = 0, x = −4, x = 1</strong>
+                        </div>
+                        <div class="step-explanation">We factor the cubic equation to find three x-coordinates.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Find corresponding y-coordinates</div>
+                        <div class="step-content">
+                            Using <i>y</i> = −<i>x</i><sup>2</sup> − 8 (the simpler equation):<br>
+                            When <i>x</i> = 0:<br>
+                            <i>y</i> = −(0)<sup>2</sup> − 8 = −8<br>
+                            <strong>Point: (0, −8)</strong><br>
+                            When <i>x</i> = −4:<br>
+                            <i>y</i> = −(−4)<sup>2</sup> − 8 = −16 − 8 = −24<br>
+                            <strong>Point: (−4, −24)</strong><br>
+                            When <i>x</i> = 1:<br>
+                            <i>y</i> = −(1)<sup>2</sup> − 8 = −1 − 8 = −9<br>
+                            <strong>Point: (1, −9)</strong>
+                        </div>
+                        <div class="step-explanation">We substitute each x-value to find corresponding y-coordinates.<br>
+Note that we can use either <i>y</i> = (<i>x</i> − 2)(<i>x</i> + 2)<sup>2</sup> or <i>y</i> = −<i>x</i><sup>2</sup> − 8 to find the y-coordinates, so we chose the simpler one.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answer:<br>
+                        Coordinates of intersection points: <strong>(0, −8)</strong>, <strong>(−4, −24)</strong>, <strong>(1, −9)</strong> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div id="q5" class="question-box hidden">
+                <div class="question-title"><button class="nav-arrow" onclick="showQuestion(4)" title="Previous Question">←</button><span>Question 5</span><span style="width: 50px;"></span></div>
+                <div class="question-text">
+                    <strong>a)</strong> On the same set of axes, sketch the graphs of <i>y</i> = <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">4</span><span style="padding: 0 3px;"><i>x</i><sup>2</sup></span></div> and <i>y</i> = 3<i>x</i> + 7.<br>
+                    <strong>b)</strong> Write down the number of real solutions to the equation <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px;"><span style="border-bottom: 1px solid #333; padding: 0 3px;">4</span><span style="padding: 0 3px;"><i>x</i><sup>2</sup></span></div> = 3<i>x</i> + 7.<br>
+                    <strong>c)</strong> Show that you can rearrange the equation to give (<i>x</i> + 1)(<i>x</i> + 2)(3<i>x</i> − 2) = 0.<br>
+                    <strong>d)</strong> Hence determine the exact coordinates of the points of intersection.
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Solution:</div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">📐 Strategy for This Problem</div>
+                        <div class="formula-content">
+                            <span class="formula-name">Part a:</span> Sketch reciprocal curve and straight line on same axes<br>
+                            <span class="formula-name">Part b:</span> Count intersection points from sketch (number of solutions)<br>
+                            <span class="formula-name">Part c:</span> Algebraically manipulate equation to show given factored form<br>
+                            <span class="formula-name">Part d:</span> Use factored form to find x-coordinates, then find y-coordinates<br><br>
+                            <span style="color: #cc0000; font-style: italic;">Note: Intersection points can be found either by reading from the graph or algebraically (as will be shown in this question).</span>
+                        </div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part a) Sketch y = 4/x² and y = 3x + 7</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 1: Sketch y = 4/x²</div>
+                        <div class="step-content">
+                            <i>y</i> = 4/<i>x</i><sup>2</sup><br>
+                            <strong>Key features:</strong><br>
+                            • Domain: <i>x</i> ≠ 0 (cannot divide by zero)<br>
+                            • Asymptotes are at <i>x</i> = 0 (y-axis) and <i>y</i> = 0 (x-axis) — the curve approaches but never touches these axes<br>
+                            • Constant <i>k</i> = 4 (positive), so curves appear in quadrants 1 and 2 (above x-axis)<br>
+                            • Symmetric about y-axis (even function)<br>
+                            <strong>Shape:</strong><br>
+                            • In quadrant 1 (positive <i>x</i>, positive <i>y</i>): curve approaches both axes<br>
+                            • In quadrant 2 (negative <i>x</i>, positive <i>y</i>): curve approaches both axes<br>
+                            • Never touches or crosses x-axis (always positive)
+                        </div>
+                        <div class="step-explanation">This is a reciprocal squared curve with hyperbolic shape in quadrants 1 and 2, symmetric about the y-axis.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 2: Sketch y = 3x + 7</div>
+                        <div class="step-content">
+                            <i>y</i> = 3<i>x</i> + 7<br>
+                            This is a straight line.<br>
+                            <strong>Find x-intercept:</strong><br>
+                            Set <i>y</i> = 0:<br>
+                            3<i>x</i> + 7 = 0<br>
+                            <i>x</i> = −7/3 ≈ −2.33<br>
+                            <strong>x-intercept: (−7/3, 0)</strong><br>
+                            <strong>Find y-intercept:</strong><br>
+                            Set <i>x</i> = 0:<br>
+                            <i>y</i> = 7<br>
+                            <strong>y-intercept: (0, 7)</strong><br>
+                            <strong>Gradient:</strong> <i>m</i> = 3 (positive slope, line rises from left to right)
+                        </div>
+                        <div class="step-explanation">This is a straight line with positive gradient passing through (0, 7).</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 3: Sketch both curves on the same axes</div>
+                        <div class="step-content">
+                            • Draw <span style="color: #cc0000; font-weight: bold;"><i>y</i> = 4/<i>x</i><sup>2</sup></span> as reciprocal curve in quadrants 1 and 2<br>
+                            • Draw <span style="color: #0066cc; font-weight: bold;"><i>y</i> = 3<i>x</i> + 7</span> as straight line with gradient 3<br>
+                            • Label both curves clearly<br>
+                            <div style="margin: 20px 0; text-align: center; background: white; padding: 20px; border-radius: 10px;">
+                                <img src="P1-section-4c-graph5.png" alt="Graphs of y = 4/x² and y = 3x + 7" style="width: 350px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="step-explanation">Both curves are plotted on the same coordinate system to visualize their intersection points.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part b) Number of real solutions to 4/x² = 3x + 7</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 4: Count intersection points from sketch</div>
+                        <div class="step-content">
+                            <strong>b) Number of real solutions:</strong><br>
+                            From the sketch, the line and the curve intersect at <strong>3 points</strong>.<br>
+                            Therefore, the equation 4/<i>x</i><sup>2</sup> = 3<i>x</i> + 7 has <strong>3 real solutions</strong>.
+                        </div>
+                        <div class="step-explanation">The number of intersection points equals the number of real solutions to the equation.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part c) Show rearrangement to (x + 1)(x + 2)(3x − 2) = 0</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 5: Show that (x + 1)(x + 2)(3x − 2) = 0 rearranges to the original equation</div>
+                        <div class="step-content">
+                            Starting with the factored form:<br>
+                            (<i>x</i> + 1)(<i>x</i> + 2)(3<i>x</i> − 2) = 0<br>
+                            First, expand (<i>x</i> + 1)(<i>x</i> + 2):<br>
+                            (<i>x</i> + 1)(<i>x</i> + 2) = <i>x</i><sup>2</sup> + 2<i>x</i> + <i>x</i> + 2 = <i>x</i><sup>2</sup> + 3<i>x</i> + 2<br>
+                            Now multiply by (3<i>x</i> − 2):<br>
+                            (<i>x</i><sup>2</sup> + 3<i>x</i> + 2)(3<i>x</i> − 2)<br>
+                            = 3<i>x</i><sup>3</sup> − 2<i>x</i><sup>2</sup> + 9<i>x</i><sup>2</sup> − 6<i>x</i> + 6<i>x</i> − 4<br>
+                            = 3<i>x</i><sup>3</sup> + 7<i>x</i><sup>2</sup> − 4<br>
+                            Therefore:<br>
+                            3<i>x</i><sup>3</sup> + 7<i>x</i><sup>2</sup> − 4 = 0<br>
+                            Rearrange:<br>
+                            3<i>x</i><sup>3</sup> + 7<i>x</i><sup>2</sup> = 4<br>
+                            Take <i>x</i><sup>2</sup> as a common factor:<br>
+                            <i>x</i><sup>2</sup>(3<i>x</i> + 7) = 4<br>
+                            Divide both sides by <i>x</i><sup>2</sup>:<br>
+                            3<i>x</i> + 7 = 4/<i>x</i><sup>2</sup><br>
+                            Or equivalently:<br>
+                            <strong>4/x² = 3x + 7</strong><br>
+                            This is the original equation, as required. ✓
+                        </div>
+                        <div class="step-explanation">We've shown that expanding the factored form leads back to the original equation 4/x² = 3x + 7.</div>
+                    </div>
+
+                    <div class="part-divider">
+                        <strong>Part d) Find exact coordinates of intersection points</strong>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 6: Solve for x-coordinates</div>
+                        <div class="step-content">
+                            From (<i>x</i> + 1)(<i>x</i> + 2)(3<i>x</i> − 2) = 0:<br>
+                            <i>x</i> + 1 = 0 → <i>x</i> = −1<br>
+                            <i>x</i> + 2 = 0 → <i>x</i> = −2<br>
+                            3<i>x</i> − 2 = 0 → <i>x</i> = 2/3<br><br>
+                            <strong>x-coordinates: x = −1, x = −2, x = 2/3</strong>
+                        </div>
+                        <div class="step-explanation">The factored form gives us three potential x-values.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">Step 7: Find corresponding y-coordinates</div>
+                        <div class="step-content">
+                            Using <i>y</i> = 3<i>x</i> + 7 (the simpler equation):<br>
+                            When <i>x</i> = −1:<br>
+                            <i>y</i> = 3(−1) + 7 = −3 + 7 = 4<br>
+                            <strong>Point: (−1, 4)</strong><br>
+                            When <i>x</i> = −2:<br>
+                            <i>y</i> = 3(−2) + 7 = −6 + 7 = 1<br>
+                            <strong>Point: (−2, 1)</strong><br>
+                            When <i>x</i> = 2/3:<br>
+                            <i>y</i> = 3(2/3) + 7 = 2 + 7 = 9<br>
+                            <strong>Point: (2/3, 9)</strong>
+                        </div>
+                        <div class="step-explanation">We substitute each x-value to find corresponding y-coordinates.<br>
+Note that we can use either <i>y</i> = 4/<i>x</i><sup>2</sup> or <i>y</i> = 3<i>x</i> + 7 to find the y-coordinates, so we chose the simpler one.</div>
+                    </div>
+
+                    <div class="final-answer">
+                        ✨ Final Answers:<br>
+                        <strong>a)</strong> Both curves sketched on same axes (see graph above)<br>
+                        <strong>b)</strong> Number of real solutions: <strong>3</strong><br>
+                        <strong>c)</strong> Shown: 3<i>x</i><sup>3</sup> + 7<i>x</i><sup>2</sup> − 4 = (<i>x</i> + 1)(<i>x</i> + 2)(3<i>x</i> − 2) = 0<br>
+                        <strong>d)</strong> Coordinates of intersection points: <strong>(−1, 4)</strong>, <strong>(−2, 1)</strong>, and <strong>(2/3, 9)</strong> ✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation for Questions -->
+            <div class="question-navigation">
+                <button class="question-nav-btn active" onclick="showQuestion(1)">1</button>
+                <button class="question-nav-btn" onclick="showQuestion(2)">2</button>
+                <button class="question-nav-btn" onclick="showQuestion(3)">3</button>
+                <button class="question-nav-btn" onclick="showQuestion(4)">4</button>
+                <button class="question-nav-btn" onclick="showQuestion(5)">5</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuestion(num) {
+            // Hide all questions
+            const allQuestions = document.querySelectorAll('[id^="q"]');
+            allQuestions.forEach(q => q.classList.add('hidden'));
+            
+            // Show selected question
+            const selectedElement = document.getElementById('q' + num);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach((btn, index) => {
+                if (index + 1 === num) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of content
+            document.querySelector('.content-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
